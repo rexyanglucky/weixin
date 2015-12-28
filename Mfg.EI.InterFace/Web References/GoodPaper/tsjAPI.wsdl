@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetPaperList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sub" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sgrade" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="term" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="edition" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pno" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="order" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPaperListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPaperListResult" type="tns:ArrayOfETaoPaper" />
+            <s:element minOccurs="1" maxOccurs="1" name="allct" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfETaoPaper">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ETaoPaper" nillable="true" type="tns:ETaoPaper" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ETaoPaper">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="p_id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_click" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_class" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_intime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_type1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_area1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_year" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_edition1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_detailpath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_flashpath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_flashsize" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_pagesize" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_inman" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_wordpath" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPapers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sub" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ids" type="tns:ArrayOfInt" />
+            <s:element minOccurs="1" maxOccurs="1" name="pno" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPapersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPapersResult" type="tns:ArrayOfETaoPaper" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPaperSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sub" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pno" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPaperSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPaperSearchResult" type="tns:ArrayOfETaoPaper" />
+            <s:element minOccurs="1" maxOccurs="1" name="allct" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPaperDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sub" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPaperDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPaperDetailResult" type="tns:ETaoPaper" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDownPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sub" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDownPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDownPathResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="test">
+        <s:complexType />
+      </s:element>
+      <s:element name="testResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPaperListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPaperList" />
+  </wsdl:message>
+  <wsdl:message name="GetPaperListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPaperListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPapersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPapers" />
+  </wsdl:message>
+  <wsdl:message name="GetPapersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPapersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPaperSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPaperSearch" />
+  </wsdl:message>
+  <wsdl:message name="GetPaperSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPaperSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPaperDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPaperDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetPaperDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPaperDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDownPathSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDownPath" />
+  </wsdl:message>
+  <wsdl:message name="GetDownPathSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDownPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="testSoapIn">
+    <wsdl:part name="parameters" element="tns:test" />
+  </wsdl:message>
+  <wsdl:message name="testSoapOut">
+    <wsdl:part name="parameters" element="tns:testResponse" />
+  </wsdl:message>
+  <wsdl:portType name="tsjAPISoap">
+    <wsdl:operation name="GetPaperList">
+      <wsdl:input message="tns:GetPaperListSoapIn" />
+      <wsdl:output message="tns:GetPaperListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPapers">
+      <wsdl:input message="tns:GetPapersSoapIn" />
+      <wsdl:output message="tns:GetPapersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperSearch">
+      <wsdl:input message="tns:GetPaperSearchSoapIn" />
+      <wsdl:output message="tns:GetPaperSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperDetail">
+      <wsdl:input message="tns:GetPaperDetailSoapIn" />
+      <wsdl:output message="tns:GetPaperDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDownPath">
+      <wsdl:input message="tns:GetDownPathSoapIn" />
+      <wsdl:output message="tns:GetDownPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testSoapIn" />
+      <wsdl:output message="tns:testSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="tsjAPISoap" type="tns:tsjAPISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPaperList">
+      <soap:operation soapAction="http://tempuri.org/GetPaperList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPapers">
+      <soap:operation soapAction="http://tempuri.org/GetPapers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperSearch">
+      <soap:operation soapAction="http://tempuri.org/GetPaperSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperDetail">
+      <soap:operation soapAction="http://tempuri.org/GetPaperDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownPath">
+      <soap:operation soapAction="http://tempuri.org/GetDownPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap:operation soapAction="http://tempuri.org/test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="tsjAPISoap12" type="tns:tsjAPISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPaperList">
+      <soap12:operation soapAction="http://tempuri.org/GetPaperList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPapers">
+      <soap12:operation soapAction="http://tempuri.org/GetPapers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperSearch">
+      <soap12:operation soapAction="http://tempuri.org/GetPaperSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperDetail">
+      <soap12:operation soapAction="http://tempuri.org/GetPaperDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownPath">
+      <soap12:operation soapAction="http://tempuri.org/GetDownPath" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap12:operation soapAction="http://tempuri.org/test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="tsjAPI">
+    <wsdl:port name="tsjAPISoap" binding="tns:tsjAPISoap">
+      <soap:address location="http://www.mofangge.net:8000/api/tsjAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="tsjAPISoap12" binding="tns:tsjAPISoap12">
+      <soap12:address location="http://www.mofangge.net:8000/api/tsjAPI.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

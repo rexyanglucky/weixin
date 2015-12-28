@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>mfg_Zookeeper.Registry</name>
+    </assembly>
+    <members>
+        <member name="P:mfg_Zookeeper.Registry.Entity.EntityBase.Modality">
+            <summary>服务形态
+            </summary>
+        </member>
+        <member name="P:mfg_Zookeeper.Registry.Entity.EntityBase.Categorys">
+            <summary>类别
+            </summary>
+        </member>
+        <member name="P:mfg_Zookeeper.Registry.Entity.EntityBase.ServiceName">
+            <summary>服务名称 
+            </summary>
+        </member>
+        <member name="P:mfg_Zookeeper.Registry.Entity.EntityBase.Version">
+            <summary>版本 
+            </summary>
+        </member>
+        <member name="T:mfg_Zookeeper.Registry.Entity.ClusterType">
+            <summary>集群类型
+            </summary>
+        </member>
+        <member name="T:mfg_Zookeeper.Registry.Entity.Category">
+            <summary>服务分类 
+            </summary>
+        </member>
+        <member name="T:mfg_Zookeeper.Registry.Entity.MfgNodePath">
+            <summary>魔方格zookeeper节点结构规范
+            </summary>
+        </member>
+        <member name="F:mfg_Zookeeper.Registry.Entity.MfgNodePath.VClusterString">
+            <summary>可虚拟化集群中的虚拟节点(父节点)，该节点的所有子节点为真实的连接地址
+            "/{0}/ClusterList/{1}/{2}"
+            格式：/集群形态/ClusterList/集群类别/集群名称
+            例如：/Redis/ClusterList/UserCenter/CheckLogin
+            </summary>
+        </member>
+        <member name="F:mfg_Zookeeper.Registry.Entity.MfgNodePath.VClusterCatlogString">
+            <summary>可虚拟化集群中的虚拟节点(父节点)，该节点的所有子节点为Consumer专用
+            "/{0}/ClusterList/{1}"
+            格式：/集群形态/ClusterList
+            例如：/Redis/ClusterList/UserCenter
+            </summary>
+        </member>
+        <member name="F:mfg_Zookeeper.Registry.Entity.MfgNodePath.VServiceString">
+            <summary>可虚拟化集群中的物理节点(父节点)，该节点的所有子节点为真实的连接地址
+            "/{0}/ServiceList"
+            格式：/集群形态/ServiceList
+            例如：/Redis/ServiceList
+            </summary>
+        </member>
+        <member name="F:mfg_Zookeeper.Registry.Entity.MfgNodePath.DClusterString">
+            <summary>无需虚拟化的节点(父节点)，该节点的所有子节点为真实的连接地址。RPC不需要区分虚拟、物理节点
+            "/{0}/{1}/{2}"
+            格式：/集群形态/集群类别/集群名称
+            例如：/Rpc/UserCenter/CheckLogin
+            </summary>
+        </member>
+        <member name="F:mfg_Zookeeper.Registry.Entity.MfgNodePath.DClusterCatlogString">
+            <summary>无需虚拟化的节点(父节点)，该节点的所有子节点为Consumer专用
+            "/{0}/{1}}"
+            格式：/集群形态/集群类别
+            例如：/Rpc/UserCenter/CheckLogin
+            </summary>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.Entity.MfgNodePath.getString(System.Int32)">
+            <summary>获取节点模式数据
+            </summary>
+            <param name="_virtual">
+                    1 返回MfgNodePath.VClusterString
+                    2 返回MfgNodePath.VServiceString
+                    3 返回MfgNodePath.DClusterString
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.Entity.MfgNodePath.GetRoot(System.String)">
+            <summary>获得节点的跟节点
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.Entity.MfgNodePath.GetCategory(System.String,System.String)">
+            <summary>获得类别配置  
+            </summary>
+            <param name="str"></param>
+            <param name="value"></param>
+            <returns>/Virtua/{0}/ClusterList</returns>
+        </member>
+        <member name="P:mfg_Zookeeper.Registry.Entity.ProviderBase.Address">
+            <summary>地址 
+            </summary>
+        </member>
+        <member name="P:mfg_Zookeeper.Registry.Entity.ProviderBase.Weight">
+            <summary>权重 
+            </summary>
+        </member>
+        <member name="T:mfg_Zookeeper.Registry.ZookeeperRegistryFactory">
+            <summary>zookeeper 工厂 
+            </summary>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistryFactory.CreateRegistry(System.String)">
+            <summary> 创建IZookeeperRegistry
+            </summary>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.Create(System.String,System.String,System.Boolean)">
+            <summary>创建节点
+            </summary>
+            <param name="path">路径</param>
+            <param name="data">数据</param>
+            <param name="persistent">是否为永久</param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.Exists(System.String)">
+            <summary>是否存在节点
+            </summary>
+            <param name="path">节点路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.Delete(System.String)">
+            <summary>删除节点
+            </summary>
+            <param name="path">节点路径</param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.GetChildren(System.String)">
+            <summary>获得子节点
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.SetData(System.String,System.String)">
+            <summary>设置节点数据
+            </summary>
+            <param name="path">节点路径</param>
+            <param name="data">数据</param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.GetData(System.String)">
+            <summary>获得节点数据
+            </summary>
+            <param name="path">节点路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.AddDataListener(System.String,mfg_Zookeeper.Registry.Listener.AbstractDataListener)">
+            <summary>订阅数据改变事件
+            </summary>
+            <param name="path"></param>
+            <param name="dataListener"></param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.AddChildListener(System.String,mfg_Zookeeper.Registry.Listener.AbstractChildListener)">
+            <summary>订阅子节点改变事件
+            </summary>
+            <param name="path"></param>
+            <param name="childListener"></param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.AddStateListener(mfg_Zookeeper.Registry.Listener.AbstractStateListener)">
+            <summary>订阅zookeeper状态改变事件
+            </summary>
+            <param name="stateListener"></param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.IsConnected">
+            <summary>是否处于连接中
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZooKeeper.IZookeeperRegistry.Close">
+            <summary>断开连接
+            </summary>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.Create(System.String,System.String,System.Boolean)">
+            <summary>创建节点
+            </summary>
+            <param name="path">路径</param>
+            <param name="data">数据</param>
+            <param name="persistent">是否为永久</param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.Exists(System.String)">
+            <summary>是否存在节点
+            </summary>
+            <param name="path">节点路径</param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.Delete(System.String)">
+            <summary>删除节点 
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.GetChildren(System.String)">
+            <summary>获得子节点 
+            </summary>
+            <param name="path">节点路径</param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.SetData(System.String,System.String)">
+            <summary>设置节点数据 
+            </summary>
+            <param name="path">节点路径</param>
+            <param name="data">数据</param>
+            <returns>1：成功 0：失败 -1：节点路径不正确 -2：与服务器连接已断开 -3：超时 -4：节点不存在 -5：其他错误</returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.GetData(System.String)">
+            <summary>获得节点数据 
+            </summary>
+            <param name="path">节点路径</param>
+            <returns>1：成功 0：节点数据异常 -1：节点路径不正确 -2：与服务器连接已断开 -3：超时 -4：节点不存在 -5：其他错误</returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.AddDataListener(System.String,mfg_Zookeeper.Registry.Listener.AbstractDataListener)">
+            <summary>订阅数据改变事件 
+            </summary>
+            <param name="path">节点路径</param>
+            <param name="dataListener"></param>
+            <returns>1：成功 0：节点数据异常 -1：节点路径不正确 -2：与服务器连接已断开 -3：超时 -4：节点不存在 -5：其他错误</returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.AddChildListener(System.String,mfg_Zookeeper.Registry.Listener.AbstractChildListener)">
+            <summary>订阅子节点改变事件
+            </summary>
+            <param name="path"></param>
+            <param name="childListener"></param>
+            <returns></returns>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.AddStateListener(mfg_Zookeeper.Registry.Listener.AbstractStateListener)">
+            <summary>订阅zookeeper状态改变事件 
+            </summary>
+            <param name="stateListener"></param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.CreatePersistent(System.String,System.Byte[])">
+            <summary>创建永久节点
+            </summary>
+            <param name="path">节点路径</param>
+            <param name="data">节点数据</param>
+        </member>
+        <member name="M:mfg_Zookeeper.Registry.ZookeeperRegistry.CreateEphemeral(System.String,System.Byte[])">
+            <summary>创建临时节点
+            </summary>
+            <param name="path">节点路径</param>
+            <param name="data">节点数据</param>
+        </member>
+        <member name="T:mfg_Zookeeper.Registry.Listener.AbstractChildListener">
+            <summary> 
+            </summary>
+        </member>
+    </members>
+</doc>

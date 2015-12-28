@@ -1,0 +1,169 @@
+﻿@model  Mfg.EI.WeiXin.ViewModel.JobHistory
+@{
+    ViewBag.Title = "作业记录";
+}
+<div >
+    <header>
+        <div class="bgskin header">
+            <a class=" r blH pl30 " href="/Home/Menu"><i class="wtab ico"></i></a>
+            <div class="brH  dib F24 pr40 rel" id="choice1" onclick="show()">
+                <span class="selectspan">
+                    @switch (Model.subID)
+                    {
+                        case 0:
+                @:全部科目
+                            break;
+                        case 1:
+                @:语文
+                            break;
+                        case 2:
+                @:数学
+                            break;
+                        case 3:
+                @:英语
+                            break;
+                        case 4:
+                @:物理
+                            break;
+                        case 5:
+                @:化学
+                            break;
+                        case 6:
+                @:地理
+                            break;
+                        case 7:
+
+                @:历史
+                            break;
+                        case 8:
+                @:政治
+                            break;
+                        case 9:
+                @:生物
+                            break;
+
+                    }
+                </span><i class="showmore ico ml30 "></i>
+                <div class="selectdiv" style="display:none" id="selectdiv">
+                    <ul id="subject">
+                        <li><a href="JobHistory.html?subid=0&states=@Model.states">全部科目</a></li>
+                        @if (Model.BindSubject != null)
+                        {
+                            foreach (var item in Model.BindSubject)
+                            {
+                        <li>
+                            <a href="JobHistory.html?subid=@item&states=@Model.states">
+                                @switch (item)
+                                        {
+                                            case 0:
+                                        @:全部科目
+                                                break;
+                                            case 1:
+                                        @:语文
+                                                break;
+                                            case 2:
+                                        @:数学
+                                                break;
+                                            case 3:
+                                        @:英语
+                                                break;
+                                            case 4:
+                                        @:物理
+                                                break;
+                                            case 5:
+                                        @:化学
+                                                break;
+                                            @*case 6:
+                                        @:地理
+                                                break;
+                                            case 7:
+                                        @:历史
+                                                break;
+                                            case 8:
+                                        @:政治
+                                                break;
+                                            case 9:
+                                        @:生物
+                                                break;*@
+
+                                        }
+                            </a>
+                        </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div id="choice2" class="  dib pl30 F24 rel" onclick="show1()">
+                <span class="selectspan">
+                    @switch (Model.states)
+                    {
+                        case -1:
+                            @:全部作业
+                            break;
+                        case 0:
+                        @:未完成
+                            break;
+                        case 1:
+                        @:已完成
+                            break;
+                    }
+                </span><i class="showmore ico ml30  "></i>
+                <div class="selectdiv ml30" style="display:none" id="select1">
+                    <ul><li><a href="JobHistory.html?subid=@Model.subID&states=-1">全部作业</a></li><li><a href="JobHistory.html?subid=@Model.subID&states=1">已完成</a></li><li><a href="JobHistory.html?subid=@Model.subID&states=0">未完成</a></li></ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="p10">
+        @if (Model.JobList.Count > 0)
+        {
+            <ul>
+                @foreach (var info in Model.JobList)
+                {
+
+                    <li class="mb15 borH bgW">
+                        <div class="pt30  pb30 pl20 pr20 bbH "><span class="col3 F26">【@info.SubjectName】@info.Name</span></div>
+                        <a class="p20 db" href="@(info.StuState < 1 ? "/History/JobInfo?jobId="+@info.ID : "/History/AJobInfo?jobId="+@info.ID)">
+                            <span class="r F22 colskin">查看详情>></span>
+                            @switch (@info.StuState)
+                            {
+                                case 0:
+                                    <span class="colno F22">未作答</span>
+                                    break;
+                                case 1:
+                                <span class="col9 F22">老师批改中…</span>
+                                    break;
+                                case 2:
+                                <span class="col3 F22">
+                                    @info.SumScore 分
+                                </span>
+                                    break;
+                            }
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        }
+        else
+        {
+            @:您的孩子目前没有作业情况，督促他去完成吧~
+        }
+        @if (Model.JobList != null)
+        {
+            @Html.Raw(@Model.Pager)
+        }
+    </div>
+</div>
+<script type="text/javascript">
+
+    function show() {
+        $("#selectdiv").toggle(5);
+    }
+    function show1() {
+        $("#select1").toggle(5);
+    }
+    $("#choice1").mouseleave(function () { $("#selectdiv").hide(); });
+    $("#choice2").mouseleave(function () { $("#select1").hide(); });
+</script>

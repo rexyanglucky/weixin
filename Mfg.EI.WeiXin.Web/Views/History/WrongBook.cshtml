@@ -1,0 +1,229 @@
+﻿@using Mfg.EI.Common
+@model Mfg.EI.ViewModel.StudentWrongItemModel
+@{
+    ViewBag.Title = "错题本";
+    Layout = "~/Views/Shared/_LayoutWeinXinInfo.cshtml";
+}
+@{
+    var BindSubject = (List<int>)
+      ViewBag.BindSubject;
+}
+<div>
+    <header>
+        <div class="bgskin header">
+            <a class=" r blH pl30 " href="/Home/Menu"><i class="wtab ico"></i></a>
+            <div id="choice1" class="brH  dib F24 pr40 rel" onclick="show()">
+                <span class="selectspan">
+                    @switch (Model.SubjectID)
+                    {
+
+                        case 1:
+                            @:语文
+                            break;
+                        case 2:
+                        @:数学
+                            break;
+                        case 3:
+                        @:英语
+                            break;
+                        case 4:
+                        @:物理
+                            break;
+                        case 5:
+                        @:化学
+                            break;
+                            case 6:
+                                @:地理
+                                    break;
+                                case 7:
+
+                                @:历史
+                                    break;
+                                case 8:
+                                @:政治
+                                    break;
+                                case 9:
+                                @:生物
+                                    break;
+
+                    }
+                </span>
+                <i class="showmore ico ml30 "></i>
+                <div class="selectdiv" style="display:none" id="selectdiv">
+                    <ul id="subject">
+                        @if (ViewBag.BindSubject != null)
+                        {
+                            foreach (var item in (List<int>)ViewBag.BindSubject)
+                            {
+                                <li>
+                                    <a href="/History/WrongBook?subjectId=@item">
+                                        @switch (item)
+                                        {
+
+                                            case 1:
+                                                {
+                                                    @:语文
+                                            }
+                                                break;
+                                            case 2:
+                                                {
+                                                    @:数学
+                                            }
+                                                break;
+
+                                            case 3:
+                                                {
+                                                    @:英语
+                                            }
+                                                break;
+                                            case 4:
+                                                {
+                                                    @:物理
+                                            }
+                                                break;
+                                            case 5:
+                                                {
+                                                    @:化学
+                                            }
+                                                break;
+                                                case 6:
+                                                        {
+                                                            @:地理
+                                                    }
+                                                        break;
+                                                    case 7:
+                                                        {
+                                                            @:历史
+                                                    }
+                                                        break;
+                                                    case 8:
+                                                        {
+                                                            @:政治
+                                                    }
+                                                        break;
+                                                    case 9:
+                                                        {
+                                                            @:生物
+                                                    }
+                                                        break;
+
+
+                                        }
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="dib pl30 F24 rel">
+                @if (ViewBag.allTotal > 0)
+                {
+                    @:第 @ViewBag.Current 题<span class="ml20 mr20">/</span>共 @ViewBag.allTotal 题
+                }
+            </div>
+        </div>
+    </header>
+    <div class="p10">
+        <div class="borH bgW ">
+            @if (Model.ItemID > 0)
+            {
+                <div class="p30  lh50 F24">
+                    <p class="bbH ">
+                        @Html.Raw(Model.QuestionItem.GetItemBodyHtml())
+                    </p>
+                    <div class="bbH">
+                        <div class="mt30">
+                            正确答案：<span class="col_right">@Html.Raw(Model.QuestionItem.f_answer)</span>
+                            你的答案：
+                            @if (Model.ItemType != Mfg.EI.ViewModel.ItemState.Choice)
+                            {
+                                if (!string.IsNullOrEmpty(Model.Answer))
+                                {
+                                    if (Model.IsTextAnswer == 0)
+                                    {
+                                        <img src="@Model.Answer" />
+                                    }
+                                    else
+                                    {
+                                        @Model.Answer
+                                    }
+                                }
+                                else
+                                {
+                                    <text>未作答</text>
+                                }
+
+                            }
+                            else
+                            {
+                                if (Model.Accuracy == 0)
+                                {
+                                    <span class="col_wrong">
+                                        @(string.IsNullOrEmpty(Model.Answer) ? "未作答" : @Model.Answer)
+                                    </span>
+
+                                }
+                                else if (Model.Accuracy == 1)
+                                {
+                                    <span class="col_right">
+                                        @(string.IsNullOrEmpty(Model.Answer) ? "未作答" : @Model.Answer)
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="colno">
+                                        @(string.IsNullOrEmpty(Model.Answer) ? "未作答" : @Model.Answer)
+                                    </span>
+                                }
+
+                            }
+                            ，回答 <span class="col_wrong">
+                                @if (Model.Accuracy == 0)
+                                {
+                                    @:错误
+                                }
+                                @if (Model.Accuracy == 1)
+                                {
+                                    @:正确
+                                }
+                                @if (Model.Accuracy > 0 && Model.Accuracy < 1)
+                                {
+                                    @:半对
+                            }
+                            </span>。
+                            <br />
+                            笔记：
+                            <br />
+                            @if (Model.NoteContent == null)
+                            {
+                                <span>无</span>
+                            }
+                            else
+                            {
+                                <span>@Model.NoteContent</span>
+                            }
+                            <br />
+                        </div>
+                    </div>
+                    @Html.Raw(Model.Pager)
+                </div>
+            }
+
+            else
+            {
+                @:您的孩子目前没有错题记录
+                }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $("#choice1").mouseleave(function () { $("#selectdiv").hide(); });
+    function show() {
+        $("#selectdiv").toggle(5);
+    }
+
+
+</script>
+@{ Html.RenderPartial("MathJaxPartial", new ViewDataDictionary() { new KeyValuePair<string, object>("mathJaxMainDivName", "") });}

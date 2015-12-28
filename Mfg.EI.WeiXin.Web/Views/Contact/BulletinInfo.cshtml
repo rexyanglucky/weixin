@@ -1,0 +1,19 @@
+﻿@model Mfg.EI.WeiXin.ViewModel.OrgBulletin
+
+<div>
+    <div class="p20">
+        @if(Model!=null)
+        { 
+        <div class="bgW p30">
+            <h1 class="tc mb10">@Model.ContentTitle</h1>
+            <p class="tc col9 F22 mb30">@Model.CreateTime</p>
+            <article>
+                @Html.Raw(Html.Raw(Model.Content))
+                @*<p class="F26 lh50 ">尊敬的各位家长：</p>
+                <p class="tid F26 lh50">为了让各位家长更多的了解学生的在校学习和生活情况，学校将于下位家长更多的了解学生的在校学习和生活情况，学校将于.位家长更多的了解学生的在校学习和生活情况，学校将于。</p><p class="tid F26 lh50">位家长更多的了解学生的在校学习和生活情况，学校将于。位家长更多的了解学生的在校学习和生活情况，学校将于。</p><p class="tid F26 lh50">请各位家长按时参加！</p>*@
+
+            </article>
+        </div>
+        }
+    </div>
+</div>

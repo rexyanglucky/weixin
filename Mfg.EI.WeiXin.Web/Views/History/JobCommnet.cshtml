@@ -1,0 +1,64 @@
+﻿@model Mfg.EI.ViewModel.StudentJobItemModel
+
+@{
+    ViewBag.Title = "作业评语";
+    Layout = "~/Views/Shared/_LayoutWeinXinInfo.cshtml";
+}
+<div>
+
+    <header>
+        <div class="bgskin header">
+            <a class=" r blH pl30 " href="/Home/Menu"><i class="wtab ico"></i></a>
+            <div class="brH  dib F24 pr40 rel" onclick="show()">
+                <span class="selectspan">
+                    @switch (Model.SubjectID)
+                    {
+
+                        case 1:
+                            @:语文
+                            break;
+                        case 2:
+                            @:数学
+                            break;
+                        case 3:
+                            @:英语
+                            break;
+                        case 4:
+                            @:物理
+                            break;
+                        case 5:
+                            @:化学
+                            break;
+                        case 6:
+                            @:地理
+                            break;
+                        case 7:
+
+                            @:历史
+                            break;
+                        case 8:
+                            @:政治
+                            break;
+                        case 9:
+                            @:生物
+                            break;
+
+                    }
+                </span>
+            </div>
+            <div class="  dib pl30 F24 rel">
+              @Model.JobName
+            </div>
+        </div>
+    </header>
+    <div class="p10">
+        <p class="pt10 pb10">
+            作业评语
+        </p>
+        <div class="borH bgW ">
+
+            <pre class="pretext">@(string.IsNullOrEmpty(Model.TeacherTotalComment)?"无":Model.TeacherTotalComment)</pre>
+        </div>
+    </div>
+    @Html.Raw(Model.Pager)
+</div>

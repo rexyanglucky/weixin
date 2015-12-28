@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FE19E324-42E9-4054-A018-7EC85AE03180}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mfg.EI.InterFace</RootNamespace>
+    <AssemblyName>Mfg.EI.InterFace</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Climb.Core">
+      <HintPath>..\Lib\Climb.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Climb.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Climb.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Climb.Utilitys">
+      <HintPath>..\Lib\Climb.Utilitys.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Comm.Comm.BLL">
+      <HintPath>..\Lib\Mfg.Comm.Comm.BLL.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Comm.DB.Redis">
+      <HintPath>..\Lib\Mfg.Comm.DB.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Comm.Db.Sql, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mfg.comm.db.sql.1.0.7\lib\Mfg.Comm.Db.Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Comm.Func, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mfg.Comm.Func.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Comm.Log.LogHelper">
+      <HintPath>..\Lib\Mfg.Comm.Log.LogHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Comm.PhoneMsg.PhoneMsgHelper">
+      <HintPath>..\packages\Mfg.Comm.PhoneMsg.PhoneMsgHelper.1.0.0\lib\Mfg.Comm.PhoneMsg.PhoneMsgHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.ExpressionParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mfg.ExpressionParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Mmq.SendDataQueue">
+      <HintPath>..\Lib\Mfg.Mmq.SendDataQueue.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Resouce.Models">
+      <HintPath>..\Lib\Mfg.Resouce.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Resource.ApiClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mfg.Resource.ApiClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Resource.Comm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mfg.Resource.Comm.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Resource.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mfg.Resource.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Resource.IBussquery, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mfg.Resource.IBussquery.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Resource.IServiceQuery">
+      <HintPath>..\Lib\Mfg.Resource.IServiceQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Resource.Service.IQueryFactory, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mfg.Resource.Service.IQueryFactory.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.ResourceIApi">
+      <HintPath>..\Lib\Mfg.ResourceIApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.ResourceIService">
+      <HintPath>..\Lib\Mfg.ResourceIService.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Usercenter.Bill.BillInterface">
+      <HintPath>..\Lib\Mfg.Usercenter.Bill.BillInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Usercenter.Bill.Entity">
+      <HintPath>..\Lib\Mfg.Usercenter.Bill.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Usercenter.CAS.Entity">
+      <HintPath>..\Lib\Mfg.Usercenter.CAS.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.UserCenter.Comm.Bill">
+      <HintPath>..\Lib\Mfg.UserCenter.Comm.Bill.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.UserCenter.Comm.UserInfo">
+      <HintPath>..\Lib\Mfg.UserCenter.Comm.UserInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Mfg.Usercenter.MidApi.Entity">
+      <HintPath>..\Lib\Mfg.Usercenter.MidApi.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="MfgZooKeeperNet">
+      <HintPath>..\Lib\MfgZooKeeperNet.dll</HintPath>
+    </Reference>
+    <Reference Include="mfg_Zookeeper.Registry">
+      <HintPath>..\Lib\mfg_Zookeeper.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="mfg_Zookeeper_Service">
+      <HintPath>..\Lib\mfg_Zookeeper_Service.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=1.8.3.9, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Mfg.Mongo.Bson.1.0.0\lib\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.8.3.9, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Mfg.Mongo.Driver.1.0.0\lib\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OperateResult, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\OperateResult.dll</HintPath>
+    </Reference>
+    <Reference Include="ResourceProviderClient">
+      <HintPath>..\Lib\ResourceProviderClient.dll</HintPath>
+    </Reference>
+    <Reference Include="ResourceQueryClient">
+      <HintPath>..\Lib\ResourceQueryClient.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\Lib\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\Lib\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\Lib\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\Lib\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Dict.cs" />
+    <Compile Include="Common\FamilyInfo.cs" />
+    <Compile Include="Common\Grade.cs" />
+    <Compile Include="Common\IDict.cs" />
+    <Compile Include="Common\IFamilyInfo.cs" />
+    <Compile Include="Common\IGrade.cs" />
+    <Compile Include="Common\IOrgManger.cs" />
+    <Compile Include="Common\IRoleManager.cs" />
+    <Compile Include="Common\IVerification.cs" />
+    <Compile Include="Common\IYearMonthDay.cs" />
+    <Compile Include="Common\OrgManger.cs" />
+    <Compile Include="Common\RoleManager.cs" />
+    <Compile Include="Common\Verification.cs" />
+    <Compile Include="Common\YearMonthDay.cs" />
+    <Compile Include="ExamOnline\ExamOnline..cs" />
+    <Compile Include="ExamOnline\IExamOnline.cs" />
+    <Compile Include="ExamPaper\ExamPaper.cs" />
+    <Compile Include="ExamPaper\IExamPaper.cs" />
+    <Compile Include="GoodQuestion\GoodQuestion.cs" />
+    <Compile Include="GoodQuestion\IGoodQuestion.cs" />
+    <Compile Include="HomeWork\HomeWork.cs" />
+    <Compile Include="HomeWork\IHomeWork.cs" />
+    <Compile Include="KnowAssessment\IKnowAssessment.cs" />
+    <Compile Include="KnowAssessment\KnowAssessment.cs" />
+    <Compile Include="KnowledgeEvaluation\IKnowledgeEvaluation.cs" />
+    <Compile Include="KnowledgeEvaluation\KnowledgeEvaluation.cs" />
+    <Compile Include="KnowledgeSubject\IKnowledgeSubject.cs" />
+    <Compile Include="KnowledgeSubject\KnowledgeSubject.cs" />
+    <Compile Include="OrgManager\Account\Account.cs" />
+    <Compile Include="OrgManager\Account\IAccount.cs" />
+    <Compile Include="OrgManager\IDepartment.cs" />
+    <Compile Include="OrgManager\Department.cs" />
+    <Compile Include="OrgManager\IReport.cs" />
+    <Compile Include="OrgManager\Report.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionBank\IQuestion.cs" />
+    <Compile Include="QuestionBank\Question.cs" />
+    <Compile Include="Student\EnterScore.cs" />
+    <Compile Include="Student\IEnterScore.cs" />
+    <Compile Include="Student\IStudent.cs" />
+    <Compile Include="Student\Student.cs" />
+    <Compile Include="SyncStudy\EI_KDCupBll.cs" />
+    <Compile Include="SyncStudy\ISyncLearnStu.cs" />
+    <Compile Include="SyncStudy\ISyncStudy.cs" />
+    <Compile Include="SyncStudy\SyncLearnStu.cs" />
+    <Compile Include="SyncTeach\ISyncTeach.cs" />
+    <Compile Include="SyncTeach\SyncTeach.cs" />
+    <Compile Include="TeachCenter\ITeachCenter.cs" />
+    <Compile Include="TeachCenter\ITeachingPlan.cs" />
+    <Compile Include="TeachCenter\TeachCenter.cs" />
+    <Compile Include="TeachCenter\TeachingPlan.cs" />
+    <Compile Include="Teacher\ITeacher.cs" />
+    <Compile Include="Teacher\TeacherManager.cs" />
+    <Compile Include="TestAnalysis\ITestAnalysis.cs" />
+    <Compile Include="TestAnalysis\TestAnalysis.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="IUser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web References\GoodPaper\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WeiXin\IWeiXin.cs" />
+    <Compile Include="WeiXin\WeiXin.cs" />
+    <Compile Include="Wrong\IWrong.cs" />
+    <Compile Include="Wrong\Wrong.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mfg.EI.Common\Mfg.EI.Common.csproj">
+      <Project>{99e7b532-3dba-4231-82b1-1ff4553e7709}</Project>
+      <Name>Mfg.EI.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mfg.EI.DAL\Mfg.EI.DAL.csproj">
+      <Project>{6c9a5bd8-c09e-400b-a9b8-42ea110a178c}</Project>
+      <Name>Mfg.EI.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mfg.EI.Entity\Mfg.EI.Entity.csproj">
+      <Project>{9af18729-6f26-4fa5-ad8f-17bf8c0c2267}</Project>
+      <Name>Mfg.EI.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mfg.EI.ViewModel\Mfg.EI.ViewModel.csproj">
+      <Project>{352e119c-d777-4f5f-9ad4-91f85b782873}</Project>
+      <Name>Mfg.EI.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mfg.EI.WeiXin.ViewModel\Mfg.EI.WeiXin.ViewModel.csproj">
+      <Project>{f43b5dff-14a1-4329-b28d-dfd74508e49c}</Project>
+      <Name>Mfg.EI.WeiXin.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://www.mofangge.net:8000/api/tsjAPI.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\GoodPaper\</RelPath>
+      <UpdateFromURL>http://www.mofangge.net:8000/api/tsjAPI.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Mfg_EI_InterFace_GoodPaper_tsjAPI</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\GoodPaper\ETaoPaper.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\GoodPaper\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\GoodPaper\tsjAPI.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\GoodPaper\tsjAPI.disco" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

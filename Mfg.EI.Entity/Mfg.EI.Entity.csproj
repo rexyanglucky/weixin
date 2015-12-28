@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9AF18729-6F26-4FA5-AD8F-17BF8C0C2267}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mfg.EI.Entity</RootNamespace>
+    <AssemblyName>Mfg.EI.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EI_Action.cs" />
+    <Compile Include="EI_Announcement.cs" />
+    <Compile Include="EI_Base.cs" />
+    <Compile Include="EI_Dict.cs" />
+    <Compile Include="Ei_Dim_Pattren_Result.cs" />
+    <Compile Include="EI_EAnswer.cs" />
+    <Compile Include="EI_EnterScore.cs" />
+    <Compile Include="EI_ERelI.cs" />
+    <Compile Include="EI_ERelS.cs" />
+    <Compile Include="EI_Exam.cs" />
+    <Compile Include="EI_FamilyInfo.cs" />
+    <Compile Include="EI_Favorite.cs" />
+    <Compile Include="EI_Grade.cs" />
+    <Compile Include="EI_GRelM.cs" />
+    <Compile Include="EI_GRelS.cs" />
+    <Compile Include="EI_GroupInfo.cs" />
+    <Compile Include="EI_JAnswer.cs" />
+    <Compile Include="EI_Job.cs" />
+    <Compile Include="EI_JRelI.cs" />
+    <Compile Include="EI_JRelS.cs" />
+    <Compile Include="EI_KnoRelHour.cs" />
+    <Compile Include="EI_ManagerInfo.cs" />
+    <Compile Include="EI_ManRelSta.cs" />
+    <Compile Include="EI_Material.cs" />
+    <Compile Include="EI_MeasureItem.cs" />
+    <Compile Include="EI_Measure_exam.cs" />
+    <Compile Include="EI_Measure_Result.cs" />
+    <Compile Include="EI_Measure_Exam_Report.cs" />
+    <Compile Include="EI_Modoule.cs" />
+    <Compile Include="EI_MRelS.cs" />
+    <Compile Include="EI_ORelR.cs" />
+    <Compile Include="EI_Org.cs" />
+    <Compile Include="EI_OrgTemplpate.cs" />
+    <Compile Include="EI_PaperBasket.cs" />
+    <Compile Include="EI_Role.cs" />
+    <Compile Include="EI_RRelA.cs" />
+    <Compile Include="EI_SmartExam.cs" />
+    <Compile Include="EI_Smart_doc.cs" />
+    <Compile Include="EI_StaRelSub.cs" />
+    <Compile Include="EI_StudentInfo.cs" />
+    <Compile Include="EI_StuDiary.cs" />
+    <Compile Include="EI_Subject.cs" />
+    <Compile Include="EI_SubRelMat.cs" />
+    <Compile Include="EI_SyncJAnswer.cs" />
+    <Compile Include="EI_SyncJob.cs" />
+    <Compile Include="EI_SyncJRelI.cs" />
+    <Compile Include="EI_TAConfigure.cs" />
+    <Compile Include="EI_Tag.cs" />
+    <Compile Include="EI_TAnswer.cs" />
+    <Compile Include="EI_TARelItem.cs" />
+    <Compile Include="EI_TARelKno.cs" />
+    <Compile Include="EI_TeachDiary.cs" />
+    <Compile Include="EI_TempStudentInfo.cs" />
+    <Compile Include="EI_TestAnalyze.cs" />
+    <Compile Include="EI_TestExam.cs" />
+    <Compile Include="EI_TestRecord.cs" />
+    <Compile Include="EI_UploadExam.cs" />
+    <Compile Include="EI_Wrong.cs" />
+    <Compile Include="Enumerations\MenuModul.cs" />
+    <Compile Include="Enumerations\OperationEnum.cs" />
+    <Compile Include="Enumerations\RedisTypeEnum.cs" />
+    <Compile Include="Enumerations\UserTypeEnum.cs" />
+    <Compile Include="Interval.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueBoxMain.cs" />
+    <Compile Include="QueBoxSummary.cs" />
+    <Compile Include="SearchObj.cs" />
+    <Compile Include="StudentGroup.cs" />
+    <Compile Include="TeachCenter\ei_plan.cs" />
+    <Compile Include="TeachCenter\ei_plan_details.cs" />
+    <Compile Include="TeachCenter\ei_plan_details_draft.cs" />
+    <Compile Include="TeachCenter\ei_plan_details_history.cs" />
+    <Compile Include="TeachCenter\ei_plan_draft.cs" />
+    <Compile Include="TeachCenter\ei_plan_history.cs" />
+    <Compile Include="TeachCenter\ei_plan_index.cs" />
+    <Compile Include="TeachCenter\ei_plan_index_draft.cs" />
+    <Compile Include="TeachCenter\ei_plan_index_history.cs" />
+    <Compile Include="TeachCenter\ei_plan_mapping.cs" />
+    <Compile Include="TeachCenter\ei_plan_points.cs" />
+    <Compile Include="TeachCenter\ei_plan_points_draft.cs" />
+    <Compile Include="TeachCenter\ei_plan_points_history.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

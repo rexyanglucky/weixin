@@ -1,0 +1,131 @@
+﻿
+body{background:#f1f1f1}
+.borH{border:1px solid #e8e9eb}
+.col3{color:#333333}
+.colskin{color:#00a0ea}
+.bgblue{background:#00a0ea}
+.bgskin{background:#0092d6}
+.col_wrong{color:#ff0000}
+.col_right{color:#009944}
+.colno{color:#ff6138}
+.col9{color:#999999}
+.ml100{margin-left:3.333em}
+.brH{border-right:1px solid rgba(232,233,235,0.5)}
+.blH{border-left:1px solid rgba(232,233,235,0.5)}
+.bsH{border-bottom:1px dashed rgba(232,233,235,0.5)}
+.bbH{border-bottom:1px solid #e8e9eb}
+.header{padding:0.667em 1em;line-height:1.9em;color:#fff;}
+.index_1_1,.index_1_2,.index_1_3,.index_2_1,.index_2_2,.index_2_3,.index_3_1,.index_3_2,.index_3_3{background:url("/Content/weixin/indexico.png") no-repeat;width:5em;height:5em;background-size:16em 16em}
+.index_1_2{background-position:-5.5em 0}
+.index_1_3{background-position:-11em 0}
+.index_2_1{background-position:0 -5.5em}
+.index_2_2{background-position:-5.5em -5.5em}
+.index_2_3{background-position:-11em -5.5em}
+.index_3_1{background-position:0 -11em}
+.index_3_2{background-position:-5.5em -11em}
+.index_3_3{background-position:-11em -11em}
+.indexul li{width:33.4%;border-right:1px solid #e8e9eb;margin-right:-1px;float:left;border-bottom:1px solid #e8e9eb;text-align:center}
+.indexul li a{display:inline-block;padding:1em;text-align:center;color:#333}
+.indexul li i{display:block;margin-bottom:0.667em}
+.testplace_tb td{border:1px solid #e8e9eb;padding-top:0.667em;padding-bottom:0.667em;text-align:center}
+.tab{background:url("/Content/weixin/tip.png") no-repeat;width:1.9em;height:1.9em;background-size:1.8em 1.8em}
+.wtab{background:url("/Content/weixin/wtip.png") no-repeat;width:1.9em;height:1.9em;background-size:1.8em 1.8em}
+.showmore{background:url("/Content/weixin/more.png") no-repeat;width:1em;height:0.5em;background-size:1em 0.5em}
+ .btn1{border-radius:0.5em;padding:0.7em 3em;color:#fff;cursor:pointer;margin-left: 1em;margin-right:1em;display:inline-block;zoom:1;*display:inline;text-align:center;line-height:1.6em;}
+ .clay{width:8.6em}
+ .addinfo_input{background:#fff;width:70%;border-radius:0.5em;padding-left:0.2em;border:0;vertical-align:middle;margin-left:0.2em;height:3em;line-height:3em}
+.bginfo {
+    background: #fff url("/Content/weixin/btmbg.png") repeat-x top left;
+}
+.btn2{border:0;outline:none; border-radius:0.5em;padding:0.8em 3.5em;background:#eb6100;color:#fff;text-align:center}
+.phone,.koukou{background:  url("/Content/weixin/weixinico.png") no-repeat;background-size:2.3em 0.8em;width:0.9em;height:1.0em;}
+.koukou{background-position:-1.4em 0}
+.wxjt{background:  url("/Content/weixin/wxjt.png") no-repeat;background-size:auto 1.3em;width:0.8em;height:1.3em;}
+.selectspan{width:5em;text-align:center;display:inline-block;}
+.selectdiv{position:absolute;top:2.5em;left:0;width:7em;text-align:center;color:#333;background:#fff;border:1px solid #e8e9eb;line-height:2em;}
+    .selectdiv li {
+        border-bottom: 1px solid #e8e9eb;
+        margin-bottom:-1px
+    }
+.selectdiv li a{display:block;color:#333}
+    .abs_b{position:absolute;bottom:0;left:0;width:100%}
+    /*帮助页面样式*/
+  body, html {
+            height: 100%;
+            width: 100%;
+        }
+        img, table {
+            max-width: 100%;
+        }
+
+        .F1 {
+            font-size: 1em;
+        }
+
+        .F42 {
+            font-size: 1.5em;
+        }
+
+        .liclick {
+            background: #f7f7f7;
+        }
+
+        .p30-40 {
+            padding: 1.05em 1.428em;
+        }
+
+        .zysqli {
+            border-bottom: 1px solid #dedede;
+            cursor: pointer;
+        }
+
+            .zysqli a {
+                display: block;
+                background-image:  url("/Content/weixin//topjt.png");
+                background-color:#fff;
+                background-position: 90% 50%;
+                padding: 1.05em 1.428em;
+                background-repeat: no-repeat;
+                background-size: 0.7857em 0.5357em;
+            }
+
+        .zysphide a {
+            background-image: url("/Content/weixin/botjt.png");
+        }
+
+        .zysphide .zysqlip {
+            display: none;
+        }
+
+        .zysqlip {
+            padding: 0.85em 1.428em;
+            line-height: 1.8em;
+            cursor: text;
+        }
+
+        .ml-2em {
+            margin-left: -2em;
+        }
+
+        .zysqtble {
+            width: 100%;
+            margin: 0 auto;
+            border: 1px solid #000;
+            text-align: center;
+            border-collapse: collapse;
+            text-space-collapse: collapse;
+        }
+
+            .zysqtble th, .zysqtble td {
+                border: 1px solid #000;
+                line-height: 1.5em;
+            }
+
+        .zysqol li p {
+            padding-left: 2em;
+        }
+
+        .zysqolkh li p {
+            padding-left: 3em;
+        }
+.pretext{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;word-break: break-all;}
