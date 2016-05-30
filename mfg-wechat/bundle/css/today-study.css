@@ -1,15 +1,15 @@
-.nav {
+/*.nav {
     height: 38px;
     width: 100%;
     background: #26292f;
     font-size:1.8rem;
     line-height:38px;
-}
-.nav span{
+}*/
+/*.nav span{
     color:#fff;
     margin-left:5%;
-}
-.nav b{
+}*/
+/*.nav b{
     font-weight:normal;
     color:#1d1f24;
     font-size:2rem;
@@ -21,7 +21,7 @@
 .nav img:last-child{
     float:right;
     margin:10px 0  3.2% 0;
-}
+}*/
 .part{
     height:112px;
     width:93.6%;
