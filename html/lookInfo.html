@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>报名信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script src="../bundle/js/header.js"></script>
+    <link href="../bundle/css/bindInfo.css" rel="stylesheet">
+
+</head>
+<body>
+<body class="bglogin">
+<div class="main">
+    <div class="login-header">
+        <h2 class="color-cheng font-size26 ">完善以下信息</h2>
+        <p class="color-cheng ">第一时间了解孩子的学习情况！</p>
+    </div>
+    <div class="login-info">
+        <div class="title">学生</div>
+        <table id="stuinfo">
+            <tr>
+                <td>姓名</td>
+                <td>
+                    {{$d.MfgName}}
+                </td>
+            </tr>
+            <tr>
+                <td>账号</td>
+                <td>
+                    {{$d.MfgID}}
+                </td>
+            </tr>
+
+        </table>
+        <div class="title">家长</div>
+        <table id="parentinfo">
+            <tr>
+                <td>姓名</td>
+                <td>
+                    {{$d.ParentName}}
+                </td>
+            </tr>
+            <tr>
+                <td>手机</td>
+                <td>
+                    {{$d.ParentPhone}}
+                </td>
+            </tr>
+        </table>
+
+        <input type="button" class="bg-green btn" id="btnunbind" value="解除绑定"/>
+    </div>
+
+</div>
+
+<script src="../bundle/js/footer.js"></script>
+<script src="../bundle/js/init.js"></script>
+<script src="../bundle/js/lookinfo.js"></script>
+</body>
+</body>
+</html>

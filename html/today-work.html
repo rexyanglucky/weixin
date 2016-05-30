@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>今日学情</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../bundle/js/header.js"></script>
+    <link href="../bundle/css/today-work.css" rel="stylesheet">
+    <script src="../bundle/js/echarts.js"></script>
+</head>
+<body>
+    <section class="container">
+        <header>
+            <p class="work fl">课后作业</p>
+            <p class="time fl">布置：2015/03/24</p>
+        </header>
+        <div class="title">
+            <p class="title-name">初中数学三角应用</p>
+            <p class="title-time">截止：2016/5/6 12:00</p>
+        </div>
+        <div class="main">
+            <div class="work-analyze" id="work-analyze">
+                <div class="work-analyze-title">
+                    <span class="icon fl"></span>
+                    <p class="fl">作业分析</p>
+                    <p class="work-total fr">共<span>8</span>题</p>
+                </div>
+                <p class="tixing">题型分布</p>
+                <div id="pie" class="fl"></div>
+                <div class="legeng fl">
+                    <ul>
+                        <li>选择题</li>
+                        <li>填空题</li>
+                        <li>解答题</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="work-statistics" id="work-statistics">
+                <p class="tongji">各难度区间的试题统计</p>
+                <div id="colum"></div>
+                <div class="geloc">
+                    <p class="ge-one fl">容易题</p>
+
+                    <p class="ge-left fl">较容易题</p>
+
+                    <p class="ge-left fl">中等题</p>
+
+                    <p class="ge-left fl">较难题</p>
+
+                    <p class="ge-left fl">困难题</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <img src="../bundle/img/khzyso.png" alt=""/>
+        <a href="#">查看作业试题</a>
+    </footer>
+    <script src="../bundle/js/footer.js"></script>
+    <script src="../bundle/js/today-work.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+.nav {
+    height: 38px;
+    width: 100%;
+    background: #26292f;
+    font-size:1.8rem;
+    line-height:38px;
+}
+.nav span{
+    color:#fff;
+    margin-left:5%;
+}
+.nav b{
+    font-weight:normal;
+    color:#1d1f24;
+    font-size:2rem;
+    margin-left:5%;
+}
+.nav img:first-child{
+    margin:10px 0  0 3.2%;
+}
+.nav img:last-child{
+    float:right;
+    margin:10px 0  3.2% 0;
+}
+.part{
+    height:112px;
+    width:93.6%;
+    box-sizing:border-box;
+    background:#ffffff;
+    border:1px #c5c5c5 solid;
+    margin:0 auto;
+    margin-top:15px;
+}
+.part img{
+    margin-left:3.2%;
+    margin-top:-4px;
+}
+.title{
+    display:inline-block;
+    margin-top:10px;
+    margin-left:2%;
+    vertical-align:top;
+    font-size:1.6rem;
+}
+.part p:first-of-type{
+  line-height:45px;
+    font-size:1.4rem;
+    margin-left:3.2%;
+ }
+.part hr{
+    border:none;
+    width:90%;
+    text-align:center;
+    border:1px rgba(150,100,100,0.3) solid;
+     border-left-style:none;
+    border-right-style:none;
+    border-bottom-style:none;
+}
+.part p:last-of-type{
+    line-height:30px;
+    font-size:1.4rem;
+    margin-left:3.2%;
+    color:#999999;
+}
+.datatime{
+    float:right;
+    margin-right:3.2%;
+}
+.main{
+    min-height:666px;
+    width:100%;
+    background:#ebebeb;
+    font-family: 微软雅黑;
+}
