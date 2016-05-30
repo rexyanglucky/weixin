@@ -71,6 +71,7 @@ body{font-size:1.4rem;color:#000;background:#ebebeb;font-family: '微软雅黑'}
 .margin-left{margin-left:1.6rem}
 .margin-right{margin-right:1.6rem}
 .margin-top{margin-top:1.6rem}
+.color-red{color:red}
 .fr{float: right}
 .fl{float:left}
 .ml10{margin-left: 10px}
@@ -221,21 +222,22 @@ input[type="text"]:hover{
     border-color: #ffc371;
 }
 .btn{
-    display:block;
-    height:52px;
-    line-height:2.5rem;
-    text-align:center;
-    font-family:arial,verdana,sans-serif, '新宋体';
-    font-size:22px;
-    color:#fff;
-    text-decoration:none;
-    border:0;
-    border-radius: 5px;
-    width: 75%;
-    margin-left: 12.5%;
-    margin-top: 15px;
+    display:block     !important;
+    height:52px     !important;;
+    line-height:2.5rem     !important;;
+    text-align:center     !important;;
+    font-family:arial,verdana,sans-serif, '新宋体'     !important;;
+    font-size:22px     !important;;
+    color:#fff     !important;;
+    text-decoration:none     !important;;
+    border:0     !important;;
+    border-radius: 5px     !important;;
+    width: 75%     !important;;
+    margin-left: 12.5%     !important;;
+    margin-top: 15px     !important;;
     /*3px solid #357ebd;*/
-    cursor:pointer
+    cursor:pointer     !important;
+
 }
 .icon-close{
     position: absolute;
