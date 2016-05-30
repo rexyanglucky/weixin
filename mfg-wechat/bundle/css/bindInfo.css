@@ -1,7 +1,7 @@
 .main{
     width: 80%;
     min-width: 280px;
-    margin: 50px auto 0 auto;
+    margin: 32px auto 0 auto;
     text-align: center;
     padding: 0px 10%;
 }
@@ -20,12 +20,14 @@
     border-radius: 10px;
     border-color: #ffc371;
     background: #fff;
-}
-.login-header h2
-{
     text-align: left;
-    padding-left: 10px;
+    padding-left: 6.25%;
+    font-family: 微软雅黑;
 }
+.login-header span{
+    color: #ffc371;
+}
+
 .login-info{
     padding: 10px 0;
     border: solid 1px;
@@ -58,21 +60,11 @@
 
 @media screen  and (max-width:325px){
     .main{
-        width: 80%;
-        min-width: 280px;
-        margin: 50px auto 0 auto;
-        text-align: center;
         padding: 0 20px;
     }
 }
 @media screen  and (width:375px){
-    .main{
-        width: 80%;
-        min-width: 280px;
-        margin: 50px auto 0 auto;
-        text-align: center;
-        padding: 0 10%;
-    }
+
     .login-info{
         padding: 10px 0;
         height: 450px;
@@ -84,13 +76,7 @@
     }
 }
 @media screen  and (min-width:414px){
-    .main{
-        width: 80%;
-        min-width: 280px;
-        margin: 50px auto 0 auto;
-        text-align: center;
-        padding: 0 10%;
-    }
+
     .login-info{
         padding: 10px 0;
         height: 500px;

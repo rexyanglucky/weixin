@@ -60,7 +60,7 @@ body{font-size:1.4rem;color:#000;background:#ebebeb;font-family: '微软雅黑'}
 .bg-red{background:#ff5050}
 .bg-yellow{background:#ffb21d}
 .bg-golden{background:#ffe066}
-.bg-green{background:#00d535 }
+.bg-green{background:#00d535 !important; }
 .bg-darkgreen{background:#00af15}
 .box-padding{padding:0 3.2%}
 .box-padding-left{padding-left:3.2%}
@@ -208,13 +208,13 @@ body{font-size:1.4rem;color:#000;background:#ebebeb;font-family: '微软雅黑'}
 
 input[type="text"],[type='password']{
      border-radius: 5px;
-     line-height: 3.5rem;
+     line-height: 3rem;
      border:solid  1px;
      border-color: #acbac2;
      padding-left: 5px;
      margin: 7px 0;
      font-family: 微软雅黑;
-     width: 75%;
+    width: 87.7862%     !important;;
  }
 input[type="button"]{
     display:block;
@@ -236,9 +236,8 @@ input[type="text"]:hover{
     text-decoration:none     !important;;
     border:0     !important;;
     border-radius: 5px     !important;;
-    width: 75%     !important;;
-    margin-left: 12.5%     !important;;
-    margin-top: 15px     !important;;
+    width: 87.7862%     !important;;
+    margin-top: 27px     !important;;
     /*3px solid #357ebd;*/
     cursor:pointer     !important;
 
