@@ -4,6 +4,10 @@ fieldset, button, input, textarea, th, td {
     margin: 0 auto;
     padding: 0;
 }
+input[type="button"], input[type="submit"], input[type="reset"] {
+    　　-webkit-appearance: none;
+}
+textarea { -webkit-appearance: none;}
 ul, ol { list-style: none; }
 a { text-decoration: none; }
 a:hover { text-decoration: none; }
