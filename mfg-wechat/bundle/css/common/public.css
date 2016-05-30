@@ -227,19 +227,20 @@ input[type="text"]:hover{
 }
 .btn{
     display:block     !important;
-    height:52px     !important;;
+    height:30px     !important;;
     line-height:2.5rem     !important;;
     text-align:center     !important;;
-    font-family:arial,verdana,sans-serif, '新宋体'     !important;;
+    font-family:arial,verdana,sans-serif, '新宋体'  !important;;
     font-size:22px     !important;;
     color:#fff     !important;;
     text-decoration:none     !important;;
     border:0     !important;;
     border-radius: 5px     !important;;
     width: 87.7862%     !important;;
-    margin-top: 27px     !important;;
+    margin-top: 25px     !important;;
     /*3px solid #357ebd;*/
     cursor:pointer     !important;
+    padding: 10px 0;
 
 }
 .icon-close{

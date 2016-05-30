@@ -10,7 +10,7 @@
 .main td{text-align: left}
 .main tr{
     line-height: 3rem;
-    height: px;
+    /*height: px;*/
 }
 .info{
     min-height: 145px;
