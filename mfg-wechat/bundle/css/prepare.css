@@ -7,14 +7,15 @@ header {width:100%;height:42px;background: #00d535}
     line-height:42px;
     font-size:1.6rem;
     border-right:1px solid #00ca32;
+    color:#fff
 }
 .class-date{
     width:64.2%;
     height:42px;
     background:#00d535;
-    text-align: center;
     line-height:42px;
-    font-size:1.6rem;
+    font-size:1.4rem;
+    color:#fff
 }
 .title{height:19px;padding-top:15px;padding-bottom: 10px;font-weight: 800;}
 .title p{line-height: 19px}
@@ -25,5 +26,9 @@ header {width:100%;height:42px;background: #00d535}
 .teachplan-starttime{font-size:1.2rem;color:#ccc;}
 .cri-contain{width:100%;text-overflow:ellipsis;}
 .point-title,.testway-title {font-weight:800;}
-.jingpin > p{border-radius:10px;background:#ff7200;width:60px;color: #fff;margin-left:0;padding:2px 5px;}
-.suitang > p{border-radius:10px;background:#00d535;width:60px;color: #fff;margin-left:0;padding:2px 5px;}
+.jingpin > p{border-radius:10px;background:#ff7200;width:60px;color: #fff;margin-left:0;font-size:1.2rem;text-align: center}
+.suitang > p{border-radius:10px;background:#00d535;width:60px;color: #fff;margin-left:0;font-size:1.2rem;text-align:center}
+
+@media screen and (max-width: 414px){
+    table img{width:90%}
+}
