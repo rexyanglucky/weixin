@@ -37,7 +37,7 @@
 .border-right{
     border-right: 1px solid #e4e4e4;
 }
-.last img,.middle img{
+.last img,.middle img,.right-btn img{
     vertical-align: middle;
 }
 .w49{
