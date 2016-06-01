@@ -1,0 +1,3086 @@
+﻿@charset "utf-8";
+
+body {
+    background: #f1f1f1;
+    color: #333;
+    min-width: 1050px;
+    word-break: break-all;
+}
+
+table {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.bgf6 {
+    background: #f6f6f6;
+}
+
+.bg9 {
+    background: #999;
+}
+
+.bgbody {
+    background: #00a0ea;
+}
+/*这个替换模板时候不替换*/
+.ce5 {
+    color: #e5e5e5;
+}
+
+.col6 {
+    color: #666;
+}
+
+.col3 {
+    color: #333;
+}
+
+.col9 {
+    color: #999;
+}
+
+.pl58 {
+    padding-left: 58px;
+}
+
+.mt12 {
+    margin-top: 12px;
+}
+
+.ml20 {
+    margin-left: 13px;
+}
+
+.ml-5 {
+    margin-left: -5px;
+}
+
+.mr20 {
+    margin-right: 13px;
+}
+
+.mb20 {
+    margin-bottom: 13px;
+}
+
+.mt20 {
+    margin-top: 13px;
+}
+
+.ml-58 {
+    margin-left: -58px;
+}
+
+.colred {
+    color: #ff0000;
+}
+
+.colbf {
+    color: #bfbfbf;
+}
+
+.col_wrong {
+    color: #ff0000;
+}
+
+.col_right {
+    color: #009944;
+}
+
+.col_rank {
+    color: #a02b04;
+}
+
+.bg_wrong {
+    background: #ff0000;
+}
+
+.bg_right {
+    background: #009944;
+}
+
+.bg_notall {
+    background: #ff8900;
+}
+
+.col_notall {
+    color: #ff8900;
+}
+
+.bor_que_right {
+    border: 1px solid #009944;
+}
+
+.bor_que_wrong {
+    border: 1px solid #ff0000;
+}
+
+.bor_que_notall {
+    border: 1px solid #ff8900;
+}
+
+.bor_tm {
+    border: 1px solid transparent;
+}
+
+.tdhl:hover {
+    text-decoration: underline;
+}
+
+.ml100 {
+    margin-left: 100px;
+}
+
+.mr100 {
+    margin-right: 100px;
+}
+
+.mt1 {
+    margin-top: 1px;
+}
+
+.lh35 {
+    line-height: 35px;
+}
+
+.noContent {
+    margin-top: 160px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.borbf {
+    border: 1px solid #bfbfbf;
+}
+
+.hr1 {
+    height: 3px;
+}
+
+.hr2 {
+    height: 1px;
+    margin: 1px 0 0 0;
+}
+
+.header {
+    height: 60px;
+}
+
+    .header img, .screen img {
+        max-height: 60px;
+        vertical-align: middle;
+    }
+
+.logodiv {
+    height: 60px;
+}
+
+.userinfo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.user {
+    width: 20px;
+    height: 20px;
+}
+
+.look {
+    width: 18px;
+    height: 17px;
+}
+
+.write {
+    width: 15px;
+    height: 15px;
+}
+
+.vipico_bz {
+    width: 55px;
+    height: 20px;
+    background: url("../content/public/vip.png") no-repeat;
+    background-position: 0 0;
+}
+
+.vipico_zs {
+    width: 55px;
+    height: 20px;
+    background: url("../content/public/vip.png") no-repeat;
+    background-position: 0 -25px;
+}
+
+.vipico_bj {
+    width: 55px;
+    height: 20px;
+    background: url("../content/public/vip.png") no-repeat;
+    background-position: 0 -45px;
+}
+
+.set {
+    width: 25px;
+    height: 25px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -60px -20px;
+}
+
+.skin {
+    width: 25px;
+    height: 25px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: 2px -119px;
+}
+
+.pop_ok {
+    width: 45px;
+    height: 45px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: 0 -25px;
+}
+
+.w300 {
+    width: 300px;
+}
+
+.w260 {
+    width: 260px;
+}
+
+.w250 {
+    width: 250px;
+}
+
+.w400 {
+    width: 400px;
+}
+
+.w100 {
+    width: 100px;
+}
+
+.w25 {
+    width: 25px;
+}
+
+.w35 {
+    width: 35px;
+}
+
+.sub {
+    width: 120px;
+    height: 170px;
+}
+
+.sub_h {
+    height: 380px;
+}
+
+.min_h {
+    min-height: 525px;
+    clear: both;
+}
+
+.min_h400 {
+    min-height: 400px;
+    _height: 400px;
+}
+
+.min_h452 {
+    min-height: 452px;
+    _height: 452px;
+}
+
+.m10 {
+    margin: 10px;
+}
+
+.pct8 {
+    width: 8%;
+}
+
+.pct45 {
+    width: 45%;
+}
+
+.pl70 {
+    padding-left: 70px;
+}
+
+.p25 {
+    padding: 25px;
+}
+
+.pl25 {
+    padding-left: 25px;
+}
+
+.pr25 {
+    padding-right: 25px;
+}
+
+.pt25 {
+    padding-top: 25px;
+}
+
+.pb25 {
+    padding-bottom: 25px;
+}
+
+.pl90 {
+    padding-left: 90px;
+}
+
+.pl110 {
+    padding-left: 110px;
+}
+
+.ml60 {
+    margin-left: 60px;
+}
+
+.ml80 {
+    margin-left: 80px;
+}
+
+.ml75 {
+    margin-left: 75px;
+}
+
+.mml20 {
+    margin-left: 20px;
+}
+
+.mmr20 {
+    margin-right: 20px;
+}
+
+.mmt20 {
+    margin-top: 20px;
+}
+
+.mmb20 {
+    margin-bottom: 20px;
+}
+
+.nav li {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding: 0px 2px;
+    text-align: center;
+    _width: 140px;
+}
+
+.s1, .s2, .s3, .s4, .s5, .s6, .s7, .s8, .s9 {
+    width: 22px;
+    height: 25px;
+    background: url("../content/public/navico.png") no-repeat;
+    transition: all 0.2s ease 0s;
+    -webkit-transition: all 0.2s ease 0s;
+    margin-right: 5px;
+}
+
+.nav a {
+    width: 140px;
+    display: block;
+    color: #fff;
+    position: relative;
+    height: 50px;
+    font-size: 16px;
+    _position: inline;
+}
+
+    .s1, .nav a.show:hover .s1 {
+        background-position: 0 0;
+    }
+
+.s2, .nav li a.show:hover .s2 {
+    background-position: -30px 0;
+}
+
+.s3, .nav a.show:hover .s3 {
+    background-position: -61px 0;
+}
+
+.s4, .nav li a.show:hover .s4 {
+    background-position: -90px 0;
+}
+
+.s5, .nav a.show:hover .s5 {
+    background-position: -120px 0;
+}
+
+.s6, .nav li a.show:hover .s6 {
+    background-position: -150px 0;
+}
+
+.s7, .nav li a.show:hover .s7 {
+    background-position: -180px 0;
+}
+
+.s8, .nav li a.show:hover .s8 {
+    background-position: -210px 0;
+}
+
+.s9, .nav li a.show:hover .s9 {
+    background-position: -240px 0;
+}
+
+li a:hover .s1 {
+    background-position: 0 -44px;
+}
+
+li a:hover .s2 {
+    background-position: -30px -44px;
+}
+
+li a:hover .s3 {
+    background-position: -61px -44px;
+}
+
+li a:hover .s4 {
+    background-position: -90px -44px;
+}
+
+li a:hover .s5 {
+    background-position: -120px -44px;
+}
+
+li a:hover .s6 {
+    background-position: -150px -44px;
+}
+
+li a:hover .s7 {
+    background-position: -180px -44px;
+}
+
+li a:hover .s8 {
+    background-position: -210px -44px;
+}
+
+li a:hover .s9 {
+    background-position: -240px -44px;
+}
+
+
+.worktip {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    padding: 0 5px;
+    background: #ff0000;
+    border-radius: 10px;
+    color: #fff;
+    line-height: 1.6em;
+    font-size: 12px;
+    height: 18px;
+    text-decoration: none;
+    border: 2px solid #fff;
+}
+
+.copyright {
+    text-align: center;
+    line-height: 50px;
+    font-size: 12px;
+    margin-top: 100px;
+}
+/*弹出层*/
+.pop_window {
+    background: #fff;
+}
+
+.pop_title {
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 1px solid #e7e9ea;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+}
+
+.pop_btn {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -58px 0;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.pop_bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: #000;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    -moz-opacity: 0.3;
+}
+
+.upImg {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -261px;
+    margin-top: -206px;
+    width: 522px;
+    height: 412px;
+    background: #fff;
+    z-index: 101;
+}
+
+.del_bg {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -62px -3px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    vertical-align: middle;
+}
+
+.change_btn_plus, .change_btn_down {
+    height: 26px;
+    cursor: pointer;
+    width: 26px;
+    border: 0;
+    outline: none;
+    vertical-align: middle;
+    background: #fff;
+    background: url("../content/public/pubico.png") no-repeat;
+}
+
+.change_btn_down {
+    background-position: 2px -145px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.change_btn_plus {
+    background-position: -20px -145px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.change_div {
+    margin: 0 7px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    width: 76px;
+    background: #fff;
+}
+
+    .change_div input[type='text'] {
+        padding-left: 0;
+    }
+/*预览弹出层*/
+.Spop_fixdiv {
+    position: fixed;
+    _position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    z-index: 30;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.Spop_windowbg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 15px;
+    z-index: 29;
+    background: #000;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    -moz-opacity: 0.3;
+}
+
+.Spop_scrolldiv {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    z-index: 30;
+}
+
+.Spopwindow {
+    width: 974px;
+    margin: 0px auto;
+    height: auto;
+}
+
+.Scrollpop {
+    overflow: hidden;
+    height: 100%;
+}
+
+    .Scrollpop body {
+        overflow: hidden;
+        margin-right: 16px;
+        position: relative;
+        height: 100%;
+    }
+
+/*复选框标签样式*/
+.check input[type='checkbox'] {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.check label {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    white-space: nowrap;
+}
+/*按钮样式*/
+.btn {
+    border-radius: 0.3em;
+    padding: 0.4em 1.3em;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 1em;
+    margin-right: 1em;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    text-align: center;
+    line-height: 1.4em;
+}
+
+.btn_no {
+    border-radius: 0.3em;
+    padding: 0.4em 1.3em;
+    color: #fff;
+    cursor: default;
+    margin-left: 1em;
+    margin-right: 1em;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    text-align: center;
+    line-height: 1.4em;
+}
+
+.t_exam_btn .btn, .t_exam_btn .btn_no {
+    margin-left: 0;
+}
+
+.btn1 {
+    border-radius: 0.5em;
+    padding: 0.8em 2.5em;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    text-align: center;
+    line-height: 1.6em;
+}
+
+.mgtab {
+    width: 80px;
+    height: 1.8em;
+    cursor: pointer;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 1.8em;
+}
+
+.subject .mgtab {
+    width: auto;
+    padding: 0 10px;
+}
+
+.gradetab {
+    width: 60px;
+    height: 20px;
+    border: 1px solid #d2d2d2;
+    line-height: 20px;
+    text-align: center;
+    margin: 0 10px 20px;
+    cursor: pointer;
+}
+
+.knowledge_tble .gradetab {
+    margin-bottom: 0;
+}
+/*.papergrade{width:50px;height:20px;border:1px solid transparent;line-height:20px;text-align:center;margin:0 10px 20px;cursor:pointer}*/
+.papergrade {
+    line-height: 20px;
+    margin: 0 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid rgb(230, 230, 230);
+    width: 50px;
+    height: 25px;
+    padding-top: 5px;
+}
+
+.papergrade_tb {
+    position: absolute;
+    left: 0;
+    top: 51px;
+    background: #fff;
+    z-index: 10;
+}
+
+    .papergrade_tb td {
+        border-bottom: 1px solid #e7e9ea;
+        padding-top: 20px;
+    }
+
+input[type='text'], .pub_input {
+    padding: 4px 0 4px 5px;
+    vertical-align: middle;
+    height: 22px;
+    background: #fff;
+}
+/*针对input【text】样式不适合的时候的样式*/
+.bortext input[type='text'] {
+    border: 1px solid #bfbfbf;
+}
+
+.search {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    vertical-align: middle;
+}
+
+.work_name_btn {
+    height: 32px;
+    cursor: pointer;
+    outline: none;
+    vertical-align: middle;
+    width: 60px;
+    background: #fff;
+    border: 1px solid #bfbfbf;
+    line-height: 30px;
+}
+
+.w200 {
+    width: 200px;
+}
+
+.s_mg_info_tabe {
+    width: 100%;
+}
+
+    .s_mg_info_tabe th {
+        text-align: right;
+        width: 80px;
+        padding-bottom: 30px;
+    }
+
+.detail .s_mg_info_tabe th {
+    width: 120px;
+}
+
+.s_mg_info_tabe td {
+    padding-bottom: 30px;
+}
+
+.s_mg_info_tabe tr:last-child th, .s_mg_info_tabe tr:last-child td {
+    padding-bottom: 0;
+}
+
+.addphoto {
+    width: 140px;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+    cursor: pointer;
+}
+
+    .addphoto img {
+        width: 140px;
+        height: 200px;
+    }
+
+.s_mg_info_grad {
+    width: 100%;
+}
+
+    .s_mg_info_grad td {
+        border: 1px solid #e7e9ea;
+        text-align: center;
+        height: 50px;
+    }
+
+.center_subject td {
+    border: 1px solid #e7e9ea;
+    height: 50px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.center_subject th {
+    border: 1px solid #e7e9ea;
+    height: 50px;
+    text-align: center;
+}
+
+.s_mg_info_grad td input {
+    width: 25px;
+}
+
+.s_mg_info_men {
+    width: 100%;
+}
+
+    .s_mg_info_men th {
+        border: 1px solid #e7e9ea;
+        height: 40px;
+        text-align: center;
+    }
+
+    .s_mg_info_men td {
+        padding: 10px;
+        text-align: center;
+    }
+
+        .s_mg_info_men td input {
+            width: 100%;
+        }
+
+.s_mg_info_test th, .s_mg_info_test td {
+    border: 1px solid #e7e9ea;
+    padding: 20px 30px;
+}
+
+.bbH_table td, .bbH_table th {
+    border-bottom: 1px solid #e7e9ea;
+}
+
+.bbH_table tr th:first-child, .bbH_table tr td:first-child {
+    /*padding-left: 40px;调整知识测评样式*/
+    padding-left: 30px;
+}
+
+.book {
+    background: url("../content/public/pubico.png") no-repeat;
+    width: 155px;
+    height: 201px;
+    background-position: -86px 0;
+    position: relative;
+}
+
+.star {
+    background: url("../content/public/pubico.png") no-repeat;
+    width: 20px;
+    height: 20px;
+    background-position: 0 0;
+}
+
+.starbg {
+    background: url("../content/public/pubico.png") no-repeat;
+    width: 20px;
+    height: 20px;
+    background-position: -30px 0;
+}
+
+.book_nianji {
+    font-size: 12px;
+    text-align: center;
+    position: absolute;
+    top: 160px;
+    width: 155px;
+}
+
+.wb_side {
+    width: 30%;
+    margin: 0 1.5%;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    text-align: center;
+}
+
+.pm_p {
+    width: 30%;
+    margin: 0 1.5%;
+}
+
+.lookbtn {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    line-height: 30px;
+    line-height: 30px;
+    width: 5.4em;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    margin-left: -6px;
+}
+
+.biluico_50, .vipuser, .task_1, .task_1_2 {
+    width: 20px;
+    height: 22px;
+}
+
+.t_mg_rtble td, .t_mg_rtble th {
+    padding-bottom: 10px;
+}
+
+    .t_mg_rtble td input[type='text'] {
+        line-height: 25px;
+        height: 25px;
+    }
+
+.t_mg_t_addt td, .t_mg_t_addt th {
+    padding-bottom: 25px;
+    padding-left: 15px;
+}
+
+.t_mg_t_addt th {
+    text-align: right;
+    padding-bottom: 25px;
+}
+
+.pubico_edit {
+    background: url("../content/public/pubico.png") no-repeat;
+    width: 20px;
+    height: 16px;
+    background-position: -66px -77px;
+}
+
+.pubico_remove {
+    background: url("../content/public/pubico.png") no-repeat;
+    width: 14px;
+    height: 16px;
+    background-position: -64px -48px;
+}
+
+.no_empty {
+    width: 16px;
+    height: 16px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -119px -407px;
+}
+
+.pubico_correct {
+    background: url("../content/public/pubico.png") no-repeat;
+    width: 20px;
+    height: 20px;
+    background-position: -20px -75px;
+}
+
+.pubico_fenxi {
+    background: url("../content/public/pubico.png") no-repeat;
+    width: 20px;
+    height: 20px;
+    background-position: -42px -75px;
+}
+
+.del_ques {
+    width: 15px;
+    height: 20px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: 0px -75px;
+}
+
+.hover_div, .hover_div1, .hover_div2, .hover_div3 {
+    z-index: 100;
+    padding: 0 15px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #fff;
+    line-height: 30px;
+    display: none;
+}
+
+.edit_hover:hover .hover_div {
+    display: block;
+}
+
+.ques_list dt {
+    padding: 15px 5px;
+    font-weight: bold;
+}
+
+.ques_list dd {
+    padding: 10px;
+    line-height: 30px;
+    margin: 5px 0;
+    word-break: break-all;
+}
+
+.work_edit_tble td {
+    padding-bottom: 10px;
+}
+
+.t_homework_name {
+    border: 1px solid #bfbfbf;
+    padding: 0 8px 0 12px;
+    position: relative;
+    line-height: 21px;
+    text-align: center;
+    height: 22px;
+    margin: 8px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    vertical-align: middle;
+}
+
+.sj {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -25px -118px;
+    width: 13px;
+    height: 24px;
+    position: absolute;
+    left: -6px;
+    top: -1px;
+}
+
+.ques_num {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: inline-block;
+    zoom: 1;
+    border-radius: 5px;
+    margin: 9px;
+}
+
+.correct_set {
+    width: 40px;
+    height: 25px;
+    height: 25px;
+    border: 1px solid #bfbfbf;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    zoom: 1;
+}
+
+.correct_right {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -0px -100px;
+    width: 25px;
+    height: 18px;
+}
+
+.correct_wrong {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -30px -100px;
+    width: 18px;
+    height: 18px;
+}
+
+.has_correct_right {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -232px -380px;
+    width: 25px;
+    height: 18px;
+}
+
+.has_correct_wrong {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -204px -378px;
+    width: 18px;
+    height: 18px;
+}
+
+.correct_notall {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -56px -99px;
+    width: 25px;
+    height: 18px;
+}
+
+.has_correct_notall {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -1px -400px;
+    width: 25px;
+    height: 18px;
+}
+
+.scrollbor_btm {
+    height: 15px;
+    width: 100px;
+    border-top: 1px solid #bfbfbf;
+    border-bottom: 1px solid #bfbfbf;
+    position: relative;
+    display: inline-block;
+    zoom: 1;
+}
+
+.scrollbor {
+    height: 100%;
+    display: inline-block;
+    zoom: 1;
+    width: 20%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+/*.t_homework_report_tble tbody tr:first-child td{border-top:1px solid #bfbfbf;}*/
+.t_homework_report_tble td {
+    border: 1px solid #e7e9ea;
+    text-align: center;
+    line-height: 35px;
+    width: 7.14%;
+}
+/*.t_homework_report_tble thead th{border-width:1px;border-style:solid;border-color:#e7e9ea #e7e9ea #bfbfbf #e7e9ea;line-height:35px;height:35px;text-align:center;margin-bottom:-1px;margin-left:-1px;}
+.t_homework_report_tble thead th:first-child{margin-left:0}*/
+/*.t_homework_report_tble thead th.show{border-top:2px solid #009944;margin-bottom:-2px;background:#fff;border-bottom:1px solid transparent}*/
+.t_homework_report_ul li {
+    float: left;
+    width: 71px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e7e9ea #e7e9ea #bfbfbf #e7e9ea;
+    line-height: 35px;
+    height: 35px;
+    text-align: center;
+    margin-bottom: -1px;
+    margin-left: -1px;
+}
+
+    .t_homework_report_ul li:first-child {
+        margin-left: 0;
+    }
+
+    .t_homework_report_ul li.show {
+        border-top: 2px solid #009944;
+        margin-bottom: -2px;
+        background: #fff;
+        border-bottom: 1px solid transparent;
+    }
+
+.t_homework_com_tble td {
+    border: 1px solid #e7e9ea;
+    line-height: 35px;
+}
+
+.print_div {
+    position: absolute;
+    right: 0;
+    top: 15px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.print_set {
+    position: absolute;
+    right: 100px;
+    top: 15px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.screen_quit {
+    position: absolute;
+    right: 250px;
+    top: 15px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.test_con {
+    width: 172px;
+    height: 155px;
+    display: inline-block;
+    zoom: 1;
+    margin: 20px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -87px -208px;
+}
+
+.t_test_hasreport {
+    background: url("../content/public/pubico.png") no-repeat;
+    width: 20px;
+    height: 20px;
+    background-position: -47px -125px;
+}
+
+.page a {
+    padding: 2px 8px;
+    margin: 0px 4px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #000;
+    border: 1px solid #bfbfbf;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+}
+
+    .page a.show {
+        border: 1px solid transparent;
+    }
+
+.knowledge_tble th {
+    padding-bottom: 30px;
+}
+
+.knowledge_tble td {
+    padding-bottom: 30px;
+}
+
+.knowledge_a {
+    height: 300px;
+    overflow-y: auto;
+}
+
+    .knowledge_a a, .points a {
+        margin: 0 20px 20px 0;
+        white-space: nowrap;
+        display: inline-block;
+        zoom: 1;
+        padding: 0 10px;
+        border: 1px solid #d2d2d2;
+        cursor: pointer;
+    }
+
+.t_test_tip {
+    margin-top: 15%;
+    margin-bottom: 7%;
+}
+
+.testAnswer ul li {
+    float: left;
+    padding: 4px 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid #bfbfbf;
+    border-radius: 5px;
+}
+
+.hascollect {
+    width: 15px;
+    height: 20px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: 0 -183px;
+}
+
+.poist {
+    position: absolute;
+    right: 35px;
+    top: 17px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -71px -183px;
+    width: 15px;
+    height: 20px;
+}
+
+.hasshare {
+    width: 15px;
+    height: 20px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -22px -183px;
+}
+
+.searchbgH {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -40px -177px;
+}
+
+.sort_default {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: 0 -251px;
+    width: 15px;
+    height: 18px;
+}
+
+.searchList li {
+    border-bottom: 1px solid #e7e9ea;
+    height: 46px;
+    overflow: hidden;
+    position: relative;
+}
+
+.papername {
+    display: block;
+    padding-top: 10px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.searchList_btn {
+    position: absolute;
+    top: 25px;
+    left: 520px;
+}
+
+.hot .papername {
+    padding-top: 0;
+}
+
+.centerinfo th {
+    text-align: right;
+    padding-bottom: 30px;
+}
+
+.centerinfo td {
+    text-align: left;
+    padding-bottom: 30px;
+    padding-left: 20px;
+}
+
+.tb_pb30 td {
+    padding-bottom: 30px;
+}
+
+.tb_pb30 th {
+    padding-bottom: 30px;
+    text-align: right;
+}
+
+.center_subject_tip {
+    padding-left: 5em;
+    text-indent: -5em;
+}
+
+.center_subject_tb td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #e7e9ea;
+    text-align: center;
+}
+
+.up_scrollbg {
+    width: 200px;
+    border-radius: 5px;
+    height: 10px;
+    position: relative;
+    border: 1px solid #bfbfbf;
+    background: #fff;
+    margin-right: 10px;
+}
+
+.up_scroll {
+    width: 90%;
+    border-radius: 5px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.up_paper_div {
+    border-right: 1px solid #e7e9ea;
+}
+
+    .up_paper_div th {
+        text-align: right;
+        width: 20%;
+        padding-bottom: 30px;
+    }
+
+    .up_paper_div td {
+        padding-bottom: 30px;
+        padding-left: 20px;
+        width: 30%;
+    }
+
+.word {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: 0 -210px;
+    width: 80px;
+    height: 30px;
+}
+
+.word_input {
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: 0 -208px;
+    width: 25px;
+    height: 30px;
+}
+
+.goback_p {
+    position: absolute;
+    left: 7%;
+    top: -30%;
+}
+
+.cup {
+    background: url("../content/public/pubico.png") no-repeat -48px -277px;
+    width: 20px;
+    height: 25px;
+}
+
+.cup_has {
+    background: url("../content/public/pubico.png") no-repeat -48px -250px;
+    width: 20px;
+    height: 25px;
+}
+
+.s_task {
+    width: 340px;
+    border: 1px solid #e7e9ea;
+}
+
+    .s_task th {
+        background: #f6f6f6;
+        border-bottom: 1px solid #e7e9ea;
+        text-align: left;
+        padding-left: 20px;
+        line-height: 40px;
+    }
+
+    .s_task td {
+        padding-left: 20px;
+        border-bottom: 1px solid #e7e9ea;
+        line-height: 35px;
+        font-size: 12px;
+    }
+
+.s_task_1, .s_task_2, .s_task_3, .s_task_4 {
+    border-left-width: 3px;
+    border-left-style: solid;
+    margin-left: -21px;
+    padding-left: 10px;
+}
+
+.s_task_1 {
+    border-left-color: #009944;
+}
+
+.s_task_2 {
+    border-left-color: #00a0ea;
+}
+
+.s_task_3 {
+    border-left-color: #e67e22;
+}
+
+.s_task_4 {
+    border-left-color: #e74c3c;
+}
+
+.s_task_ico1 {
+    background: url("../content/public/pubico.png") no-repeat -24px -252px;
+    width: 22px;
+    height: 22px;
+}
+
+.s_task_ico2 {
+    background: url("../content/public/pubico.png") no-repeat 0 -281px;
+    width: 22px;
+    height: 22px;
+}
+
+.s_task_ico3 {
+    background: url("../content/public/pubico.png") no-repeat -24px -281px;
+    width: 22px;
+    height: 22px;
+}
+
+.s_task_ico4 {
+    background: url("../content/public/pubico.png") no-repeat 0 -312px;
+    width: 22px;
+    height: 22px;
+}
+
+.rank_bg {
+    width: 250px;
+    height: 10px;
+    border: 1px solid #e7e9ea;
+    position: relative;
+}
+
+.rank_scroll {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #2ecc71;
+}
+
+.cupnum {
+    position: absolute;
+    right: 0;
+    width: 25%;
+    height: 30px;
+    font-size: 12px;
+}
+
+.subnum {
+    position: absolute;
+    right: 0;
+    width: 15%;
+    height: 30px;
+    font-size: 12px;
+}
+
+.lookfalse {
+    background: url("../content/public/pubico.png") no-repeat -24px -312px;
+    width: 15px;
+    height: 15px;
+}
+
+.falseico {
+    background: url("../content/public/pubico.png") no-repeat -46px -312px;
+    width: 25px;
+    height: 25px;
+}
+
+.rightico {
+    background: url("../content/public/pubico.png") no-repeat -46px -338px;
+    width: 25px;
+    height: 25px;
+}
+
+.notallico {
+    background: url("../content/public/pubico.png") no-repeat 0 -364px;
+    width: 25px;
+    height: 25px;
+}
+
+.numbg {
+    background: url("../content/public/result.png") no-repeat 0px -124px;
+    width: 111px;
+    height: 111px;
+    text-align: center;
+    color: #fff;
+    font-size: 70px;
+    line-height: 110px;
+}
+
+.numat {
+    position: absolute;
+    right: 25%;
+    bottom: 20px;
+}
+
+.dadui {
+    position: absolute;
+    left: 28%;
+    top: 20px;
+}
+
+.result1, .result2, .result3, .result4, .result1_has, .result2_has, .result3_has, .result4_has {
+    background: url("../content/public/result.png") no-repeat;
+    width: 52px;
+    height: 52px;
+}
+
+.result2 {
+    background-position: -65px 0;
+}
+
+.result3 {
+    background-position: -130px 0;
+}
+
+.result4 {
+    background-position: -196px 0;
+}
+
+.result1_has {
+    background-position: 0 -64px;
+}
+
+.result2_has {
+    background-position: -65px -64px;
+}
+
+.result3_has {
+    background-position: -130px -64px;
+}
+
+.result4_has {
+    background-position: -196px -64px;
+}
+
+.rasult_btn1 {
+    background: url("../content/public/pubico.png") no-repeat 0 -342px;
+    width: 18px;
+    height: 18px;
+}
+
+.rasult_btn2 {
+    background: url("../content/public/pubico.png") no-repeat -24px -342px;
+    width: 18px;
+    height: 18px;
+}
+
+.tip {
+    background: url("../content/public/pubico.png") no-repeat -30px -365px;
+    width: 18px;
+    height: 18px;
+}
+
+.login {
+    width: 100%;
+    background: #fff;
+    min-width: 1050px;
+    overflow: hidden;
+}
+
+.loginImg img {
+    height: 385px;
+}
+
+.login input[type='text'], .logininput_ie6 {
+    height: 23px;
+    border: 1px solid #bfbfbf;
+    background: #fff;
+    padding: 11px 0 11px 5px;
+    margin: 10px;
+    vertical-align: middle;
+    font-size: 16px;
+    width: 230px;
+}
+
+.logoinput img {
+    height: 45px;
+    width: 110px;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+.logobtn {
+    height: 45px;
+    line-height: 45px;
+    width: 140px;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+    color: #fff;
+    font-size: 18px;
+    margin: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.showother {
+    background: url("../Content/public/pubico.png") no-repeat -51px -367px;
+    width: 22px;
+    height: 20px;
+    border: 1px solid #e7e9ea;
+}
+
+.skin1 {
+    background: #ce014e;
+}
+
+.skin2 {
+    background: #b10f0f;
+}
+
+.skin3 {
+    background: #ef8b16;
+}
+
+.skin4 {
+    background: #88c833;
+}
+
+.skin5 {
+    background: #159c77;
+}
+
+.skin6 {
+    background: #00a0ea;
+}
+
+.skin7 {
+    background: #2d62b8;
+}
+
+.skin8 {
+    background: #811c21;
+}
+
+.skincon {
+    width: 60px;
+    height: 30px;
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+}
+
+.skindiv .radioUp, .skindiv .radioOff {
+    margin-right: 15px;
+}
+
+.logoimg {
+    height: 100px;
+}
+
+    .logoimg img {
+        max-height: 60px;
+        vertical-align: middle;
+    }
+
+/*页面调整*/
+.knowledge_tble .mgtab:hover {
+    color: #333;
+}
+
+.s_mg_info_men label {
+    position: absolute;
+}
+/*完善信息页面错误提示 导致表格错位问题*/
+.lh10 {
+    line-height: 10px;
+}
+
+.camera1 {
+    width: 18px;
+    height: 18px;
+    background: url("../Content/public/pubico.png") no-repeat;
+    background-position: -173px -380px;
+}
+/*弹出层样式*/
+.aui_title {
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 1px solid #e7e9ea;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+}
+
+.aui_state_highlight:focus {
+    border: none;
+    outline: none;
+}
+
+.aui_close { /*background:url("../content/public/pubico.png") no-repeat;background-position:-58px 0;*/
+    width: 20px;
+    height: 20px;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    top: 12px;
+    right: 24px;
+    font-size: 36px;
+    color: #bfbfbf;
+    line-height: 20px;
+    text-align: center;
+}
+
+.aui_buttons button {
+    border-radius: 0.5em;
+    padding: 0.8em 2.5em;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 1.75em;
+    margin-right: 1.75em;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    text-align: center;
+    line-height: 1.6em;
+    border: 0;
+}
+
+.swfContent {
+    height: 465px;
+    background: #CCC none repeat scroll 0% 0%;
+    overflow: hidden;
+}
+
+.mg_hover_del {
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    display: none;
+}
+
+.mg_hover_del1 {
+    position: absolute;
+    right: 27px;
+    top: 7px;
+    display: none;
+}
+
+.mgllist li:hover .mg_hover_del, .mgllist li:hover .mg_hover_del1 {
+    display: block;
+}
+
+.pop_max_h {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.fenzu_max_h {
+    max-height: 168px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.fix_b {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    position: _absolute;
+    left: 0;
+}
+
+.pb73 {
+    padding-bottom: 73px;
+}
+
+.test_index .btn1 {
+    height: 55px;
+    line-height: 55px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 3.5em;
+    padding-right: 3.5em;
+}
+
+
+.no_pre {
+    border-style: solid;
+    border-width: 5px;
+    border-color: transparent #999 transparent transparent;
+    height: 0px;
+    width: 0;
+}
+
+.no_next {
+    border-style: solid;
+    border-width: 5px;
+    border-color: transparent transparent transparent #999;
+    height: 0px;
+    width: 0;
+}
+
+.mgllist_a li {
+    word-break: break-all;
+}
+
+.pm_p1 {
+    width: 32%;
+    margin: 0 0.66%;
+}
+
+.camera_div {
+    height: 160px;
+    width: 650px;
+}
+
+.camera_img {
+    height: 376px;
+}
+
+    .camera_img img {
+        vertical-align: middle;
+        height: 376px;
+        width: 648px;
+    }
+
+.max_img img {
+    max-width: 650px;
+}
+
+.btn_tm {
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    opacity: 0;
+}
+
+.del_hover_div .hover_del {
+    display: none;
+}
+
+.book_deldiv {
+    width: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 30px;
+    height: 30px;
+    border-bottom: 1px solid #e7e9ea;
+    display: none;
+}
+
+.del_hover_div tr:hover .hover_del, .hover_book:hover .book_deldiv {
+    display: inline-block;
+    zoom: 1;
+}
+
+
+/*试题编辑上下移动灰色*/
+.no_hover_up {
+    width: 15px;
+    height: 15px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -94px -380px;
+}
+
+.hover_down {
+    width: 15px;
+    height: 15px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -130px -380px;
+}
+
+.up_paperico {
+    width: 15px;
+    height: 15px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -147px -380px;
+}
+
+.abs_vc {
+    width: 361px;
+    height: 250px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -180px;
+    margin-top: -100px;
+}
+
+.worknum {
+    vertical-align: middle;
+    *vertical-align: baseline;
+}
+/*登录页面*/
+.bx-default-pager {
+    position: absolute;
+    background: url("../Content/public/login_go.png") no-repeat;
+    background-position: left bottom;
+    width: 80px;
+    height: 22px;
+    text-align: center;
+    left: 50%;
+    margin-left: -40px;
+    bottom: 10px;
+}
+
+.page_now {
+    background: url("../Content/public/login_go.png") no-repeat;
+    background-position: -130px -48px;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.page_def {
+    background: url("../Content/public/login_go.png") no-repeat;
+    background-position: -132px 0;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.login_gopre {
+    background: url("../Content/public/login_go.png") no-repeat;
+    background-position: 0 0;
+    width: 35px;
+    height: 65px;
+    margin: 0 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: -50px;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    z-index: 50;
+}
+
+.login_gonext {
+    background: url("../Content/public/login_go.png") no-repeat;
+    background-position: -75px 0;
+    width: 35px;
+    height: 65px;
+    margin: 0 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    right: -50px;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    z-index: 50;
+}
+
+.login_piclist {
+    width: 600%;
+    position: absolute;
+    _width: 3605px;
+}
+
+.login_gonext:hover, .login_gopre:hover {
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
+}
+
+.login_piclist li {
+    width: 1050px;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+    float: left;
+}
+
+.scroll_div {
+    width: 1050px;
+    margin: 0 auto;
+    text-align: center;
+    overflow: visible;
+    position: relative;
+    height: 385px;
+}
+
+.ppl {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -1575px;
+    width: 1050px;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    height: 385px;
+    background: #000;
+}
+
+.ppr {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: 525px;
+    width: 1050px;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    height: 385px;
+    background: #000;
+}
+
+/*调整错误提示代码*/
+label.error {
+    position: absolute;
+    color: red;
+    top: 40px;
+    left: 10px;
+}
+
+.fault_parent1, .fault_parent2, .fault_parent3, .fault_parent4, .fault_parent5, .fault_parent6, .fault_parent7 {
+    position: relative;
+}
+
+    .fault_parent1 label.error {
+        top: 48px;
+        left: 0;
+    }
+
+    .fault_parent2 label.error {
+        top: 48px;
+        left: 10px;
+    }
+
+    .fault_parent3 label.error {
+        top: 42px;
+        left: 10px;
+    }
+
+    .fault_parent4 label.error {
+        top: 35px;
+        left: 0px;
+    }
+
+    .fault_parent5 label.error {
+        top: 40px;
+        left: 0px;
+    }
+
+    .fault_parent6 label.error {
+        top: 28px;
+        left: 15px;
+    }
+
+    .fault_parent7 label.error {
+        top: 28px;
+        left: 140px;
+    }
+
+.fault_parent8 label.error {
+    top: 35px;
+    left: 80px;
+}
+/*帮助页面*/
+.bor_help {
+    width: 4px;
+    height: 18px;
+}
+/*打印预览*/
+.print_list dt {
+    padding: 15px 5px;
+}
+
+.print_list dd {
+    padding: 10px;
+    line-height: 30px;
+    margin: 5px 0;
+}
+
+.printcon {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment_txt {
+    height: 200px;
+    width: 250px;
+    padding-left: 5px;
+}
+
+.report_txt {
+    height: 200px;
+    width: 695px;
+    padding-left: 5px;
+}
+/*修改关联分组*/
+.fenzu_pop_tble th, .fenzu_pop_tble td {
+    padding-left: 10px;
+}
+
+.fenzu_pop_div {
+    width: 45%;
+    padding: 10px 0;
+    max-height: 400px;
+    height: 380px;
+    overflow: auto;
+}
+
+.fenzu_pop_div1 {
+    width: 45%;
+    padding: 10px 0;
+    max-height: 500px;
+    height: 415px;
+    overflow: auto;
+}
+
+.pretext {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.booktable td {
+    padding-bottom: 10px;
+    line-height: 30px;
+}
+/*编辑器特殊处理*/
+.edui-tab-text {
+    line-height: 1.1em;
+}
+/*jia*/
+.addlist {
+    position: absolute;
+    top: 30px;
+    border: 1px solid #bfbfbf;
+    background: #fff;
+    left: 0;
+    width: 48px;
+}
+
+    .addlist li {
+        line-height: 25px;
+        border-bottom: 1px solid #bfbfbf;
+        height: 25px;
+        text-align: center;
+    }
+
+        .addlist li:last-child {
+            border-bottom: 0;
+        }
+
+.hoverh3 .tip_skin {
+    display: none;
+}
+
+.hoverh3:hover .tip_skin {
+    display: inline-block;
+    zoom: 1;
+}
+
+.advice_txt {
+    width: 99%;
+    height: 260px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #bfbfbf;
+}
+
+.tip_text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 25px;
+    width: 98%;
+    height: 260px;
+    padding: 5px 0px 0 17px;
+    border: 1px solid #bfbfbf;
+    background: #fff;
+}
+
+.tongzhibg {
+    background: #000;
+    filter: alpha(opacity=50);
+    background: rgba(0,0,0,0.5);
+    height: 30px;
+    position: relative;
+    z-index: 10;
+    text-align: left;
+}
+
+.tongzhi {
+    color: #fff;
+    font-size: 12px;
+    line-height: 30px;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.tongzhiico {
+    width: 16px;
+    height: 16px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -74px -383px;
+    margin-top: -3px;
+}
+
+.pct38 {
+    width: 38%;
+    overflow: hidden;
+}
+
+.pct82_5 {
+    width: 82.5%;
+}
+
+.work_del {
+    position: absolute;
+    right: 20px;
+}
+
+.s_test td, .s_test th {
+    border: 1px solid #E7E9EA;
+    padding: 10px 20px;
+    line-height: 1.4em;
+}
+
+.tid1 {
+    text-indent: 1em;
+}
+
+.ques {
+    width: 650px;
+    margin-bottom: 13px;
+}
+
+.quesli {
+    width: 650px;
+}
+
+.reportcon {
+    padding: 25px 60px;
+    background: #fff;
+}
+
+.reporttb td, .reporttb th {
+    padding-bottom: 15px;
+}
+
+reporttb2 {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reporttb2 th {
+    text-align: center;
+    border: 1px solid #E7E9EA;
+    height: 50px;
+}
+
+.reporttb2 thead th {
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #E7E9EA;
+    height: 40px;
+}
+
+.reporttb2 td {
+    padding: 0 15px;
+    border: 1px solid #E7E9EA;
+    height: 50px;
+}
+
+.reporttb3 td {
+    border: 1px solid #E7E9EA;
+    height: 35px;
+}
+
+.coly {
+    color: #ff6633;
+}
+
+.reporttb4 th, .reporttb41 th {
+    background: #f1f1f1;
+    font-weight: bold;
+    text-align: center;
+    line-height: 35px;
+    border: 1px solid #E7E9EA;
+}
+
+.reporttb4 td, .reporttb41 td {
+    text-align: center;
+    line-height: 35px;
+    border: 1px solid #E7E9EA;
+    background: #fff;
+}
+
+.reporttb41 th, .reporttb41 td {
+    padding: 10px 0;
+    line-height: 1.4em;
+}
+
+.col_hasknow {
+    color: #98c47a;
+}
+
+.col_noallknow {
+    color: #5b9bd5;
+}
+
+.col_noknow {
+    color: #ff7a7a;
+}
+
+.reporttb5 th {
+    text-align: center;
+    line-height: 35px;
+    border: 1px solid #E7E9EA;
+    font-weight: bold;
+}
+
+.reporttb5 td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #E7E9EA;
+}
+
+.stary {
+    height: 20px;
+    width: 20px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -37px -401px;
+}
+
+.icocon {
+    padding: 0 40px;
+}
+
+.square {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+}
+
+.bg1 {
+    background: #407fcb;
+}
+
+.bg2 {
+    background: #cf413e;
+}
+
+.bg3 {
+    background: #9dc44b;
+}
+
+.bg4 {
+    background: #74559b;
+}
+
+input.test_text {
+    height: 18px;
+    line-height: 18px;
+    width: 50px;
+    border: 1px solid #bfbfbf;
+    vertical-align: middle;
+    padding: 0;
+    text-align: center;
+}
+
+input.test_text {
+    height: 18px;
+    line-height: 18px;
+    width: 50px;
+    border: 1px solid #bfbfbf;
+    vertical-align: middle;
+    padding: 0;
+    text-align: center;
+}
+
+.popn_h {
+    overflow: auto;
+    max-height: 120px;
+    _height: 120px;
+}
+
+.popn_h2 {
+    overflow: auto;
+    max-height: 250px;
+    _height: 250px;
+}
+
+.bigsj {
+    background: #d55454;
+    width: 40px;
+    height: 100px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    position: relative;
+}
+
+    .bigsj:after {
+        position: absolute;
+        bottom: -80px;
+        height: 0;
+        width: 0;
+        border-top: 60px solid red;
+        border-left: 40px solid #fff;
+        border-right: 40px solid #fff;
+        border-top: 80px solid #d55454;
+        display: inline-block;
+        left: -20px;
+        content: '';
+    }
+/*资源题库*/
+.r_subject {
+    border: 1px solid #E7E9EA;
+    height: 38px;
+    width: 198px;
+    position: relative;
+    background: #fff;
+    line-height: 38px;
+    font-size: 16px;
+}
+
+.r_maindiv {
+    float: right;
+    width: 730px;
+}
+
+.r_maindiv1 {
+    float: right;
+    width: 787px;
+}
+
+.r_subject .showother, .r_search .showother {
+    border: 1px solid #fff;
+}
+
+.r_search {
+    width: 448px;
+    height: 30px;
+    position: relative;
+    background: #fff;
+    padding: 5px 0;
+}
+
+.plan_search {
+    height: 30px;
+    position: relative;
+    background: #fff;
+    padding: 5px 0;
+    width: 360px;
+    margin-top: -5px;
+    margin-right: 30px;
+}
+
+.r_select {
+    position: absolute;
+    top: 20px;
+    left: -1px;
+    text-align: center;
+    width: 100%;
+    background: #fff;
+    display: none;
+}
+
+.plan_search .r_select {
+    top: 30px;
+}
+
+.r_tb {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .r_tb th {
+        text-align: right;
+        font-weight: normal;
+        vertical-align: middle;
+    }
+
+    .r_tb td {
+        padding: 8px;
+    }
+
+.sel_subject {
+    position: absolute;
+    top: 38px;
+    left: -1px;
+    background: #fff;
+    width: 100%;
+    border: 1px solid #E7E9EA;
+    z-index: 999;
+}
+    /*.sel_subject .mgllist li{position:static}*/
+
+    .sel_subject .poist {
+        top: 8px;
+        right: 15px;
+    }
+
+.sel_second {
+    position: absolute;
+    left: 100%;
+    top: -1px;
+    height: 130px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #E7E9EA;
+}
+
+.btn2 {
+    border-radius: 0.3em;
+    padding: 0.7em 1.3em;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 1em;
+    margin-right: 1em;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    text-align: center;
+    line-height: 1.4em;
+}
+/*公用试题样式*/
+.questions {
+    line-height: 30px;
+    position: relative;
+}
+
+    .questions img {
+        max-width: 100%;
+    }
+
+    .questions li {
+        padding: 20px 15px;
+        border-bottom: 1px solid #E7E9EA;
+        position: relative;
+        margin-top: 5px;
+    }
+
+.destop {
+    margin-bottom: 10px;
+}
+
+.difficulty {
+    margin-left: 30px;
+}
+
+.extraope {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.analysis_div {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.analysis {
+    font-weight: bold;
+}
+
+.findques_que {
+    padding: 0 25px;
+}
+
+
+
+.ans_list {
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+    .ans_list dd {
+        padding: 0;
+        border-bottom: none;
+        margin: 0;
+    }
+
+
+/*单个页面试题*/
+.findques_que .shoucang, .paperdetail .shoucang {
+    margin-right: 30px;
+}
+
+.findques_que .hasshoucang, .paperdetail .hasshoucang {
+    margin-right: 30px;
+}
+
+.quesh2 {
+    font-weight: bold;
+    padding: 15px 5px;
+    position: relative;
+}
+
+.hovershow, .hovershow2 {
+    border: 1px solid transparent;
+}
+/*.hovershow:hover .hover_div3,.hovershow2:hover .hover_div2,*/ .quesh2:hover .hover_div, .paperpreview li:hover .hover_div, .planques .questions li:hover .hover_div1 {
+    display: block;
+}
+
+.paperpreview .questions li, .paperdetail .questions li {
+    padding: 10px 15px;
+    margin: 5px 0;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.planques .questions li {
+    padding: 5px 10px;
+    margin: 5px 0;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.paperpreview .analysis_div {
+    padding-left: 20px;
+}
+
+.paperpreview .difficulty {
+    margin-left: 20px;
+}
+
+.paperpreview .que_main, .paperdetail .que_main, .paperdetail .extraope {
+    margin-left: 20px;
+}
+
+.quesh2 {
+    font-weight: bold;
+    padding: 15px 5px;
+    position: relative;
+}
+
+.planques .quesh2, .planprint .quesh2 {
+    font-weight: normal;
+}
+
+.quesh2:hover .hover_div, .paperpreview li:hover .hover_div {
+    display: block;
+}
+
+.paperdetail .analysis_div {
+    margin-left: 20px;
+}
+
+.paperlist li {
+    padding: 15px 25px;
+    border-bottom: 1px solid #e7e9ea;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.jiucuo {
+    margin-right: 30px;
+    color: #999;
+    cursor: pointer;
+}
+
+.printcon .que_main {
+    margin-left: 20px;
+}
+
+.printcon .quesh2:hover {
+    border: 1px solid transparent;
+}
+
+/**小灰色篮子*/
+.hasbasket {
+    width: 15px;
+    height: 15px;
+    background: url("../content/public/pubico.png") no-repeat;
+    background-position: -94px -407px;
+}
+
+
+.paperpreview .que_main, .paperdetail .que_main, .paperdetail .extraope {
+    margin-left: 20px;
+}
+
+.hasshoucang {
+    color: #999;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.zujuan {
+    position: absolute;
+    right: 30px;
+    bottom: 5px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.xnqueslist .btn1 {
+    height: 55px;
+    line-height: 55px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 5.5em;
+    padding-right: 5.5em;
+}
+
+/*11.19版本学能选题*/
+.xntable th {
+    text-align: left;
+    width: 10%;
+    font-weight: normal;
+    vertical-align: top;
+}
+
+.xntr1 label {
+    margin-right: 25px;
+    white-space: nowrap;
+    margin-bottom: 25px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    cursor: pointer;
+}
+
+.xntr3 label {
+    margin-right: 45px;
+    white-space: nowrap;
+    margin-bottom: 25px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    cursor: pointer;
+}
+
+.r_selSub .mgtab {
+    line-height: 1.4em;
+    height: 1.4em;
+}
+
+.r_selSub {
+    z-index: 100;
+}
+
+
+
+/*20151205*/
+/*.step1,.step2,.step3{width:220px;height:40px;display:inline-block;zoom:1;background:url("../content/public/setneedH.jpg") no-repeat;}
+.step1{background-position:0 0}
+.step2{background-position:-305px 0}
+.step3{background-position:-610px 0}
+.setneedtble th{text-align:right;padding-bottom:30px;font-weight:normal;width:20%;vertical-align:top}
+.setneedtble td{padding-bottom:30px;}
+.setneedtble .reporttb5 th{width:auto;text-align:center;padding:0}
+.setneedtble .reporttb5 td{padding: 5px;}
+.h400{height:400px}
+.setbneedtree .li_open,.setbneedtree .li_close{position:static;vertical-align:middle;margin-right:5px}
+.setbneedtree .li_open{margin-top:3px}
+.ml-25{margin-left:-25px}
+.planlist{border-radius:3px;border:1px solid #ccc;background:#f9f9f9;margin-bottom:20px;padding-top:10px;padding-bottom:10px}
+.planjt{position:absolute;top:10px;left:-8px;background:url("../content/public/leftjt.png") no-repeat;width:8px;height:12px}
+.planlist ol{display:none}
+.selectlist .planlist ol{display:block}
+.planlist li{padding-left:20px;padding-right:10px}
+.planlist h3{margin-left:10px}*/
+
+
+
+/*20151205*/
+.step1, .step2, .step3 {
+    width: 220px;
+    height: 40px;
+    display: inline-block;
+    zoom: 1;
+}
+
+.step1 {
+    background-position: 0 0;
+}
+
+.step2 {
+    background-position: -305px 0;
+}
+
+.step3 {
+    background-position: -610px 0;
+}
+
+.setneedtble th {
+    text-align: right;
+    padding-bottom: 30px;
+    font-weight: normal;
+    width: 20%;
+    vertical-align: top;
+}
+
+.setneedtble td {
+    padding-bottom: 30px;
+}
+
+.setneedtble .reporttb5 th {
+    width: auto;
+    text-align: center;
+    padding: 0;
+}
+
+.setneedtble .reporttb5 td {
+    padding: 5px;
+}
+
+.h400 {
+    height: 400px;
+}
+
+.setbneedtree .li_open, .setbneedtree .li_close {
+    position: static;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.setbneedtree .li_open {
+    margin-top: 3px;
+}
+
+.ml-25 {
+    margin-left: -25px;
+}
+
+.planlist {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 120px;
+}
+
+.planjt {
+    position: absolute;
+    top: 10px;
+    left: -8px;
+    background: url("../content/public/leftjt.png") no-repeat;
+    width: 8px;
+    height: 12px;
+}
+
+.planlist li {
+    padding-left: 20px;
+    padding-right: 80px;
+    position: relative;
+}
+
+.planlist h3 {
+    margin-left: 10px;
+}
+
+.setdetail .btn {
+    padding: 5px 10px;
+}
+/*.classlist{height:530px;overflow:hidden}
+.classlist li{margin-bottom:20px;position:relative}
+.classlist li a{width:90px;text-align:center;height:33px;line-height:33px;background:#e4e4e4;color:#666;font-size:16px;display:inline-block}*/
+.classlist {
+    width: 150px;
+}
+
+.classlistdiv {
+    height: 530px;
+    padding-left: 30px;
+    padding-top: 20px;
+    padding-right: 30px;
+    overflow: hidden;
+}
+
+.classlist li {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+    .classlist li a {
+        width: 90px;
+        text-align: center;
+        height: 33px;
+        line-height: 33px;
+        background: #e4e4e4;
+        color: #666;
+        font-size: 16px;
+        display: inline-block;
+    }
+
+.setTeachPlan .questions li {
+    margin-top: 0;
+}
+
+.setTeachPlan li {
+    margin-bottom: 5px;
+}
+
+.showbtn {
+    width: 70%;
+    height: 30px;
+    height: 30px;
+    display: inline-block;
+    zoom: 1;
+}
+
+.planmain {
+    width: 86%;
+    border-left: dotted 2px #838383;
+    margin-top: 20px;
+    margin-left: -10px;
+}
+
+    .planmain .questions li {
+        border: 1px solid transparent;
+    }
+
+.gotop {
+    position: fixed;
+    bottom: 80px;
+    right: 10%;
+    cursor: pointer;
+}
+
+.setbneedtree li {
+    position: relative;
+}
+
+    .setbneedtree li:hover .hover_div, .plancaption:hover .hover_div {
+        display: block;
+    }
+
+.planlist li:hover .hover_div {
+    display: block;
+    background: none;
+}
+
+.timecon {
+    width: 120px;
+    text-align: center;
+}
+
+.absopt {
+    position: absolute;
+    line-height: 30px;
+    text-align: center;
+    width: 100px;
+    z-index: 100;
+    color: #333;
+    display: none;
+    height: 63px;
+}
+
+.showul:hover .absopt {
+    display: block;
+}
+
+.planclassman {
+    float: right;
+    width: 915px;
+    overflow: visible;
+}
+
+.ovs {
+    overflow: visible;
+}
+
+.planprint .questions li:hover {
+    border: 0px;
+    border-bottom: #e7e9ea 1px solid;
+}
+
+.planprint .quesh2 {
+    border: 0px;
+}
+
+.plancaption {
+    border: 1px solid transparent;
+    border-bottom: #e7e9ea 1px solid;
+}
+
+.nohand .mgtab {
+    cursor: text;
+}
+
+.haswid {
+    width: 190px;
+    display: block;
+}
+
+.progress .rank_bg {
+    width: 150px;
+}
+
+.planques .quesh2:hover .hover_div {
+    display: none;
+}
+
+.downjt {
+    width: 12px;
+    height: 14px;
+    background: url("../content/public/updownjt.png") no-repeat left bottom;
+}
+
+.upjt {
+    width: 12px;
+    height: 14px;
+    background: url("../content/public/updownjt.png") no-repeat 0 0;
+}
+.setplanol li{ padding-left: 50px;padding-right: 10px;}
+
+
+.alljt{width:87px;height:57px;background:url("../content/public/alljt.png") no-repeat center center;}
