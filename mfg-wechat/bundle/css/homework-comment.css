@@ -15,6 +15,7 @@
 }
 .title-wrapper span{
     display: inline-block;
+    vertical-align: middle;
 }
 .title-wrapper{
     padding-top: 16px;
@@ -34,6 +35,9 @@
     height: 42px;
     line-height: 42px;
     border-top: 1px solid #bebebe;
+}
+.handler .search{
+    vertical-align: middle;
 }
 .grey{
     color: #999999;

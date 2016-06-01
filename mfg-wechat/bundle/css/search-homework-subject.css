@@ -5,6 +5,9 @@
     width: 100%;
     overflow: hidden;
 }
+.content-wrapper{
+    margin-bottom: 100px;
+}
 .course-name{
     width: 35.33%;
     border-right: 1px solid #00b52d;
@@ -45,4 +48,13 @@
 }
 .w50{
     width: 50%;
+}
+
+.no{
+    position: absolute;
+    left: 0;
+    top: 42px;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 0;
 }
