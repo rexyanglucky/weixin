@@ -8,18 +8,21 @@
     <link href="../bundle/css/afterClass-homework.css" rel="stylesheet">
 </head>
 <body>
-    <div class="header green color-white font-size16" style="overflow:hidden;zoom:1">
-        <div class="left-select green center"  id="subjectName" ></div>
-        <div class="header-right-title" id="homeworkName" style="overflow:hidden;zoom:1"></div>
-    </div>
-    <div  class="main box-padding-left box-padding-right bg-white " >
-        <div class="main-topic font-size16 border-bottom" id="headline">
-            <span class="text-name left" id="left"></span><div class="topic-right-num right">(<span id="nownum"></span>/<span id="sumnum"></span>)</div>
+    <div id="homeWork_box">
+        <div class="header green color-white font-size16" style="overflow:hidden;zoom:1">
+            <div class="left-select green center"  id="subjectName" ></div>
+            <div class="header-right-title" id="homeworkName" style="overflow:hidden;zoom:1"></div>
         </div>
-        <div class="main-answer box-padding-top box-padding-bottom"  id="topicbody" ></div>
+        <div  class="main box-padding-left box-padding-right bg-white " >
+            <div class="main-topic font-size16 border-bottom" id="headline">
+                <span class="text-name left" id="left"></span><div class="topic-right-num right">(<span id="nownum"></span>/<span id="sumnum"></span>)</div>
+            </div>
+            <div class="main-answer box-padding-top box-padding-bottom"  id="topicbody" ></div>
+        </div>
+        <div  id="footer" style="position:fixed;bottom:0;left:0"></div>
     </div>
-    <div class="footer center border-top bg-white overflow"  id="footer" ></div>
     <script src="../bundle/js/footer.js"></script>
     <script src="../bundle/js/afterClass-homework.js"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
