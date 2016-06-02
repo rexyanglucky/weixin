@@ -31,4 +31,5 @@ header {width:100%;height:42px;background: #00d535}
 
 @media screen and (max-width: 414px){
     table img{width:90%}
+    img{max-width:320px}
 }

@@ -41,14 +41,13 @@ header{width:100%;background:#00d535;color:#fff;overflow: hidden}
 .work-analyze-title{
     padding-top:20px;
     overflow:hidden;
+    height:19px;
 }
+.work-analyze-title p{line-height: 19px}
 .work-total span{color:#00d535}
 .tixing{text-align: center;margin-top:44px}
 .icon{
-    display: block;
-    width:3px;
-    height:14px;
-    background:#00d535 ;
+    width:3px;height:19px;margin-right:3px;background:#00d535;display:inline-block
 }
 #pie{
     width:70%;
@@ -96,6 +95,7 @@ footer img{
     position: relative;
     top:3px;
 }
+a{color:#00d535}
 a:link{color:#00d535}
 a:active{color:#00d535;}
 a:visited{color:#00d535;text-decoration: none}

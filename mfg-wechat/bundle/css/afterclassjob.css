@@ -29,4 +29,5 @@ header {width:100%;height:42px;background: #00d535}
 .suitang > p{border-radius:10px;background:#00d535;width:60px;color: #fff;margin-left:0;padding:2px 5px;}
 @media screen and (max-width: 414px){
     table img{width:90%}
+    img{max-width: 320px}
 }
