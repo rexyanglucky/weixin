@@ -19,7 +19,7 @@ button, input, select, textarea {
     font-size: 100%;
 }
 table {
-    border-collapse: collapse; close();
+    border-collapse: collapse;
     border-spacing: 0;
 }
 html { overflow-y: scroll;font-size:10px; }

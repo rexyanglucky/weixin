@@ -48,8 +48,8 @@ span.fieldtip a { height: 20px; line-height: 20px; display: inline-block; margin
 table.edittable { border-collapse: collapse; text-align: center; margin: 2px; }
 table.edittable th, table.edittable td { line-height: 30px; padding: 5px; white-space: normal; word-break: break-all; border: 1px solid #000; vertical-align: middle; }
 .selectoption label.s.sh, div.s.sh { margin: 1px; border: none; background: none; }
-td.m label { border: 1px solid #f00; padding: 4px; padding-right: 40px; background: url(images/m.png) bottom right no-repeat; display: inline-block; }
-td.r label { padding-right: 40px; background: url(images/r.png) bottom right no-repeat; display: inline-block; }
+td.m label { border: 1px solid #f00; padding: 4px; padding-right: 40px; /*background: url(images/m.png) bottom right no-repeat;*/ display: inline-block; }
+td.r label { padding-right: 40px; /*background: url(images/r.png) bottom right no-repeat;*/ display: inline-block; }
 
 .sanwser {
     padding: 4px 10px;
