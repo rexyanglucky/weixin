@@ -27,3 +27,6 @@ header {width:100%;height:42px;background: #00d535}
 .point-title,.testway-title {font-weight:800;}
 .jingpin > p{border-radius:10px;background:#ff7200;width:60px;color: #fff;margin-left:0;padding:2px 5px;}
 .suitang > p{border-radius:10px;background:#00d535;width:60px;color: #fff;margin-left:0;padding:2px 5px;}
+@media screen and(max-width: 414px){
+    img{max-width: 320px}
+}
