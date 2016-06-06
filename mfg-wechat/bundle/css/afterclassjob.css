@@ -23,6 +23,8 @@ header {width:100%;height:42px;background: #00d535}
 .teach-plan li{padding:0 3.1%;  width:93.8%;background:#fff;margin-bottom: 10px}
 .teachplan-info{height: 68px}
 .teachplan-starttime{font-size:1.2rem;color:#ccc;}
+.konwpoint-title{margin-top:15px;margin-bottom: 10px}
+.testway-title{margin:10px 0;}
 .cri-contain{width:100%;text-overflow:ellipsis;}
 .point-title,.testway-title {font-weight:800;}
 .jingpin > p{border-radius:10px;background:#ff7200;width:60px;color: #fff;margin-left:0;padding:2px 5px;}
