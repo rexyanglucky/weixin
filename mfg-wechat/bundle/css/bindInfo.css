@@ -25,11 +25,11 @@
     font-family: 微软雅黑;
 }
 .login-header span{
-    color: #ffc371;
+    color: #ff6000;
 }
 
 .login-info{
-    padding: 10px 0;
+    padding: 10px 0px 30px 0px;
     border: solid 1px;
     border-top-width:0;
     border-radius: 10px;
