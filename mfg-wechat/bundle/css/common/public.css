@@ -49,7 +49,7 @@ body{font-size:1.4rem;color:#000;background:#ebebeb;font-family: '微软雅黑'}
 .color-black{color:#6e6e6e}
 .color-siliver{color:#c2c2c2}
 .color-gray{color: #bebebe}
-.color-green{color:#00d535}
+.color-green{color:#00d535 !important;}
 .color-darkgreen{color:#00af15}
 .color-cheng{color:#ff6000}
 .color-ff7f01{color: #ff7f01}
