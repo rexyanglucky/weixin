@@ -45,6 +45,7 @@
 .comment-content{
     border-bottom: 1px solid #bebebe;
     margin-bottom: 100px;
+    padding-bottom: 9rem;
 }
 .comment-content .content{
     line-height: 1.8rem;
