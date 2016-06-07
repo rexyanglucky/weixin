@@ -163,6 +163,9 @@ input[type="text"],[type='password']{
     background-color: #fdfaf6;
     width: 87.7862%     !important;;
  }
+input[type="button"], input[type="submit"], input[type="reset"] {
+    -webkit-appearance: none;
+}
 input[type="button"]{
     display:block;
     border:0;
@@ -176,6 +179,9 @@ input[type="text"]:hover,[type='password']:hover{
 input[type="text"]:active,[type='password']:active{
     background-color: #fdfaf6;
     border-color: #ffc371;
+}
+.readonly{
+    border: 0;color:#cccccc;padding: 0; background:#fff
 }
 .btn{
     display:block     !important;
