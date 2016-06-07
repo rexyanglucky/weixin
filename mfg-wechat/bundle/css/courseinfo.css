@@ -43,7 +43,7 @@
 }
 
 .foot{
-    margin-top:20%;
+    margin-top:18%;
     height:41%;
 }
 .foot .plan{
@@ -59,7 +59,7 @@
 }
 .totalinfo{
     width: 100%;
-    margin-top: 20%;
+    margin-top: 18%;
     height: 110px;
 }
 .teach{
@@ -72,9 +72,9 @@
 }
 
 .teach .desc{
-    height: 68%;
-    line-height: 7rem;
-    font-size: 1.6rem;
+    height: 74.8px;
+    line-height: 74.8px;
+    font-size: 30px;
     color: #ffffff;
 }
 .teach .num{
