@@ -136,8 +136,8 @@ body{font-size:1.4rem;color:#000;background:#ebebeb;font-family: '微软雅黑'}
 .popmsg{
     background:rgba(0,0,0,0.6) ;
     top: 20%;
-    left: 15%;
-    width: 70%;
+    left:23%;
+    width: 54%;
     height: 150px;
     position: fixed;
     color: #ffffff;
