@@ -227,3 +227,5 @@ input[type="text"]:active,[type='password']:active{
 .footer .left-text,.footer .right-text{width:49%;height:25px;line-height:25px;  }
 .footer .left-text{border-right:1px solid #e4e4e4}
 .footer img{vertical-align:middle;margin-right:1px;display:inline-block}
+.pretext{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;word-break: break-all;}
+
