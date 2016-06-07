@@ -134,7 +134,7 @@ body{font-size:1.4rem;color:#000;background:#ebebeb;font-family: '微软雅黑'}
 }
 /****消息弹出框start*****/
 .popmsg{
-    background:rgba(0,0,0,0.6) ;
+    background:rgba(0,0,0,0.8) ;
     top: 20%;
     left:23%;
     width: 54%;
