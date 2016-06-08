@@ -59,9 +59,9 @@ header{width:100%;background:#00d535;color:#fff;overflow: hidden}
 }
 .legeng ul{margin-top:25px}
 .legeng li{  list-style:inside;margin-bottom:15px;}
-.legeng li:nth-child(1){  list-style-image: url(../img/legend-1.png);}
-.legeng li:nth-child(2){  list-style-image: url(../img/legend-2.jpg);}
-.legeng li:nth-child(3){  list-style-image: url(../img/legend-3.jpg);}
+.legeng li:nth-child(1){  list-style-image: url(../img/legend-2.jpg);}
+.legeng li:nth-child(2){  list-style-image: url(../img/legend-3.jpg);}
+.legeng li:nth-child(3){  list-style-image: url(../img/legend-1.png);}
 .work-statistics{
     padding:1px 3.1%;
     width:93.8%;
