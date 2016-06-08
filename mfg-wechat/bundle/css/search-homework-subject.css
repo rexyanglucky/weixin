@@ -58,3 +58,7 @@
     bottom: 0;
     margin-bottom: 0;
 }
+@media screen and(max-width:414px){
+     table td img{max-width:100%}
+     img{max-width:100%}
+}
