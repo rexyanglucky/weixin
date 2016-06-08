@@ -7,7 +7,6 @@
 .course{
     width: 35.33%;
     border-right: 1px solid #00b52d;
-    box-shadow: 1px 0 #00f23c;
 }
 .type{
     width: 37.6%;
@@ -83,11 +82,11 @@
     font-size: 1.4rem;
     color: #ffffff;
 }
-.right{
+.righth{
     width: 64%;
 
 }
-.right p{text-align: center;}
+.righth p{text-align: center;}
 
 @media screen  and (max-width:325px){
     .main{
