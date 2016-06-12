@@ -29,8 +29,8 @@ header {width:100%;height:42px;background: #00d535}
 .konwpoint-title{margin-top:15px;margin-bottom: 10px}
 .testway-title{margin:10px 0;}
 .jingpin,.suitang{width:100%;overflow: hidden}
-.jingpin > p{border-radius:10px;background:#ff7200;width:60px;color: #fff;margin-left:0;font-size:1.2rem;text-align: center}
-.suitang > p{border-radius:10px;background:#00d535;width:60px;color: #fff;margin-left:0;font-size:1.2rem;text-align:center}
+.jingpin > p{border-radius:10px;background:#ff7200;width:60px;color: #fff;margin-left:0;font-size:1.2rem;text-align: center;margin-top:12px;margin-bottom:12px;}
+.suitang > p{border-radius:10px;background:#00d535;width:60px;color: #fff;margin-left:0;font-size:1.2rem;text-align:center;margin-top:12px;margin-bottom:12px;}
 @media screen and(max-width:414px){
     .konwpoint table td img{max-width:100%}
     .konwpoint img{max-width:100%}
