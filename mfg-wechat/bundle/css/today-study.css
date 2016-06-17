@@ -1,5 +1,5 @@
 .part{
-    height:112px;
+   min-height:112px;
     width:94%;
     box-sizing:border-box;
     background:#ffffff;
@@ -19,9 +19,9 @@
     font-size:1.6rem;
 }
 .part p:first-of-type{
-  line-height:45px;
-    font-size:1.4rem;
-    margin-left:3.2%;
+  line-height:30px;
+  font-size:1.4rem;
+  margin-left:3.2%;
  }
 .part hr{
     border:none;

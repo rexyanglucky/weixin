@@ -26,7 +26,7 @@
     min-width: 280px;
     margin: 0px auto;
     text-align: center;
-    padding: 8% 10%;
+    padding: 0px 10%;
     font-family: 微软雅黑;
     font-size: 1.4rem;
 }
@@ -90,7 +90,7 @@
 
 @media screen  and (max-width:325px){
     .main{
-        padding: 8% 8px;
+        padding: 0px 8px;
         width: 95%;
     }
 

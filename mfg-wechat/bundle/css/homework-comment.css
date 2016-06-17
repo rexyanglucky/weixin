@@ -38,6 +38,8 @@
 }
 .handler .search{
     vertical-align: middle;
+    height: 14px;
+    width: 14px;
 }
 .grey{
     color: #999999;

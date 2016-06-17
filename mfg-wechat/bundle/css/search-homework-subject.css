@@ -36,12 +36,16 @@
 }
 .homework-comment .search{
     vertical-align: middle;
+    height: 14px;
+    width: 14px;
 }
 .border-right{
     border-right: 1px solid #e4e4e4;
 }
 .last img,.middle img,.right-btn img{
     vertical-align: middle;
+    height: 14px;
+    width: 14px;
 }
 .w49{
     width: 49%;
