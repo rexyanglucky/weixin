@@ -18,14 +18,26 @@
         alert(sessionStorage.getItem('支持'));
     }
    window.onload=function(){
-       document.getElementById("setbtn").addEventListener("click", function () {
-         window.sessionStorage.setItem('tt',document.getElementById("sinput").value);
-       },false);
-       document.getElementById("getbtn").addEventListener("click", function () {
-           alert(window.sessionStorage.getItem('tt'));
-       },false);
+       if(document.getElementById("setbtn").addEventListener)
+       {
+           document.getElementById("setbtn").addEventListener("click", function () {
+               window.sessionStorage.setItem('tt',document.getElementById("sinput").value);
+           },false);
+           document.getElementById("getbtn").attachEvent("click", function () {
+               alert(window.sessionStorage.getItem('tt'));
+           },false);
+       }
+       else {
+           document.getElementById("setbtn").attachEvent("click", function () {
+               window.sessionStorage.setItem('tt',document.getElementById("sinput").value);
+           },false);
+           document.getElementById("getbtn").attachEvent("click", function () {
+               alert(window.sessionStorage.getItem('tt'));
+           },false);
+       }
+
    }
-   
+
 </script>
 </html>
 
