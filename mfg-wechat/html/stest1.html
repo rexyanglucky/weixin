@@ -28,10 +28,10 @@
            },false);
        }
        else {
-           document.getElementById("setbtn").attachEvent("click", function () {
+           document.getElementById("setbtn").attachEvent("onclick", function () {
                window.sessionStorage.setItem('tt',document.getElementById("sinput").value);
            },false);
-           document.getElementById("getbtn").attachEvent("click", function () {
+           document.getElementById("getbtn").attachEvent("onclick", function () {
                alert(window.sessionStorage.getItem('tt'));
            },false);
        }
