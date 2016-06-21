@@ -6,9 +6,10 @@
 </head>
 <body>
 
-<input type="text" value="" placeholder="请输入值" id="sinput"/>
+<input type="text" value="test" placeholder="请输入值" id="sinput"/>
 <br>
 <input type="button" value="存入sessionstorage" id="setbtn">
+<input type="button" value="获取sessionstorage" id="getbtn">
 
 </body>
 <script type="text/javascript">
@@ -16,11 +17,15 @@
         sessionStorage.setItem('支持','真的支持');
         alert(sessionStorage.getItem('支持'));
     }
-//   window.onload=function(){
-//       document.getElementById("setbtn").addEventListener("click", function () {
-//         window.sessionStorage.setItem(document.getElementById("sinput").value);
-//       },false);       };
-//   }
+   window.onload=function(){
+       document.getElementById("setbtn").addEventListener("click", function () {
+         window.sessionStorage.setItem('tt',document.getElementById("sinput").value);
+       },false);
+       document.getElementById("getbtn").addEventListener("click", function () {
+           alert(window.sessionStorage.getItem('tt'));
+       },false);
+   }
+   }
 </script>
 </html>
 
