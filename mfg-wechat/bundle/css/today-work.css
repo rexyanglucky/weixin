@@ -39,7 +39,7 @@ header{width:100%;background:#00d535;color:#fff;overflow: hidden}
 .work-analyze{
     padding:0 3.1%;
     width:93.8%;
-    height:222px;
+    max-height:222px;
 }
 .work-analyze-title{
     padding-top:20px;
