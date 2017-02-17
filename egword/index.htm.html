@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="read.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var pdir;
+    function wp(obj){
+        for(var p in obj)
+        {
+
+            if(typeof(obj[p])==="object")
+            {
+                pdir=p;
+                wp(obj[p]);
+            }
+            else{
+                var h=document.body.innerHTML;
+                var href="/egword/src/html/"+pdir+"/"+obj[p];
+                h+='<a style="height: 50px;line-height: 50px;display: inline-block" href="'+href+'">'+p+"："+obj[p]+'</a>';
+                h+="<br/>";
+                document.body.innerHTML=h;
+
+            }
+        }
+
+    }
+   wp(list);
+</script>
+</body>
+</html>

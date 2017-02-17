@@ -1,0 +1,89 @@
+@import "student-reset.less";
+.main-pops{
+  //width:80%;
+margin-bottom: 100px;
+  min-height:500px;
+  .tabs-wrap{
+    .tabs-header{
+
+      /*学情分析用*/
+      .tabs-btn-1{
+        width:130px;
+      }
+      .active{
+        background:#ff942f;
+        border-color:#ff8522;
+      }
+      .normal{
+        background:#e5e5e5;
+        color: #a5a5a5;
+        text-shadow:1px 0px 1px #ffffff,1px 0px 1px #ffffff;
+        border-color:#cacaca ;
+      }
+    }
+    .tabs-split{
+      background: url(../../img/student-split1.png) no-repeat;
+      height: 2px;
+      background-size: 100%;
+    }
+    .tabs-content{
+      margin-top: 0px;
+      //饼状图样式
+      .chart-div-pie{
+        margin-top: 75px;
+        border: none;
+        width: 49%;
+        display: inline-block;
+
+        .chart_title{
+          width: 300px;
+          margin:0 auto;
+          color: #ff8716;
+          font-size: 18px;
+          text-align: left;
+        }
+        .chart{
+          //background: url(../../img/student-chart.png) no-repeat;
+          width: 300px;
+          margin:0 auto;
+          height:172px;
+          margin-top: 60px;
+
+          //text-align: center;
+        }
+        .chart_left{
+          background-position: 0px,0px;
+          //background-position: 160px;
+
+        }
+        .chart_right{
+          background-position:-474px, 0px;
+
+        }
+      }
+      //柱状图样式
+      .chart-div-line{
+        margin: 35px 0 45px 0 ;
+        p{background: #f7f7f7;height:40px;line-height: 40px;text-align: center;color: #ff8716; }
+        .chart-line{ margin: 20px auto 0 auto ; width: 917px;height: 255px}
+      }
+      dl {
+        dd {
+          height: 40px;
+          //width: 100%;
+          padding-left:27px ;
+          position: relative;
+          margin-bottom: 6px;
+          .pink_title{position: absolute; display: inline-block;margin-left:-27px;height:40px;width:25px;background: #ffebd9  }
+          p{background:#f2f2f2; padding:0 20px; height:40px;line-height: 40px;
+          color: #646464}
+          .course_name,.course_num{color:#ff8008}
+        }
+
+      }
+
+    }
+  }
+
+
+}
