@@ -1,0 +1,105 @@
+html:not(.watch-active-state) .list-block .item-link:active,
+.list-block .item-link.active-state {
+  background: #fff;
+}
+#lesson-report {
+  background: #fff;
+}
+#lesson-report .tabs,
+#lesson-report .data {
+  padding: 0 0.5rem;
+  display: -webkit-flex;
+  /* Safari */
+  -webkit-flex-direction: column;
+  /* Safari 6.1+ */
+  flex-direction: row;
+  display: flex;
+  background: #fff;
+  border-bottom: 0.025rem solid #e5e5e5;
+  height: 2.25rem;
+}
+#lesson-report .tabs .box,
+#lesson-report .data .box {
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  text-align: center;
+  line-height: 2.25rem;
+  color: #a1a1a1;
+  font-size: 0.6rem;
+  height: 2.25rem;
+}
+#lesson-report .tabs .active,
+#lesson-report .data .active {
+  border-bottom: 0.05rem solid #45c6fc;
+  color: #45c6fc;
+}
+#lesson-report .data {
+  height: 6.85rem;
+}
+#lesson-report .data .box {
+  font-size: 1.75rem;
+  height: 3.25rem;
+  align-self: center;
+  -webkit-align-self: center;
+  border-right: 0.025rem solid #e5e5e5;
+}
+#lesson-report .data .box .p {
+  display: block;
+  font-size: 0.7rem;
+  line-height: normal;
+  color: #5d6467;
+}
+#lesson-report .data .box:last-child {
+  border-right: none;
+}
+#lesson-report .report {
+  min-height: 12.5rem;
+  margin-top: 0.25rem;
+  border-top: 0.025rem solid #e5e5e5;
+  background: #fff;
+}
+#lesson-report .report .title {
+  text-align: center;
+  color: #a9acae;
+  font-size: 0.55rem;
+}
+#lesson-report .report .list-block .item-link .item-inner {
+  background-image: url('../../../build/img/li-arrow.png');
+}
+#lesson-report .report .list-block li {
+  background: #45c6fc;
+  width: 95%;
+  margin: 0 auto;
+  border: 0.025rem solid #009ee2;
+  border-radius: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+#lesson-report .report .list-block .item-inner .item-title {
+  height: 3.2rem;
+  line-height: 3.2rem;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  font-size: 0.65rem;
+}
+#lesson-report .mesg-show {
+  display: none;
+}
+#lesson-report .less-nodata {
+  min-height: 12.5rem;
+  border-top: 0.025rem solid #e5e5e5;
+  background: #fff;
+  text-align: center;
+}
+#lesson-report .less-nodata img {
+  margin-top: 3.25rem;
+}
+#lesson-report .bar-tab {
+  text-align: right;
+  font-size: 0.65rem;
+  width: 90%;
+  margin: 0 auto;
+}
+#lesson-report .bar-tab:before {
+  background-color: #fff;
+}

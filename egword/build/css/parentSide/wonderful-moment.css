@@ -1,0 +1,75 @@
+#wonderful-moment {
+  background: #ebf8ff;
+}
+#wonderful-moment .bar-nav ~ .content {
+  top: 3.8rem;
+}
+#wonderful-moment .bar-tab {
+  text-align: right;
+  font-size: 0.65rem;
+  background: #ebf8ff;
+  width: 90%;
+  margin: 0 auto;
+}
+#wonderful-moment .bar-nav {
+  background: #fff;
+  height: 3rem;
+}
+#wonderful-moment .bar-nav .title {
+  text-align: center;
+  font-size: 0;
+  line-height: 3.45rem;
+}
+#wonderful-moment .bar-nav span {
+  border: 0.05rem solid #45c6fc;
+  display: inline-block;
+  font-size: 0.65rem;
+  width: 4.2rem;
+  text-align: center;
+  line-height: 1.15rem;
+  height: 1.25rem;
+  color: #45c6fc;
+  margin-top: 0.45rem;
+}
+#wonderful-moment .bar-nav .one {
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+#wonderful-moment .bar-nav .two {
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
+#wonderful-moment .bar-nav .active {
+  background: #45c6fc;
+  color: #fff;
+}
+#wonderful-moment .bar-nav .icon-left:before {
+  content: url('../../../build/img/go-back.png');
+}
+#wonderful-moment .cont {
+  display: none;
+  padding-top: 1rem;
+  min-height: 20.35rem;
+  background: #fff;
+  padding-bottom: 0.5rem;
+}
+#wonderful-moment .cont .img {
+  max-width: 90%;
+  margin: 0 auto;
+  border-radius: 0.2rem;
+  text-align: center;
+  margin-bottom: 0.625rem;
+}
+#wonderful-moment .cont .img img {
+  max-width: 100%;
+}
+#wonderful-moment .no-record {
+  padding-top: 1rem;
+  min-height: 20.35rem;
+  background: #fff;
+  padding-bottom: 0.5rem;
+  text-align: center;
+}
+#wonderful-moment .no-record img {
+  margin-top: 3.25rem;
+}

@@ -1,0 +1,49 @@
+#lesson-manage {
+  background: #fff;
+}
+#lesson-manage .reg {
+  min-height: 12.75rem;
+  border-bottom: 0.025rem solid #c9c9c9;
+  width: 95%;
+  margin: 0 auto;
+}
+#lesson-manage .reg .right {
+  float: right;
+  color: #b4bfc6;
+  font-size: 0.6rem;
+}
+#lesson-manage .reg .intruduce {
+  color: #b4bfc6;
+  font-size: 0.6rem;
+  word-wrap: break-word;
+  line-height: 1.0rem;
+}
+#lesson-manage .reg .lesson {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #fff;
+}
+#lesson-manage .reg .lesson .box {
+  border-radius: 0.5rem;
+  width: 5.4rem;
+  height: 5.4rem;
+  display: inline-block;
+  text-align: center;
+}
+#lesson-manage .reg .lesson .box .big-letter {
+  display: inline-block;
+  height: 3.8rem;
+  line-height: 3.8rem;
+  font-size: 2.15rem;
+  width: 100%;
+}
+#lesson-manage .no-record {
+  margin-top: 3.75rem;
+  text-align: center;
+}
+#lesson-manage .bar-tab {
+  text-align: right;
+  font-size: 0.65rem;
+  width: 90%;
+  margin: 0 auto;
+}

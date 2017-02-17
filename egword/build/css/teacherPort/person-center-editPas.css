@@ -1,0 +1,42 @@
+#person-center-editPas {
+  background: #ebf8ff;
+}
+#person-center-editPas .list-block {
+  background: #fff;
+  margin-top: 0;
+}
+#person-center-editPas .list-block ul {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  width: 90%;
+  margin: 0 auto;
+}
+#person-center-editPas .list-block input[type='password'] {
+  color: #68cefc;
+  border-bottom: 2px solid #6ad1fd;
+}
+#person-center-editPas .list-block .mesg {
+  height: 3rem;
+  text-align: right;
+  width: 90%;
+  margin: 0 auto;
+}
+#person-center-editPas .list-block .mesg span {
+  margin-right: 1rem;
+  color: #ff6c00;
+}
+#person-center-editPas .list-block .footers {
+  height: 3.75rem;
+  text-align: center;
+}
+#person-center-editPas .list-block .footers span {
+  width: 8.65rem;
+  height: 1.75rem;
+  line-height: 1.75rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 0.2rem;
+  background: #45c6fc;
+  cursor: pointer;
+  display: inline-block;
+}

@@ -1,0 +1,119 @@
+#lesson-evaluate {
+  background: #ebf8ff;
+}
+#lesson-evaluate .bar-nav ~ .content {
+  top: 3.8rem;
+}
+#lesson-evaluate .bar-tab {
+  text-align: right;
+  font-size: 0.65rem;
+  background: #ebf8ff;
+  width: 90%;
+  margin: 0 auto;
+}
+#lesson-evaluate .bar-nav {
+  background: #fff;
+  height: 3rem;
+}
+#lesson-evaluate .bar-nav .title {
+  text-align: center;
+  font-size: 0;
+  line-height: 3.45rem;
+}
+#lesson-evaluate .bar-nav span {
+  border: 0.05rem solid #45c6fc;
+  display: inline-block;
+  font-size: 0.65rem;
+  width: 4.2rem;
+  text-align: center;
+  line-height: 1.15rem;
+  height: 1.25rem;
+  color: #45c6fc;
+  margin-top: 0.45rem;
+}
+#lesson-evaluate .bar-nav .one {
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+#lesson-evaluate .bar-nav .two {
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
+#lesson-evaluate .bar-nav .active {
+  background: #45c6fc;
+  color: #fff;
+}
+#lesson-evaluate .bar-nav .icon-left:before {
+  content: url('../../../build/img/go-back.png');
+}
+#lesson-evaluate .content {
+  width: 96%;
+  margin: 0 auto;
+}
+#lesson-evaluate .content .cont {
+  background: #fff;
+  height: 22.5rem;
+  padding: 0 0.5rem;
+}
+#lesson-evaluate .content .name-student {
+  height: 3.625rem;
+  line-height: 3.625rem;
+  font-size: 0.75rem;
+  padding: 0 0.5rem;
+  border-bottom: 0.025rem solid #e5e5e5;
+}
+#lesson-evaluate .content .name-student .circle {
+  display: inline-block;
+  width: 2.625rem;
+  height: 2.625rem;
+  line-height: 2.625rem;
+  border-radius: 50%;
+  background: #eeeeee;
+  border: 0.025rem solid #cccccc;
+  float: right;
+  font-size: 0.45rem;
+  text-align: center;
+  margin-top: 0.4rem;
+}
+#lesson-evaluate .content .current-less .titles {
+  height: 2.625rem;
+  line-height: 2.625rem;
+  color: #00b4ff;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+#lesson-evaluate .content .current-less .titles .span {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.7rem;
+  background: #8fddfd;
+  border: 0.025rem solid #66b9dc;
+  line-height: normal;
+  border-radius: 0.1rem;
+  vertical-align: middle;
+}
+#lesson-evaluate .content .current-less .item {
+  padding-left: 1rem;
+  margin-top: 2.25rem;
+  height: 0.9rem;
+  font-size: 0.65rem;
+}
+#lesson-evaluate .content .current-less .item .red {
+  color: #ff5400;
+}
+#lesson-evaluate .content .current-less .item .ml1 {
+  margin-left: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  width: 3.5rem;
+  color: #ff5400;
+}
+#lesson-evaluate .content .current-less .item .btn {
+  display: inline-block;
+  padding: 0.08rem 0.5rem;
+  vertical-align: middle;
+  border: 0.025rem solid #ff0000;
+  border-radius: 0.1rem;
+  background: #ff5400;
+  color: #fff;
+}

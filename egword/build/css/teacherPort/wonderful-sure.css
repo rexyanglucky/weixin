@@ -1,0 +1,74 @@
+#wonderful-sure .bar-tab {
+  text-align: center;
+  font-size: 0.65rem;
+  line-height: 2.5rem;
+}
+#wonderful-sure .bar-tab span {
+  display: inline-block;
+  width: 8.5rem;
+  text-align: center;
+  height: 1.75rem;
+  line-height: 1.75rem;
+  background: #45c6fc;
+  color: #fff;
+  border: 1px solid #45c6fc;
+  border-radius: 0.2rem;
+  font-size: 0.65rem;
+  vertical-align: middle;
+}
+#wonderful-sure .bar-nav {
+  background: #45c6fc;
+}
+#wonderful-sure .bar-nav .title {
+  text-align: center;
+  font-size: 0;
+}
+#wonderful-sure .bar-nav span {
+  border: 2px solid #fff;
+  display: inline-block;
+  font-size: 0.65rem;
+  width: 4.2rem;
+  text-align: center;
+  line-height: 1.15rem;
+  height: 1.25rem;
+  color: #fff;
+  margin-top: 0.45rem;
+}
+#wonderful-sure .bar-nav .one {
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+#wonderful-sure .bar-nav .two {
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
+#wonderful-sure .bar-nav .active {
+  background: #fff;
+  color: #45c6fc;
+}
+#wonderful-sure .bar-nav .icon-left:before {
+  content: url('../../../build/img/go-back.png');
+}
+#wonderful-sure .cont .p-mesg {
+  padding: 0.5rem 0.75rem;
+  line-height: 0.8rem;
+  width: 95%;
+  background: #fff2df;
+  color: #ffab4c;
+  margin: 0 auto;
+  margin-top: 1.0rem;
+  font-size: 0.5rem;
+  border-radius: 0.2rem;
+  border: 1px solid #ff9600;
+  margin-bottom: 0.9rem;
+}
+#wonderful-sure .cont .img {
+  max-width: 90%;
+  margin: 0 auto;
+  border-radius: 0.2rem;
+  text-align: center;
+  margin-bottom: 0.625rem;
+}
+#wonderful-sure .cont .img img {
+  max-width: 100%;
+}

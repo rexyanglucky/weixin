@@ -1,0 +1,21 @@
+html:not(.watch-active-state) .list-block .item-link:active,
+.list-block .item-link.active-state {
+  background: #fff;
+}
+#person-center-set {
+  background: #ebf8ff;
+}
+#person-center-set .ml10 {
+  margin-left: 10px;
+}
+#person-center-set .list-block {
+  margin-top: 0;
+}
+#person-center-set .list-block .item-content {
+  border-bottom: 1px solid #e5e5e5;
+}
+#person-center-set .list-block .item-link .item-inner {
+  width: 90%;
+  margin: 0 auto;
+  background: url('../../../build/img/teacher-right-arrow.png') no-repeat 97% center;
+}
