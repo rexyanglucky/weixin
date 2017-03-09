@@ -27,9 +27,10 @@ function GetStudentTestList() {
 
 
             $(".b-studentlist-item").on("click", function () {
-                var studentid = $(this).attr("data-studentid");
+                var evaluationid = $(this).attr("data-evaluationid");
+                var username = $(this).attr("data-username");
 
-                $.router.load("/teacher/testcenter/StudentTestReportDetail?studentid=" + studentid, true);
+                $.router.load("/teacher/testcenter/StudentTestReportDetail?evaluationid=" + evaluationid+"&username="+username, true);
 
             });
 

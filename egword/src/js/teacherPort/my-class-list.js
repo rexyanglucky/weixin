@@ -32,11 +32,11 @@ function GetMyTeachClassList() {
                 var classid = $(this).attr("data-classid");
                 var classindex = $(this).attr("data-classindex");
                 var classstatus = $(this).attr("data-classstatus");
-
+                 var classname = $(this).attr("data-classname");
                 if (classstatus == "1") {
                     $.router.load('/teacher/myclass/ClassroomMonitor?classindex=' + classindex, true);
                 } else {
-                    $.router.load('/teacher/myclass/ClassCourseRecord?classid=' + classid, true);
+                    $.router.load('/teacher/myclass/ClassCourseRecord?classid=' + classid+'&classname='+classname, true);
                 }
 
             });

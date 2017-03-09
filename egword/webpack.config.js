@@ -31,7 +31,7 @@ module.exports = {
         publicPath: '',
         filename: '[name].js',
     },
-    devtool:  "#inline-source-map",//eval-source-map
+    // devtool:  "#inline-source-map",//eval-source-map
     module: {
         loaders: [
         {
@@ -45,7 +45,7 @@ module.exports = {
         root: [path.join(__dirname, './src/tpl')]
     },
 
-    plugin: [
+    plugins: [
      /* new webpack.optimize.UglifyJsPlugin({
                 compress:{warnings:false}
               })*/

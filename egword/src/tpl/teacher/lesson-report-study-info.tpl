@@ -6,6 +6,14 @@
                 </div>
                 <div class="card-content">
                     <div class="card-content-inner">
+                        {{if studentOne.BookNumber - studentOne.CurrentNumber == 0}}
+                        <div class="lesson-circle over">已结课</div>
+                        {{else if studentOne.BookNumber - studentOne.CurrentNumber == 1}}
+                        <div class="lesson-circle normal">剩1次</div>
+                        {{else}}
+
+                        {{/if}}
+
                         <div class="content-block-title">
                              本次课程
                             </div>
@@ -24,7 +32,7 @@
                                               {{/if}}
                                                
                                             </span>
-                                            <span class="item-remark">（目标量：<span>{{studentOne.DestNumber}}</span>）</span>
+                                            <span class="item-remark">（目标值：<span>{{studentOne.DestNumber}}</span>）</span>
                                         </div>
                                         <div class="item-after"></div>
                                     </div>
@@ -75,7 +83,7 @@
                                     <div class="item-inner">
                                         <div class="item-title">
                                             累计学分：
-                                            {{if studentAll.Credits<120}}
+                                            {{if studentAll.Credits<studentAll.CurrentNumber*studentAll.DestNumber}}
                                             <span class="word-num">
                                                 {{studentAll.Credits}}
                                             {{else}}
@@ -83,7 +91,7 @@
                                              {{studentAll.Credits}}
                                             {{/if}}
                                             </span>
-                                            <span class="item-remark">（参考值：<span>120/500</span>）</span>
+                                            <span class="item-remark">（参考值：<span>{{studentAll.CurrentNumber*studentAll.DestNumber}}/{{studentAll.WordAmount}}</span>）</span>
                                         </div>
                                         <div class="item-after"></div>
                                     </div>

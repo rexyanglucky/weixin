@@ -43,6 +43,7 @@ html:not(.watch-active-state) .list-block .item-link:active,
   padding-bottom: 2rem;
 }
 #person-center .card .card-header {
+  display: inline-block;
   justify-content: flex-start;
   -webkit-justify-content: flex-start;
   font-size: 0.65rem;
@@ -84,4 +85,34 @@ html:not(.watch-active-state) .list-block .item-link:active,
 }
 #person-center .bar .icon-star:before {
   content: url("../../../build/img/perser-center.png");
+}
+#b-picker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  outline: none;
+  border: none;
+  width: 3.5rem;
+  padding-right: 0.5rem;
+  z-index: 4;
+  background: transparent;
+}
+.teachdown {
+  position: absolute;
+  right: 0;
+  top: 0.3rem;
+  z-index: 3;
+}
+.picker-modal-inner {
+  background: #fff;
+  -webkit-mask-box-image: none;
+}
+.picker-modal {
+  background: #fff;
+}
+.picker-modal {
+  height: 8rem;
+}
+.bar + .picker-items {
+  height: 6.8rem;
 }

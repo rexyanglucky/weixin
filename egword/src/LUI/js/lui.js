@@ -1,5 +1,7 @@
 var LuiDropDownList = require('../js/dropdownlist');
 var LuiCheckBox = require('../js/checkbox');
+var LuiWordSpeak=require("../js/wordspeak");
+var LuiGuide=require("../js/guide");
 
 function Lui() {
     //this.checkBox = null;
@@ -17,7 +19,7 @@ Lui.prototype = {
         return d.init(p);
     },
     initCheckBox: function (p) {
-        //����һ��������ȫ�ֵ�checkbox����
+        //声明一个适用于全局的checkbox对象
         if (!this.checkBox) {
             this.checkBox = new LuiCheckBox();
         }
@@ -26,12 +28,20 @@ Lui.prototype = {
 
     },
     initWordSpeak: function (p) {
-        //����һ��������ȫ�ֵ�wordspeak����
+        //声明一个适用于全局的wordspeak对象
         if (!this.wordspeak) {
             this.wordspeak = new LuiWordSpeak();
         }
         var c = new LuiWordSpeak();
         return c.init(p);
+    },
+    initGuide:function(p){
+        //声明一个适用于全局的checkbox对象
+        if (!this.guide) {
+            this.guide = new LuiGuide();
+        }
+        var c = new LuiGuide();
+        return c.init();
     }
 };
 

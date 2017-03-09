@@ -19,6 +19,24 @@
       font-size: 0.7rem;
       color: #5d6467;
     }
+    .lesson-circle{
+      position: absolute;right: 20px;top:-10px;
+      width: 2rem;height: 2rem;display: inline-block;border-radius: 1rem;
+      font-size: 0.45rem;line-height: 2rem;text-align: center;
+      @media  only screen and (max-width: 374px){
+        width: 2.3rem;height: 2.3rem;border-radius: 1.15rem;line-height: 2.3rem;
+      }
+    }
+    .lesson-circle.over{
+      background: #eeeeee;
+      border: solid 1px #cdcdcd;
+      color: #5c5c5c;
+    }
+    .lesson-circle.normal{
+      background: #eef9fd;
+      border: solid 1px #0ca1ff;
+      color: #0ca1ff;
+    }
     .card-content-inner {
       .content-block-title {
         color: #1bbaff;

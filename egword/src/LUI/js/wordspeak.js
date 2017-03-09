@@ -47,22 +47,18 @@ LuiWordSpeak.prototype = {
             var url = $(item).attr("data-src");
             var div = document.getElementById('lui_div_speak');
             div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-            // div.innerHTML = '<embed src="' + url + '" loop="0" autostart="true" hidden="true"></embed>';
-            // var emb = document.getElementsByTagName('EMBED')[0];
-            // if (emb) {
-            //     div.disabled = true;
-            // }
             var audio = $("#lui_audio_speak")[0];
             audio.play();
             if (callback) {
                 if (loop === 1) {
+                    // audio.onended=callback;
                     var is_playFinish = setInterval(function () {
                         if (audio.ended) {
                             callback();
                             window.clearInterval(is_playFinish);
                         }
                         setTimeout(function() {
-                             window.clearInterval(is_playFinish);
+                            window.clearInterval(is_playFinish);
                         }, 10000);
                     }, 5);
                 }
@@ -71,12 +67,11 @@ LuiWordSpeak.prototype = {
         }
         if (loop > 0) {
             setTimeout(function () {
-                sthis.play(item, loop - 1,interval,callback);
+                sthis.play(item, loop,interval,callback);
             }, interval);
         }
         else { return; }
     }
 
 };
-
-module.exports = LuiWordSpeak;
+module.exports=LuiWordSpeak;

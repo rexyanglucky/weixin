@@ -484,6 +484,9 @@ a.gray {
 .ovh {
   overflow: hidden;
 }
+.pointer {
+  cursor: pointer;
+}
 .start,
 .start-nobg {
   display: inline-block;
@@ -547,7 +550,8 @@ a.gray {
 /*进度条的样式结束*/
 .voice {
   margin: 0 auto;
-  width: 510px;
+  min-width: 580px;
+  max-width: 780px;
 }
 .voice .word {
   line-height: 110px;
@@ -557,6 +561,7 @@ a.gray {
   width: 80%;
   border-bottom: 1px solid #d0d8dd;
   font-weight: 600;
+  margin: 0 auto;
 }
 .voice .pronunce {
   font-size: 0;
@@ -605,8 +610,9 @@ a.gray {
   background: #ffbc66;
 }
 .voice .anysis {
-  height: 40px;
+  min-height: 40px;
   color: #000;
+  line-height: 25px;
 }
 .voice .remumber {
   background: #fffce1;
@@ -616,7 +622,29 @@ a.gray {
   border: 1px solid #ffd376;
 }
 .voice .remumber .wordWrap {
-  padding: 25px;
+  padding: 20px;
+}
+/**单词发音*/
+.lui_wordspeak1 {
+  display: inline-block;
+  width: 20px;
+  height: 16px;
+  margin-left: 6px;
+  margin-right: 20px;
+  cursor: pointer;
+  background: url(../img/wordico.png) -4px -4px no-repeat;
+  vertical-align: middle;
+}
+.lui_wordspeak1:hover {
+  background: url("../img/sound-play.gif") no-repeat;
+}
+.lui_wordspeak {
+  display: inline-block;
+  width: 37px;
+  height: 30px;
+  cursor: pointer;
+  background: url(../../img/horn.png) no-repeat;
+  vertical-align: middle;
 }
 .start-nobg {
   background: url('../../../build/img/start2.png') no-repeat;
@@ -743,6 +771,7 @@ a {
 .main-pops .tabs-wrap {
   margin-top: 45px;
   padding: 0 5%;
+  padding-bottom: 80px;
 }
 .main-pops .tabs-wrap .tabs-header {
   margin-left: 50px ;
@@ -810,6 +839,8 @@ a {
 }
 */
 .pop-mask {
+  width: 100%;
+  height: 100%;
   display: none;
   position: fixed;
   left: 0;
@@ -832,6 +863,8 @@ a {
   top: 50%;
   background: #fff;
   border: 1px solid #ffcb94;
+  min-width: 300px;
+  width: 560px;
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -844,11 +877,11 @@ a {
 }
 .eg-pop .header {
   font-size: 16px;
-  color: #0084f3;
+  color: #ff9735;
   height: 60px;
   line-height: 60px;
   text-align: center;
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid #ff9735;
 }
 .eg-pop .header .close {
   width: 20px;
@@ -860,9 +893,29 @@ a {
   background: url('../../../build/img/eg-close.png') no-repeat;
   cursor: pointer;
 }
-.eg-pop .text {
-  text-align: left;
-  text-indent: 3rem;
+.eg-pop .body .text {
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px 0 20px 0;
+  line-height: 40px;
+  color: #555555;
+}
+.eg-pop .body .text span {
+  font-size: 20px;
+  font-weight: 600;
+}
+.eg-pop .body .word {
+  width: 290px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  margin: 0 auto;
+  color: #ff7d00;
+}
+.eg-pop .oprt {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 /*页面常用弹窗结束*/
 /*倒计时，start，timesup 弹框*/
@@ -909,30 +962,6 @@ a {
   font-size: 18px;
   color: #ff8716;
 }
-.time-pop .inner_wrap .time_center .rotate-big {
-  position: relative;
-  width: 247px;
-  height: 247px;
-  margin-top: 9px;
-  background: url('../../img/time-circle.png') no-repeat;
-}
-.time-pop .inner_wrap .time_center .rotate-big .rotate-point {
-  background: url('../../img/time-point.png') no-repeat 20px 20px;
-  width: 100%;
-  height: 100%;
-  animation: time-loading 1s linear 0s infinite normal;
-  animation-play-state: paused;
-}
-.time-pop .inner_wrap .time_center .rotate-big .times-big {
-  width: 100%;
-  height: 100%;
-  text-shadow: 1px 1px 0px #ff8717,3px 3px 0px #ff8717;
-  line-height: 265px;
-  font-size: 64px;
-  text-align: center;
-  color: #ff8717;
-  margin-top: -265px;
-}
 .time-pop .inner_wrap .time_center .start {
   cursor: pointer;
   margin-left: 51px;
@@ -954,6 +983,49 @@ a {
   background: url(../../img/student-pop-start.png) no-repeat;
   background-position-x: -306px;
   background-position-y: -40px;
+}
+.rotate-big {
+  position: relative;
+  width: 247px;
+  height: 247px;
+  background: url('../../img/time-circle.png') no-repeat;
+}
+.rotate-big .rotate-point {
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.rotate-big .times-big {
+  width: 100%;
+  height: 100%;
+  text-shadow: 1px 1px 0px #ff8717,3px 3px 0px #ff8717;
+  line-height: 247px;
+  font-size: 64px;
+  text-align: center;
+  color: #ff8717;
+  margin-top: -247px;
+}
+.rotate-small {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  margin-top: 18px;
+  background: url('../../img/time-circle-small.png') no-repeat;
+}
+.rotate-small .rotate-point {
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.rotate-small .times-small {
+  width: 100%;
+  height: 100%;
+  text-shadow: 1px 1px 0 #ff8717,2px 1px 0 #ff8717;
+  line-height: 68px;
+  font-size: 35px;
+  text-align: center;
+  color: #ff8717;
+  margin-top: -68px;
 }
 /*常用按钮样式开始*/
 .btn,
@@ -1222,10 +1294,15 @@ table tr:hover {
     top: -20px;
   }
 }
+.content-title {
+  width: 80%;
+  margin: 0 auto;
+}
 .main-pops {
   padding: 50px;
   padding-bottom: 100px;
   min-height: 730px;
+  width: 80%;
 }
 .main-pops .intruduce {
   height: 175px;

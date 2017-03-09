@@ -1,4 +1,3 @@
-
 function LuiCheckBox() {
     this.selector = "luicheck";
     //参数
@@ -23,7 +22,7 @@ LuiCheckBox.prototype = {
         $(this.selector).each(function (index, item) {
             var ischeckStyle = $(item).attr("data-checked") == 1 ? "check_sel" : "";
             var ischeckshow = $(item).attr("data-showcheckbox") != 1;
-
+            $(item).attr("onselectstart", "return false;");
             var text = $(item).attr("data-text");
             var h = '<i class="icon_check ' + ischeckStyle + ' "></i>';
             var s = '<span class="check_text"  onselectstart="return false;" >' + text + '</span>';
@@ -31,9 +30,9 @@ LuiCheckBox.prototype = {
             // if ($(item).find("icon_check").length > 0 || $(item).find("check_text").length > 0) {
             //     return;
             // }
-            
+
             $(item).html(h);
-            $(item).css({ "cursor": "pointer" });
+            $(item).css({"cursor": "pointer"});
             $(item).unbind("click");
             $(item).bind("click", function () {
                 var ischeck = $(this).attr("data-checked");
@@ -46,7 +45,7 @@ LuiCheckBox.prototype = {
                     $(this).children("i").removeClass("check_def").addClass("check_sel");
                 }
                 // alert("bind");
-                if (param&&param.callback) {
+                if (param && param.callback) {
                     var groupname = $(item).attr("data-name");
                     var val = cthis.getJsonValue(groupname);
                     //调用回调函数，并返回组名和所选中值得json串
@@ -114,14 +113,17 @@ LuiCheckBox.prototype = {
     /**模拟单击 只改变样式 */
     setClickStyle: function (item) {
         var ischeck = $(item).attr("data-checked");
+       this.setClickStyle1(item,ischeck);
+    },
+    setClickStyle1: function (item,ischeck) {
         if (ischeck == 1) {
             $(item).attr("data-checked", 0);
-            $(item).children("i").removeClass("check_sel");
+            $(item).children("i").removeClass("check_sel").addClass("check_def");
         }
         else {
             $(item).attr("data-checked", 1);
-            $(item).children("i").addClass("check_sel");
+            $(item).children("i").addClass("check_sel").removeClass("check_sel");
         }
     }
 };
-module.exports=LuiCheckBox;
+module.exports = LuiCheckBox;

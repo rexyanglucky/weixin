@@ -1,7 +1,9 @@
-var lesson={
-    init:function () {
+var lesson = {
+    init: function () {
+
+        $(".card-header").off("click");
         $(".card-header").on("click",
-            function() {
+            function () {
                 var p = $(this).parent();
                 if (p.hasClass("slide-down")) {
                     var next = $(this).next();
@@ -20,39 +22,66 @@ var lesson={
 
 
 }
-lesson.init();
 
 
-    var classindex;
+var classindex;
+var classid;
+var timer = {};
 
-    $(function () {
-        classindex = $("#hidden-classindex").text();
+$(function () {
+    
+    classindex = $("#hidden-classindex").text();
+    classid = $("#hidden-classid").text();
 
-        //var data = li = [];
-        //var tpl = require("teacher/my-class-list");
-        //$("#studentlist").html(tpl(li));
+    GetClassroomMonitor();
 
+    $("#btn-submit").click(SaveClassEnd);
 
-        $("#btn-submit").click(SaveClassEnd);
+});
 
+function GetClassroomMonitor() {
+
+    $.ajax({
+        type: "get",
+        url: "/teacher/myclass/GetClassroomMonitor",
+        cache: false,
+        data: { classindex: classindex },
+        dataType: "JSON",
+        success: function (data) {
+
+            data = JSON.parse(data);
+            var li = data.result;
+
+            var tpl = require("teacher/lesson-watching");
+            $("#b-monitorlist").html(tpl(li));
+
+            lesson.init();
+
+           window.timer= setTimeout(GetClassroomMonitor, 10000);
+
+        }
     });
 
-    function SaveClassEnd() {
+}
 
-        $.ajax({
-            type: "get",
-            url: "/teacher/myclass/SaveClassEnd",
-            cache: false,
-            data: { classid: classid },
-            dataType: "JSON",
-            success: function (data) {
+function SaveClassEnd() {
 
-                $.router.load('/teacher/myclass/CourseReport?classindex=' + classindex, true);
+    $.ajax({
+        type: "POST",
+        url: "/teacher/myclass/SaveClassEnd",
+        cache: false,
+        data: { classindex: classindex },
+        dataType: "JSON",
+        success: function (data) {
 
-            }
-        });
+            $("#btn-submit").off("click");
 
-    }
+            $.router.load('/teacher/myclass/CourseReport?classindex=' + classindex+"&classid="+classid, true);
+
+        }
+    });
+
+}
 
 
 

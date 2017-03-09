@@ -34,7 +34,8 @@ var module = {
     },
 
     render: function () {
-        calender("#txtEnterTime");
+       
+        calender("#txtEnterTime",null,300);
         //加载
         GetPerSingle();
 
@@ -55,21 +56,23 @@ var module = {
                 jsonAdd.Gender = 0;
             }
             jsonAdd.EnterTime = $.trim($("#txtEnterTime").val());//入职时间
-            jsonAdd.UserRole = $("#drop_role").attr("data-id");//角色
+            //jsonAdd.UserRole = $("#drop_role").attr("data-id");//角色不在修改
             jsonAdd.SchoolId = $("#drop_sc").attr("data-id");//校区id
 
             if (jsonAdd.UserName.length < 1) {
-                alert("姓名不能为空");
+                $("#addStuffP").css({ "visibility": "visible" }).html("姓名不能为空！");
+              
                 return;
             }
             if (jsonAdd.Tel.length < 1) {
-                alert("手机不能为空");
+                $("#addStuffP").css({ "visibility": "visible" }).html("手机格式不对！");
+              
                 return;
             }
             //校验电话
             if (!commJs.IsMobile(jsonAdd.Tel)) {
-
-                alert("手机格式不对");
+                $("#addStuffP").css({ "visibility": "visible" }).html("手机格式不对！");
+             
                 return;
 
             }
@@ -84,7 +87,7 @@ var module = {
                     data: jsonAdd.Tel, userId: dataId
                 },
                 success: function (data) {
-
+                    $("#addStuffP").css({ "visibility": "hidden" });
 
                     if (data.Data == "0") {
 
@@ -105,7 +108,7 @@ var module = {
                             }
                         });
                     } else {
-                        alert("电话重复");
+                        $("#addStuffP").css({ "visibility": "visible" }).html("电话重复！");
                     }
 
                 }
@@ -181,8 +184,13 @@ function GetPerSingle() {
                     $("#sexWMan").addClass('active');//女
                 }
                 //初始化下拉框    drop_role    drop_sc
-
-                lui.initDropDownList({ warpid: "drop_role", width: 260, nameField: 'name', idField: 'id', subtextlength: 15, data: [{ name: '教学点管理员', id: '3', pid: '' }, { name: '老师', id: '4', pid: '00' }], defaultValue: data.Data.RoleId, defaultText: data.Data.RoleName });
+                $("#drop_role").html(data.Data.RoleName);
+                $("#drop_role").attr("data-id", data.Data.RoleId);
+                //lui.initDropDownList({ warpid: "drop_role", width: 260, nameField: 'name', idField: 'id', subtextlength: 15, data: [{ name: '教学点管理员', id: '3', pid: '' }, { name: '老师', id: '4', pid: '00' }], defaultValue: data.Data.RoleId, defaultText: data.Data.RoleName });
+                
+                if (data.Data.RoleId < 3 || data.Data.RoleId == 4) {
+                    $("#schoolShow").hide();
+                }
 
 
                 loadSchools(data.Data.SchoolId, data.Data.SchoolName);//加载学校列表并且赋值默认值
@@ -233,4 +241,35 @@ function loadSchools(defaultValue,defaultText) {
     });
 
 }
+
+
+
+
+//添加实时校验
+$(function () {
+    OptCheck();
+
+});
+
+function OptCheck() {
+
+    $("#txtPreName").keyup(function () {
+        if (this.value.length > 1) {
+            $("#addStuffP").css({ "visibility": "hidden" });
+        }
+
+    });
+
+    $("#perTel").keyup(function () {
+        if (commJs.IsMobile(this.value)) {
+            $("#addStuffP").css({ "visibility": "hidden" });
+        } else {
+            $("#addStuffP").css({ "visibility": "visible" }).html("手机格式不对！");
+        }
+
+    });
+
+
+}
+
 

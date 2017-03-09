@@ -9,8 +9,8 @@
         else {
             totalPages = parseInt(totalCount / pageSize) + 1;
         }
-        var pagePre = '<a href="#"  data-num=' + (parseInt(currentPage) - 1) + ' class="pre-page inline mr20">上一页</a>';
-        var pageNext = '<a href="#"  data-num=' + (parseInt(currentPage) + 1) + ' class="next-page inline">下一页</a>';
+        var pagePre = '<a href="#"  data-num=' + (parseInt(currentPage) - 1) + ' class="pre-page inline mr20 pre-e">上一页</a>';
+        var pageNext = '<a href="#"  data-num=' + (parseInt(currentPage) + 1) + ' class="next-page inline next-e">下一页</a>';
         var indexPage = '<a href="#"  data-num="1" class="pre-page inline mr20">首页</a></li>';
 
         var lastPage = ' <a href="#"  data-num=' + totalPages + ' class="pre-page inline mr20 ml20"> 末页</a>';

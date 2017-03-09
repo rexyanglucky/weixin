@@ -12,19 +12,36 @@ html_js_cssRoute["person-center"]={css:"person-center",js:"person-center"};//个
 html_js_cssRoute["person-center-set"]={css:"person-center-set",js:"person-center-set"};//个人中心-设置
 html_js_cssRoute["person-center-editPas"]={css:"person-center-editPas",js:"person-center-editPas"};//个人中心-修改密码
 html_js_cssRoute["reward-coins"]={css:"reward-coins",js:"reward-coins"};//奖励学币
-html_js_cssRoute["wonderful-moment"]={css:"wonderful-moment",js:"wonderful-moment"};//精彩瞬间
 html_js_cssRoute["wonderful-sure"]={css:"wonderful-sure",js:"wonderful-sure"};//精彩瞬间-确定提交
 html_js_cssRoute["lesson-report-group"]={css:"lesson-report-group",js:"lesson-report-group"};//奖励学币-小组，学生
 html_js_cssRoute["lesson-report"]={css:"lesson-report",js:"lesson-report"};//课次报告
 html_js_cssRoute["student-evaluation-report"]={css:"student-evaluation-report",js:"student-evaluation-report"};//测评报告
+html_js_cssRoute["login"]={css:"login",js:"login"};//登录
 
 //页面dom加载之后加载js
 $(document).on("pageInit", function(e, pageId, $page) {
     console.log($page);
     console.log(pageId);
+    $.ajax({
+        type: "get",
+        url: "/teacher/myclass/GetMyTeachClassList",
+        cache: false,
+        data: {},
+        dataType: "JSON",
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.Code == "404" && data.OK.toString() == "false") {
+                window.location.reload();
+            }
+
+        }
+    });
+    if (window.timer) {
+        window.clearTimeout(window.timer);}
+
     if(pageId&&html_js_cssRoute[pageId]){
-        var jsUrl=src.jsurl+html_js_cssRoute[pageId].js+".js?v="+src.version;
-        reloadJS("cp-script",jsUrl);
+        var jsUrl = src.jsurl + html_js_cssRoute[pageId].js + ".js?v=" + src.version;
+        reloadJS("cp-script", jsUrl, pageId);
     }
 });
 //动画切换之前换加载下一个页面的css
@@ -33,6 +50,7 @@ $(document).on("pageAnimationStart",function(e,pageId,$page){
         var cssUrl=src.cssurl+html_js_cssRoute[pageId].css+".css?v="+src.version;
         reloadCss("cp-css",cssUrl);
     }
+    document.title=document.getElementById("doc-title").value;
 });
 //动画切换之后加载下一个页面的css
 //    $(document).on("pageAnimationEnd",function(e,pageId,$page){
@@ -43,10 +61,15 @@ $(document).on("pageAnimationStart",function(e,pageId,$page){
 ////            reloadJS("cp-script",jsUrl);
 //        }
 //    });
-function reloadJS(id,path)
+function reloadJS(id,path,pageid)
 {
     var oldjs = document.getElementById(id);
-    if(oldjs) {oldjs.parentNode.removeChild(oldjs);}
+    //如果该页面已经加载js 不再做变动
+
+    if (oldjs) {
+        if (oldjs.src.indexOf(html_js_cssRoute[pageid].js+".js") > -1) { return; }
+        oldjs.parentNode.removeChild(oldjs);
+    }
     var scriptObj = document.createElement("script");
     scriptObj.src = path;
     scriptObj.type = "text/javascript";

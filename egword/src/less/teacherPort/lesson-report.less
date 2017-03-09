@@ -4,8 +4,20 @@
 .card{
   box-shadow: none;
 margin: 2.2rem 0 -1.8rem 0;
+  .seq-icon{background: url("../../img/seq2.png") no-repeat;width: 50px;height: 80px;zoom: 0.5;
+    @media  only screen and (max-width: 374px){
+    zoom: 0.43555;
+  }
+  }
+  .group-icon{width: 32px;height: 36px;background-position:0 -46px;margin-right: 0.3rem}
+  .student-icon{width: 32px;height: 36px;margin-right: 0.3rem}
+  .first-icon{background-position:0 -92px}
+  .second-icon{background-position:0 -182px}
+  .third-icon{background-position:0 -271px}
   .card-header{
     color: #5d6467;padding: 1.2rem 1.25rem 0.6rem 1.25rem;font-size: 0.75rem;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
   &:after{background: none;  }
   }
   .card-content-inner{
@@ -15,39 +27,53 @@ margin: 2.2rem 0 -1.8rem 0;
   margin: 0;
   .item-content {
     padding: 0;
-    //border-bottom: solid 0.05rem #E5E5E5;
+    //border-bottom: solid 0.05rem #d2d2d2;
     height: 2.6rem;
     margin-top: 0.5rem;
+    position: relative;
     .item-media {
       width: 0.25rem;
-      background: #45c6fc;
-      border: solid 0.05rem #009ee2;
+      background: #eeeeee;
+      border: solid 0.05rem #d2d2d2;
       height: 100%;
       border-top-left-radius: 0.25rem;
       border-bottom-left-radius: 0.25rem;
     }
-
+    .seq {
+      position: absolute;
+      left: 0;
+      margin-top: -28rem/@base-f;
+      margin-left: 18rem/@base-f;
+    }
+    .seq-num {
+      position: absolute;
+      left: 0;
+      margin-left: 28rem/@base-f;
+      font-size: 1rem;
+      margin-top: 0;
+    }
     .item-inner {
       margin-left: 0;
       height: 100%;
-      border: solid 0.05rem #d5d5d5;
+      border: solid 0.05rem #d2d2d2;
+      border-left: none;
       border-top-right-radius: 0.25rem;
       border-bottom-right-radius: 0.25rem;
+
       .item-title {
-        margin-left: 0.75rem;
+        margin-left:110rem/@base-f;
         color: #5d6467;
         font-size: 0.75rem;
-        .seq {
-          font-size: 1rem;
-        }
+
       }
       .item-after {
         .word-num {
           color: #ff5400
         }
-        &:after {
-          background: none;
-        }
+
+      }
+      &:after {
+        background: none;
       }
 
     }
@@ -57,16 +83,20 @@ margin: 2.2rem 0 -1.8rem 0;
   .card-footer{&:before{background: none}}
 }
 .student{
+  margin-bottom: 3.8rem;
   .card-content-inner{
   .list-block{
     .item-content {
-  .item-media {
-    background: #fcac45;
-    border: solid 0.05rem #ff8726;
-  } .item-inner{
+    .item-inner{
       .lesson-circle{
+        margin-top: -0.3rem;
+        margin-right: 1.25rem;
         width: 2rem;height: 2rem;display: inline-block;border-radius: 1rem;
         font-size: 0.45rem;line-height: 2rem;text-align: center;
+        @media  only screen and (max-width: 374px){
+          margin-top: -0.45rem;
+        width: 2.3rem;height: 2.3rem;border-radius: 1.15rem;line-height: 2.3rem;
+        }
       }
       .over{
         background: #eeeeee;

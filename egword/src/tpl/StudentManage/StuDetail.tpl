@@ -1,14 +1,14 @@
 ﻿
    <div>
-            <span class="mr20"><span class="white">姓名</span>姓名:</span>
+            <span class="mr20">姓&emsp;&emsp;名:</span>
             <span>{{StuName}}</span>
         </div>
         <div class="mt20">
-            <span class="mr20"><span class="white">账号</span>账号:</span>
+            <span class="mr20">账&emsp;&emsp;号:</span>
             <span> {{LoginId}}</span>
         </div>
         <div class="mt20">
-            <span class="mr20"><span class="white">性别</span>性别:</span>
+            <span class="mr20">性&emsp;&emsp;别:</span>
 			 {{if Gender==1}}
             <span> 男</span>
 			{{else}}
@@ -16,11 +16,11 @@
 			{{/if}}
         </div>
         <div class="mt20">
-            <span class="mr20"><span class="white">手机</span>手机:</span>
+            <span class="mr20">手&emsp;&emsp;机:</span>
             <span>{{Tel}}</span>
         </div>
         <div class="mt20">
-            <span class="mr20"><span class="white">年级</span>年级:</span>
+            <span class="mr20">年&emsp;&emsp;级:</span>
             <span>{{GradeId | GetBigGrade}}</span>
         </div>
         <div class="mt20">

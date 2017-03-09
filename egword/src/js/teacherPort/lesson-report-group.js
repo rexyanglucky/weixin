@@ -29,7 +29,6 @@ $(function () {
 
 });
 
-
 function GetGroupOrderList() {
 
     $.ajax({
@@ -44,7 +43,7 @@ function GetGroupOrderList() {
 
             data = JSON.parse(data);
             var li = data.result;
-            if (li.length > 1) {
+            if (li.length > 0) {
 
                 var tpl = require("teacher/lesson-report-group-g");
 
@@ -59,7 +58,7 @@ function GetGroupOrderList() {
                     $(".b-addcoin-num").removeClass("active").first().addClass("active");
                     $("#hidden-coinnum").text(10);
 
-                    $("#b-showaddcoin").show();
+                    $(".b-showaddcoin").show();
                     $("#b-showaddcoin-title").html("奖励学币-" + groupindex + "组");
 
                     $(".b-addcoin-num").off("click");
@@ -77,13 +76,13 @@ function GetGroupOrderList() {
                     $("#btn-submit").off("click");
                     $("#btn-submit").click(function () {
 
-                        $("#b-showaddcoin").hide();
+                        $(".b-showaddcoin").hide();
                         AddGroupCurrency();
 
                     });
                     $("#btn-cancel").off("click");
                     $("#btn-cancel").click(function () {
-                        $("#b-showaddcoin").hide();
+                        $(".b-showaddcoin").hide();
                     });
 
 
@@ -91,6 +90,11 @@ function GetGroupOrderList() {
 
 
             }
+            else {
+
+            $("#g-s-content").html("");
+            }
+
 
 
         }
@@ -125,7 +129,7 @@ function GetStudentOrderList() {
                 $(".b-addcoin-num").removeClass("active").first().addClass("active");
                 $("#hidden-coinnum").text(10);
 
-                $("#b-showaddcoin").show();
+                $(".b-showaddcoin").show();
 
 
                 $("#b-showaddcoin-title").html("奖励学币-" + studentname);
@@ -144,13 +148,13 @@ function GetStudentOrderList() {
                 $("#btn-submit").off("click");
                 $("#btn-submit").click(function () {
 
-                    $("#b-showaddcoin").hide();
+                    $(".b-showaddcoin").hide();
                     AddStudentCurrency();
 
                 });
                 $("#btn-cancel").off("click");
                 $("#btn-cancel").click(function () {
-                    $("#b-showaddcoin").hide();
+                    $(".b-showaddcoin").hide();
                 });
             });
 
@@ -159,7 +163,6 @@ function GetStudentOrderList() {
         }
     });
 }
-
 
 function AddGroupCurrency() {
 
@@ -185,7 +188,6 @@ function AddGroupCurrency() {
     });
 
 }
-
 
 function AddStudentCurrency() {
 

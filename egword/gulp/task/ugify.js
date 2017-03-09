@@ -17,15 +17,17 @@ gulp.task('dep', function () {
 });
 gulp.task('webpack', function () {
     return webpacks(webpackConfig,function(err, stats) {
-        // console.log(stats.toString());
+               // console.log(stats.toString());
     })
 });
 gulp.task('minjs', function () {
     var min = new webpacks.optimize.UglifyJsPlugin({
-        compress: { warnings: false }
+        compress: { warnings: false },except: ['$super', '$', 'exports', 'require'],comments: false 
     })
-    webpackConfig.plugin.push(min);
+    webpackConfig.devtool='cheap-module-source-map';
+    webpackConfig.plugins.push(min);
+    console.log(webpackConfig.plugins)
     webpacks(webpackConfig, function (err, stats) {
-        // console.log(stats.toString());
+        //console.log(stats.toString());
     })
 });

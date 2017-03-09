@@ -7,15 +7,18 @@ html_js_cssRoute["lesson-report"]={css:"lesson-report",js:"lesson-report"};//课
 html_js_cssRoute["lesson-manage"]={css:"lesson-manage",js:"lesson-manage"};//课程管理
 html_js_cssRoute["lesson-evaluate"]={css:"lesson-evaluate",js:"lesson-evaluate"};//课程管理
 html_js_cssRoute["contat-us"]={css:"contat-us",js:"contat-us"};//课程管理
+html_js_cssRoute["bind-info"]={css:"bind-info",js:"bind-info"};//绑定学生
+html_js_cssRoute["unbind-info"]={css:"unbind-info",js:"unbind-info"};//解除绑定
 
 
 //页面dom加载之后加载js
 $(document).on("pageInit", function(e, pageId, $page) {
     console.log($page);
     console.log(pageId);
+
     if(pageId&&html_js_cssRoute[pageId]){
-        var jsUrl=src.jsurl+html_js_cssRoute[pageId].js+".js?v="+src.version;
-        reloadJS("cp-script",jsUrl);
+        var jsUrl = src.jsurl + html_js_cssRoute[pageId].js + ".js?v=" + src.version;
+        reloadJS("cp-script", jsUrl, pageId);
     }
 });
 //动画切换之前换加载下一个页面的css
@@ -34,10 +37,15 @@ $(document).on("pageAnimationStart",function(e,pageId,$page){
 ////            reloadJS("cp-script",jsUrl);
 //        }
 //    });
-function reloadJS(id,path)
+function reloadJS(id,path,pageid)
 {
     var oldjs = document.getElementById(id);
-    if(oldjs) {oldjs.parentNode.removeChild(oldjs);}
+    //如果该页面已经加载js 不再做变动
+
+    if (oldjs) {
+        if (oldjs.src.indexOf(html_js_cssRoute[pageid].js+".js") > -1) { return; }
+        oldjs.parentNode.removeChild(oldjs);
+    }
     var scriptObj = document.createElement("script");
     scriptObj.src = path;
     scriptObj.type = "text/javascript";

@@ -1,51 +1,511 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	//后台交互
+	__webpack_require__(9);
+
+	var tplSpleMoment = __webpack_require__(34);//精彩瞬间模板
+
+	var id = $("#hideId").val();//课程评价需要的id
+
+	var aid = $("#hideAId").val();//比较全的id
+
+	var stuId = $("#stuId").val();//学生id
+	var module = {
+	    init: function () {
+	        //todo 逻辑函数
+	        this.render();
+	        this.initBtns();
+	    },
+
+	    render: function () {
+	        //加载列表
+	        GetClassMomentData();
+
+	    },
+	    initBtns: function () {
+	        //todo 绑定事件
+
+	        //课程评价
+	        $("body").delegate("#courseE", "click", function () {
+	           // $.router.load("/Parents/ParentMenu/CourseEvalu/" + aid, true);//精彩瞬间跳转
+
+	            window.location.href = "/Parents/ParentMenu/CourseEvalu"+aid;
+
+
+	        });
+	        //首页的跳转
+	        $("body").delegate("#menuId", "click", function () {
+
+	            //$.router.load("/Parents/ParentMenu/Index", true);//处理跳转
+
+	            window.location.href = "/Parents/ParentMenu/Index/"+stuId;
+
+
+	        });
+
+
+	    }
+
+
+	};
+
+	//绑定数据
+	$(function () {
+	    module.init();
+
+
+
+	});
+
+
+	//发送请求调取单堂课的数据
+	function GetClassMomentData() {
+
+	    //加载列表
+	    $.ajax({
+	        type: "post",
+	        url: "/Parents/ParentMenu/GetOrgClassMoment",
+	        dataType: "json",
+
+	        data: {
+	            ClassIndex: $("#hideId").val()//传递的是班级的第几次上课
+
+	        },
+	        success: function (data) {
+	            if (data.Data && data.Data.length > 0) {
+	                //请求新数据绑定
+	                $("#tb").html(tplSpleMoment(data.Data));//加载课程头部
+	            }
+	            else {
+	              
+	                $("#tb").hide();
+	                $("#showNoData").show();//显示暂无数据
+
+	            }
+	        }
+	    });
+
+	}
+
+
+
+
+
+
+/***/ },
+
+/***/ 9:
+/***/ function(module, exports, __webpack_require__) {
+
+	//var template = require('./template');
+	var template = __webpack_require__(10);
+
+	/**
+	 * 对日期进行格式化，
+	 * @param date 要格式化的日期
+	 * @param format 进行格式化的模式字符串
+	 *     支持的模式字母有：
+	 *     y:年,
+	 *     M:年中的月份(1-12),
+	 *     d:月份中的天(1-31),
+	 *     h:小时(0-23),
+	 *     m:分(0-59),
+	 *     s:秒(0-59),
+	 *     S:毫秒(0-999),
+	 *     q:季度(1-4)
+	 * @return String
+	 * @author yanis.wang
+	 * @see    http://yaniswang.com/frontend/2013/02/16/dateformat-performance/
+	 */
+
+	//时间转换
+	template.helper('dateFormat', function (date, format) {
+	    date = new Date(parseInt(date.replace("/Date(", "").replace(")/", ""), 10));
+	    //return date.getDate();
+	    //date = new Date(date);
+
+	    var map = {
+	        "y": date.getYear(),
+	        "M": date.getMonth() + 1, //月份 
+	        "d": date.getDate(), //日 
+	        "h": date.getHours(), //小时 
+	        "m": date.getMinutes(), //分 
+	        "s": date.getSeconds(), //秒 
+	        "q": Math.floor((date.getMonth() + 3) / 3), //季度 
+	        "S": date.getMilliseconds() //毫秒 
+	    };
+	    format = format.replace(/([yMdhmsqS])+/g, function (all, t) {
+	        var v = map[t];
+	        if (v !== undefined) {
+	            if (all.length > 1) {
+	                v = '0' + v;
+	                v = v.substr(v.length - 2);
+	            }
+	            return v;
+	        }
+	        else if (t === 'y') {
+	            return (date.getFullYear() + '').substr(4 - all.length);
+	        }
+	        return all;
+	    });
+	    return format;
+	});
+
+	//截字处理
+	template.helper('cutchar', function (obj, charlength) {
+
+	    if (obj == null) {
+	        return "";
+	    }
+	    if (obj.length > parseInt(charlength)) {
+	        obj = obj.substring(0, parseInt(charlength)) + "...";
+	        return obj;
+	    }
+	    return obj;
+
+	});
+
+	//教研评级
+	template.helper('TeachTypeTran', function (obj) {
+
+	    if (obj == 1) {
+	        return "A级";
+	    } else {
+	        return "B级";
+	    }
+	});
+
+	//合同期限转换
+	template.helper('HtQx', function (obj) {
+
+	    return template.helper(obj) + "年";
+	});
+
+	//年级
+	template.helper('GetBigGrade', function (e) {
+	    return e == 1 ? "一年级"
+	        : e == 2 ? "二年级"
+	        : e == 3 ? "三年级"
+	        : e == 4 ? "四年级"
+	        : e == 5 ? "五年级"
+	        : e == 6 ? "六年级"
+	        : e == 7 ? "七年级"
+	        : e == 8 ? "八年级"
+	        : e == 9 ? "九年级"
+	        : e == 10 ? "高一"
+	        : e == 11 ? "高二"
+	        : e == 12 ? "高三"
+	        : "";
+
+	});
+
+	//获取json对象属性个数
+	template.helper('getJsonLength',
+	    function (jsonData) {
+
+	        var jsonLength = 0;
+
+	        for (var item in jsonData) {
+
+	            jsonLength++;
+
+	        }
+
+	        return jsonLength;
+
+	    });
+
+	template.helper('floor',
+	    function (d) {
+	        return Math.floor(d);
+
+	    });
+
+	//大写的转换
+	template.helper('GetBigW', function (e) {
+	    return e == 1 ? "一"
+	        : e == 2 ? "二"
+	        : e == 3 ? "三"
+	        : e == 4 ? "四"
+	        : e == 5 ? "五"
+	        : e == 6 ? "六"
+	        : e == 7 ? "七"
+	        : e == 8 ? "八"
+	        : e == 9 ? "九"
+	        : e == 10 ? "十"
+	        : e == 11 ? "十一"
+	        : e == 12 ? "十二"
+	        : e == 13 ? "十三"
+	        : e == 14 ? "十四"
+	        : e == 15 ? "十五"
+	        : e == 16 ? "十六"
+	        : e == 17 ? "十七"
+	        : e == 18 ? "十八"
+	        : e == 19 ? "十九"
+	        : e == 20 ? "二十"
+	        : e == 21 ? "二十一"
+	        : e == 22 ? "二十二"
+	        : e == 23 ? "二十三"
+	        : e == 24 ? "二十四"
+	        : e == 25 ? "二十五"
+	        : e == 26 ? "二十六"
+	        : e == 27 ? "二十七"
+	        : e == 28 ? "二十八"
+	        : e == 29 ? "二十九"
+	        : e == 30 ? "三十"
+	        : e == 31 ? "三十一"
+	        : e == 32 ? "三十二"
+	        : e == 33 ? "三十三"
+	        : e == 34 ? "三十四"
+	        : e == 35 ? "三十五"
+	        : e == 36 ? "三十六"
+	        : e == 37 ? "三十七"
+	        : e == 38 ? "三十八"
+	        : e == 39 ? "三十九"
+	        : e == 40 ? "四十"
+	        : e == 41 ? "四十一"
+	        : e == 42 ? "四十二"
+	        : e == 43 ? "四十三"
+	        : e == 44 ? "四十四"
+	        : e == 45 ? "四十五"
+	        : e == 46 ? "四十六"
+	        : e == 47 ? "四十七"
+	        : e == 48 ? "四十八"
+	        : e == 49 ? "四十九"
+	        : e == 50 ? "五十"
+	        : "";
+	});
+	//字母的转换
+	template.helper('GetEngBig', function (e) {
+	    return e == 1 ? "A"
+	        : e == 2 ? "B"
+	        : e == 3 ? "C"
+	        : e == 4 ? "D"
+	        : e == 5 ? "E"
+	        : e == 6 ? "F"
+	        : e == 7 ? "G"
+	        : e == 8 ? "H"
+	        : e == 9 ? "I"
+	        : e == 10 ? "J"
+	        : e == 11 ? "K"
+	        : e == 12 ? "L"
+	        : e == 13 ? "M"
+	        : e == 14 ? "N"
+	        : e == 15 ? "O"
+	        : e == 16 ? "P"
+	        : e == 17 ? "Q"
+	        : e == 18 ? "R"
+	        : e == 19 ? "S"
+	        : e == 20 ? "T"
+	        : e == 21 ? "U"
+	        : e == 22 ? "V"
+	        : e == 23 ? "W"
+	        : e == 24 ? "X"
+	        : e == 25 ? "Y"
+	        : e == 26 ? "Z"
+	        : "";
+	});
+	//单词按音节套红
+	template.helper('GetRedWord', function (word) {
+	    // var arr=e.split("");
+	    // var keyword=["a","e","i","o","u"];
+	    // var result="";
+	    // if(arr&&arr.length>0)
+	    // {
+	    //      result= arr.map(function (item,index,array) {
+	    //         if(keyword.indexOf(item)>-1){
+	    //                 return "<span class='red'>"+item+"</span>"
+	    //         }
+	    //         else{
+	    //             return "<span>"+item+"</span>"
+	    //         }
+	    //     });
+	    //     result=result.toString().replace(/,/gi,"");
+	    // }
+	    // console.log(result);
+	    // return result;
+	    var wordStr = word.Word;
+	    if (word.Word.indexOf("-") == -1) {
+	        wordStr = word.Syllables.join("-");
+	    }
+	    var array = ['sion', 'tion', 'sual', 'sure', 'ture', 'dge', 'ar', 'or', 'er', 'ir', 'ur', 'air', 'eir', 'ear', 'eer', 'oar', 'are', 'ere', 'ere', 'ire', 'ore', 'ure', '-y', 'le', 'al', 'el', 'ol', 'il', 'ul', 'ow', 'ew', 'aw', 'gh', 'nk', 'ng', 'ge', 'a', 'e', 'i', 'o', 'u', 'an', 'en', 'in'];
+	    for (var l = 0; l < array.length; l++) {
+	        if (wordStr.indexOf(array[l]) != -1) {
+	            wordStr = wordStr.replace(new RegExp(array[l], "gi"), (l + 10000).toString());
+	        }
+	    }
+	    for (var l = 0; l < array.length; l++) {
+	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	        }
+
+	    }
+
+	    var arr = wordStr.split("<span class=\"red\">");
+	    for (var m = 0; m < arr.length; m++) {
+	        if (arr[m].indexOf("<") == -1) {
+	            wordStr = wordStr.replace(arr[m], ("<span>" + arr[m] + "</span>"));
+	        } else {
+	            if (arr[m].split("</span>")[1] != "") {
+	                wordStr = wordStr.replace(arr[m], (arr[m].split("</span>")[0] + "</span><span>" + arr[m].split("</span>")[1] + "</span>"));
+	            }
+	        }
+	    }
+	    return wordStr;
+	});
+	template.helper('test', function (e) {
+	    return e;
+	})
+
+/***/ },
+
+/***/ 10:
 /***/ function(module, exports) {
 
+	/*TMODJS:{}*/
+	!function () {
+		function a(a, b) {
+			return (/string|function/.test(typeof b) ? h : g)(a, b)
+		}
 
+		function b(a, c) {
+			return "string" != typeof a && (c = typeof a, "number" === c ? a += "" : a = "function" === c ? b(a.call(a)) : ""), a
+		}
+
+		function c(a) {
+			return l[a]
+		}
+
+		function d(a) {
+			return b(a).replace(/&(?![\w#]+;)|[<>"']/g, c)
+		}
+
+		function e(a, b) {
+			if (m(a))for (var c = 0, d = a.length; d > c; c++)b.call(a, a[c], c, a); else for (c in a)b.call(a, a[c], c)
+		}
+
+		function f(a, b) {
+			var c = /(\/)[^\/]+\1\.\.\1/, d = ("./" + a).replace(/[^\/]+$/, ""), e = d + b;
+			for (e = e.replace(/\/\.\//g, "/"); e.match(c);)e = e.replace(c, "/");
+			return e
+		}
+
+		function g(b, c) {
+			var d = a.get(b) || i({filename: b, name: "Render Error", message: "Template not found"});
+			return c ? d(c) : d
+		}
+
+		function h(a, b) {
+			if ("string" == typeof b) {
+				var c = b;
+				b = function () {
+					return new k(c)
+				}
+			}
+			var d = j[a] = function (c) {
+				try {
+					return new b(c, a) + ""
+				} catch (d) {
+					return i(d)()
+				}
+			};
+			return d.prototype = b.prototype = n, d.toString = function () {
+				return b + ""
+			}, d
+		}
+
+		function i(a) {
+			var b = "{Template Error}", c = a.stack || "";
+			if (c)c = c.split("\n").slice(0, 2).join("\n"); else for (var d in a)c += "<" + d + ">\n" + a[d] + "\n\n";
+			return function () {
+				return "object" == typeof console && console.error(b + "\n\n" + c), b
+			}
+		}
+
+		var j = a.cache = {}, k = this.String, l = {
+			"<": "&#60;",
+			">": "&#62;",
+			'"': "&#34;",
+			"'": "&#39;",
+			"&": "&#38;"
+		}, m = Array.isArray || function (a) {
+				return "[object Array]" === {}.toString.call(a)
+			}, n = a.utils = {
+			$helpers: {}, $include: function (a, b, c) {
+				return a = f(c, a), g(a, b)
+			}, $string: b, $escape: d, $each: e
+		}, o = a.helpers = n.$helpers;
+		a.get = function (a) {
+			return j[a.replace(/^\.\//, "")]
+		}, a.helper = function (a, b) {
+			o[a] = b
+		}, module.exports = a
+	}();
+
+/***/ },
+
+/***/ 34:
+/***/ function(module, exports, __webpack_require__) {
+
+	var template=__webpack_require__(10);
+	module.exports=template('src/tpl/Parent/SpleMoment',function($data,$filename
+	/**/) {
+	'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,$out='';$out+=' ';
+	$each($data,function($value,$index){
+	$out+=' <div class="img"> <img src="';
+	$out+=$escape($value.PicUrl);
+	$out+='" alt=""> </div> ';
+	});
+	$out+=' ';
+	return new String($out);
+	});
 
 /***/ }
-/******/ ]);
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vd2VicGFjay9ib290c3RyYXAgNjEwNjE0OGQwNTc5NDA4MDBmZjU/ZjEwMioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBLHVCQUFlO0FBQ2Y7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7OztBQUdBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0EiLCJmaWxlIjoicGFyZW50U2lkZS93b25kZXJmdWwtbW9tZW50LmpzIiwic291cmNlc0NvbnRlbnQiOlsiIFx0Ly8gVGhlIG1vZHVsZSBjYWNoZVxuIFx0dmFyIGluc3RhbGxlZE1vZHVsZXMgPSB7fTtcblxuIFx0Ly8gVGhlIHJlcXVpcmUgZnVuY3Rpb25cbiBcdGZ1bmN0aW9uIF9fd2VicGFja19yZXF1aXJlX18obW9kdWxlSWQpIHtcblxuIFx0XHQvLyBDaGVjayBpZiBtb2R1bGUgaXMgaW4gY2FjaGVcbiBcdFx0aWYoaW5zdGFsbGVkTW9kdWxlc1ttb2R1bGVJZF0pXG4gXHRcdFx0cmV0dXJuIGluc3RhbGxlZE1vZHVsZXNbbW9kdWxlSWRdLmV4cG9ydHM7XG5cbiBcdFx0Ly8gQ3JlYXRlIGEgbmV3IG1vZHVsZSAoYW5kIHB1dCBpdCBpbnRvIHRoZSBjYWNoZSlcbiBcdFx0dmFyIG1vZHVsZSA9IGluc3RhbGxlZE1vZHVsZXNbbW9kdWxlSWRdID0ge1xuIFx0XHRcdGV4cG9ydHM6IHt9LFxuIFx0XHRcdGlkOiBtb2R1bGVJZCxcbiBcdFx0XHRsb2FkZWQ6IGZhbHNlXG4gXHRcdH07XG5cbiBcdFx0Ly8gRXhlY3V0ZSB0aGUgbW9kdWxlIGZ1bmN0aW9uXG4gXHRcdG1vZHVsZXNbbW9kdWxlSWRdLmNhbGwobW9kdWxlLmV4cG9ydHMsIG1vZHVsZSwgbW9kdWxlLmV4cG9ydHMsIF9fd2VicGFja19yZXF1aXJlX18pO1xuXG4gXHRcdC8vIEZsYWcgdGhlIG1vZHVsZSBhcyBsb2FkZWRcbiBcdFx0bW9kdWxlLmxvYWRlZCA9IHRydWU7XG5cbiBcdFx0Ly8gUmV0dXJuIHRoZSBleHBvcnRzIG9mIHRoZSBtb2R1bGVcbiBcdFx0cmV0dXJuIG1vZHVsZS5leHBvcnRzO1xuIFx0fVxuXG5cbiBcdC8vIGV4cG9zZSB0aGUgbW9kdWxlcyBvYmplY3QgKF9fd2VicGFja19tb2R1bGVzX18pXG4gXHRfX3dlYnBhY2tfcmVxdWlyZV9fLm0gPSBtb2R1bGVzO1xuXG4gXHQvLyBleHBvc2UgdGhlIG1vZHVsZSBjYWNoZVxuIFx0X193ZWJwYWNrX3JlcXVpcmVfXy5jID0gaW5zdGFsbGVkTW9kdWxlcztcblxuIFx0Ly8gX193ZWJwYWNrX3B1YmxpY19wYXRoX19cbiBcdF9fd2VicGFja19yZXF1aXJlX18ucCA9IFwiXCI7XG5cbiBcdC8vIExvYWQgZW50cnkgbW9kdWxlIGFuZCByZXR1cm4gZXhwb3J0c1xuIFx0cmV0dXJuIF9fd2VicGFja19yZXF1aXJlX18oMCk7XG5cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gd2VicGFjay9ib290c3RyYXAgNjEwNjE0OGQwNTc5NDA4MDBmZjUiXSwic291cmNlUm9vdCI6IiJ9
+
+/******/ });

@@ -1,6 +1,6 @@
 ﻿<ul>
     {{each $data as v i}}
-    <li class="item-content s-class-list-item" data-classid="{{v.ClassID}}" data-classindex="{{v.ClassIndex}}" data-classstatus="{{v.ClassStatus}}">
+    <li class="item-content s-class-list-item" data-classname="{{v.ClassName}}" data-classid="{{v.ClassID}}" data-classindex="{{v.ClassIndex}}" data-classstatus="{{v.ClassStatus}}">
         <div class="item-inner">
             <div class="item-title">
                 {{v.ClassName}}

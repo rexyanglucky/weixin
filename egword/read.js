@@ -25,7 +25,15 @@ var list = {
         '4.6报告详情': 'report-detail.html',
         '4.7 课程管理': 'curriculum-manage.html',
         "4.8 绩效分管理": "Performance-score.html",
-        "4.9 学生学币收支": "student-coins.html"
+        "4.9 学生学币收支": "student-coins.html",
+        "单元满分榜":'unit-fullMarks.html',
+        "课程进度统计":'lesson-statistics.html',
+        "课堂精彩瞬间":"lesson-wonderfulMoent.html",
+        "学习量统计":'learning-statistics.html',
+        "运营分析-合同期限":"analysis-period.html",
+        "运营分析-老师开通分析":'analysis-teacher.html',
+        "运营分析-学生开通分析":"analysis-cross.html",
+        "运营分析-学生学情分析":'analysis-student-situation.html'
     },
     studentPort: {
         '登录': '',//2
@@ -98,9 +106,10 @@ var list = {
         "上课-课堂监管-下课":"lesson-watching.html",
         "我的班级":"my-class-list.html",
         "我的班级-课程记录":"my-class-course-list.html",
+        "登录":"login.html",
     },
-    parentsPort:{
-        "菜单":"menu.html",
+    parentSide:{
+        "菜单":"main.html",
         "精彩瞬间":"wonderful-moment.html",
         /*"精彩瞬间-暂无记录":"",*/
         "课程报告":"lesson-report.html",
@@ -108,6 +117,8 @@ var list = {
         "课程管理":"lesson-manage.html",
         "课程评价":"lesson-evaluate.html",
         "联系我们":"contat-us.html",
+        "绑定学生":"bind-info.html",
+        "解除绑定":"unbind-info.html"
     }
 
 };

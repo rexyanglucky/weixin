@@ -1,24 +1,24 @@
 // var tool=require("../../LUI/tool.js");
 var Lui = require("../../LUI/js/lui.js");
 var lui = new Lui();
-
+lui.initCheckBox();
 
 var _studentGroup = null;
 var classid;
+var _isgroup = 1;//1分组;0不分组
+
 /*初始化*/
 $(function () {
 
     classid = $("#hidden-classid").text();
-    GetStudentGroup(classid, 1);
-
-    $("#btn-submit").click(SaveClassBegin);
+    GetStudentGroup(classid);
 
 });
 
 /*获取学生分组信息 ajax*/
-function GetStudentGroup(classid, isgroup) {
+function GetStudentGroup(classid) {
     var url = "/teacher/myclass/GetStudentGroup";
-    if (!isgroup) {
+    if (!_isgroup) {
         url = "/teacher/myclass/GetStudentNoGroup";
     }
     $.ajax({
@@ -34,43 +34,13 @@ function GetStudentGroup(classid, isgroup) {
             var li = data.result;
             _studentGroup = li;
 
-            var groupCount = 0;
-            var studentCount = 0;
 
-            var t_data = { isgroup: isgroup, list: li }
+            var t_data = { isgroup: _isgroup, list: li }
 
             var tpl = require("teacher/student-group");
             $("#grouplist").html(tpl(t_data));
 
-            if (isgroup) {
-
-                for (var i = 0; i < li.length; i++) {
-
-                    groupCount++;
-
-                    for (var j = 0; j < li[i].StudentInfoList.length; j++) {
-                        studentCount++;
-                    }
-                }
-
-                $("#groupinfo").html("( " + studentCount + "人 共 " + groupCount + " 组)");
-
-            } else {
-                var sl = li[0].StudentInfoList;
-                for (var j = 0; j < sl.length; j++) {
-                    studentCount++;
-                }
-                $("#groupinfo").html("( " + studentCount + " 人)");
-            }
-
-            if (studentCount == 0) {
-                //确定按钮不可用
-
-            } else {
-                $("#btn-submit").show();
-                $("#btn-submit-no").hide();
-
-            }
+            ShowSetGroupInfo();
 
             lui.initCheckBox({
                 callback: function (item) {
@@ -79,19 +49,32 @@ function GetStudentGroup(classid, isgroup) {
 
                         if ($(item).attr("data-checked") == "1") {
                             //分组
-                            GetStudentGroup(classid, 1);
+                            _isgroup = 1;
+
                         } else {
                             //不分组
-                            GetStudentGroup(classid, 0);
+                            _isgroup = 0;
+                            
                         }
+
+                        GetStudentGroup(classid);
+
                     }
                     else if (groupname == "g1") {
+
                         if ($(item).attr("data-checked") == "1") {
+
                             $(item).parent().removeClass("def").addClass("sel");
+
                         }
                         else {
+
                             $(item).parent().removeClass("sel").addClass("def");
+
                         }
+
+                        ChangeCheckBoxHandle();
+
                     }
                 }
             });
@@ -99,40 +82,124 @@ function GetStudentGroup(classid, isgroup) {
     });
 }
 
-/*获取操作后 学生分组信息*/
-function changeCheckBox() {
+/*修改学生选中状态*/
+function ChangeCheckBoxHandle() {
+
     $("luicheck[data-name='g1']").each(function () {
 
         var isbool = $(this).attr("data-checked") == 1;
 
-        if (!isbool) {
+        var getgroupindexid = $(this).attr("data-groupindexid");
+        var studentid = $(this).attr("data-val");
 
-            var getgroupindexid = $(this).attr("data-groupindexid");
-            var studentid = $(this).attr("data-val");
+        for (var i = 0; i < _studentGroup.length; i++) {
+            if (getgroupindexid == _studentGroup[i].GroupIndexId) {
 
-            for (var i = 0; i < _studentGroup.length; i++) {
-                if (getgroupindexid == _studentGroup[i].GroupIndexId) {
+                for (var j = 0; j < _studentGroup[i].StudentInfoList.length; j++) {
+                    if (studentid == _studentGroup[i].StudentInfoList[j].StudentID) {
 
-                    for (var j = 0; j < _studentGroup[i].StudentInfoList.length; j++) {
-                        if (studentid == _studentGroup[i].StudentInfoList[j].StudentID) {
-                            _studentGroup[i].StudentInfoList.splice(j, 1);
-                            j--;
+
+                        if (isbool) {
+                            _studentGroup[i].StudentInfoList[j].IsDel = 0;
                         }
+                        else {
+                            _studentGroup[i].StudentInfoList[j].IsDel = 1;
+
+                        }
+
                     }
-
-
                 }
+
             }
         }
 
-
     });
+
+    ShowSetGroupInfo();
+
+}
+
+/*分组人数显示 / 分组,学生是否有效(IsDel) / 提交按钮是否可用*/
+function ShowSetGroupInfo() {
+
+    var groupCount = 0;
+    var studentCount = 0;
+
+    if (_isgroup) {
+
+        for (var i = 0; i < _studentGroup.length; i++) {
+
+            var t_stucount = _studentGroup[i].StudentInfoList.length;
+
+
+            for (var j = 0; j < _studentGroup[i].StudentInfoList.length; j++) {
+
+                if (_studentGroup[i].StudentInfoList[j].IsDel == 1) {
+                    t_stucount--;
+                }
+                else {
+                    studentCount++;
+                }
+
+            }
+
+            if (t_stucount == 0) {
+                _studentGroup[i].IsDel = 1;
+            }
+            else {
+                _studentGroup[i].IsDel = 0;
+
+                groupCount++;
+            }
+
+        }
+
+        $("#groupinfo").html("( " + studentCount + "人 共 " + groupCount + " 组)");
+
+    } else {
+        var sl = _studentGroup[0].StudentInfoList;
+
+        var t_stucount = sl.length;
+
+
+        for (var j = 0; j < sl.length; j++) {
+
+            if (sl[j].IsDel == 1) {
+                t_stucount--;
+            }
+            else {
+                studentCount++;
+            }
+
+        }
+
+        if (t_stucount == 0) {
+            _studentGroup[0].IsDel = 1;
+        }
+        else {
+            _studentGroup[0].IsDel = 0;
+
+        }
+
+        $("#groupinfo").html("( " + studentCount + " 人)");
+    }
+
+    $("#btn-submit").off("click");
+    if (studentCount == 0) {
+        //确定按钮不可用
+        $("#btn-submit").addClass("btn-disable");
+
+
+    } else {
+        $("#btn-submit").removeClass("btn-disable");
+
+        $("#btn-submit").click(SaveClassBegin);
+    }
+
 }
 
 /*提交上课信息*/
 function SaveClassBegin() {
-
-    changeCheckBox();
 
     var groupinfo = JSON.stringify(_studentGroup);
 
@@ -146,7 +213,9 @@ function SaveClassBegin() {
 
             data = JSON.parse(data);
 
-            $.router.load('/teacher/myclass/ClassroomMonitor?classindex=' + data.result, true);
+            $("#btn-submit").off("click");
+
+            $.router.load('/teacher/myclass/ClassroomMonitor?classindex=' + data.result+"&classid="+classid, true);
 
         }
     });

@@ -1,4 +1,5 @@
 @import "./student-reset.less";
+.review-word{
 .main-pops {
   .content{
     width:80%;
@@ -10,7 +11,8 @@
     .word{height:100px;line-height:100px;display:inline-block;font-size:40px;border:none;width:60%;}
     .pronunce{float:right;height:110px;line-height:110px;}
     .voice{
-      width:580px;
+      min-width:580px;
+      max-width:780px;
       .btn{
         text-align:left;
         color:#646464;
@@ -42,6 +44,7 @@
         color:#ffb269;
         margin-left:20px;
         font-size:16px;
+        cursor: pointer;
       }
     }
     .write{
@@ -81,6 +84,7 @@
         border-radius:6px;
         background:#f9f9f9;
         margin-right:10px;
+        cursor: pointer;
       }
       span.active{
         background:#fff4ea;
@@ -98,9 +102,17 @@
   line-height:30px;
   padding:0 20px;
 }
+.unclick{
+    cursor: default;
+    background:#ffc997;
+    color:#ff9439;
+    border:1px solid #f37817;
+  }
+}
 .eg-pop{
   width:410px;
   min-height:440px;
+  z-index:99;
   .header{border-bottom:none;height:40px;line-height:40px;}
   .body{
     text-align:center;
@@ -127,6 +139,8 @@
     }
   }
   .oprt{
+    text-align: left;
+    margin: 0;
     padding:30px 45px 40px 45px;
     .btn,.btns{
       padding:0 35px;

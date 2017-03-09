@@ -1,4 +1,4 @@
-#courselist .content {
+#main .content {
   display: -webkit-flex;
   /* Safari */
   -webkit-flex-direction: column;
@@ -9,13 +9,13 @@
   justify-content: center;
   -webkit-justify-content: center;
 }
-#courselist .content .box {
+#main .content .box {
   align-self: center;
 }
-#courselist .content .box a {
+#main .content .box a {
   color: #fff;
 }
-#courselist .content .box span {
+#main .content .box span {
   display: block;
   margin-top: 0.8rem;
   margin-bottom: 1.5rem;

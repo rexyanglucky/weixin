@@ -2,11 +2,21 @@ html:not(.watch-active-state) .list-block .item-link:active,
 .list-block .item-link.active-state {
   background: #fff;
 }
+h1.title {
+  height: 2.2rem;
+  background: #fff;
+}
 #lesson-report {
   background: #fff;
+  /*.mesg-show{display:none;}*/
+}
+#lesson-report .content {
+  margin-bottom: 2rem;
 }
 #lesson-report .tabs,
 #lesson-report .data {
+  width: 90%;
+  margin: 0 auto;
   padding: 0 0.5rem;
   display: -webkit-flex;
   /* Safari */
@@ -15,7 +25,6 @@ html:not(.watch-active-state) .list-block .item-link:active,
   flex-direction: row;
   display: flex;
   background: #fff;
-  border-bottom: 0.025rem solid #e5e5e5;
   height: 2.25rem;
 }
 #lesson-report .tabs .box,
@@ -23,10 +32,10 @@ html:not(.watch-active-state) .list-block .item-link:active,
   flex-grow: 1;
   -webkit-flex-grow: 1;
   text-align: center;
-  line-height: 2.25rem;
+  line-height: 2.2rem;
   color: #a1a1a1;
   font-size: 0.6rem;
-  height: 2.25rem;
+  height: 2.2rem;
 }
 #lesson-report .tabs .active,
 #lesson-report .data .active {
@@ -82,9 +91,6 @@ html:not(.watch-active-state) .list-block .item-link:active,
   text-align: center;
   font-size: 0.65rem;
 }
-#lesson-report .mesg-show {
-  display: none;
-}
 #lesson-report .less-nodata {
   min-height: 12.5rem;
   border-top: 0.025rem solid #e5e5e5;
@@ -99,6 +105,7 @@ html:not(.watch-active-state) .list-block .item-link:active,
   font-size: 0.65rem;
   width: 90%;
   margin: 0 auto;
+  background: #fff;
 }
 #lesson-report .bar-tab:before {
   background-color: #fff;

@@ -10,7 +10,7 @@ function GetMyTeachClassList() {
 
     $.ajax({
         type: "get",
-        url: "/teacher/myclass/GetMyTeachClassList",
+        url: "/teacher/testcenter/GetMyTeachClassList4Test",
         cache: false,
         data: {},
         dataType: "JSON",
@@ -27,8 +27,9 @@ function GetMyTeachClassList() {
 
                 $(".b-classlist-item").on("click", function() {
                     var classid = $(this).attr("data-classid");
+                    var classname = $(this).attr("data-classname");
 
-                    $.router.load("/teacher/testcenter/StudentTestReportList?classid=" + classid,true );
+                    $.router.load("/teacher/testcenter/StudentTestReportList?classid=" + classid+"&classname="+classname,true );
 
                 });
 

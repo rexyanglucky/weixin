@@ -262,7 +262,7 @@ textarea {
   left: 0;
   display: none;
 }
-.header .right:hover .hover-brm {
+.nav .right:hover .hover-brm {
   display: block;
 }
 .header .log {
@@ -597,6 +597,14 @@ textarea {
 }
 .last-page {
   margin-right: 0!important;
+}
+.next-e {
+  margin-left: -20px;
+  margin-right: 6px;
+}
+.pre-e {
+  margin-right: 14px;
+  margin-left: -7px;
 }
 #content {
   min-height: 600px;

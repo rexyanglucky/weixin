@@ -24,28 +24,27 @@ $(function () {
             return;
         }
 
+        var row_data = { PWD: pwdold, Re: pwdnew1, RePwd: pwdnew2 };//当前行数据
 
         $.ajax({
-            type: "post",
-            url: "/teacher/myinfo/SetPassword",
-            cache: false,
-            data: { pwdold: pwdold, pwdnew1: pwdnew1, pwdnew2: pwdnew2 },
-            dataType: "JSON",
-            success: function (data) {
+        type: "post",
+        url: "/Home/RePwd",
+        data: { data: JSON.stringify(row_data) },
+        dataType: "JSON",
 
+        success: function(data) {
+            
                 data = JSON.parse(data);
 
-                if (data.result == 0) {
-                    showtip = "原密码不正确,请重新输入!";
-                      $("#showtip").html(showtip);
-                    $("#b-pwdold").val("");
-                    return;
+                if (data.OK) {
+                    $.router.load("/teacher/myinfo/set",true);
                 } else {
-                    showtip = "修改成功!";
+                    $("#showtip").html(data.Result);
                 }
-
             }
         });
+
+
 
     });
 

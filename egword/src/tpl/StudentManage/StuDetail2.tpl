@@ -6,7 +6,7 @@
                     <td>{{$value.ClassName}}</td>
                     <td>{{$value.TeachName}}</td>
                     <td>
-                        {{$value.HaveNumber}}课时/{{$value.BookNumber}}课次
+                        {{$value.HaveNumber}}课次/{{$value.BookNumber}}课次
                     </td>
 					{{if $value.IsWarn==1}}
                     <td class="red">

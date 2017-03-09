@@ -1,5 +1,5 @@
 @import "../comm/egComm.less";
-
+@import "../../js/lib/page/paging.less";
 #content {
     min-height: 600px;
 
@@ -13,7 +13,14 @@
         margin: 0 auto;
     }
 
-    .table tr {
-        border: none;
+      .table {
+        border-top: none;
+    }
+
+    .table tr:first-child {
+        border-top: none;
+    }
+     .table tr td p{
+        line-height:35px;
     }
 }

@@ -262,7 +262,7 @@ textarea {
   left: 0;
   display: none;
 }
-.header .right:hover .hover-brm {
+.nav .right:hover .hover-brm {
   display: block;
 }
 .header .log {
@@ -571,33 +571,34 @@ textarea {
 #content .red {
   color: #ff4901;
 }
-#content .header {
+#content .headers {
   position: relative;
   height: 112px;
   text-align: right;
   line-height: 112px;
   padding-right: 40px;
+  margin-right: 45px;
 }
-#content .header .addbtn {
+#content .headers .addbtn {
   height: 30px;
   line-height: 30px;
   padding: 0 25px;
   margin-right: 10px;
 }
-#content .header .manage {
+#content .headers .manage {
   padding: 0;
   position: relative;
   width: 100px;
   height: 30px;
   top: 10px;
 }
-#content .header .managebtn {
+#content .headers .managebtn {
   position: absolute;
   z-index: 1;
   width: 80px;
   left: 0px;
 }
-#content .header .drop {
+#content .headers .drop {
   position: absolute;
   width: 100px;
   background: #f7f6f6;
@@ -605,13 +606,13 @@ textarea {
   left: 0;
   display: none;
 }
-#content .header .operate {
+#content .headers .operate {
   border-radius: 4px;
   width: 100%;
   color: #838f97;
   border: 1px solid #d9d9d9;
 }
-#content .header .operate li:hover {
+#content .headers .operate li:hover {
   background: #e7e9ea;
 }
 #content .filter {
@@ -628,8 +629,8 @@ textarea {
   color: #ff5a00;
 }
 #sing-up {
-  width: 420px;
-  height: 550px;
+  width: 458px;
+  height: 570px;
 }
 #sing-up .body {
   padding: 35px 0 45px 45px;
@@ -646,7 +647,7 @@ textarea {
   margin-left: 15px;
 }
 #sing-out {
-  width: 420px;
+  width: 500px;
   height: 525px;
 }
 #sing-out .body {
@@ -655,13 +656,36 @@ textarea {
 #change-class,
 #add-classOrder,
 #change-prounce {
-  width: 420px;
-  height: 400px;
+  width: 470px;
+  max-height: 460px;
+  padding-bottom: 30px;
 }
 #change-class .body,
 #add-classOrder .body,
 #change-prounce .body {
-  padding: 55px 50px 30px 85px;
+  padding: 30px 0px 30px 0px;
+}
+#change-class .overflow,
+#add-classOrder .overflow,
+#change-prounce .overflow {
+  max-height: 160px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#change-class #updateReadCourse,
+#add-classOrder #updateReadCourse,
+#change-prounce #updateReadCourse {
+  display: inline-block;
+  width: 283px;
+  font-size: 0;
+}
+#change-class #updateReadCourse label,
+#add-classOrder #updateReadCourse label,
+#change-prounce #updateReadCourse label {
+  font-size: 14px;
+  width: 50%;
+  display: inline-block;
+  margin-left: 0!important;
 }
 .spans {
   display: inline-block;
@@ -681,9 +705,6 @@ textarea {
   margin-top: 0px;
   background: blue;
   display: inline-block;
-}
-#change-prounce .body {
-  padding: 55px 50px 70px 85px;
 }
 .spans:first-of-type {
   border-top-right-radius: 4px;
@@ -718,4 +739,17 @@ textarea {
   color: #fff;
   border: 1px solid blue;
   border-right: none;
+}
+.mt15 {
+  margin-top: 15px;
+}
+#stuCourse {
+  display: inline-block;
+  width: 325px;
+  font-size: 0;
+}
+#stuCourse label {
+  font-size: 14px;
+  display: inline-block;
+  width: 50%;
 }

@@ -13,7 +13,6 @@ gulp.task('watch',function(){
 		gulp.start('webpack');
 	})
 	watch(config.tpl.src,function(){
-		console.log(00)
 		gulp.start('webpack');
 	})
 })

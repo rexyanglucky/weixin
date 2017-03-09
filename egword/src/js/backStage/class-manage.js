@@ -1,4 +1,4 @@
-var Lui = require('../../LUI/js/lui');
+﻿var Lui = require('../../LUI/js/lui');
 var lui = new Lui();
 var tool = require('../../LUI/tool');
 
@@ -29,6 +29,16 @@ $("#edit-name,#add-name").keypress(function () {
     $("[data-type='edit-info'],[data-type='add-info']").css({ "visibility": "hidden" });
 });
 
+$("#edit-name,#add-name,#edit-num,#add-num").keydown(function () {
+    if (event.keyCode == 8) {
+        $("[data-type='edit-info'],[data-type='add-info']").css({ "visibility": "hidden" });
+    }
+});
+
+$("#edit-name,#add-name").keyup(function () {
+    $("[data-type='edit-info'],[data-type='add-info']").css({ "visibility": "hidden" });
+});
+
 //修改班级
 $("#edit-ok").click(function () {
     if ($("[data-type='edit-info']").css("visibility") == "visible") {
@@ -38,6 +48,10 @@ $("#edit-ok").click(function () {
     row_data.ClassType = drop_time.getValue().value;
     row_data.ClassName = $("#edit-name").val();
     row_data.DefaultNumber = $("#edit-num").val();
+    if (+row_data.TeacherID < 1) {
+        $("[data-type='edit-info']").css({ "visibility": "visible" }).text("请选择老师！");
+        return;
+    }
     if ($.trim(row_data.ClassName).length == 0) {
         $("[data-type='edit-info']").css({ "visibility": "visible" }).text("班级不能为空！");
         return;
@@ -78,6 +92,10 @@ $("#add-ok").click(function () {
     row_data.ClassType = drop_time.getValue().value;
     row_data.ClassName = $("#add-name").val();
     row_data.DefaultNumber = $("#add-num").val();
+    if (+row_data.TeacherID < 1) {
+        $("[data-type='add-info']").css({ "visibility": "visible" }).text("请选择老师！");
+        return;
+    }
     if ($.trim(row_data.ClassName).length == 0) {
         $("[data-type='add-info']").css({ "visibility": "visible" }).text("班级不能为空！");
         return;
@@ -154,7 +172,7 @@ function GetSchool(e1, e2)//学校ID、页码
         },
         success: function (e) {
             $("#ctable").children(":first").nextAll().remove();
-            if (e.Data.length == 0) {
+            if (e.Data == null || e.Data.length == 0) {
                 $("#emptyDataOver").tmpl(null).appendTo("#ctable");
             }
             else {

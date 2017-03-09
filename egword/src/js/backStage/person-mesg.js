@@ -9,6 +9,7 @@ var calender = require('../lib/calendar/calender-plugin.js');
 //require('../lib/calendar/calender-plugin.min.css');
 var tplTablePerDetail = require("PersonManage/PersonDetail.tpl");//员工模板
 var dataId = $("#perId").val();
+var userRole = 0;
 
 
 var module = {
@@ -32,12 +33,15 @@ var module = {
         });
         //禁用员工
         $("body").delegate("#btnBand", "click", function () {
+            var str = $("#btnBand").html();
+            pop.OpenConfrimPop("确认" + str + "员工账号?", "Confrim", str + "提示");
 
-            //pop.OpenConfrimPop("确认禁用");
 
-            //return;
+
+        });
+        //确定禁用
+        $("body").delegate("#Confrim", "click", function () {
             var subVal = $("#btnBand").attr("data-id");
-           
             //提交表单
             $.ajax({
                 type: "post",
@@ -51,10 +55,11 @@ var module = {
 
                     if (data && data.Data > 0) {
                         GetPerSingle();
-                        alert("操作成功");
+                        $(".small-popbtn").remove();
+                        pop.PopTipShow("操作成功");
 
                     } else {
-                        alert("操作失败");
+                        pop.PopTipShow("操作失败");
                     }
 
 
@@ -62,11 +67,19 @@ var module = {
                 }
             });
 
-
         });
+
         //重置密码
         $("body").delegate("#btnReset", "click", function () {
+            var tipStr = "确认重置" + $("#perName0").html() + "(" + $("#perLoginId").html() + ")"+"的密码?";
+           
+            pop.OpenConfrimPop(tipStr, "ConfrimReset", "重置提示");
 
+
+
+        });
+        //确定重置
+        $("body").delegate("#ConfrimReset", "click", function () {
             //提交表单
             $.ajax({
                 type: "post",
@@ -79,10 +92,12 @@ var module = {
                 success: function (data) {
 
                     if (data && data.Data > 0) {
-                        alert("重置成功");
+                        $(".small-popbtn").remove();
+                        pop.PopTipShow("重置成功,重置密码为:000000");
 
                     } else {
-                        alert("提交失败");
+                        $(".small-popbtn").remove();
+                        pop.PopTipShow("重置失败");
                     }
 
 
@@ -90,10 +105,7 @@ var module = {
                 }
             });
 
-
         });
-
-   
 
         //展示完的确定的删除弹窗
         $("body").delegate("#btnloginOk", "click", function () {
@@ -133,11 +145,11 @@ function GetPerSingle() {
 
             //$("#divLoading").hide();
             if (data.OK) {
-
+                userRole = data.Data.RoleId;
                 $("#perTb").html(tplTablePerDetail(data.Data));
-                if (data.Data.IsFrozen==1) {
+                if (data.Data.IsFrozen == 1) {
                     $("#btnBand").html("启用");
-                    $("#btnBand").attr("data-id",0);
+                    $("#btnBand").attr("data-id", 0);
                 } else {
                     $("#btnBand").html("禁用");
                     $("#btnBand").attr("data-id", 1);

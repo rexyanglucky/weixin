@@ -150,6 +150,7 @@ html{color:#909090;}
 .col-pass{color:  #ff3c00}
 .col-bad{color:  #626262}
 .ovh{overflow: hidden}
+.pointer{cursor: pointer;}
 .start,.start-nobg{
   display:inline-block;
   width:15px;
@@ -208,7 +209,8 @@ html{color:#909090;}
 //单词发音部分开始
 .voice{
   margin:0 auto;
-  width:510px;
+  min-width:580px;
+  max-width:780px;
   .word{
     line-height:110px;
     font-size:60px;
@@ -217,6 +219,7 @@ html{color:#909090;}
     width:80%;
     border-bottom:1px solid #d0d8dd;
     font-weight: 600;
+    margin:0 auto;
   }
   .pronunce{
     .img{cursor: pointer;}
@@ -263,8 +266,9 @@ html{color:#909090;}
     }
   }
   .anysis{
-    height:40px;
+    min-height:40px;
     color:#000;
+    line-height:25px;
   }
   .remumber{
     background:#fffce1;
@@ -272,8 +276,31 @@ html{color:#909090;}
     width:100%;
     min-height:60px;
     border:1px solid #ffd376;
-    .wordWrap{padding:25px;}
+    .wordWrap{padding:20px;}
   }
+}
+/**单词发音*/
+.lui_wordspeak1{
+  display: inline-block;
+  width: 20px;
+  height: 16px;
+  margin-left: 6px;
+  margin-right: 20px;
+  cursor: pointer;
+  background: url(../img/wordico.png) -4px -4px no-repeat;
+  vertical-align: middle;
+  &:hover {background:url("../img/sound-play.gif") no-repeat;}
+}
+.lui_wordspeak{
+  display: inline-block;
+width: 37px;
+  height: 30px;
+  //margin-left: 6px;
+  //margin-right: 20px;
+  cursor: pointer;
+  background: url(../../img/horn.png) no-repeat;
+  vertical-align: middle;
+  //&:hover {background:url("../img/sound-play.gif") no-repeat;}
 }
 //单词发音部分结束
 
@@ -388,6 +415,7 @@ a{text-decoration: none; color: #fff;}
   .tabs-wrap{
     margin-top: 45px;
     padding: 0 5%;
+    padding-bottom:80px;
     .tabs-header{
       margin-left:50px ;
      //按钮 可自定义
@@ -449,7 +477,7 @@ a{text-decoration: none; color: #fff;}
   font-size:16px;
 }
 */
-.pop-mask{ display:none; position: fixed; left: 0; right: 0; top: 0; bottom:0; z-index:1; background-color: #333333; opacity:0.5; filter:alpha(opacity=50);}
+.pop-mask{width:100%;height:100%; display:none; position: fixed; left: 0; right: 0; top: 0; bottom:0; z-index:1; background-color: #333333; opacity:0.5; filter:alpha(opacity=50);}
 /*弹窗结束*/
 
 /*页面常用弹窗开始*/
@@ -462,6 +490,8 @@ a{text-decoration: none; color: #fff;}
   top:50%;
   background:#fff;
   border:1px solid #ffcb94;
+min-width: 300px;
+  width: 560px;
   -ms-transform:translate(-50%,-50%);
   -o-transform:translate(-50%,-50%);
   -webkit-transform:translate(-50%,-50%);
@@ -473,11 +503,11 @@ a{text-decoration: none; color: #fff;}
   -o-box-shadow:1px 0 10px #ffcb94;
   .header{
     font-size:16px;
-    color:#0084f3;
+    color:#ff9735;
     height:60px;
     line-height:60px;
     text-align:center;
-    border-bottom:1px solid #d8d8d8;
+    border-bottom:1px solid #ff9735;
     .close{
       width:20px;
       height:20px;
@@ -489,10 +519,33 @@ a{text-decoration: none; color: #fff;}
       cursor: pointer;
     }
   }
-  .text{
-    text-align:left;
-    text-indent:3rem;
+  .body {
+    .text {
+      width: 80%;
+      margin: 0 auto;
+      padding: 30px 0 20px 0;
+      line-height: 40px;
+      color: #555555;
+      span {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+    .word{ width:290px;
+      height:45px;
+      line-height:45px;
+      //border:1px solid #ffd376;
+      //background:#fffce1;
+      text-align:center;
+      margin:0 auto;
+      color:#ff7d00;}
   }
+.oprt{
+  margin-top: 30px;
+  margin-bottom: 50px;
+  text-align: center;
+
+}
 }
 /*页面常用弹窗结束*/
 /*倒计时，start，timesup 弹框*/
@@ -533,28 +586,7 @@ a{text-decoration: none; color: #fff;}
       //  animation: time-loading 2s linear 0s infinite normal;
       //}
       .info{margin: 40px -80px;text-align: center;font-size: 18px;color: #ff8716;}
-      .rotate-big{
-        position: relative;
-        width: 247px;
-        height: 247px;
-        margin-top: 9px;
-        background:url('../../img/time-circle.png') no-repeat;
-        .rotate-point{
-          background: url('../../img/time-point.png') no-repeat 20px 20px;
-          width: 100%;height: 100%;
-          animation: time-loading 1s linear 0s infinite normal;
-          animation-play-state:paused;
-        }
-        .times-big{
-          width: 100%;height: 100%;
-          text-shadow:1px 1px 0px #ff8717,3px 3px 0px #ff8717;
-          line-height: 265px;
-          font-size: 64px;
-          text-align: center;
-          color:#ff8717;
-          margin-top: -265px;
-        }
-      }
+
 
       /*倒计时结束*/
       .start{
@@ -582,7 +614,54 @@ a{text-decoration: none; color: #fff;}
 
 
   }
-
+.rotate-big{
+  position: relative;
+  width: 247px;
+  height: 247px;
+  //margin-top: 9px;
+  background:url('../../img/time-circle.png') no-repeat;
+  .rotate-point{
+    //background: url('../../img/time-point.png') no-repeat 20px 20px;
+    width: 100%;height: 100%;
+    transform:rotate(45deg);
+    //animation: time-loading 1s linear 0s infinite normal;
+    //animation-play-state:paused;
+  }
+  .times-big{
+    width: 100%;height: 100%;
+    text-shadow:1px 1px 0px #ff8717,3px 3px 0px #ff8717;
+    line-height: 247px;
+    font-size: 64px;
+    text-align: center;
+    color:#ff8717;
+    //margin-top: -265px;
+    margin-top: -247px;
+  }
+}
+.rotate-small{
+  position: relative;
+  width: 68px;
+  height: 68px;
+  margin-top: 18px;
+  background:url('../../img/time-circle-small.png') no-repeat;
+  .rotate-point{
+    //background: url('../../img/time-point-small.png') no-repeat 5.5px 5.5px;
+    width: 100%;height: 100%;
+    transform:rotate(45deg);
+    //animation: time-loading 1s linear 0s infinite normal;
+    //animation-play-state:running;
+  }
+  .times-small{
+    width: 100%;height: 100%;
+    //text-shadow:1px 1px 0px #ff8717,3px 3px 0px #ff8717;
+    text-shadow:1px 1px 0 #ff8717,2px 1px 0 #ff8717;
+    line-height: 68px;
+    font-size: 35px;
+    text-align: center;
+    color:#ff8717;
+    margin-top: -68px;
+  }
+}
 /*常用按钮样式开始*/
 .btn,.btns{
   height:42px;

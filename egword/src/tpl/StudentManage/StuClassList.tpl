@@ -15,18 +15,22 @@
   
    {{/each}}</td>
 <td>
+  
+  
+  
   {{each}}
 
   {{if $value.IsWarn==1}}
-  <p class="red">{{$value.HaveNumber}}/{{$value.BookNumber}}</p>
+  <p class="red">{{$value.StrBar}}</p>
   {{else}}
-  <p>{{$value.HaveNumber}}/{{$value.BookNumber}}</p>
+  <p>{{$value.StrBar}}</p>
   {{/if}}
  
   
    {{/each}}</td>
 <td>
   {{each}}
-  <p>{{$value.ExpireTime | dateFormat: "yyyy-MM-dd"}}</p>
-  
-   {{/each}}</td>
+
+
+  <p>{{$value.ExpireTimeStr}}</p>
+  {{/each}}</td>

@@ -24,6 +24,13 @@ $("#edit-remark,#add-remark").keypress(function () {
     $("[data-type='edit-info'],[data-type='add-info']").css({ "visibility": "hidden" });
 });
 
+$("#edit-num,#add-num,#edit-remark,#add-remark").keydown(function () {
+    if (event.keyCode == 8) {
+        $("[data-type='edit-info'],[data-type='add-info']").css({ "visibility": "hidden" });
+    }
+});
+
+
 
 initData();
 
@@ -187,7 +194,7 @@ $("#edit-ok").click(function () {
         return;
     }
     if (!(+row_data.CValue > 0 && +row_data.CValue <= +($("#edit-cur").text()))) {
-        $("[data-type='edit-info']").css({ "visibility": "visible" }).text("兑换数量过大！");
+        $("[data-type='edit-info']").css({ "visibility": "visible" }).text("学币不足！");
         return;
     }
     if (row_data.Remark == "") {

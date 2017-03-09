@@ -28,6 +28,7 @@ $("span[data-auto]").click(function () {
     }
 });
 
+
 $("#usercode").keypress(function () {
     var keynum = event.keyCode;
     if (!(keynum >= 48 && keynum <= 57))

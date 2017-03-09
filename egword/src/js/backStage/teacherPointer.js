@@ -5,7 +5,7 @@ $("[data-type='add']").click(function () {
 
     $("[data-type='add-info']").css({ "visibility": "hidden" });
     $("#add-name").val("");
-    $('.pop-mask,#addteach-pointer').show();   
+    $('.pop-mask,#addteach-pointer').show();
 
 });
 
@@ -22,6 +22,16 @@ $("#edit-name,#add-name").keypress(function () {
     $("[data-type='edit-info'],[data-type='add-info']").css({ "visibility": "hidden" });
 });
 
+$("#edit-name,#add-name").keydown(function () {
+    if (event.keyCode == 8) {
+        $("[data-type='edit-info'],[data-type='add-info']").css({ "visibility": "hidden" });
+    }
+});
+
+$("#edit-name,#add-name").keyup(function () {
+    $("[data-type='edit-info'],[data-type='add-info']").css({ "visibility": "hidden" });
+});
+
 //修改教学点
 $("#edit-ok").click(function () {
     if ($("[data-type='edit-info']").css("visibility") == "visible") {
@@ -30,6 +40,10 @@ $("#edit-ok").click(function () {
     row_data.SchoolName = $("#edit-name").val();
     if ($.trim(row_data.SchoolName).length == 0) {
         $("[data-type='edit-info']").css({ "visibility": "visible" }).text("教学点不能为空！");
+        return;
+    }
+    if ($.trim(row_data.SchoolName).length > 10) {
+        $("[data-type='edit-info']").css({ "visibility": "visible" }).text("教学点名称最大长度为10！");
         return;
     }
     $.ajax({
@@ -62,7 +76,10 @@ $("#add-ok").click(function () {
         $("[data-type='add-info']").css({ "visibility": "visible" }).text("教学点不能为空！");
         return;
     }
-
+    if ($.trim(row_data.SchoolName).length > 10) {
+        $("[data-type='add-info']").css({ "visibility": "visible" }).text("教学点名称最大长度为10！");
+        return;
+    }
     $.ajax({
         type: "post",
         url: "/Org/School/AddSchool",

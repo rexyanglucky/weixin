@@ -1,5 +1,4 @@
-﻿            <div class="list-block">
-                <ul>
+﻿
                     {{each $data as v i }}
                     <li class="item-content item-link s-course-list" data-classindex="{{v.ClassIndex}}">
                             <div class="item-inner">
@@ -8,5 +7,3 @@
                         </div>
                     </li>
                     {{/each}}
-                </ul>
-            </div>

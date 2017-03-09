@@ -262,7 +262,7 @@ textarea {
   left: 0;
   display: none;
 }
-.header .right:hover .hover-brm {
+.nav .right:hover .hover-brm {
   display: block;
 }
 .header .log {
@@ -479,6 +479,7 @@ textarea {
   margin: 0 auto;
 }
 #content .group .group-left {
+  display: inline-block;
   width: 60%;
   height: 100%;
 }
@@ -515,11 +516,11 @@ textarea {
   top: -1px;
 }
 #content .group .group-left .student-goup {
-  padding: 5px 30px 5px 20px;
+  padding: 5px 10px 5px 20px;
   position: relative;
   height: 40px;
   line-height: 40px;
-  width: 602px;
+  width: 623px;
   margin-bottom: 10px;
   border: 1px solid #d5d5d5;
   border-left: none;
@@ -561,9 +562,12 @@ textarea {
   background: #fec260;
 }
 #content .group .group-left .class-process {
-  margin-top: 35px;
-  width: 666px;
+  display: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 664px;
   height: 295px;
+  margin-left: 2px;
   border: 1px solid #dadada;
 }
 #content .group .group-left .class-process .header {
@@ -579,23 +583,58 @@ textarea {
   line-height: 60px;
 }
 #content .group .group-left .class-process .class-mesg {
-  padding: 0 25px;
+  padding: 0;
   height: 80px;
   line-height: 80px;
   font-size: 16px;
 }
-#content .group .group-left .class-process .class-mesg .left,
+#content .group .group-left .class-process .class-mesg .left {
+  width: 45%;
+  text-indent: 15px;
+}
 #content .group .group-left .class-process .class-mesg .right {
-  width: 50%;
+  width: 55%;
+  text-indent: -5px;
 }
 #content .group .group-left .class-process .mesgs {
-  padding: 0 30px 0 35px;
+  padding: 0 0px 0 0px;
 }
 #content .group .group-left .class-process .mesgs .left,
 #content .group .group-left .class-process .mesgs .right {
-  width: 50%;
   height: 32px;
   line-height: 32px;
+}
+#content .group .group-left .class-process .mesgs .left {
+  width: 45%;
+  text-indent: 20px;
+}
+#content .group .group-left .class-process .mesgs .right {
+  width: 55%;
+}
+#content .group .group-left img.one {
+  margin-top: 14px;
+}
+#content .group .group-left img.two {
+  margin-top: 10px;
+}
+#content .group .group-left .show .class-process {
+  display: block;
+}
+#content .group .group-left .student-goup img.right {
+  cursor: pointer;
+  display: none;
+}
+#content .group .group-left .student-goup img.two {
+  display: block;
+}
+#content .group .group-left .show img.right {
+  display: none;
+}
+#content .group .group-left .show img.one {
+  display: block;
+}
+#content .group .group-left .show .student-goup {
+  background: #ecf2f7;
 }
 #content .group .group-right {
   width: 40%;
@@ -628,16 +667,18 @@ textarea {
   position: absolute;
   top: 0px;
   left: 0px;
+  width: 100%;
+  height: 100%;
 }
 .ppt-container ul.button-list {
   list-style: none;
-  position: absolute;
-  right: 0px;
-  bottom: 10px;
+  position: static;
+  margin-top: 250px;
 }
 .ppt-container ul.button-list li {
   float: left;
   padding-right: 10px;
+  height: 35px;
 }
 .ppt-container ul.button-list span {
   background: #E5E5E5;

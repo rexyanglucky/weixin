@@ -262,7 +262,7 @@ textarea {
   left: 0;
   display: none;
 }
-.header .right:hover .hover-brm {
+.nav .right:hover .hover-brm {
   display: block;
 }
 .header .log {
@@ -598,11 +598,22 @@ textarea {
 .last-page {
   margin-right: 0!important;
 }
+.next-e {
+  margin-left: -20px;
+  margin-right: 6px;
+}
+.pre-e {
+  margin-right: 14px;
+  margin-left: -7px;
+}
 .mr20 {
   margin-right: 20px;
 }
-.mt20 {
+.mt10 {
   margin-top: 10px;
+}
+.mt20 {
+  margin-top: 20px;
 }
 #content {
   min-height: 685px;
@@ -639,8 +650,8 @@ textarea {
 }
 #creatStudent,
 #continue {
-  width: 415px;
-  height: 575px;
+  width: 515px;
+  height: 495px;
 }
 #creatStudent .body,
 #continue .body {
@@ -659,6 +670,12 @@ textarea {
 #continue .body .tip {
   color: #ff8467;
   margin-left: 15px;
+}
+#creatStudent .body {
+  padding: 20px 0 30px 70px;
+}
+#continue {
+  height: 575px;
 }
 #continue .span {
   height: 38px;
@@ -745,4 +762,85 @@ textarea {
   color: #fff;
   border: 1px solid blue;
   border-right: none;
+}
+#add-grade {
+  width: 600px;
+  min-height: 400px;
+}
+#add-grade .header {
+  text-align: left;
+  line-height: normal;
+}
+#add-grade .header .tabs {
+  padding-top: 20px;
+  color: #838f97;
+}
+#add-grade .header .tabs span {
+  height: 39px;
+  line-height: 38px;
+  display: inline-block;
+  text-align: center;
+  width: 40px;
+  margin-left: 60px;
+}
+#add-grade .header .tabs span.active {
+  border-bottom: 2px solid #008bff;
+  color: #008bff;
+}
+#add-grade .header .tabs span:hover {
+  border-bottom: 2px solid #008bff;
+  color: #008bff;
+  cursor: pointer;
+}
+#add-grade .body {
+  padding: 24px 75px 70px 75px;
+}
+#add-grade .body .table {
+  padding-bottom: 30px;
+}
+#add-grade .body table {
+  width: 100%;
+  margin-top: 20px;
+}
+#add-grade .body table tr {
+  border: none;
+}
+#add-grade .body table tr td span {
+  display: inline-block;
+  padding: 9px;
+}
+#add-grade .body table tr td span.active {
+  background: #0084f3;
+  border-radius: 4px;
+  color: #fff;
+}
+#add-grade .body table tr td span:hover {
+  cursor: pointer;
+  background: #0084f3;
+  border-radius: 4px;
+  color: #fff;
+}
+#add-grade .body table tr:hover {
+  background: #fff;
+}
+#sing-up {
+  width: 458px;
+  height: 570px;
+}
+#sing-up .body {
+  padding: 35px 0 45px 45px;
+}
+#sing-up .body .input-name {
+  display: block;
+}
+#sing-up .body .first {
+  margin-right: 10px;
+  color: #707070;
+}
+#sing-up .body .tip {
+  color: #ff8467;
+  margin-left: 15px;
+}
+.mt15 {
+  margin-top: 15px;
 }

@@ -1,8 +1,14 @@
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var controlWidth=0;//赋值插件的宽度(全局)
 
-var flatpickr = function flatpickr(selector, config) {
+var flatpickr = function flatpickr(selector, config, width) {
+    if (width!= undefined) {
+controlWidth = width;
+        
+    }
+  
 	var elements = void 0;
 
 	var createInstance = function createInstance(element) {
@@ -52,15 +58,23 @@ var flatpickr = function flatpickr(selector, config) {
  * @constructor
  */
 flatpickr.init = function (element, instanceConfig) {
+    
+   
 	function createElement(tag, className, content) {
 		var newElement = document.createElement(tag);
 
 		if (content) {
-			newElement.textContent = content;
-		}
+		    newElement.textContent = content;
+          
+          }
+	    
 
+	    //制定下宽度
 		if (className) {
-			newElement.className = className;
+		    newElement.className = className;
+		    if (className=="flatpickr-calendar"&&controlWidth!=0) {
+		        $(newElement).css("width", controlWidth);
+		    }
 		}
 
 		return newElement;
@@ -325,7 +339,10 @@ flatpickr.init = function (element, instanceConfig) {
 		// called every time calendar is closed
 		onClose: null, // function (dateObj, dateStr) {}
 
-		onValueUpdate: null
+		onValueUpdate: function() {
+		    self.close();//更改完值之后关闭
+		}
+     
 	};
 
 	init = function init() {

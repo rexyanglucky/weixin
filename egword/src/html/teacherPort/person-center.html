@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,8 +38,12 @@
             <div class="card">
                 <div class="card-header">
                     <span class="rect"></span>
-                    <span>绩效</span>
-                </div>
+
+                    <span style="display:inline-block;width:3.5rem;height:0.8rem;position:relative;">
+                        <input type="text" id='b-picker' value="本月"/>
+                        <img src="../../../build/img/teach-down.png" alt="" class="teachdown">
+                    </span>
+                 </div>
                 <div class="card-content">
                     <div class="card-content-inner">
                         <span>月度：</span>
@@ -68,7 +72,7 @@
                         <span>当前学员：</span>
                         <span class="ml1">45个</span>
                     </div>
-                    <div class="card-content-inner">
+                    <div class="card-content-inner" style="padding:0;">
                         <span>累计学员：</span>
                         <span class="ml1" style="color:#ff5400;">535人次</span>
                     </div>

@@ -1,4 +1,4 @@
-﻿var row_data = { BookSetID: 0, SName: "", BookNumber: 0, Remark: "" };//当前行数据
+﻿var row_data = { BookSetID: 0, BookType: 0, SName: "", OutPrice: 0, BookNumber: 0, Remark: "" };//当前行数据
 
 $("[data-close]").click(function () {
     $('.pop-mask,#edit').hide();
@@ -15,6 +15,30 @@ $("#edit-num").keypress(function () {
     $("[data-type='edit-info']").css({ "visibility": "hidden" });
 });
 
+$("#edit-out").keypress(function () {
+    var keynum = event.keyCode;
+    if (!(keynum >= 48 && keynum <= 57))//非数字
+        return false;
+    if ($(this).val().length == 6)//6位数字
+        return false;
+    if (row_data.BookType == 4)//体验课
+    {
+        if ($(this).val() == "0" && keynum == 48)//首位不能为0
+            return false;
+    }
+    else {
+        if ($(this).val() == "" && keynum == 48)//首位不能为0
+            return false;
+    }
+    $("[data-type='edit-info']").css({ "visibility": "hidden" });
+});
+
+$("#edit-num,#edit-out").keydown(function () {
+    if (event.keyCode == 8) {
+        $("[data-type='edit-info']").css({ "visibility": "hidden" });
+    }
+});
+
 
 $("[data-type='view-info']").click(function () {
     $.ajax({
@@ -27,6 +51,7 @@ $("[data-type='view-info']").click(function () {
         success: function (e) {
             if (e.OK) {
                 $("#edit-num").val(e.Data[0].DefaultNumber);
+                $("[data-type='edit-info']").css({ "visibility": "hidden" });
             }
         }
     });
@@ -37,8 +62,24 @@ $("#edit-ok").click(function () {
     if ($("[data-type='edit-info']").css("visibility") == "visible") {
         return;
     }
+    row_data.OutPrice = $("#edit-out").val();
     row_data.BookNumber = $("#edit-num").val();
     row_data.Remark = $("#edit-remark").val();
+    if (row_data.BookType == 4)//体验课
+    {
+        if (row_data.OutPrice == "") {
+            $("[data-type='edit-info']").css({ "visibility": "visible" }).text("请有效填写学生售价！");
+            return;
+        }
+        if (!(+row_data.OutPrice >= 0 && +row_data.OutPrice < 1000000)) {
+            $("[data-type='edit-info']").css({ "visibility": "visible" }).text("请有效填写学生售价！");
+            return;
+        }
+    }
+    else if (!(+row_data.OutPrice > 0 && +row_data.OutPrice < 1000000)) {
+        $("[data-type='edit-info']").css({ "visibility": "visible" }).text("请有效填写学生售价！");
+        return;
+    }
     if (!(+row_data.BookNumber > 0 && +row_data.BookNumber < 1000)) {
         $("[data-type='edit-info']").css({ "visibility": "visible" }).text("请正确填写课次！");
         return;
@@ -110,14 +151,19 @@ function EditClick() {
 
         $('.pop-mask,#edit').show();
 
+        $("[data-type='edit-info']").css({ "visibility": "hidden" }).text("");
+
         var $r = $(("tr[data-id=" + $(this).attr("data-id") + "]"));
         row_data.BookSetID = $(this).attr("data-id")//套课ID
+        row_data.BookType = $r.children("[data-index=10]").attr("data-value");//套课类型
         row_data.SName = $r.children("[data-index=1]").attr("data-value");//套课名称
+        row_data.OutPrice = $r.children("[data-index=0]").attr("data-value");//学生售价
         row_data.BookNumber = $r.children("[data-index=2]").attr("data-value");//套课课次
         row_data.Remark = $r.children("[data-index=3]").attr("data-value");//套课备注
         //
         $("#edit-name").html(row_data.SName);
         $("#edit-num").val(row_data.BookNumber);
+        $("#edit-out").val(row_data.OutPrice);
         $("#edit-remark").val(row_data.Remark);
     });
 }

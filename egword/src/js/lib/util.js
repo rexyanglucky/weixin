@@ -47,7 +47,7 @@
             return false;
     },
     numGradeTran: function (t) { //数字年级转换
-        debugger;
+       
         switch (t) {
             case 1:
                 return "一年级";
@@ -73,6 +73,8 @@
                 return "高二";
             case 12:
                 return "高三";
+            default:
+                return t;
 
 
         }

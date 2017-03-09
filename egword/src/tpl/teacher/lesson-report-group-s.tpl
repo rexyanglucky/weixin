@@ -10,7 +10,7 @@
                         <div class="item-media"></div>
                         <div class="item-inner">
                             <div class="item-title">
-                                <span class="seq">{{(i+1)}}.</span>
+                                <span class="seq">{{v.Ranking}}.</span>
                                 <span>{{v.UserName}}</span>
                             </div>
                             <div class="item-after"><span class="word-num">奖学币：<span>{{v.Currency}}</span></span></div>

@@ -262,7 +262,7 @@ textarea {
   left: 0;
   display: none;
 }
-.header .right:hover .hover-brm {
+.nav .right:hover .hover-brm {
   display: block;
 }
 .header .log {
@@ -706,4 +706,7 @@ textarea {
 }
 #add-grade .body table tr:hover {
   background: #fff;
+}
+.eg-pop .header {
+  color: #838f97;
 }

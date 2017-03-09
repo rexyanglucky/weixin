@@ -9,7 +9,7 @@ var Lui=require('../../LUI/js/lui');
 var lui = new Lui();
 var arrJxd = [];//教学点的数组
 //角色
-lui.initDropDownList({ warpid: "drop_role", width: 260, nameField: 'name', idField: 'id', subtextlength:15, data: [{ name: '教学点管理员', id: '3', pid: '' }, { name: '老师', id: '4', pid: '00' }] });
+lui.initDropDownList({ warpid: "drop_role", width: 260, nameField: 'name', idField: 'id', subtextlength: 15, data: [{ name: '教学点管理员', id: '3', pid: '' }, { name: '老师', id: '4', pid: '00' }], selectedCallBack: HandleIsShowSchool });
 //校区
 //lui.initDropDownList({ warpid: "drop_sc", width: 260, nameField: 'name', idField: 'id', data: [{ name: '01', id: '00', pid: '' }, { name: '02', id: '00_01', pid: '00' }, { name: '03', id: '00_02', pid: '00' }, { name: '04', id: '00_01_01', pid: '00_01' }, { name: '05', id: '00_01_02', pid: '00_01' }, { name: '06', id: '00_02_01', pid: '00_02' }, { name: '07', id: '00_02_02', pid: '00_02' }] });
 
@@ -26,6 +26,7 @@ var calender = require('../lib/calendar/calender-plugin.js');
 var tplTablePer = require("PersonManage/PersonManageList.tpl");//员工模板
 
 
+var isLoadDropSc = 0;//是否加载校区0没加载1加载
 
 var module = {
     init: function () {
@@ -49,7 +50,7 @@ var module = {
 
       
         //详情页跳转
-        $("body").delegate(".see-detail", "click", function () {
+        $("body").delegate(".editMesg", "click", function () {
 
             var dataId = $(this).attr("data-id");
             window.location.href = "/Org/PersonManage/PersonDetail/" + dataId;
@@ -58,12 +59,17 @@ var module = {
         //添加员工的按钮
         $("body").delegate(".addstuff", "click", function () {
 
-            $("#addStuff").show();
-            $(".pop-mask").show();
+            $("#txtPreName,#txtTel").val("");//清空
+            $("#lbMan").click();
+            $("#showSchool").show();
+
             //日期控件初始化
-            calender("#txtEnterTime");//dateFormat: 'yyyy-MM-dd hh:mm:ss'
+            calender("#txtEnterTime", { defaultDate: new Date() }, 300);//dateFormat: 'yyyy-MM-dd hh:mm:ss'
+            lui.initDropDownList({ warpid: "drop_role", width: 260, nameField: 'name', idField: 'id', subtextlength: 15, data: [{ name: '教学点管理员', id: '3', pid: '' }, { name: '老师', id: '4', pid: '00' }], selectedCallBack: HandleIsShowSchool });//重置角色
             //加载校区
             loadSchools();
+            $("#addStuff").show();
+            $(".pop-mask").show();
 
 
         });
@@ -80,23 +86,41 @@ var module = {
                 jsonAdd.Gender = 0;
             }
             jsonAdd.EnterTime = $.trim($("#txtEnterTime").val());//入职时间
-            jsonAdd.UserRole = $("#drop_role").attr("data-id");//角色
-            jsonAdd.SchoolId = $("#SchoolId").attr("data-id");//校区id
+            
+            jsonAdd.UserRole = $("#drop_role").attr("data-id");//角色3校长 4老师
+            jsonAdd.SchoolId = $("#drop_sc").attr("data-id");//校区id
 
+            var now = new Date;//当前时间
+            var d = new Date(jsonAdd.EnterTime);
+           
+            if (now < d) {//
+                $("#addStuffP").css({ "visibility": "visible" }).html("入职时间不应大于今天！");
+                return;
+            }
+           
             if (jsonAdd.UserName.length < 1) {
-                alert("姓名不能为空");
+                $("#addStuffP").css({ "visibility": "visible" }).html("姓名不能为空！");
+               
                 return;
             }
             if (jsonAdd.Tel.length < 1) {
-                alert("手机不能为空");
+                $("#addStuffP").css({ "visibility": "visible" }).html("手机格式不对！");
+               
                 return;
             }
             //校验电话
             if (!commJs.IsMobile(jsonAdd.Tel)) {
+                $("#addStuffP").css({ "visibility": "visible" }).html("手机格式不对！");
 
-                alert("手机格式不对");
+               
                 return;
 
+            }
+            //教学点
+            if (jsonAdd.SchoolId == "0" || jsonAdd.SchoolId == "") {
+                $("#addStuffP").css({ "visibility": "visible" }).html("教学点不能为空！");
+
+                return;
             }
 
             //提交表单
@@ -128,17 +152,19 @@ var module = {
                                 //进行显示赋值
                                 $("#orgName").html($("#txtPreName").val().trim());//名不要加密过的
                                 $("#loginId").html(data.Data);//登录账号
-                                $("#loginTel").html(jsonAdd.Tel);//电话
+                                //$("#loginTel").html(jsonAdd.Tel);//电话
 
                                 $("#addStuff").hide();
                                 $("#addstuff-success").show();
                                 $('.pop-mask').show();
-                               
+                                GetPerData();
 
                             }
                         });
                     } else {
-                        alert("电话重复");
+                        $("#addStuffP").css({ "visibility": "visible" }).html("电话重复！");
+
+                      
                     }
 
                 }
@@ -217,8 +243,7 @@ function GetPerData(page) {
                 $("#Totalcount").html(data.PageSum);
                 $("#bandTotalcount").html(data.TagValue);//禁用
                 Paginator.Paginator(pageSize, page, data.PageSum, GetPerData);
-                //日期控件
-                calender("#txtEnterTime");
+                
             }
             else {
 
@@ -228,6 +253,7 @@ function GetPerData(page) {
                 $("#pagination").html("");//分页控件不显示
                 $("#Totalcount").html(0);//数据设置为0
                 $("#bandTotalcount").html(0);//禁用
+              
 
             }
         }
@@ -238,6 +264,10 @@ function GetPerData(page) {
 
 //加载学校下拉
 function loadSchools() {
+    
+    if (isLoadDropSc>0) {
+        return;//已经加载过不再加载
+    }
     //加载学校
     $.ajax({
         type: "post",
@@ -255,17 +285,76 @@ function loadSchools() {
 
                     arrJxd.push({ name: data.Data[i].SchoolName, id: data.Data[i].SchoolId, pid: data.Data[i].SchoolId });
                 }
-
+                isLoadDropSc = 1;//已经加载
                 lui.initDropDownList({ warpid: "drop_sc", width: 260, nameField: 'name', idField: 'id', data: arrJxd, selectedCallBack: null });//学校和班级的联动
               
             }
             else {
 
-                //alert("获取数据失败");
+                lui.initDropDownList({ warpid: "drop_sc", width: 260, nameField: 'name', idField: 'id', data: [{ name: '无', id: '0' }], selectedCallBack: null });//学校和班级的联动
 
             }
         }
     });
 
 }
+
+
+///是否显示校区
+function HandleIsShowSchool() {
+    var chRoleId = $("#drop_role").attr("data-id");//角色3校长 4老师
+
+    if (chRoleId=="4") {
+        $("#showSchool").hide();//隐藏校区
+    } else {
+        $("#showSchool").show();//隐藏校区
+    }
+
+
+   
+}
+
+
+
+
+
+//添加实时校验
+$(function () {
+    OptCheck();
+
+});
+//校验
+function OptCheck() {
+
+    $("#txtPreName").keyup(function () {
+        if (this.value.length > 1) {
+            $("#addStuffP").css({ "visibility": "hidden" });
+        }
+
+    });
+
+    $("#txtTel").keyup(function () {
+        if (commJs.IsMobile(this.value)) {
+            $("#addStuffP").css({ "visibility": "hidden" });
+        } else {
+            $("#addStuffP").css({ "visibility": "visible" }).html("手机格式不对！");
+        }
+
+    });
+
+
+}
+
+
+
+//回车事件
+$(function () {
+    $('#txtserch').bind('keypress', function (event) {
+        if (event.keyCode == "13") {
+            GetPerData(1);
+
+        }
+    });
+});
+
 

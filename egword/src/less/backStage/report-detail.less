@@ -12,6 +12,8 @@
     width:85%;
     margin:0 auto;
     .group-left{
+
+      display:inline-block;
       width:60%;
       height:100%;
       .small-group{
@@ -41,11 +43,11 @@
         top:-1px;
       }
       .student-goup{
-        padding:5px 30px 5px 20px;
+        padding:5px 10px 5px 20px;
         position:relative;
         height:40px;
         line-height:40px;
-        width:602px;
+        width:623px;
         margin-bottom:10px;
         border:1px solid #d5d5d5;
         border-left:none;
@@ -78,9 +80,12 @@
         background:#fec260;
       }
       .class-process{
-        margin-top:35px;
-        width:666px;
+        display:none;
+        margin-top:10px;
+        margin-bottom:20px;
+        width:664px;
         height:295px;
+        margin-left:2px;
         border:1px solid #dadada;
         .header{
           padding:0 32px;
@@ -95,22 +100,59 @@
           }
         }
         .class-mesg{
-          .left,.right{
-            width:50%;
+          .left{
+              width:45%;
+              text-indent:15px;
           }
-          padding:0 25px;
+          .right{
+              width:55%;
+              text-indent:-5px;
+          }
+          padding:0;
           height:80px;
           line-height:80px;
           font-size:16px;
         }
         .mesgs{
-          padding:0 30px 0 35px;
+          padding:0 0px 0 0px;
           .left,.right{
-            width:50%;
             height:32px;
             line-height:32px;
           }
+          .left{
+              width:45%;
+              text-indent: 20px;
+          }
+          .right{
+               width:55%;
+          }
         }
+      }
+      img.one{
+          margin-top:14px;
+      }
+      img.two{
+          margin-top:10px;
+      }
+      .show .class-process{
+        display:block;
+      }
+      .student-goup img.right{
+        cursor: pointer;
+        display:none;
+      }
+      .student-goup img.two{
+        display:block;
+      }
+      .show img.right{
+        display:none;
+      }
+      .show img.one{
+        display:block;
+      }
+
+      .show .student-goup{
+        background:#ecf2f7;
       }
     }
     .group-right{
@@ -143,16 +185,19 @@
   position : absolute;
   top : 0px;
   left : 0px;
+  width:100%;
+  height:100%;
 }
 .ppt-container ul.button-list {
   list-style : none;
-  position : absolute;
-  right : 0px;
-  bottom : 10px;
+  position : static;
+  margin-top:250px;
+
 }
 .ppt-container ul.button-list li {
   float : left;
   padding-right : 10px;
+  height:35px;
 }
 .ppt-container ul.button-list span {
   background : #E5E5E5;

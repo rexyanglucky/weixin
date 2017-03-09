@@ -262,7 +262,7 @@ textarea {
   left: 0;
   display: none;
 }
-.header .right:hover .hover-brm {
+.nav .right:hover .hover-brm {
   display: block;
 }
 .header .log {
@@ -513,6 +513,14 @@ textarea {
 }
 .last-page {
   margin-right: 0!important;
+}
+.next-e {
+  margin-left: -20px;
+  margin-right: 6px;
+}
+.pre-e {
+  margin-right: 14px;
+  margin-left: -7px;
 }
 .flatpickr-input,
 .flatpickr-wrapper input {
@@ -973,4 +981,16 @@ textarea {
 }
 #addstuff-success .body {
   padding: 60px 180px 30px 120px;
+}
+.lui_dropdownlist {
+  text-align: left;
+}
+.lui_dropdownlist .dropul li {
+  padding-left: 20px;
+}
+.flatpickr-current-month .cur_year {
+  width: 3.6em;
+}
+.default {
+  color: #bbbcbd;
 }
