@@ -719,6 +719,8 @@ html {
   height: 2.6rem;
   margin-top: 0.5rem;
   position: relative;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
 }
 .card .card-content-inner .list-block .item-content .item-media {
   width: 0.25rem;
@@ -730,13 +732,11 @@ html {
 }
 .card .card-content-inner .list-block .item-content .seq {
   position: absolute;
-  left: 0;
   margin-top: -0.7rem;
   margin-left: 0.45rem;
 }
 .card .card-content-inner .list-block .item-content .seq-num {
   position: absolute;
-  left: 0;
   margin-left: 0.7rem;
   font-size: 1rem;
   margin-top: 0;
