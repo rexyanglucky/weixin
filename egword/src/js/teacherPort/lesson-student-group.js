@@ -626,11 +626,11 @@
 	    },
 	    setClickStyle1: function (item,ischeck) {
 	        if (ischeck == 1) {
-	            $(item).attr("data-checked", 0);
+	            $(item).attr("data-checked", 1);
 	            $(item).children("i").removeClass("check_sel").addClass("check_def");
 	        }
 	        else {
-	            $(item).attr("data-checked", 1);
+	            $(item).attr("data-checked", 0);
 	            $(item).children("i").addClass("check_sel").removeClass("check_sel");
 	        }
 	    }
