@@ -70,6 +70,7 @@
 
 	        var file = e.target.files[0];
 	        var supportedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+	        $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type);
 	        if (file && supportedTypes.indexOf(file.type) >= 0) {
 	            if (typeof FileReader === 'undefined') {
 
@@ -101,7 +102,8 @@
 	                oReader.readAsDataURL(file);
 
 	            }
-	            $("#b-message").html('课堂精彩瞬间照片请下课后一小时内完成上传，逾期将无法上传！');
+
+	            //$("#b-message").html('课堂精彩瞬间照片请下课后一小时内完成上传，逾期将无法上传！');
 
 	        } else {
 	            if (file) {
@@ -119,39 +121,39 @@
 	});
 
 	function GetSplendidPic() {
-	    $.ajax({
-	        type: "get",
-	        url: "/teacher/myclass/GetSplendidPic",
-	        cache: false,
-	        data: {
-	            classindex: classindex
-	        },
-	        dataType: "JSON",
-	        success: function (data) {
+	    //$.ajax({
+	    //    type: "get",
+	    //    url: "/teacher/myclass/GetSplendidPic",
+	    //    cache: false,
+	    //    data: {
+	    //        classindex: classindex
+	    //    },
+	    //    dataType: "JSON",
+	    //    success: function (data) {
 
-	            data = JSON.parse(data);
+	    //        data = JSON.parse(data);
 
-	            var m = data.result;
-	            islate = data.islate;
+	    //        var m = data.result;
+	    //        islate = data.islate;
 
-	            var str = "";
-	            for (var i = 0; i < m.length; i++) {
-	                str += '<div class="img" ><img src="' + m[i].PicUrl + '" alt=""></div>';
-	            }
+	    //        var str = "";
+	    //        for (var i = 0; i < m.length; i++) {
+	    //            str += '<div class="img" ><img src="' + m[i].PicUrl + '" alt=""></div>';
+	    //        }
 
-	            $("#b-piclist").html(str);
+	    //        $("#b-piclist").html(str);
 
-	            $("#b-show-btnsubmit").hide();
+	    //        $("#b-show-btnsubmit").hide();
 
-	            if (islate) {
+	    //        if (islate) {
 
-	                //上传按钮不可用
-	                $("#b-showupimg").hide();
+	    //            //上传按钮不可用
+	    //            $("#b-showupimg").hide();
 
 
-	            }
-	        }
-	    });
+	    //        }
+	    //    }
+	    //});
 	}
 
 	function SetPic() {

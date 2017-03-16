@@ -93,7 +93,8 @@
 	            "focus": function () {
 	                $(".bar-tab").css({ "z-index": -1 });
 	            }, "blur": function () {
-	                $(".bar-tab").css({ "z-index": 10 });
+	                setTimeout(function () { $(".bar-tab").css({ "z-index": 10 }); }, 1000);
+	                
 	                //console.log(2);
 	            }
 	        }, "input");
