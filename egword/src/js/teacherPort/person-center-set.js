@@ -1,24 +1,73 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
 
-$(function() {
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
 
-    $("#btn-changepassword").click(function() {
-        $.router.load("/teacher/myinfo/ChangePassword");
-    });
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
 
-      $("#btn-loginout").click(function () {
-            $.ajax({
-                type: "post",
-                url: "/Home/Exit",
-                dataType: "json",
-                error: function (e) {
-                },
-                success: function (e) {
-                    if (e.OK) {
-                        location.href = "/";
-                    }
-                }
-            });
-        });
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
 
-    
-});
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	
+	$(function() {
+
+	    $("#btn-changepassword").click(function() {
+	        $.router.load("/teacher/myinfo/ChangePassword");
+	    });
+
+	      $("#btn-loginout").click(function () {
+	            $.ajax({
+	                type: "post",
+	                url: "/Home/Exit",
+	                dataType: "json",
+	                error: function (e) {
+	                },
+	                success: function (e) {
+	                    if (e.OK) {
+	                        location.href = "/";
+	                    }
+	                }
+	            });
+	        });
+
+	    
+	});
+
+/***/ }
+/******/ ]);
