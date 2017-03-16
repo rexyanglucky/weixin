@@ -681,42 +681,45 @@ html {
 .bar.bar-tab .active .icon-star:before {
   content: url("../../../build/img/perser-center-active.png");
 }
-.bglogin {
+/*.bglogin {
+    background: #f3f6f8;
+}*/
+#login .content {
   background: #f3f6f8;
 }
-#login .logo {
+#login .content .logo {
   margin: 2.325rem 0 3.25rem 0;
   text-align: center;
 }
-#login .logo img {
+#login .content .logo img {
   width: 8.375rem;
   height: 1.975rem;
   /*width: 220rem/@base-f;
       height: 135rem/@base-f;*/
 }
-#login .list-block ul li:first-child {
+#login .content .list-block ul li:first-child {
   border-top: solid #d2d2d2 0.025rem;
 }
-#login .list-block .item-content {
+#login .content .list-block .item-content {
   color: #717171;
   height: 2.625rem;
   font-size: 0.6rem;
   border-bottom: solid #d2d2d2 0.025rem;
 }
-#login .list-block .item-content input[type="text"] {
+#login .content .list-block .item-content input[type="text"] {
   font-size: 0.6rem;
 }
-#login .list-block .item-content input[type="password"] {
+#login .content .list-block .item-content input[type="password"] {
   font-size: 0.6rem;
 }
-#login .list-block .item-content .item-inner:after {
+#login .content .list-block .item-content .item-inner:after {
   background: none;
 }
-#login .opt {
+#login .content .opt {
   text-align: center;
   padding: 0 0.875rem;
 }
-#login .opt .btn {
+#login .content .opt .btn {
   width: 100%;
 }
 #login .bar-tab {
@@ -726,6 +729,7 @@ html {
   line-height: 2.5rem;
   background: none;
   border: 0;
+  z-index: 10;
 }
 #login .bar-tab:before {
   background: none;

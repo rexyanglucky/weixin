@@ -85,9 +85,18 @@
 	    bindEvent:function(){
 	        var tthis=this;
 	        $("#t-login").off("click");
-	        $("#t-login").click(function(){
+	        $("#t-login").click(function () {
 	            tthis.login();
-	        })
+	        });
+	        //$("input").on("focus", function () { })
+	        $(document).on({
+	            "focus": function () {
+	                $(".bar-tab").css({ "z-index": -1 });
+	            }, "blur": function () {
+	                $(".bar-tab").css({ "z-index": 10 });
+	                //console.log(2);
+	            }
+	        }, "input");
 	    }
 	}
 
