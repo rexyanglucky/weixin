@@ -72,13 +72,17 @@
 	        console.log(file);
 	        var supportedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 	        $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type+"文件名称："+file.name+"文件大小"+file.size/1024+"KB");
-	        if (file && supportedTypes.indexOf(file.type) >= 0) {
+	        //if (file && supportedTypes.indexOf(file.type) >= 0) {
 	            if (typeof FileReader === 'undefined') {
 
 	            }
 	            else {
 	                var oReader = new FileReader();
 	                oReader.onload = function (e) {
+	                    var str = e.target.result;
+	                    var arr = str.split(";");
+	                    var type = arr[0].split(":")[1];
+	                    $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type + "文件名称：" + file.name + "文件大小" + file.size / 1024 + "KB"+"data:"+type);
 	                    var img = '<div class="img"><img src="' + e.target.result + '" alt="" class="b-upimg"><span class="close b-delimg"></span></div>';
 	                    $("#b-piclist").prepend(img);
 
@@ -106,14 +110,14 @@
 
 	            //$("#b-message").html('课堂精彩瞬间照片请下课后一小时内完成上传，逾期将无法上传！');
 
-	        } else {
-	            if (file) {
+	        //} else {
+	        //    if (file) {
 
-	                $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type);
-	                $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type + "文件名称：" + file.name + "文件大小" + file.size / 1024 + "KB");
-	            }
+	        //        $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type);
+	        //        $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type + "文件名称：" + file.name + "文件大小" + file.size / 1024 + "KB");
+	        //    }
 
-	        }
+	        //}
 
 
 
