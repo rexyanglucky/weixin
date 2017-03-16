@@ -109,7 +109,8 @@
 	        } else {
 	            if (file) {
 
-	                $("#b-message").html('文件格式只支持：jpg、jpeg 和 png'+"当前类型："+file.type);
+	                $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type);
+	                $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type + "文件名称：" + file.name + "文件大小" + file.size / 1024 + "KB");
 	            }
 
 	        }
