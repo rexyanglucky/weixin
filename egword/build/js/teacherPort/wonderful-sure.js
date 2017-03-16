@@ -82,7 +82,8 @@
 	                    var str = e.target.result;
 	                    var arr = str.split(";");
 	                    var type = arr[0].split(":")[1];
-	                    $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type + "文件名称：" + file.name + "文件大小" + file.size / 1024 + "KB"+"data:"+type);
+	                    //$("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type + "文件名称：" + file.name + "文件大小" + file.size / 1024 + "KB" + "data:" + type);
+	                    $("#b-message").html('文件格式只支持：jpg、jpeg 和 png' + "当前类型：" + file.type + "文件名称：" + file.name + "文件大小" + file.size / 1024 + "KB" + "data:" + e.target.result);
 	                    var img = '<div class="img"><img src="' + e.target.result + '" alt="" class="b-upimg"><span class="close b-delimg"></span></div>';
 	                    $("#b-piclist").prepend(img);
 
