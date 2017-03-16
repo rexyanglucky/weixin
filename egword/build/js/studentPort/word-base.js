@@ -53,7 +53,7 @@
 
 
 	$(function () {
-	    if (userCount <= 0) {
+	    if (showTask>0) {
 	        guide.popup($(".child-unit")[0], 'child-unit0', true, { width: 130, height: 125 }, { width: 350, height: 270 }, 'up', '学完每个单元都会有测试，根据结果点亮荣耀之星！', '/egword/build/img/get-it-img2.png', 15);
 	    }
 
@@ -70,7 +70,7 @@
 	        count++;
 	    });
 	    count = 0;
-
+	   
 	    $(".mt15").each(function () {
 	        if (count != 0) {
 	            var doc = $(this).children(".megs").children(".fr").children(".ml30");
@@ -81,20 +81,32 @@
 	        count++;
 	    });
 
-	    $("body").delegate(".downleft", "click", function (event) {
-	        $(this).parent(".fr").parent(".megs").parent(".mt15").children(".main-content").toggle();
-	        var doc = $(this).parent(".fr").children(".ml30");
+	   
+	    $("body").delegate(".megs", "click", function (event) {
+	       // $(this).parent(".fr").parent(".megs").parent(".mt15").children(".main-content").toggle();
+	       // $(this).parent(".fr").parent(".megs").toggleClass('addColor');
+	        //var doc = $(this).parent(".fr").children(".ml30");
+	        
+	        $(this).parent(".mt15").children(".main-content").toggle();
+	       
+	        var doc = $(this).children(".fr").children(".ml30");
 	        var srcStr = doc.attr("src");
 	        if (srcStr.toString().indexOf("down-arrow.png") == -1) {
 	            doc.attr("src", "/egword/build/img/down-arrow.png");
-	            $(this).removeClass("megscolor");
+	           $(this).css('background', '#ff8b1e');
 	        } else {
 	            doc.attr("src", "/egword/build/img/left-arrow.png");
-	            $(this).addClass("megscolor");
+	            $(this).css('background', '#ffc46e');
+	            
+	          
 	        }
+
 	    });
 
 	    $("body").delegate(".tabs-header", "click", function (event) {
+	        if ($(event.target).attr("data-id")==undefined) {
+	            return;
+	        }
 	        $(this).children("span").each(function () {
 	            $(this).removeClass("active");
 	            $(this).addClass("normal");
@@ -110,15 +122,19 @@
 	            }
 
 	        });
+
 	    });
 	    $("body").delegate(".showremark", "click", function (event) {
+	        $('.pop-mask').show();
 	        var remark = $(this).attr("data-message");
 	        $(".text").html(remark);
 	        $(".eg-pop").show();
+	        //阻止事件继续
+	        event.stopPropagation();
 	    });
 
 	    $("body").delegate(".close", "click", function (event) {
-	     
+	        $('.pop-mask').hide();
 	        $(".eg-pop").hide();
 	    });
 	    
@@ -546,11 +562,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -568,12 +590,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -582,18 +605,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -622,7 +651,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -643,16 +672,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -682,6 +717,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);

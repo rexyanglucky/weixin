@@ -96,7 +96,11 @@ function GetLinkUsData(page) {
               
             }
             else {
-                $("#showNoData").show();
+                if (page == 1) {
+                    
+                    $("#showNoData").show();
+                }
+              
 
 
             }

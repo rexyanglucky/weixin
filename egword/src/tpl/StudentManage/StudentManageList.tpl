@@ -3,7 +3,7 @@
             
                 <tr>
                     <td>{{$value.StuName}}</td>
-                    <td>{{$value.LoginId}}</td>
+                    <td>{{$value.Tel}}</td>
                   
                     
 					{{include './StuClassList' $value.StuClassList}}

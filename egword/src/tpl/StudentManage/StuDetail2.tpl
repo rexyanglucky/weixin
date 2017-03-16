@@ -10,7 +10,7 @@
                     </td>
 					{{if $value.IsWarn==1}}
                     <td class="red">
-                      过期
+                      已过期
                     </td>
 
 					{{else}}

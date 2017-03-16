@@ -5,6 +5,11 @@ html:not(.watch-active-state) .list-block .item-link:active,
 #test-center-class {
   background: #ebf8ff;
 }
+#test-center-class .none {
+  display: none;
+  height: 0;
+  width: 0;
+}
 #test-center-class .ml10 {
   margin-left: 10px;
 }

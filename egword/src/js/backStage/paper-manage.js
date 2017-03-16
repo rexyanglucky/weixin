@@ -286,7 +286,7 @@ function loadSchools() {
                     arrJxd.push({ name: data.Data[i].SchoolName, id: data.Data[i].SchoolId, pid: data.Data[i].SchoolId });
                 }
                 isLoadDropSc = 1;//已经加载
-                lui.initDropDownList({ warpid: "drop_sc", width: 260, nameField: 'name', idField: 'id', data: arrJxd, selectedCallBack: null });//学校和班级的联动
+                lui.initDropDownList({ warpid: "drop_sc", width: 260, nameField: 'name', idField: 'id', data: arrJxd, selectedCallBack: null, subtextlength:10 });//学校和班级的联动
               
             }
             else {

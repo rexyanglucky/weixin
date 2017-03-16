@@ -60,9 +60,8 @@
 	    initBtns: function () {
 	        //todo 绑定事件
 
-
-	        
-
+	    //先解绑，再添加事件
+	        $("body").undelegate("#btnBind", "click");
 	        //绑定
 	        $("body").delegate("#btnBind", "click", function () {
 	            var stuAccount = $("#stuAccount").val().trim();
@@ -108,6 +107,12 @@
 
 	//绑定
 	function BindStuAccount(a, b) {
+	   
+	    if (parseInt(openId) > 0) {//表明是返回导致的
+	        $.alert("请重新点击微信菜单进入", "提示");
+	        return;
+
+	    }
 	   
 	    $("#divLoading").show();
 	    //加载列表

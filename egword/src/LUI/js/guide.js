@@ -15,7 +15,7 @@ LuiGuide.prototype.popup=function(dist,getItbutton,has,line,box,dir,content,hasi
     }else{
         url='/egword/build/img/guide-line.png'
     }
-
+   
     if(pd){
         pd=pd
     }else{pd=10}
@@ -36,16 +36,22 @@ LuiGuide.prototype.popup=function(dist,getItbutton,has,line,box,dir,content,hasi
         $(".guide-over-layer").remove();
         $(".guide-line").remove();
         $(".guide-msg-pop").remove();
+        $(".guide-pop").remove();
         $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
     }else{
         $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
         $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
         $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
         if(hasimg){
             $(".guide-msg-pop").remove();
             $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
         }
     }
+    console.log($(getItbutton))
+    $('.' + getItbutton).on('click', function () {
+       $('.guide-pop').hide();
+    })
     if(dist){
         var d=$(dist);
         var pos=d.offset();
@@ -75,6 +81,7 @@ LuiGuide.prototype.popup=function(dist,getItbutton,has,line,box,dir,content,hasi
 LuiGuide.prototype.init=function(){
     $(".guide-over-layer").remove();
     $(".guide-line").remove();
+    $(".guide-pop").remove();
     $(".guide-msg-pop").remove();
     /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
     $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);

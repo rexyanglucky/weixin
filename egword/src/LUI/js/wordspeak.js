@@ -21,11 +21,17 @@ LuiWordSpeak.prototype = {
         $("body").append(luidivspeak);
         $(".lui_wordspeak").each(function (index, item) {
             // $(item).unbind("mouseover");
-            $(item).unbind("click");
-            $(item).bind("click", function () {
+            //$(item).unbind("click");
+            //$(item).bind("click", function () {
+            //    // var soundurl = $(item).attr("data-src");
+            //    sthis.play(item);
+            //});
+            $(item).unbind("mouseover");
+            $(item).bind("mouseover", function () {
                 // var soundurl = $(item).attr("data-src");
                 sthis.play(item);
             });
+
         });
         if (param.auto) {
             param.loop = param.loop || 1;
@@ -43,12 +49,13 @@ LuiWordSpeak.prototype = {
         var sthis = this;
         loop = loop || 1;
         interval = interval || 1000;
+        var url = $(item).attr("data-src");
+        var div = document.getElementById('lui_div_speak');
+        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+        var audio = $("#lui_audio_speak")[0];
+        audio.onended = null;
         if (loop > 0) {
-            var url = $(item).attr("data-src");
-            var div = document.getElementById('lui_div_speak');
-            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-            var audio = $("#lui_audio_speak")[0];
-            audio.play();
+             audio.play();
             if (callback) {
                 if (loop === 1) {
                     // audio.onended=callback;
@@ -57,18 +64,24 @@ LuiWordSpeak.prototype = {
                             callback();
                             window.clearInterval(is_playFinish);
                         }
-                        setTimeout(function() {
-                            window.clearInterval(is_playFinish);
-                        }, 10000);
                     }, 5);
+                    setTimeout(function () {
+                        window.clearInterval(is_playFinish);
+                    }, 10000);
                 }
             }
             loop--;
         }
         if (loop > 0) {
-            setTimeout(function () {
-                sthis.play(item, loop,interval,callback);
-            }, interval);
+          
+            audio.onended = function () {
+                setTimeout(function () {
+                    sthis.play(item, loop, interval, callback);
+                }, interval);
+            }
+           
+            
+            
         }
         else { return; }
     }

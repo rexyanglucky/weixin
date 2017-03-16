@@ -48,10 +48,12 @@
 	var Lui = __webpack_require__(1);
 	var tool = __webpack_require__(6);
 	var lui = new Lui();
+	var commJs = __webpack_require__(8);//公共方法
 	//发送请求调取省市县数据
 	var arrS = [];//省
 	var arrSs = [];//市
 	var arrX = [];//县
+	var orgId = 0;//当前的orgId
 
 	//arrS.push({ name: '北京市', id: '110000', pid: '110000' });
 	//arrSs.push({ name: '北京市', id: '110000', pid: '110000' });
@@ -85,14 +87,38 @@
 	lui.initDropDownList({ warpid: "drop_xs", width: 100, nameField: 'name', idField: 'id', data: [{ name: '01', id: '00', pid: '' }, { name: '02', id: '00_01', pid: '00' }, { name: '03', id: '00_02', pid: '00' }, { name: '04', id: '00_01_01', pid: '00_01' }, { name: '05', id: '00_01_02', pid: '00_01' }, { name: '06', id: '00_02_01', pid: '00_02' }, { name: '07', id: '00_02_02', pid: '00_02' }] });
 	//教师数量的下拉
 	lui.initDropDownList({ warpid: "drop_js", width: 90, nameField: 'name', idField: 'id', data: [{ name: '01', id: '00', pid: '' }, { name: '02', id: '00_01', pid: '00' }, { name: '03', id: '00_02', pid: '00' }, { name: '04', id: '00_01_01', pid: '00_01' }, { name: '05', id: '00_01_02', pid: '00_01' }, { name: '06', id: '00_02_01', pid: '00_02' }, { name: '07', id: '00_02_02', pid: '00_02' }] });
+
+	//折扣的下拉
+	lui.initDropDownList({
+	    warpid: "drop_zk", width: 90, nameField: 'name', idField: 'id', data: [{
+	        name: '一折', id: '0.1', pid: '00_02'
+	    }, {
+	        name: '二折', id: '0.2', pid: '00_02'
+	    }, {
+	        name: '三折', id: '0.3', pid: '00_02'
+	    }, {
+	        name: '四折', id: '0.4', pid: '00_02'
+	    }, { name: '五折', id: '0.5', pid: '00_01' }, { name: '六折', id: '0.6', pid: '00_01' }, {
+	        name: '七折', id: '0.7', pid: '00'
+	    }, {
+	        name: '八折', id: '0.8', pid: '00'
+	    }, { name: '九折', id: '0.9', pid: '' }]
+	});
 	//添加机构的弹出层事件
 	tool.pophide($('.eg-pop .close'), $('.eg-pop'));
-	tool.popshow($('.addbtn '), $('#addorg-pop'));
+	//tool.popshow($('.addbtn '), $('#addorg-pop'));
 	//机构详情的弹出层事件
 	tool.popshow($('.see-detail '), $('#addorg-name'));
+
+	//多选框的点击
+	tool.checkBoox();
 	//后台交互
 	var tplTableOrg = __webpack_require__(21);
 	__webpack_require__(9);
+	//分页
+	var pop = __webpack_require__(11);
+	var loadimg = __webpack_require__(12);
+	var Paginator = __webpack_require__(13);
 	var module = {
 	    init: function () {
 	        //todo 逻辑函数
@@ -110,7 +136,17 @@
 	        //todo 绑定事件
 	        //搜索
 	        $("body").delegate("#searchImg", "click", function () {
-	            GetOrgData();
+	            GetOrgData(1);
+
+	        });
+	        //添加机构
+	        $("body").delegate("#addOrgBtn", "click", function () {
+	          
+	            GetSData();//初始化省市数据  添加机构的时候触发
+	            $("#addorg-pop").show();
+	            $('.pop-mask').show();
+
+	            
 
 	        });
 
@@ -163,22 +199,27 @@
 	            jsonAdd.Addr = escape($("#txtconaddr").val());
 	            jsonAdd.Remark = escape($("#txtmark").val());//备注
 	            if (jsonAdd.OrgName.length < 1) {
-	                alert("机构名称不能为空");
+	                $("#addTip").css({ "visibility": "visible" }).html("机构名称不能为空！");
+	             
 	                return;
 	            }
 	            if (jsonAdd.LinkMan.length < 1) {
-	                alert("机构联系人不能为空");
+	                $("#addTip").css({ "visibility": "visible" }).html("机构联系人不能为空！");
 	                return;
 	            }
 	            if (jsonAdd.LinkManTel.length < 1) {
-	                alert("机构电话不能为空");
+	                $("#addTip").css({ "visibility": "visible" }).html("电话格式不对！");
+
+	              
 	                return;
 	            }
 
 	            //校验电话
 	            if (!IsMobile(jsonAdd.LinkManTel)) {
+	                $("#addTip").css({ "visibility": "visible" }).html("电话格式不对！");
 
-	                alert("电话格式不对");
+
+	             
 	                return;
 
 	            }
@@ -216,13 +257,15 @@
 	                                $("#loginTel").html(jsonAdd.LinkManTel);//电话
 	                                $("#addorg-name").show();
 	                                $('.pop-mask').show();
-	                                alert(data + "添加成功");
+	                                //alert(data + "添加成功");
 	                                GetOrgData();//重新加载列表
 
 	                            }
 	                        });
 	                    } else {
-	                        alert("电话重复");
+	                        //alert("电话重复");
+	                        $("#addTip").css({ "visibility": "visible" }).html("电话重复！");
+
 	                    }
 
 	                }
@@ -234,6 +277,72 @@
 
 
 
+	        });
+
+	        //机构付款金额和奖励储值失去焦点的时候
+	        $("body").delegate("#txtOrgMoney,#txtOrgValue", "blur", function () {
+	            CalMoney();
+	        });
+	        //checkbox点击的时候
+	        $("body").delegate("#checkBoxSpan", "click", function () {
+	           
+	            CalMoney();
+	        });
+
+
+	        //储值
+	        $("body").delegate(".cz", "click", function () {
+	            orgId = $(this).attr("data-id");//当前的机构id
+	            $("#orgNameShow").html($(this).attr("data-name"));//机构的名称
+	            $('#save-pop').show();
+	            $('.pop-mask').show();
+
+	        });
+
+	        //储值信息的提交表单
+	        $("body").delegate("#btnCzOk", "click", function () {
+	            var jsonAddCz = {};
+	            jsonAddCz.OrgId = orgId;
+	            jsonAddCz.OrgMoney = $("#txtOrgMoney").val();//付款金额
+	            jsonAddCz.DisCount = $("#drop_zk").attr("data-id");//折扣  
+	            jsonAddCz.OrgValue = $("#txtOrgValue").val();//奖励储值  checkImg
+	            jsonAddCz.Remarks = escape($("#txtRemarks").val());//备注
+	            jsonAddCz.AfterValue = escape($("#addCz").html());//最后的总的计算钱数
+
+
+	            if (jsonAddCz.OrgValue == "") {
+	                jsonAddCz.OrgValue = 0;
+	            }
+	            if (jsonAddCz.OrgMoney.length < 1) {
+	                $("#addTipM").css({ "visibility": "visible" }).html("机构付款金额不能为空！");
+	                //alert("机构付款金额不能为空");
+	                return;
+	            }
+	            //提交表单
+	            $.ajax({
+	                type: "post",
+	                url: "/Management/OrgManage/AddOrgMoney",
+	                dataType: "json",
+	                data: {
+
+	                    data: JSON.stringify(jsonAddCz)
+	                },
+	                success: function (data) {
+	                   
+	                    $(".eg-pop .close").click();//关闭弹窗
+
+	                    GetOrgData(1);//重新加载
+
+	                }
+	            });
+
+
+
+	        });
+	        //储值的取消
+	        $("body").delegate("#addMCancel","click", function() {
+	            $("#save-pop").hide();
+	            $('.pop-mask').hide();
 	        });
 
 	    }
@@ -272,8 +381,15 @@
 
 
 	//发送请求调取数据
-	function GetOrgData() {
+	function GetOrgData(page) {
+	    //$("#divLoading").show();
+	    
+	    loadimg.ShowLoadingForTableNoClass($("#tb"), 12);//不要tr样式的清除
+	    if (page == undefined) {
+	        page = 1;
+	    }
 
+	    var pageSize = 10;
 	    var json = {};
 	    json.OrgType = dataType;//0:全部，1金牌，2银牌
 	    json.KeyWord = escape($("#txtserch").val());
@@ -285,7 +401,7 @@
 	        data: {
 	            //OrgType: dataType,
 	            //KeyWord: escape($("#txtserch").val()) //$("#tagId").val()
-	            data: JSON.stringify(json)
+	            data: JSON.stringify(json), PageIndex: page, PageSize: pageSize
 	        },
 	        success: function (data) {
 
@@ -294,17 +410,19 @@
 	                $("#tb").html(tplTableOrg(data.Data));
 	                //$("#Totalcount").html(data.PageSum);
 	                //Paginator.Paginator(10, page, data.PageSum, loadExamStu);
-	                //加载咨询师列表
-	                GetSData();//初始化省市数据
+	                //加载列表
+	                Paginator.Paginator(pageSize, page, data.PageSum, GetOrgData);
+	            
 
 	            }
 	            else {
 
 	                $("#tb").html("");
-
-	                //$("#tb").html('<tr  style="border:none;text-align:center;height:280px;"><td style="font-size: 16px;" colspan="8"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;"><img src="../../../bundle/img/noclass.png" style="text-align:center;"><br/><span>暂无数据！</span></div></div></td></tr>');//清空数据
-	                //$("#pagination").html("");//分页控件不显示
-	                //$("#Totalcount").html(0);//数据设置为0
+	                //<img src="../../../bundle/img/noclass.png" style="text-align:center;">
+	                $("#tb").html('<tr  style="border:none;text-align:center;height:280px;"><td style="font-size: 16px;" colspan="8"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;"><br/><span>暂无数据！</span></div></div></td></tr>');//清空数据
+	                $("#pagination").html("");//分页控件不显示
+	                $("#Totalcount").html(0);//数据设置为0
+	                $("#bandTotalcount").html(0);//禁用
 
 
 
@@ -358,6 +476,30 @@
 
 	}
 
+
+
+	//计算总额
+	function CalMoney() {
+
+	   
+	    var total = 0;
+	    var zk = $("#drop_zk").attr("data-id");
+	    if ($("#txtOrgMoney").val() != "") {
+
+	        total = parseFloat($("#txtOrgMoney").val()) / parseFloat(zk);
+	    }
+	    var cssVal = $("#checkImg").css("visibility");
+	    if (cssVal != "hidden") {
+	        if ($("#txtOrgValue").val() != "") {
+	            total = parseFloat($("#txtOrgValue").val()) + total;
+
+	        }
+
+	    }
+	    total = total.toFixed(2);//保留两位小数
+	    $("#addCz").html(total);
+
+	}
 
 
 
@@ -444,6 +586,48 @@
 	    Bindx(Sscode);
 
 	}
+
+
+	//添加实时校验
+	$(function () {
+	    OptCheck();
+
+	});
+	//校验
+	function OptCheck() {
+	    
+	    $("#txtorgname,#txtorgcon").keyup(function () {
+	        
+	        if (this.value.length > 1) {
+	            $("#addTip").css({ "visibility": "hidden" });
+	        }
+
+	    });
+
+	    $("#txtcontel").keyup(function () {
+	        if (commJs.IsMobile(this.value)) {
+	            $("#addTip").css({ "visibility": "hidden" });
+	        } else {
+	            $("#addTip").css({ "visibility": "visible" }).html("手机格式不对！");
+	        }
+
+	    });
+
+
+	}
+
+
+
+
+	//回车事件
+	$(function () {
+	    $('#txtserch').bind('keypress', function (event) {
+	        if (event.keyCode == "13") {
+	            GetOrgData(1);
+
+	        }
+	    });
+	});
 
 
 
@@ -841,11 +1025,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -863,12 +1053,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -877,18 +1068,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -917,7 +1114,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -938,16 +1135,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -977,6 +1180,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
@@ -1194,7 +1398,97 @@
 
 /***/ },
 /* 7 */,
-/* 8 */,
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	    checkNum: function (event) {
+
+	        var keynum = event.keyCode;
+	        if ((keynum >= 48 && keynum <= 57)) {
+	            document.execCommand("Cut", false, true);
+	            var nT = $(event.currentTarget).val();
+	            //第一个不能输入0
+	            if ((nT == "") && keynum == 48)
+	                return false;
+
+	            else if (nT.length > 2) {
+	                return false;
+	            } else
+	                return true;
+	        } else
+	            return false;
+	    },
+	    matchNum: function (t) {
+	        t.value = t.value.trimtext('.');
+	    },
+	    checkFloat: function (event) {
+	        //var score = this.totalSore;
+	        var keynum = event.keyCode;
+	        //console.log(keynum);
+	        if ((keynum >= 48 && keynum <= 57) || (keynum == 46)) {
+	            document.execCommand("Cut", false, true);
+	            var nT = $(event.currentTarget).val();
+	            //第一个字符不能为小数点，不能重复输入小数点
+	            if ((nT == "" || nT.indexOf(".") > -1) && keynum == 46)
+	                return false;
+	                //小数点后保留一位
+	            else if (nT.length > 2 && nT.indexOf(".") == nT.length - 2) {
+	                return false;
+	            }
+	                //0后面只能输入小数点
+	            else if (nT == "0" && keynum != 46)
+	                return false;
+	                //三位数后只能输入小数点
+	            else if (nT.length == 3 && nT.indexOf(".") < 0 && keynum != 46)
+	                return false;
+	            else if (nT.length > 4) {
+	                return false;
+	            } else
+	                return true;
+	        } else
+	            return false;
+	    },
+	    numGradeTran: function (t) { //数字年级转换
+	       
+	        switch (t) {
+	            case 1:
+	                return "一年级";
+	            case 2:
+	                return "二年级";
+	            case 3:
+	                return "三年级";
+	            case 4:
+	                return "四年级";
+	            case 5:
+	                return "五年级";
+	            case 6:
+	                return "六年级";
+	            case 7:
+	                return "七年级";
+	            case 8:
+	                return "八年级";
+	            case 9:
+	                return "九年级";
+	            case 10:
+	                return "高一";
+	            case 11:
+	                return "高二";
+	            case 12:
+	                return "高三";
+	            default:
+	                return t;
+
+
+	        }
+
+	        return t;
+	    }, IsMobile: function(t) {
+	        return (/^1[3|4|5|7|8]\d{9}$/.test(t));//校验手机的格式
+	    }
+	}
+
+/***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1437,7 +1731,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }
@@ -1543,9 +1837,309 @@
 	}();
 
 /***/ },
-/* 11 */,
-/* 12 */,
-/* 13 */,
+/* 11 */
+/***/ function(module, exports) {
+
+	//遮罩
+	function MaskShow() {
+	    $(".pop-mask").show();
+	}
+
+	function MaskHide() {
+	    $(".pop-mask").hide();
+	    $(".add").hide();
+	}
+	//传递显示的消息
+	function PopTipShow(obj,title) {
+	    $(".small-pop").each(function () {
+
+	        $(this).remove();
+	    });
+
+	    if (title == undefined) {
+	        title = "提示消息";
+	    }
+	    var tiphtml = '<div class="eg-pop small-pop" > <div class="header"> ' + title + '<span class="close"></span> </div> <div class="body">' + obj + ' </div> </div>';
+
+	   
+	    $("body").append(tiphtml);
+	    $(".pop-mask").show();
+	    $(".small-pop").show();
+	}
+
+
+
+	//弹出确认框
+	var OpenConfrimPop = function (obj,btnId,title) {
+	    $('[class="pop-up font14"]').each(function () {
+
+	        $(this).remove();
+	    });
+
+	    if (title==undefined) {
+	        title ="提示消息";
+	    }
+	   
+	    var html = '<div class="eg-pop small-popbtn" > <div class="header"> ' + title + '<span class="close"></span> </div> <div class="body"> ' + obj + ' </div> <div class="footer"> <span class="operatBtn left" id="' + btnId + '" style="margin-left:50px;">确定</span> <span class="operatBtn right" id="Cancel" style="margin-right:50px;">取消</span> </div> </div>';
+	    debugger;
+	    $("body").append(html);
+	    $(".pop-mask").show();
+	    $(".small-popbtn").show();
+	};
+
+	function PopTipHide() {
+	    $(".pop-up").hide();
+	    $(".pop-mask").hide();
+	    $(".add").hide();
+	    document.location.reload();
+	}
+
+	exports.MaskShow = MaskShow;
+	exports.MaskHide = MaskHide;
+	exports.PopTipShow = PopTipShow;
+	exports.PopTipHide = PopTipHide;
+	exports.OpenConfrimPop = OpenConfrimPop;
+
+	//处理弹出框的隐藏
+	$(function () {
+	    $("body").delegate(".close,#Cancel", "click", function () {
+	        $(".small-popbtn").hide();
+	        $(".small-pop").hide();
+	        $(".pop-mask").hide();
+	        //document.location.reload();
+	    });
+
+	   
+
+
+
+	});
+
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	//弹出加载图片针对列表传递居中参数
+	function ShowLoadingForTable(obj, num) {
+	    if (num == undefined || obj==undefined) {
+	        return;
+	    }
+	    obj.html('<tr  style="border:none;text-align:center;height:280px;"><td style="font-size: 16px;" colspan="'+num+'"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;">'+jQuery("#divLoading").html() +'</div></div></td></tr>');
+	}
+
+	function ShowLoadingForTableNoClass(obj, num) {
+	    if (num == undefined || obj == undefined) {
+	        return;
+	    }
+	    obj.html('<tr><td colspan="' + num + '"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;">' + jQuery("#divLoading").html() + '</div></div></td></tr>');
+	}
+
+
+	//弹出加载图片
+	function ShowLoading(obj) {
+	    if (obj == undefined) {
+	        return;
+	    }
+	    obj.html(jQuery("#divLoading").html());
+	}
+
+
+	exports.ShowLoadingForTable = ShowLoadingForTable;//针对table布局的
+	exports.ShowLoadingForTableNoClass = ShowLoadingForTableNoClass;//清除样式
+
+	exports.ShowLoading = ShowLoading;
+
+
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	    Paginator: function (pageSize, currentPage, totalCount, callback) {
+	        //todo 绑定事件
+
+	        var totalPages;
+	        if (totalCount % pageSize == 0) {
+	            totalPages = totalCount / pageSize;
+	        }
+	        else {
+	            totalPages = parseInt(totalCount / pageSize) + 1;
+	        }
+	        var pagePre = '<a href="#"  data-num=' + (parseInt(currentPage) - 1) + ' class="pre-page inline mr20 pre-e">上一页</a>';
+	        var pageNext = '<a href="#"  data-num=' + (parseInt(currentPage) + 1) + ' class="next-page inline next-e">下一页</a>';
+	        var indexPage = '<a href="#"  data-num="1" class="pre-page inline mr20">首页</a></li>';
+
+	        var lastPage = ' <a href="#"  data-num=' + totalPages + ' class="pre-page inline mr20 ml20"> 末页</a>';
+	        if (totalPages < pageSize) {
+	            // pagePre = "";
+	            //pageNext = "";
+	            indexPage = "";
+	            lastPage = "";
+	        }
+
+	        if (currentPage <= 1) {
+	            currentPage = 1;
+	            pagePre = "";
+
+	        }
+	        if (currentPage >= totalPages) {
+	            currentPage = totalPages;
+	            pageNext = "";
+	            lastPage = "";
+	        }
+
+	        if (totalCount > 0) {
+
+	            var pagenum = '<ul class="page-box inline mr20 mb20">';
+
+
+	            if (totalPages > 1) {
+	                if (currentPage == 1) //第一页
+	                {
+
+	                    //output.Append(" <a disabled='disabled' class='colH'>上一页</a> ");//上一页
+	                }
+	                if (currentPage > 1) {
+	                    //处理首页连接
+	                    //处理上一页的连接
+	                    //pagePre = ' <li><a href="#"  data-num=' + (parseInt(currentPage) - 1) + '>上一页</a> </li>';
+	                    // output.AppendFormat(" <a data-pageIndex='{0}' class='pageLink'>上一页</a> ", currentPage - 1);//上一页
+	                }
+	                if (totalPages > 7) {
+	                    var currint = 3;
+	                    if (currentPage < 4)//4
+	                    {
+
+	                        for (var i = 0; i <= 6; i++) {
+	                            if (currentPage == i + 1) {
+	                                pagenum = pagenum + ' <li><a href="#" class="active" data-num=' + currentPage + '>' + currentPage + '</a> </li>';
+
+	                            }
+	                            else {
+	                                if (i == 6) {
+
+	                                    pagenum = pagenum + ' <li><a href="#"  data-num=' + 7 + '>...</a> </li>';
+	                                    pagenum = pagenum + ' <li><a href="#"  data-num=' + totalPages + '>' + totalPages + '</a> </li>';
+	                                }
+	                                else {
+
+	                                    pagenum = pagenum + ' <li><a href="#"  data-num=' + (i + 1) + '>' + (i + 1) + '</a> </li>';
+	                                }
+	                            }
+	                        }
+	                    }//4
+	                    else if (currentPage >= 4 && currentPage < totalPages - 3) {
+
+	                        for (var i = 0; i <= 6; i++) {
+	                            if (i == 0) {
+	                                //pagenum=pagenum+' <li data-num='+(currentPage-3)+'><a href="#" onclick="Paginator('+pageSize+','+(currentPage-3)+',' + totalCount + ')">...</a> </li>';
+	                                pagenum = pagenum + ' <li><a href="#"  data-num="1">1</a> </li>';//201609130930
+	                                if (parseInt(currentPage) - 3 > 1) {
+	                                    pagenum = pagenum + ' <li><a href="#"  data-num=' + (parseInt(currentPage) - 3) + '>...</a> </li>';//201609130930
+	                                }
+
+	                            }
+	                            else if (i == 3)//中间当前页
+	                            {
+
+
+	                                pagenum = pagenum + ' <li><a href="#" class="active" data-num=' + (currentPage) + '>' + currentPage + '</a> </li>';
+	                            }
+	                            else if (i == 6) {
+
+	                                pagenum = pagenum + ' <li><a href="#" data-num=' + (parseInt(currentPage) + 3) + '>...</a> </li>';
+	                                pagenum = pagenum + ' <li><a href="#"  data-num=' + totalPages + '>' + totalPages + '</a> </li>';
+	                            }
+	                            else {
+
+	                                pagenum = pagenum + ' <li><a href="#"  data-num=' + (parseInt(currentPage) + i - parseInt(currint)) + '>' + (parseInt(currentPage) + i - parseInt(currint)) + '</a> </li>';
+	                            }
+	                        }
+
+	                    }
+	                    else {
+	                        for (var i = 0; i <= 6; i++) {
+	                            if (i == 0) {
+
+	                                pagenum = pagenum + ' <li><a href="#"  data-num="1">1</a> </li>';//201609130930
+	                                pagenum = pagenum + ' <li><a href="#" data-num=' + (parseInt(totalPages) - 6) + '>...</a> </li>';//201609130930
+	                            }
+	                            else {
+	                                if (totalPages - 6 + i == currentPage) {
+
+
+	                                    pagenum = pagenum + ' <li><a href="#" class="active"  data-num=' + currentPage + '>' + currentPage + '</a> </li>';
+	                                }
+	                                else {
+
+	                                    pagenum = pagenum + ' <li><a href="#"  data-num=' + (totalPages - 6 + i) + '>' + (totalPages - 6 + i) + '</a> </li>';
+	                                }
+	                            }
+	                        }
+	                    }
+
+	                }
+	                else {
+	                    for (var i = 0; i < totalPages; i++) {
+	                        if (currentPage == i + 1) {
+
+	                            pagenum = pagenum + ' <li><a href="#" class="active" data-num=' + currentPage + '>' + currentPage + '</a> </li>';
+
+	                        }
+	                        else {
+
+	                            pagenum = pagenum + ' <li><a href="#"  data-num=' + (i + 1) + '>' + (i + 1) + '</a> </li>';
+
+	                        }
+	                    }
+	                }
+	                if (currentPage == totalPages) //最后一页
+	                {//处理下一页和尾页的链接
+
+
+	                    //output.Append(" <a disabled='disabled' class='colH'>下一页</a> ");
+	                    pageNext = "";
+	                    lastPage = "";
+	                }
+	                if (currentPage < totalPages) {//处理下一页和尾页的链接 
+
+	                    //output.AppendFormat(" <a data-pageindex='{0}' class='pageLink'>下一页</a> ", currentPage + 1);
+	                    //pagePre = '<a href="#"  data-num=' + (parseInt(currentPage) + 1) + ' class="next-page inline">下一页</a>';
+	                }
+
+
+	            }
+
+	            pagenum = pagenum + '</ul>';
+	            document.getElementById("pagination").innerHTML = indexPage + pagePre + pagenum + pageNext;
+
+
+	        }
+	        else {
+	            document.getElementById("pagination").innerHTML = "";
+	        }
+	        $("#pagination a").unbind("click");
+	        $("#pagination a").bind("click", function () {
+	           
+	            if (callback) {
+	                callback($(this).attr("data-num"));
+	            }
+	        });
+
+	    }
+	}
+	//function Paginator(pageSize, currentPage, totalCount, callback) {
+
+
+	//}
+
+
+
+/***/ },
 /* 14 */,
 /* 15 */,
 /* 16 */,
@@ -1575,8 +2169,10 @@
 	$out+=$escape($value.CurrentValue);
 	$out+='</td> <td> <span class="inline operatBtn see-detail" data-id="';
 	$out+=$escape($value.OrgId);
-	$out+='">查看详情</span> <span class="inline operatBtn ml25" data-id="';
+	$out+='">查看详情</span> <span class="inline operatBtn ml25 cz" data-id="';
 	$out+=$escape($value.OrgId);
+	$out+='" data-name="';
+	$out+=$escape($value.OrgName);
 	$out+='">储值</span> </td> </tr> ';
 	});
 	return new String($out);

@@ -75,7 +75,7 @@
 	        $("body").delegate("#courseE", "click", function () {
 	           // $.router.load("/Parents/ParentMenu/CourseEvalu/" + aid, true);//精彩瞬间跳转
 
-	            window.location.href = "/Parents/ParentMenu/CourseEvalu"+aid;
+	            window.location.href = "/Parents/ParentMenu/CourseEvalu/"+aid;
 
 
 	        });
@@ -98,8 +98,17 @@
 	//绑定数据
 	$(function () {
 	    module.init();
+	    //处理图片的点击效果
+	    $(document).on('click', '.img', function () {
+	        $('.pop-mask').show();
+	        var htnlval = $(this).html();
+	        $('.pop-mask').html(htnlval);
 
-
+	    });
+	    $(document).on('click', '.pop-mask img', function () {
+	        $('.pop-mask').html('');
+	        $('.pop-mask').hide();
+	    });
 
 	});
 
@@ -114,7 +123,7 @@
 	        dataType: "json",
 
 	        data: {
-	            ClassIndex: $("#hideId").val()//传递的是班级的第几次上课
+	            stuId: stuId, ClassIndex: $("#hideId").val()//传递的是班级的第几次上课
 
 	        },
 	        success: function (data) {
@@ -382,7 +391,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }

@@ -8,7 +8,7 @@
                 <td>{{$value.CurrentValue}}</td>
                 <td>
                     <span class="inline operatBtn see-detail" data-id="{{$value.OrgId}}">查看详情</span>
-                    <span class="inline operatBtn ml25" data-id="{{$value.OrgId}}">储值</span>
+                    <span class="inline operatBtn ml25 cz" data-id="{{$value.OrgId}}" data-name="{{$value.OrgName}}">储值</span>
                 </td>
             </tr>
             

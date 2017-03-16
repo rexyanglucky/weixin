@@ -268,7 +268,8 @@ textarea {
 .header .log {
   width: 11.3%;
   height: 90px;
-  background: url('../../../build/img/eg-log.png') 0 17px no-repeat;
+  /*background:url('../../../build/img/eg-log.png') 0 17px no-repeat;*/
+  background: url('../../../build/img/blogo.png') 0 25px no-repeat;
   background-origin: content-box;
   display: inline-block;
 }
@@ -674,7 +675,7 @@ textarea {
   cursor: default;
   padding: 0 0 0 2px;
   margin: 0;
-  width: 3.15em;
+  width: 3.6em;
   display: inline;
   font-size: inherit;
   font-weight: 300;
@@ -862,4 +863,7 @@ textarea {
 }
 #content .body .inputdiv label .left15 {
   margin-left: 15px;
+}
+.flatpickr-current-month .cur_year {
+  width: 3.6em;
 }

@@ -78,7 +78,18 @@
 
 	    render: function () {
 	       
-	        document.title = '学情分析';
+	       
+	        //var $body = $('body');
+	        //document.title = '学情分析';
+	        //var $iframe = $('<iframe src="/favicon.ico"></iframe>');
+	        //$iframe.on('load', function () {
+	        //    setTimeout(function () {
+	        //        $iframe.off('load').remove();
+	        //    }, 0);
+	        //}).appendTo($body);
+
+	        
+	        
 	      
 	        //加载列表
 	        GetStuCourseNameListData();//获取学生课程列表
@@ -86,8 +97,13 @@
 	    },
 	    initBtns: function () {
 	        //todo 绑定事件
+	     
 	        //左边
+	        $("body").undelegate("#leftIndex", "click");
 	        $("body").delegate("#leftIndex", "click", function () {
+	            if (totalNum <= pageSize) {
+	                return;
+	            }
 	            currentPage = currentPage - 1;
 	            GetStuCourseNameListData(currentPage);
 
@@ -95,24 +111,33 @@
 
 
 	        //右边
+	        $("body").undelegate("#rightIndex", "click");
+
 	        $("body").delegate("#rightIndex", "click", function () {
-	            
+	            if (totalNum <= pageSize) {
+	                return;
+	            }
 	            currentPage = currentPage + 1;
 	            GetStuCourseNameListData(currentPage);
 
 	        });
+	       
+	        $("body").undelegate("#tabsCourse .box", "click");
 	        //课程点击
 	        $("body").delegate("#tabsCourse .box", "click", function () {
 	            $(this).siblings().removeClass('active');
 	            $(this).addClass('active');
 	            //清空上课记录
 	            $("#ulCourse").html("");
-
+	            $("#showNoData").hide();
+	          
+	            
 	            //加载上课
 	            GetStuCourseLessonData(1);//加载课堂数据
 
 	        });
 	        //首页的跳转
+	        $("body").undelegate("#menuId", "click");
 	        $("body").delegate("#menuId", "click", function () {
 	            ////window.location.href = "";//跳转
 	           
@@ -121,19 +146,21 @@
 
 
 	        });
+	        $("body").undelegate("li[datatype='2']", "click");
+
 	        //列表的详情跳转
 	        $("body").delegate("li[datatype='2']", "click", function () {
 	            var lId = $(this).attr("data-lid");//第几次课
 	            var cId = $(this).attr("data-cid");//课程id
 	            var cIn = $(this).attr("data-cin");//班级的第几次课
 	            var nid = cId + "-" + lId + "-" + cIn+"-"+id;
-	            $.router.load("/Parents/ParentMenu/CourseEvalu/" + nid, true);//处理跳转
+	            //$.router.load("/Parents/ParentMenu/CourseEvalu/" + nid, true);//处理跳转
 
-
+	            window.location.href = "/Parents/ParentMenu/CourseEvalu/" + nid;
 	        });
 
 
-
+	        $("body").undelegate("#btnloginOk", "click");
 	        //展示完的确定的删除弹窗
 	        $("body").delegate("#btnloginOk", "click", function () {
 	            $(".eg-pop .close").click();//关闭弹窗
@@ -149,16 +176,34 @@
 
 	//绑定数据
 	$(function () {
+	    
+	 
+	   
 	    module.initStup();
-
-
+	    setTitle();
 
 	});
+
+
+	function setTitle() {
+	    var stuName = $("#stuName").val();
+	    document.title = stuName+'学情分析';
+	    var i = document.createElement('iframe');
+	    i.src = '/favicon.ico';
+	    i.style.display = 'none';
+	    i.onload = function () {
+	        setTimeout(function () {
+	            i.remove();
+	        }, 9);
+	    }
+	    document.body.appendChild(i);
+	}
 
 
 	//发送请求调取数据
 	function GetStuCourseNameListData(page) {
 	    
+	    $("#datashow").css("display", "");
 	    if (page == undefined || page < 1) {
 	        page = 1;
 	    }
@@ -186,7 +231,11 @@
 	                $("#tabsCourse").html(tplStuCourseNameList(data.Data));//加载课程头部
 	                $("#ulCourse").html("");//需要进行清空
 	                //加载列表
-	                GetStuCourseLessonData(1);//加载课堂数据
+	              
+	                    GetStuCourseLessonData(1);//加载课堂数据
+	                    
+	             
+	               
 
 	            }
 	            else {
@@ -194,6 +243,7 @@
 	                ClearLoad();
 	                loading = false;
 	                $("#showNoData").show();
+	                $("#datashow").css("display", "none");
 	                //alert("无数据");
 
 	            }
@@ -205,7 +255,7 @@
 
 	//加载课程的每堂课
 	function GetStuCourseLessonData(page) {
-
+	    $("#datashow").css("display", "");
 	    //$("#divLoading").show();
 	    //loadimg.ShowLoadingForTable($("#tb"), 4);
 	    if (page == undefined || page < 1) {
@@ -228,11 +278,11 @@
 	        dataType: "json",
 
 	        data: {
-	            data: $("#tabsCourse .active").attr("data-co"), PageIndex: page, PageSize: pageSizeL
+	            stuId: id, data: $("#tabsCourse .active").attr("data-co"), PageIndex: page, PageSize: pageSizeL
 
 	        },
 	        success: function (data) {
-	           
+	            
 	            loading = false;
 	            //$("#divLoading").hide();
 	            if (data.Data && data.Data.length > 0) {
@@ -244,14 +294,7 @@
 
 	                //容器发生改变,如果是js滚动，需要刷新滚动
 	                $.refreshScroller();
-	                //$(".s-course-list").off("click");
-	                //$(".s-course-list").on("click", function () {
-
-	                //    var classindex = $(this).attr("data-classindex");
-
-	                //    //$.router.load('/teacher/myclass/CourseReport?classindex=' + classindex, true);//处理跳转
-
-	                //});
+	               
 	                if (page == 1) {
 	                    loadWordInfo();//加载单词数量信息
 	                }
@@ -259,8 +302,13 @@
 
 	            }
 	            else {
-	                ClearLoad();
-	                $("#showNoData").show();
+	                if (page == 1) {
+	                    ClearLoad();
+	                    $("#showNoData").show();
+	                    $("#datashow").css("display", "none");
+	                    
+	                }
+	               
 
 
 	            }
@@ -279,7 +327,7 @@
 	        dataType: "json",
 
 	        data: {
-	            data: $("#tabsCourse .active").attr("data-co")
+	            data: $("#tabsCourse .active").attr("data-co"), stuId: id
 
 	        },
 	        success: function (data) {
@@ -576,7 +624,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }

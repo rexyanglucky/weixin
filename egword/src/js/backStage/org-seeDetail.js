@@ -1,5 +1,9 @@
+
 var Lui = require('../../LUI/js/lui');
 var tool = require('../../LUI/tool');
+var ut = require('../lib/util.js');//校验
+var pop = require("../lib/popup/popuptip.js");//提示消息
+
 var lui = new Lui();
 //编辑的弹出层事件
 tool.pophide($('.eg-pop .close,.eg-pop .cancel'), $('.eg-pop'));
@@ -91,18 +95,21 @@ var module = {
             jsonAdd.Remark = escape($("#txtmark").val());//备注
            
             if (jsonAdd.LinkMan.length < 1) {
-                alert("机构联系人不能为空");
+                $("#addTipU").css({ "visibility": "visible" }).html("机构联系人不能为空！");
+                //alert("机构联系人不能为空");
                 return;
             }
             if (jsonAdd.LinkManTel.length < 1) {
-                alert("机构电话不能为空");
+                $("#addTipU").css({ "visibility": "visible" }).html("电话格式不对！");
+                //alert("机构电话不能为空");
                 return;
             }
-
+           
             //校验电话
-            if (!IsMobile(jsonAdd.LinkManTel)) {
+            if (!ut.IsMobile(jsonAdd.LinkManTel)) {
+                $("#addTipU").css({ "visibility": "visible" }).html("电话格式不对！");
 
-                alert("电话格式不对");
+                //alert("电话格式不对");
                 return;
 
             }
@@ -135,12 +142,15 @@ var module = {
                             success: function (data) {
 
 
-                                alert("添加成功");
+                                //alert("添加成功");
+                                pop.PopTipShow("操作成功");
 
                             }
                         });
                     } else {
-                        alert("电话重复");
+                        //alert("电话重复");
+                        $("#addTipU").css({ "visibility": "visible" }).html("电话重复！");
+                       
                     }
 
                 }
@@ -161,7 +171,7 @@ var module = {
 
         //checkbox点击的时候
         $("body").delegate("#checkBoxSpan", "click", function () {
-            debugger;
+            
             CalMoney();
         });
       
@@ -181,7 +191,8 @@ var module = {
                 jsonAddCz.OrgValue = 0;
             }
             if (jsonAddCz.OrgMoney.length < 1) {
-                alert("机构付款金额不能为空");
+                $("#addTipM").css({ "visibility": "visible" }).html("机构付款金额不能为空！");
+                //alert("机构付款金额不能为空");
                 return;
             }
             //提交表单
@@ -194,10 +205,12 @@ var module = {
                     data: JSON.stringify(jsonAddCz)
                 },
                 success: function (data) {
-                    debugger;
+                    
                     $(".eg-pop .close").click();//关闭弹窗
+                    GetSingleOrg();//重新请求
 
-                    alert("添加成功");
+                   // alert("添加成功");
+                    //pop.PopTipShow("添加成功");
 
                 }
             });
@@ -207,23 +220,47 @@ var module = {
         });
 
 
+      
         //机构账号冻结
         $("body").delegate("#froBtn", "click", function () {
+            var str = $("#froBtn").html();
+            pop.OpenConfrimPop("确认" + str + "?", "Confrim", str + "提示");
+
+
+
+        });
+        //确定禁用
+        $("body").delegate("#Confrim", "click", function () {
+            var subVal = $("#froBtn").attr("data-id");
             //提交表单
-                $.ajax({
-                    type: "post",
-                    url: "/Management/OrgManage/FrozenAccount",
-                    dataType: "json",
-                    data: {
-                        data: orgId
-            },
+            $.ajax({
+                type: "post",
+                url: "/Management/OrgManage/FrozenAccount",
+                dataType: "json",
+                data: {
+                    data: orgId, type: subVal
+                },
                 success: function (data) {
-                    debugger;
-                   
-                    alert("冻结成功");
+
+                    $(".eg-pop").hide();
+                    $(".pop-mask").hide();//隐藏
+
+                    //alert("冻结成功");
+                    //pop.PopTipShow("操作成功");
+                    if (subVal == "1") {//启用
+                        $("#froBtn").html("启用账号");
+                        $("#froBtn").attr("data-id","0");
+
+
+                    } else {
+                        $("#froBtn").html("冻结账号");
+                        $("#froBtn").attr("data-id", "1");
+                        
+                    }
 
                 }
             });
+
         });
 
 
@@ -276,7 +313,7 @@ function GetSingleOrg() {
                     $("#spandrop_jy").html("B级");
 
                 }
-                debugger;
+                
                 $("#drop_htyq").attr("title", GetNumTran(data.Data.CoYear) + "年");//合同延期
                 $("#spandrop_htyq").html(GetNumTran(data.Data.CoYear) + "年");//合同延期显示赋值
                 $("#drop_htyq").attr("data-id", data.Data.CoYear);
@@ -289,6 +326,17 @@ function GetSingleOrg() {
                 //oldCoYear = data.Data.CoYear;//后台需要进行减法处理（暂时不需要）
                 //储值信息赋值
                 $("#orgName").html(orgName);
+                if (data.Data.IsFrozen) {//禁用1启用0
+                    $("#froBtn").attr("data-id", "0");
+                    $("#froBtn").html("启用账号");
+
+
+                } else {
+                    $("#froBtn").attr("data-id", "1");//
+                    $("#froBtn").html("冻结账号");
+
+                    
+                }
 
 
             }
@@ -318,7 +366,7 @@ function OptDrop() {
 //计算总额
 function CalMoney() {
 
-    debugger;
+    
     var total = 0;
     var zk = $("#drop_zk").attr("data-id");
     if ($("#txtOrgMoney").val() != "") {

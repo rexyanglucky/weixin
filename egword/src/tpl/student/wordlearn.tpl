@@ -2,7 +2,7 @@
     <div class="word" style="width:95%;border-bottom: 1px solid #d0d8dd;">
         {{Word}}
     </div>
-    <div class="pronunce" style="float:none;">
+    <div class="pronunce" style="float:none;margin-left:0;">
          <span style="font-size:0;" class="pronunce-guide">
              {{# $helpers.GetRedWord($data)}}
 
@@ -16,14 +16,15 @@
         <div>
             <span class="konow-gap-guide">
                 <span class="konow-gap">陌</span>
-                <span>陌生词，请慢速跟读三遍</span>
+                <span>陌生词，分音节，慢速跟读三遍</span>
+                
             </span>
         </div>
         {{else if WordType==1}}
         <div class="">
             <span class="konow-gap-guide">
              <span class="konow-gap">生</span>
-             <span>夹生词，请快速跟读两遍</span>
+             <span>夹生词，分音节，快速跟读两遍</span>
             </span>
         </div>
         {{/if}}
@@ -32,12 +33,13 @@
     </div>
     <div class="anysis none">
         {{each WordNatures as v i}}
-        <span>{{WordNatures[0]}}</span>
+        <span>{{v}}</span>
+        <br />
         {{/each}}
 
     </div>
     <div class="remumber none" >
         <div class="wordWrap"><span class="mr10">【记忆法】</span>{{Rember}}</div>
     </div>
-    <div class="btn"  id="btn-learn-next" style="margin-top:35px;background: #ff8b1e;border: 1px solid #ff3c00;width: 100%;text-align:center;color:#fff;display: none">下一个</div>
+    <div class="btns"  id="btn-learn-next" style="margin-top:35px;background: #ff8b1e;border: 1px solid #ff3c00;width: 100%;text-align:center;color:#fff;display: none">下一个</div>
 </div>

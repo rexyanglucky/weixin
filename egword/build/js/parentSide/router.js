@@ -58,10 +58,7 @@
 
 
 	//页面dom加载之后加载js
-	$(document).on("pageInit", function(e, pageId, $page) {
-	    console.log($page);
-	    console.log(pageId);
-
+	$(document).on("pageInit", function (e, pageId, $page) {
 	    if(pageId&&html_js_cssRoute[pageId]){
 	        var jsUrl = src.jsurl + html_js_cssRoute[pageId].js + ".js?v=" + src.version;
 	        reloadJS("cp-script", jsUrl, pageId);
@@ -73,6 +70,7 @@
 	        var cssUrl=src.cssurl+html_js_cssRoute[pageId].css+".css?v="+src.version;
 	        reloadCss("cp-css",cssUrl);
 	    }
+	    document.title = document.getElementById("doc-title").value;
 	});
 	//动画切换之后加载下一个页面的css
 	//    $(document).on("pageAnimationEnd",function(e,pageId,$page){
@@ -100,7 +98,7 @@
 	}
 	function reloadCss(id,path)
 	{
-	    var oldcss = document.getElementById(id);
+	   var oldcss = document.getElementById(id);
 	    if(oldcss) {oldcss.parentNode.removeChild(oldcss);}
 	    var linkObj = document.createElement("link");
 	    linkObj.id=id;

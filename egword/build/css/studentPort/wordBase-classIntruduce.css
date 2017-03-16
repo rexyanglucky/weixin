@@ -1,4 +1,9 @@
 /*格式化样式*/
+/*@font-face{
+    font-family:myyouyuan;
+    src:url('/egword/Yuanti SC Regular.TTF');
+}
+body{font-family:Yuanti SC Regular;font-size: 14px;}*/
 body {
   font-family: "Microsoft YaHei";
   font-size: 14px;
@@ -309,8 +314,11 @@ a.gray {
 .mt50 {
   margin-top: 50px;
 }
-.mt55 {
+.mt60 {
   margin-top: 50px;
+}
+.mt55 {
+  margin-top: 60px;
 }
 .mt80 {
   margin-top: 80px;
@@ -460,11 +468,14 @@ a.gray {
 .red-dark {
   color: #ff3c00;
 }
-； .orange {
+.orange {
   color: #fe994a;
 }
 .col-ff8716 {
   color: #ff8716;
+}
+.col-normal {
+  color: #808080;
 }
 .col-white {
   color: #ffffff;
@@ -553,6 +564,10 @@ a.gray {
   min-width: 580px;
   max-width: 780px;
 }
+.voice .items .btn:hover {
+  background: #fff4ea!important;
+  border: 2px solid #ffb269!important;
+}
 .voice .word {
   line-height: 110px;
   font-size: 60px;
@@ -573,7 +588,7 @@ a.gray {
   cursor: pointer;
 }
 .voice .pronunce span {
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 600;
   vertical-align: middle;
 }
@@ -591,6 +606,7 @@ a.gray {
   width: 100%;
   text-align: center;
   font-size: 22px;
+  cursor: pointer;
 }
 .voice .un-know {
   background: #ff6633;
@@ -602,10 +618,10 @@ a.gray {
 }
 .voice .word-types .konow-gap {
   display: inline-block;
-  width: 22px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  line-height: 20px;
+  line-height: 25px;
   color: #fff;
   background: #ffbc66;
 }
@@ -649,15 +665,33 @@ a.gray {
 .start-nobg {
   background: url('../../../build/img/start2.png') no-repeat;
 }
-#content {
+/*#content {
+    position: relative;
+    overflow: hidden;
+}*/
+.body-normal {
   position: relative;
-  overflow: hidden;
+}
+.body-normal .bg-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+.body-normal.noHeader .bg-img {
+  top: 0;
+}
+.body-normal.hasHeader .bg-img {
+  top: 82px;
 }
 #content .bg-img {
   position: absolute;
   width: 100%;
   height: 100%;
   z-index: -1;
+  display: none;
 }
 /*导航样式*/
 a {
@@ -678,17 +712,26 @@ a {
 .header .right:hover .hover-brm {
   display: block;
 }
-.header .log {
+/*.header .log{
   width: 11.3%;
+  height:80px;
+  background:url('../../../build/img/student-log.png') 0 12px no-repeat;
+  background-origin:content-box;
+  display:inline-block;
+}*/
+.header .log {
+  width: 12%;
   height: 80px;
-  background: url('../../../build/img/student-log.png') 0 12px no-repeat;
+  background: url('../../../build/img/slogo1.png') 0 20px no-repeat;
+  /*background:url('../../../build/img/student-log.png') 0 12px no-repeat;*/
   background-origin: content-box;
   display: inline-block;
+  /*min-width:134px;*/
 }
 .header .nav {
   display: inline-block;
   line-height: 80px;
-  width: 88.7%;
+  width: 88%;
 }
 .header .nav li {
   cursor: pointer;
@@ -699,6 +742,12 @@ a {
 }
 .header .nav li:hover {
   background: #e55c00;
+}
+.header .nav li.last:hover {
+  background: #ff9600;
+}
+.header .nav li.last.active {
+  background: #ff9600;
 }
 .header .nav li:last-child:hover {
   background: #ff9600;
@@ -774,10 +823,12 @@ a {
   padding-bottom: 80px;
 }
 .main-pops .tabs-wrap .tabs-header {
-  margin-left: 50px ;
+  margin-left: 50px;
+  font-size: 0;
 }
 .main-pops .tabs-wrap .tabs-header .tabs-btn-1 {
   width: 130px;
+  margin-right: 10px;
 }
 .main-pops .tabs-wrap .tabs-header .active {
   background: #ff942f;
@@ -787,7 +838,7 @@ a {
   background: #e5e5e5;
   color: #a5a5a5;
   text-shadow: 1px 0px 1px #ffffff,1px 0px 1px #ffffff;
-  border-color: #cacaca ;
+  border-color: #cacaca;
 }
 .main-pops .tabs-wrap .tabs-split {
   background: url(../../img/student-split1.png) no-repeat;
@@ -838,7 +889,8 @@ a {
   font-size:16px;
 }
 */
-.pop-mask {
+.pop-mask,
+.veio-mask {
   width: 100%;
   height: 100%;
   display: none;
@@ -854,7 +906,8 @@ a {
 }
 /*弹窗结束*/
 /*页面常用弹窗开始*/
-.eg-pop {
+.eg-pop,
+.vedio-popMask {
   border-radius: 4px;
   color: #505050;
   position: fixed;
@@ -875,7 +928,8 @@ a {
   -ms-box-shadow: 1px 0 10px #ffcb94;
   -o-box-shadow: 1px 0 10px #ffcb94;
 }
-.eg-pop .header {
+.eg-pop .header,
+.vedio-popMask .header {
   font-size: 16px;
   color: #ff9735;
   height: 60px;
@@ -883,7 +937,8 @@ a {
   text-align: center;
   border-bottom: 1px solid #ff9735;
 }
-.eg-pop .header .close {
+.eg-pop .header .close,
+.vedio-popMask .header .close {
   width: 20px;
   height: 20px;
   position: absolute;
@@ -893,18 +948,21 @@ a {
   background: url('../../../build/img/eg-close.png') no-repeat;
   cursor: pointer;
 }
-.eg-pop .body .text {
+.eg-pop .body .text,
+.vedio-popMask .body .text {
   width: 80%;
   margin: 0 auto;
   padding: 30px 0 20px 0;
   line-height: 40px;
   color: #555555;
 }
-.eg-pop .body .text span {
+.eg-pop .body .text span,
+.vedio-popMask .body .text span {
   font-size: 20px;
   font-weight: 600;
 }
-.eg-pop .body .word {
+.eg-pop .body .word,
+.vedio-popMask .body .word {
   width: 290px;
   height: 45px;
   line-height: 45px;
@@ -912,7 +970,8 @@ a {
   margin: 0 auto;
   color: #ff7d00;
 }
-.eg-pop .oprt {
+.eg-pop .oprt,
+.vedio-popMask .oprt {
   margin-top: 30px;
   margin-bottom: 50px;
   text-align: center;
@@ -983,6 +1042,33 @@ a {
   background: url(../../img/student-pop-start.png) no-repeat;
   background-position-x: -306px;
   background-position-y: -40px;
+}
+.no-data-pop {
+  border: 1px solid #ffe6b1;
+  background: #fffdee;
+  width: 100%;
+  height: 500px;
+  margin-top: 70px;
+}
+.no-data-pop .time_center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -123.5px;
+  margin-top: -132.5px;
+  width: 247px;
+  height: 265px;
+}
+.no-data-pop .time_center .no_data {
+  background: url('../../img/no-word.png') no-repeat;
+  width: 179px;
+  height: 168px;
+  margin: 0 auto;
+}
+.no-data-pop .time_center .info {
+  margin: 18px 0;
+  text-align: center;
+  font-size: 16px;
 }
 .rotate-big {
   position: relative;
@@ -1294,11 +1380,20 @@ table tr:hover {
     top: -20px;
   }
 }
+.sing-word span {
+  font-size: 16px;
+  font-weight: 500;
+}
+.write input {
+  font-size: 16px;
+  font-weight: 500;
+}
 .main-pops {
   margin-bottom: 125px;
 }
 .wordWrap {
   padding: 30px 65px 150px 80px;
+  text-align: left;
 }
 .striped {
   height: 28px;

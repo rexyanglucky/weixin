@@ -1,10 +1,12 @@
 
+var a = require('template-helpers.js');
+
 var classid;
 
 $(function () {
     classid = $("#hidden-classid").text();
 
-    GetStudentTestList();
+         GetStudentTestList();
 
 });
 
@@ -19,12 +21,15 @@ function GetStudentTestList() {
         success: function (data) {
 
             data = JSON.parse(data);
-            var li = data.result;
+            var li = JSON.parse(data.result);
 
             var tpl = require("teacher/test-center-class");
 
             $("#b-studentlist").html(tpl(li));
 
+            if (li.length==0) {
+                $("#b-studentlist").html("暂无学生");
+            }
 
             $(".b-studentlist-item").on("click", function () {
                 var evaluationid = $(this).attr("data-evaluationid");

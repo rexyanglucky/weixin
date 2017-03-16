@@ -110,3 +110,6 @@ h1.title {
 #lesson-report .bar-tab:before {
   background-color: #fff;
 }
+.list-block .item-inner:after {
+  height: 0;
+}

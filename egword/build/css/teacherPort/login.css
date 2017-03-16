@@ -660,16 +660,39 @@ html {
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
 }
+.bar.bar-tab .icon-home:before {
+  content: url("../../../build/img/mystudent.png");
+}
+.bar.bar-tab .icon-me:before {
+  content: url("../../../build/img/test-center.png");
+}
+.bar.bar-tab .icon-star:before {
+  content: url("../../../build/img/perser-center.png");
+}
+.bar.bar-tab .active {
+  color: #45c6fc;
+}
+.bar.bar-tab .active .icon-home:before {
+  content: url("../../../build/img/mystudent-active.png");
+}
+.bar.bar-tab .active .icon-me:before {
+  content: url("../../../build/img/test-center-active.png");
+}
+.bar.bar-tab .active .icon-star:before {
+  content: url("../../../build/img/perser-center-active.png");
+}
 .bglogin {
   background: #f3f6f8;
 }
 #login .logo {
-  margin: 1.75rem auto;
+  margin: 2.325rem 0 3.25rem 0;
   text-align: center;
 }
 #login .logo img {
-  width: 5.5rem;
-  height: 3.375rem;
+  width: 8.375rem;
+  height: 1.975rem;
+  /*width: 220rem/@base-f;
+      height: 135rem/@base-f;*/
 }
 #login .list-block ul li:first-child {
   border-top: solid #d2d2d2 0.025rem;
@@ -698,97 +721,12 @@ html {
 }
 #login .bar-tab {
   text-align: center;
-  font-size: 0.65rem;
+  font-size: 0.4rem;
+  color: #7a7a7a;
   line-height: 2.5rem;
+  background: none;
+  border: 0;
 }
-#login .bar-tab span {
-  display: inline-block;
-  width: 8.5rem;
-  text-align: center;
-  height: 1.75rem;
-  line-height: 1.75rem;
-  background: #45c6fc;
-  color: #fff;
-  border: 1px solid #45c6fc;
-  border-radius: 0.2rem;
-  font-size: 0.65rem;
-  vertical-align: middle;
-}
-#login .bar-nav {
-  background: #45c6fc;
-}
-#login .bar-nav .title {
-  text-align: center;
-  font-size: 0;
-}
-#login .bar-nav span {
-  border: 2px solid #fff;
-  display: inline-block;
-  font-size: 0.65rem;
-  width: 4.2rem;
-  text-align: center;
-  line-height: 1.15rem;
-  height: 1.25rem;
-  color: #fff;
-  margin-top: 0.45rem;
-}
-#login .bar-nav .one {
-  border-top-left-radius: 0.2rem;
-  border-bottom-left-radius: 0.2rem;
-}
-#login .bar-nav .two {
-  border-top-right-radius: 0.2rem;
-  border-bottom-right-radius: 0.2rem;
-}
-#login .bar-nav .active {
-  background: #fff;
-  color: #45c6fc;
-}
-#login .bar-nav .icon-left:before {
-  content: url('../../../build/img/go-back.png');
-}
-#login .cont {
-  margin-top: 1.0rem;
-}
-#login .cont .p-mesg {
-  padding: 0.5rem 0.75rem;
-  line-height: 0.8rem;
-  width: 95%;
-  background: #fff2df;
-  color: #ffab4c;
-  margin: 0 auto;
-  font-size: 0.5rem;
-  border-radius: 0.2rem;
-  border: 1px solid #ff9600;
-  margin-bottom: 0.9rem;
-}
-#login .cont .img {
-  max-width: 90%;
-  margin: 0 auto;
-  border-radius: 0.2rem;
-  text-align: center;
-  margin-bottom: 0.625rem;
-  position: relative;
-}
-#login .cont .img input {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 20;
-  left: 0;
-  top: 0;
-  opacity: 0;
-}
-#login .cont .img .close {
-  display: inline-block;
-  width: 0.8rem;
-  height: 0.8rem;
-  background: url('../../../build/img/image-close.png') no-repeat;
-  position: absolute;
-  right: 1rem;
-  top: 0.5rem;
-  z-index: 21;
-}
-#login .cont .img img {
-  max-width: 100%;
+#login .bar-tab:before {
+  background: none;
 }

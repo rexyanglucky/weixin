@@ -15,7 +15,10 @@ var Paginator = require('../lib/page/Paginator.js');
 var commJs = require("../lib/util.js");//公共方法
 var gradeArr = [{ name: '一年级', id: '1', pid: '' }, { name: '二年级', id: '2', pid: '00' }, { name: '三年级', id: '3', pid: '00' }, { name: '四年级', id: '4', pid: '00_01' }, { name: '五年级', id: '5', pid: '00_01' }, { name: '六年级', id: '6', pid: '00_02' }, { name: '七年级', id: '7', pid: '00_02' }, { name: '八年级', id: '8', pid: '' }, { name: '九年级', id: '9', pid: '00' }, { name: '高一', id: '10', pid: '00' }, { name: '高二', id: '11', pid: '00_01' }, { name: '高三', id: '12', pid: '00_01' }];//年级初始化
 
-var isSel = 0;//0表示没加载下拉1表示加载
+var isSel = 0;//0表示没加载下拉1表示加载（学校）
+//var isSelBj = 0;//0表示没加载下拉班级1表示加载
+var arrTjr = [];//推荐人，老师
+var isLoadTeach = 0;//是否加载推荐人0没加，1加
 var module = {
     init: function () {
         //todo 逻辑函数
@@ -77,13 +80,22 @@ var module = {
             var dataArr = $(this).attr("data-id");//数组id、姓名、年级、学校id、教材id
             var stuName = $(this).attr("data-name");//学生姓名
            
+
             stuId = parseInt(dataArr.split('-')[0]);
             stuGrade = parseInt(dataArr.split('-')[1]);
             stuEditionId = parseInt(dataArr.split('-')[3]);
             var strGrade = commJs.numGradeTran(parseInt(dataArr.split('-')[1]));
             $("#stuName").html(stuName + "(" + strGrade + ")");//张三（七年级）
-
-
+            debugger;
+            var strShow = $(this).html();//续课
+            if (strShow == "续课") {
+                $("#showAddCo").html("课程续报");
+                $("#tjr").show();
+            } else {
+                $("#showAddCo").html("课程开通");
+                $("#tjr").hide();
+                
+            }
             //调取数据初始化弹窗(下拉框的数据)
             var arrTemp = [];//临时数据
             //加载班级列表
@@ -106,12 +118,12 @@ var module = {
                             });//课程
                         }
 
-                        lui.initDropDownList({ warpid: "drop_class", width: 185, subtextlength: 20, nameField: 'name', idField: 'id', data: arrTemp, selectedCallBack: null });//报课的班级
+                        lui.initDropDownList({ warpid: "drop_class", width: 185, subtextlength: 15, nameField: 'name', idField: 'id', data: arrTemp, selectedCallBack: null });//报课的班级
                         loadCourse(1);
                     }
                     else {
 
-                        lui.initDropDownList({ warpid: "drop_class", width: 185, subtextlength: 20, nameField: 'name', idField: 'id', data: [{ name: '无', id: '0' }], selectedCallBack: null });//报课的班级
+                        lui.initDropDownList({ warpid: "drop_class", width: 185, subtextlength: 15, nameField: 'name', idField: 'id', data: [{ name: '无', id: '0' }], selectedCallBack: null });//报课的班级
                         loadCourse(1);
                        
 
@@ -144,8 +156,14 @@ var module = {
             }
             jsonAdd.SchoolId = $("#drop_class").attr("data-id").split('-')[0];
             jsonAdd.ClassId = $("#drop_class").attr("data-id").split('-')[1];
+            debugger;
+            jsonAdd.RefereeId = $("#drop_tjr").attr("data-id");//推荐人
+            if (parseInt(jsonAdd.RefereeId)>0) {
+                
+            } else {
+                jsonAdd.RefereeId = 0;//给默认值
 
-           
+            }
 
             if ($("#engType").hasClass("active")) {
                 jsonAdd.IsEng = 1;//是默认的英语
@@ -187,7 +205,21 @@ var module = {
         });
         //教材选择框
         $("body").delegate('.teacher-grade', "click", function () {
-            GetEdutionData("X");
+           
+            var grade = $("#drop_nj").attr("data-id");
+            if (grade > 9) { 
+
+                $("span[data-id='G']").click();
+
+            } else if (grade > 6) {
+                $("span[data-id='C']").click();
+
+            } else {
+
+                $("span[data-id='X']").click();
+            }
+
+            //GetEdutionData("X");
             $("#add-grade").show();
 
 
@@ -401,7 +433,15 @@ function GetStuData(page) {
 
 //只是加载列表数据
 function GetStuDataNotLoadSelect() {
+   
     loadClass(-1);//如果是-的话不进行加载课程
+    return GetStuData(1);
+
+}
+
+//只是加载列表数据（不联动）
+function GetStuDataNotLoadSelectBj() {
+   
     return GetStuData(1);
 
 }
@@ -457,7 +497,7 @@ function loadClass(obj) {
         success: function (data) {
             if (data.Data && data.Data.length > 0) {
 
-
+                arrBj.length = 0;//清空数组
                 arrBj.push({
                     name: "全部班级", id: 0, pid: 0
                 });//班级
@@ -469,7 +509,7 @@ function loadClass(obj) {
                 }
 
 
-                lui.initDropDownList({ warpid: "drop_bj", width: 185, nameField: 'name', idField: 'id', data: arrBj, selectedCallBack: GetStuDataNotLoadSelect, subtextlength: 10 });//班级
+                lui.initDropDownList({ warpid: "drop_bj", width: 185, nameField: 'name', idField: 'id', data: arrBj, selectedCallBack: GetStuDataNotLoadSelectBj, subtextlength: 10 });//班级
 
                 if (obj != -1) {
                     loadCourse();
@@ -503,8 +543,11 @@ function loadCourse(obj) {
         success: function (data) {
             
             if (data.Data && data.Data.length > 0) {
-
-
+                if (isLoadTeach != 1) {
+                    loadTeachers();//加载推荐人
+                    
+                }
+              
                 arrTbk.push({
                     name: "同步课", id: 0, pid: 0
                 });//班级
@@ -530,7 +573,7 @@ function loadCourse(obj) {
                     $("#lessonPrice").html(arrTemp[0].id.split('-')[3] + "元");
 
                 } else {
-                    lui.initDropDownList({ warpid: "drop_tbk", width: 185, nameField: 'name', idField: 'id', data: arrTbk, selectedCallBack: GetStuDataNotLoadSelect, subtextlength: 10 });//课程
+                    lui.initDropDownList({ warpid: "drop_tbk", width: 185, nameField: 'name', idField: 'id', data: arrTbk, selectedCallBack: GetStuDataNotLoadSelectBj, subtextlength: 10 });//课程
                 }
 
 
@@ -632,6 +675,52 @@ function GetEdutionData(obj) {
     });
 
 }
+
+
+
+//加载推荐人
+function loadTeachers() {
+
+    //加载班级列表
+    $.ajax({
+        type: "post",
+        url: "/Org/StudentManage/GetOrgTeachers",
+        dataType: "json",
+        data: {
+            data: ""
+        },
+        success: function (data) {
+            if (data.Data && data.Data.length > 0) {
+
+
+
+                for (var i = 0; i < data.Data.length; i++) {
+
+                    arrTjr.push({
+                        name: data.Data[i].TeachName, id: data.Data[i].TeachId, pid: 1
+                    });//推荐人
+                }
+
+
+                lui.initDropDownList({
+                    warpid: "drop_tjr", width: 185, nameField: 'name', idField: 'id', subtextlength: 10, data: arrTjr
+                });//推荐人
+                isLoadTeach = 1;
+
+            }
+            else {
+
+                lui.initDropDownList({
+                    warpid: "drop_tjr", width: 185, nameField: 'name', idField: 'id', data: [{ name: '无', id: '0', pid: '' }]
+                });//推荐人
+
+            }
+        }
+    });
+
+}
+
+
 
 
 

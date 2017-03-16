@@ -58,11 +58,9 @@
 
                             </div>
 
-
-
-                            <div class="item-after"> {{if v.BookNumber - v.CurrentNumber == 0}}
+                            <div class="item-after"> {{if v.LeftNumber == 0}}
                                 <div class="lesson-circle over">已结课</div>
-                                {{else if v.BookNumber - v.CurrentNumber == 1}}
+                                {{else if v.LeftNumber == 1}}
                                 <div class="lesson-circle normal">剩1次</div>
                                 {{else}}
 

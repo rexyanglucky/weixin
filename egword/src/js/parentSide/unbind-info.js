@@ -3,6 +3,7 @@
 require("../../tpl/template-helpers.js");
 
 var openId = $("#openId").val();
+var stuId = $("#stuId").val();
 var module = {
     init: function () {
         //todo 逻辑函数
@@ -25,7 +26,7 @@ var module = {
 
            // $.router.load("/Parents/ParentMenu/Index", true);//处理跳转
 
-            window.location.href = "/Parents/ParentMenu/Index";
+            window.location.href = "/Parents/ParentMenu/Index/" + stuId;
 
 
         });
@@ -51,7 +52,7 @@ var module = {
 //绑定数据
 $(function () {
     module.init();
-
+    
     if (openId == "0" || openId == "") {
         $.router.load("/Parents/ParentMenu/BindStuAccount", true); //处理跳转
 
@@ -82,8 +83,8 @@ function UnBindStuAccount() {
             //$("#divLoading").hide();
             if (data.Data && data.Data.length > 0) {
                 
-                $.router.load("/Parents/ParentMenu/BindStuAccount", true); //处理跳转
-           
+               // $.router.load("/Parents/ParentMenu/BindStuAccount", true); //处理跳转
+                window.location.href = "/Parents/ParentMenu/BindStuAccount/" + openId;
             }
             else {
                 $.alert("绑定失败!", "提示");

@@ -7,6 +7,7 @@ var temp_pic_count = 0;
 var islate = 0;
 
 $(function () {
+
     classindex = $("#hidden-classindex").text();
     classid = $("#hidden-classid").text();
 
@@ -59,9 +60,9 @@ $(function () {
         } else {
             if (file) {
 
-                $("#b-message").html('文件格式只支持：jpg、jpeg 和 png');
+                $("#b-message").html('文件格式只支持：jpg、jpeg 和 png'+"当前类型："+file.type);
             }
-            this.clearFile();
+
         }
 
 
@@ -108,7 +109,7 @@ function GetSplendidPic() {
 }
 
 function SetPic() {
-
+    $.showPreloader('努力上传中...');
 
     var picArr = [];
     $(".b-upimg").each(function (i, v) {
@@ -123,7 +124,7 @@ function SetPic() {
         return;
     }
     var picarrstr = JSON.stringify(picArr);
-
+    
     $.ajax({
         type: "post",
         url: "/teacher/myclass/SetSplendidPic",
@@ -136,7 +137,7 @@ function SetPic() {
         },
         dataType: "JSON",
         success: function (data) {
-
+            $.hidePreloader();
             data = JSON.parse(data);
 
             if (data.result == -1) {
@@ -156,6 +157,7 @@ function SetPic() {
             setTimeout(function () {
                 $("#b-message").html("课堂精彩瞬间照片请下课后一小时内完成上传，逾期将无法上传！");
             }, 3000);
+
         }
     });
 

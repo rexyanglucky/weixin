@@ -11,10 +11,22 @@ var groupId = 0;
 function VerUserClass() {
     $.post("/Student/LearnCenter/GetUserClassInfo", {}, function (result) {
         if (result.State == 0) {
-            needCourseId = result.CouserId;
+            needCourseId = parseInt(result.CouserId);
             groupId = result.GroupId;
-            if (result.GroupId>0&&needCourseId>0) {
-                $("#zhuangtai").html("<img src=\"../../../build/img/pc.png\" alt=\"\" class=\"vm\"/>&nbsp;<span class=\"learn-coins\">正在上课:</span><span style=\"margin-left: 20px;\">(" + groupId + "组)</span>");
+            if (needCourseId > 0) {
+                if (groupId > 0) {
+                    $("#zhuangtai").html("<img src=\"../../../egword/build/img/pc.png\" alt=\"\" class=\"vm\"/>&nbsp;<span class=\"learn-coins\">正在上课:</span><span style=\"margin-left: 20px;\">(" + groupId + "组)</span>");
+                } else {
+                    $("#zhuangtai").html("<img src=\"../../../egword/build/img/pc.png\" alt=\"\" class=\"vm\"/>&nbsp;<span class=\"learn-coins\">正在上课</span>");
+                }
+               
+                $(".synchronization").each(function() {
+                    if (parseInt($(this).attr("data-id")) == needCourseId) {
+                        var message = $(this).children(".onediv").children(".twodiv").children(".threediv").children(".kexiao").html();
+                        var newmessage = (parseInt(message.split('/')[0]) + 1 )+ "/" + message.split('/')[1];
+                        $(this).children(".onediv").children(".twodiv").children(".threediv").children(".kexiao").html(newmessage);
+                    }
+                });
             }
         }
     });
@@ -24,11 +36,12 @@ function InsertCourse(courseId,type) {
     $.post("/Student/LearnCenter/ReviewCount", { "courseId": courseId }, function (result) {
         if (result.State == 0) {
             if (result.Data == 0) {
-                if (type == 0) {
-                    window.location.href = "/Student/LearnCenter/ExperienceIndex?courseId=" + courseId;
-                } else {
-                    window.location.href = "/Student/LearnCenter/CourseBase?courseId=" + courseId;
-                }
+                window.location.href = "/Student/LearnCenter/CourseBase?courseId=" + courseId;
+                //if (type == 0) {
+                //    window.location.href = "/Student/LearnCenter/ExperienceIndex?courseId=" + courseId;
+                //} else {
+                //    window.location.href = "/Student/LearnCenter/CourseBase?courseId=" + courseId;
+                //}
                 
             } else {
                 window.location.href = "/Student/LearnCenter/ReviewCourse?courseId=" + courseId + "&count=" + result.Data + "&canClose=" + result.CanClose;
@@ -49,6 +62,7 @@ $(function () {
 
     $("body").delegate(".close", "click", function () {
         $("#go-lesson").hide();
+        $('.pop-mask').hide();
     });
 
     
@@ -56,17 +70,19 @@ $(function () {
     $("body").delegate(".courseinsert", "click", function () {
         var courseId = $(this).attr("data-setid");
 
-        if (needCourseId == courseId||needCourseId==0) {
+        if (parseInt(needCourseId) == parseInt(courseId)||parseInt(needCourseId)==0) {
             InsertCourse(courseId,1);
         } else {
             $("#go-lesson").show();
+            $('.pop-mask').show();
         }
     });
 
     $("body").delegate(".analysispage", "click", function () {
         var courseId = $(this).attr("data-setid");
+        var courseName = $(this).attr("data-name");
 
-        window.location.href = "/Student/LearnCenter/StudentAnalysis?courseId=" + courseId;
+        window.location.href = "/Student/LearnCenter/StudentAnalysis?courseId=" + courseId + "&courseName=" + courseName;
     });
 
     $("body").delegate(".wordbenpage", "click", function () {
@@ -101,6 +117,7 @@ $(function () {
             InsertCourse(courseId,0);
         } else {
             $("#go-lesson").show();
+            $('.pop-mask').show();
         }
     });
 });

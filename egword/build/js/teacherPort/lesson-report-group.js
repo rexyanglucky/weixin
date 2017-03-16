@@ -53,26 +53,35 @@
 
 	$(function () {
 	    _classindex = $("#hidden-classindex").text();
+	    var ishavegroup =  $("#hidden-ishavegroup").text();
+	    $(".s-tab").on("click",
+	        function() {
+	            var types = $(this).attr("data-id");
 
-	    $(".s-tab").on("click", function () {
-	        var types = $(this).attr("data-id");
+	            $(this).addClass("active");
+	            $(this).siblings().removeClass("active");
 
-	        $(this).addClass("active");
-	        $(this).siblings().removeClass("active");
+	            if (types == "g") {
 
-	        if (types == "g") {
+	                GetGroupOrderList();
 
-	            GetGroupOrderList();
-
-	        } else {
-	            GetStudentOrderList();
-	        }
-
-
-	    });
+	            } else {
+	                GetStudentOrderList();
+	            }
 
 
-	    GetGroupOrderList();
+	        });
+
+	    if (ishavegroup == "1") {
+
+	        GetGroupOrderList();
+
+	    } else {
+	        GetStudentOrderList();
+	    }
+
+
+
 
 	});
 

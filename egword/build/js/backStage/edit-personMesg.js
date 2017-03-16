@@ -712,11 +712,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -734,12 +740,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -748,18 +755,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -788,7 +801,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -809,16 +822,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -848,6 +867,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
@@ -1398,7 +1418,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }
@@ -1596,6 +1616,12 @@
 	    obj.html('<tr  style="border:none;text-align:center;height:280px;"><td style="font-size: 16px;" colspan="'+num+'"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;">'+jQuery("#divLoading").html() +'</div></div></td></tr>');
 	}
 
+	function ShowLoadingForTableNoClass(obj, num) {
+	    if (num == undefined || obj == undefined) {
+	        return;
+	    }
+	    obj.html('<tr><td colspan="' + num + '"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;">' + jQuery("#divLoading").html() + '</div></div></td></tr>');
+	}
 
 
 	//弹出加载图片
@@ -1608,6 +1634,8 @@
 
 
 	exports.ShowLoadingForTable = ShowLoadingForTable;//针对table布局的
+	exports.ShowLoadingForTableNoClass = ShowLoadingForTableNoClass;//清除样式
+
 	exports.ShowLoading = ShowLoading;
 
 

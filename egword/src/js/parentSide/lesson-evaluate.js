@@ -67,7 +67,7 @@ function GetStuCourseLessionData() {
         dataType: "json",
 
         data: {
-            CourseId: $("#cId").val(), CurrentNumber: $("#lId").val()
+            CourseId: $("#cId").val(), CurrentNumber: $("#lId").val(), stuId: stuId
 
         },
         success: function (data) {

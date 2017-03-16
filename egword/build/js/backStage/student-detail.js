@@ -49,6 +49,7 @@
 	var arrTbk = [];//同步课
 	var arrBj = [];//班级
 	var arrTjr = [];//推荐人，老师
+	var isLoadTeach = 0;//0未加载，1加载
 	var tplTableStuDetail = __webpack_require__(25);//学生详情
 	var stuId = $("#stuId").val();//学生id  stuEditionId
 	var stuEditionId = $("#stuEditionId").val();//教材id
@@ -177,11 +178,11 @@
 	            var type = $(this).attr("data-type");//类型0为调班1为加课次
 	            var id = this.id;
 	            if (type == "0") {
-	                $("#currentClass").html(id.split('-')[2]);
+	                $("#currentClass").html($(this).attr("data-name"));//当前班级
 	                if ($("#change-prounce").css("display")!="none") {
 	                    //进行联动读音
 	                    $('.spans').removeClass('active');
-	                    if (id.split('-')[3] == "true") {//英式选中，美式移除
+	                    if (id.split('-')[2] == "true") {//英式选中，美式移除
 	                        $("#updateRead").addClass('active');
 
 	                    } else {
@@ -192,6 +193,7 @@
 
 	            } else {
 	                $("#currentCourseNumber").html(id.split('-')[1] + "/" + id.split('-')[2] + "课次");//目前班级
+	                $("#currentCourseNumber").attr("data-id", id.split('-')[1] + "-" + id.split('-')[0]);
 
 	            }
 
@@ -219,15 +221,17 @@
 
 	                    }
 	                } else {
-	                    $("#currentClass").html(id.split('-')[2]);
+	                    $("#currentClass").html($(this).attr("data-name"));
 	                    
 	                }
+	                $("#currentClass").attr("data-id", id.split('-')[1]);
 
 	            } else {
 	                $("#currentCourseNumber").html(id.split('-')[1] + "/" + id.split('-')[2] + "课次");//目前班级
 
 	            }
-	            $("#currentClass").html(id.split('-')[2]);
+	            $("#currentClass").html($(this).attr("data-name"));
+	           
 	            $('.radio').removeClass('active');
 	            $($(this).find(".radio")[0]).addClass('active');
 
@@ -260,7 +264,7 @@
 	            var orgCourse = $("#stuCourse .active")[0].id;
 	            jsonAdd.CourseId = orgCourse.split('-')[0];//课程id、课次 、课程有效期 课价
 	            var currC = $("#currentClass").attr("data-id");//当前选择课程所在的班级old
-	            if (currC == jsonAdd.ClassId) {
+	            if (currC == jsonAdd.ClassId || jsonAdd.ClassId=="0") {
 	                return;//无效请求每更换班级
 	            }
 
@@ -300,6 +304,8 @@
 	            $("#addCStuName").html(stuName);//张三（七年级）
 	            $('.pop-mask').show();
 	            $("#add-classOrder").show();
+	          
+	            
 
 	        });
 	        //加课次提交数据
@@ -320,6 +326,7 @@
 	            //     return;//无效请求不能超过当前的总课次
 	            // }
 	            jsonAdd.LeftNumber = addNum;//加课的次数
+	            jsonAdd.ReaLeftNumber = parseInt(orgCourse.split('-')[3]);//加课的次数
 	            //提交表单
 	            $.ajax({
 	                type: "post",
@@ -330,14 +337,15 @@
 	                    data: JSON.stringify(jsonAdd)
 	                },
 	                success: function (data) {
-
+	                   
 	                    if (data && data.Data > 0) {
 	                        GetStuDetailData();//重新加载列表
 	                        $("#add-classOrder").hide();
 	                        $('.pop-mask').hide();
 
 	                    } else {
-	                        alert("提交失败");
+	                        $("#addCourseTip").css({ "visibility": "visible" }).html(data.TagValue);
+	                        //alert(data.TagValue);
 	                    }
 
 
@@ -380,6 +388,7 @@
 	                return;
 	            }
 	            jsonAdd.CourseId = orgCourse.split('-')[0];//课程id、已经上课次 、总课次
+	            jsonAdd.ClassId = orgCourse.split('-')[4];//班级id
 	            jsonAdd.Remark = $("#backReason").val().trim();//退课的原因
 	            //提交表单
 	            $.ajax({
@@ -464,6 +473,13 @@
 
 	        //续课的确定
 	        $("body").delegate("#courseAddBtn", "click", function () {
+
+	            
+	            if ($("#drop_class").attr("data-id") == "0") {
+	                return;//无效请求每更换班级
+	            }
+
+
 	            var jsonAdd = {};
 	            var orgCourse = $("#drop_course").attr("data-id");//课程数组
 	            jsonAdd.StuId = stuId;
@@ -667,7 +683,11 @@
 	                $("#lessonTime").html(arrTemp[0].id.split('-')[2] + "次");
 	                $("#lessonPrice").html(arrTemp[0].id.split('-')[3] + "元");
 	                //$("#actuPrice").html(arrTemp[0].id.split('-')[4] + "元");
-	                loadTeachers();//加载推荐人
+	                if (isLoadTeach != 1) {
+	                    loadTeachers();//加载推荐人
+	                    
+	                }
+	             
 
 	            }
 	            else {
@@ -678,7 +698,10 @@
 	                $("#lessonTime").html(0 + "次");
 	                $("#lessonPrice").html(0 + "元");
 	                //$("#actuPrice").html(0+ "元");
-	                loadTeachers();//加载推荐人
+	                if (isLoadTeach != 1) {
+	                    loadTeachers();//加载推荐人
+
+	                }
 
 	            }
 	        }
@@ -705,13 +728,13 @@
 	                for (var i = 0; i < data.Data.length; i++) {
 
 	                    if (i == 0) {
-	                        strHtml += '<label style="" class="lbCourse" data-type="0" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].ClassName + "-" + data.Data[i].IsEng + '><span data-type="0" class="radio active" style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].ClassName + "-" + data.Data[i].IsEng + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
+	                        strHtml += '<label style="" class="lbCourse" data-type="0" data-name=' + data.Data[i].ClassName + '  data-id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].IsEng + '><span data-type="0" class="radio active" style="margin-right:15px;" data-name=' + data.Data[i].ClassName + '  id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId  + "-" + data.Data[i].IsEng + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
 	                        $("#currentClass").html(data.Data[i].ClassName);//目前班级
 	                        $("#currentClass").attr("data-id", data.Data[i].ClassId);
 	                       
 
 	                    } else {
-	                        strHtml += '<label style="" class="lbCourse" data-type="0" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].ClassName + "-" + data.Data[i].IsEng + '><span data-type="0"  class="radio " style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].ClassName + "-" + data.Data[i].IsEng + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
+	                        strHtml += '<label style="" class="lbCourse" data-type="0"  data-name=' + data.Data[i].ClassName + ' data-id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].IsEng + '><span data-type="0"  class="radio " style="margin-right:15px;" data-name=' + data.Data[i].ClassName + '  id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId  + "-" + data.Data[i].IsEng + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
 
 	                    }
 	                }
@@ -765,12 +788,12 @@
 	                for (var i = 0; i < data.Data.length; i++) {
 
 	                    if (i == 0) {
-	                        strHtml += '<label style="width:50%;display:inline-block;font-size:14px;" class="lbCourse" data-type="1" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + '><span data-type="1"  class="radio active" style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
+	                        strHtml += '<label style="width:50%;display:inline-block;font-size:14px;" class="lbCourse" data-type="1" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].LeftNumber + '><span data-type="1"  class="radio active" style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].LeftNumber + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
 	                        $("#currentCourseNumber").html(data.Data[i].HaveNumber + "/" + data.Data[i].BookNumber + "课次");//目前班级
 	                        $("#currentCourseNumber").attr("data-id", data.Data[i].HaveNumber + "-" + data.Data[i].CourseId);
 
 	                    } else {
-	                        strHtml += '<label style="width:50%;display:inline-block;font-size:14px;" class="lbCourse" data-type="1" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + '><span data-type="1"  class="radio " style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
+	                        strHtml += '<label style="width:50%;display:inline-block;font-size:14px;" class="lbCourse" data-type="1" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].LeftNumber + '><span data-type="1"  class="radio " style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].LeftNumber + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
 
 	                    }
 	                }
@@ -810,7 +833,7 @@
 	                for (var i = 0; i < data.Data.length; i++) {
 
 	                    arrTemp.push({
-	                        name: data.Data[i].CourseName, id: data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].ExpiryMonth, pid: data.Data[i].CourseId
+	                        name: data.Data[i].CourseName, id: data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].ExpiryMonth + "-" + data.Data[i].ClassId, pid: data.Data[i].CourseId
 	                    });//报班的课程
 
 	                }
@@ -865,9 +888,9 @@
 
 
 	                lui.initDropDownList({
-	                    warpid: "drop_tjr", width: 200, nameField: 'name', idField: 'id', data: arrTjr
+	                    warpid: "drop_tjr", width: 200, nameField: 'name', idField: 'id', data: arrTjr, subtextlength: 10
 	                });//推荐人
-
+	                isLoadTeach = 1;
 
 	            }
 	            else {
@@ -1388,11 +1411,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -1410,12 +1439,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -1424,18 +1454,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -1464,7 +1500,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -1485,16 +1521,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -1524,6 +1566,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
@@ -2074,7 +2117,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }
@@ -2272,6 +2315,12 @@
 	    obj.html('<tr  style="border:none;text-align:center;height:280px;"><td style="font-size: 16px;" colspan="'+num+'"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;">'+jQuery("#divLoading").html() +'</div></div></td></tr>');
 	}
 
+	function ShowLoadingForTableNoClass(obj, num) {
+	    if (num == undefined || obj == undefined) {
+	        return;
+	    }
+	    obj.html('<tr><td colspan="' + num + '"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;">' + jQuery("#divLoading").html() + '</div></div></td></tr>');
+	}
 
 
 	//弹出加载图片
@@ -2284,6 +2333,8 @@
 
 
 	exports.ShowLoadingForTable = ShowLoadingForTable;//针对table布局的
+	exports.ShowLoadingForTableNoClass = ShowLoadingForTableNoClass;//清除样式
+
 	exports.ShowLoading = ShowLoading;
 
 
@@ -2351,7 +2402,7 @@
 	$out+=$escape($value.BookNumber);
 	$out+='课次 </td> ';
 	if($value.IsWarn==1){
-	$out+=' <td class="red"> 过期 </td> ';
+	$out+=' <td class="red"> 已过期 </td> ';
 	}else{
 	$out+=' <td> ';
 	$out+=$escape($helpers. dateFormat($value.ExpireTime ,  "yyyy-MM-dd"));

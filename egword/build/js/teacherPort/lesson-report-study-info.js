@@ -213,8 +213,8 @@
 	$out+=$escape(studentAll.NewWord);
 	$out+='/';
 	$out+=$escape(studentAll.DestNumber);
-	$out+='</span> </div> <div class="item-after"></div> </div> </li> <li class="item-content"> <div class="item-inner"> <div class="item-title"> 累计学分： ';
-	if(studentAll.Credits<studentAll.CurrentNumber*studentAll.DestNumber){
+	$out+='</span> </div> <div class="item-after"></div> </div> </li> <li class="item-content"> <div class="item-inner"> <div class="item-title"> 累计学分：  ';
+	if(studentAll.Credits<(studentOne.BookNumber-studentAll.LeftNumber)*studentOne.DestNumber){
 	$out+=' <span class="word-num"> ';
 	$out+=$escape(studentAll.Credits);
 	$out+=' ';
@@ -224,9 +224,9 @@
 	$out+=' ';
 	}
 	$out+=' </span> <span class="item-remark">（参考值：<span>';
-	$out+=$escape(studentAll.CurrentNumber*studentAll.DestNumber);
+	$out+=$escape((studentOne.BookNumber-studentAll.LeftNumber)*studentOne.DestNumber);
 	$out+='/';
-	$out+=$escape(studentAll.WordAmount);
+	$out+=$escape(studentAll.DestNumber);
 	$out+='</span>）</span> </div> <div class="item-after"></div> </div> </li> <li class="item-content"> <div class="item-inner"> <div class="item-title"> 单元小测：<span>';
 	$out+=$escape(studentAll.UnitFullScore);
 	$out+='个100分</span> </div> <div class="item-after"></div> </div> </li> <li class="item-content"> <div class="item-inner"> <div class="item-title"> 拼写错误率：<span>';

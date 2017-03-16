@@ -50,6 +50,7 @@
 	__webpack_require__(9);
 
 	var openId = $("#openId").val();
+	var stuId = $("#stuId").val();
 	var module = {
 	    init: function () {
 	        //todo 逻辑函数
@@ -72,7 +73,7 @@
 
 	           // $.router.load("/Parents/ParentMenu/Index", true);//处理跳转
 
-	            window.location.href = "/Parents/ParentMenu/Index";
+	            window.location.href = "/Parents/ParentMenu/Index/" + stuId;
 
 
 	        });
@@ -98,7 +99,7 @@
 	//绑定数据
 	$(function () {
 	    module.init();
-
+	    
 	    if (openId == "0" || openId == "") {
 	        $.router.load("/Parents/ParentMenu/BindStuAccount", true); //处理跳转
 
@@ -129,8 +130,8 @@
 	            //$("#divLoading").hide();
 	            if (data.Data && data.Data.length > 0) {
 	                
-	                $.router.load("/Parents/ParentMenu/BindStuAccount", true); //处理跳转
-	           
+	               // $.router.load("/Parents/ParentMenu/BindStuAccount", true); //处理跳转
+	                window.location.href = "/Parents/ParentMenu/BindStuAccount/" + openId;
 	            }
 	            else {
 	                $.alert("绑定失败!", "提示");
@@ -391,7 +392,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }

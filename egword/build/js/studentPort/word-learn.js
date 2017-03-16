@@ -65,6 +65,8 @@
 	var timerRead;
 	var canClick = false;
 
+	var timerStop = false;
+
 
 	//初始化页面
 	function InitPage() {
@@ -219,18 +221,34 @@
 	            $("#know").removeClass("none");
 	            if (parseInt(showTask) == 1) {
 	                guide.popup($(".rotate-small")[0], 'roates', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'down', '快速聚焦是一种能力，你要在短时间内作出准确判断！', '/egword/build/img/clock-clock.png', 12);
+	                
 	            } else {
 	                timer = setInterval(function () {
-	                    var value = parseInt($("#time").attr("datanum")) - 1;
-	                    currentUseTime = parseInt(currentUseTime) + 1;
-	                    $("#time").html(value + "s");
-	                    $("#time").attr("datanum", value);
-	                    if (value == 0) {
-	                        clearInterval(timer);
-	                        currentType = 3;
-	                        InitLearnPage(2, 1);
+	                    if (timerStop==false) {
+	                        var value = parseInt($("#time").attr("datanum")) - 1;
+	                        currentUseTime = parseInt(currentUseTime) + 1;
+	                        $("#time").html(value + "s");
+	                        $("#time").attr("datanum", value);
+	                        if (value == 0) {
+	                            clearInterval(timer);
+	                            currentType = 3;
+	                            InitLearnPage(2, 1);
+	                        }
 	                    }
+	                    
 	                }, 1000);
+	            }
+	            //加载读音
+	            try {
+	                var readId = "myaudio" + word.WordId;
+	                var start = 0;
+	                document.getElementById(readId).play();
+	                document.getElementById(readId).onended = function () {
+	                    start++;
+	                    start == 1 && document.getElementById(readId).pause();
+	                };
+	            } catch (err) {
+	                console.log(err);
 	            }
 	            break;
 	        case 2:
@@ -249,54 +267,139 @@
 	                var kong = "";
 	                for (var i = 0; i < word.Syllables.length; i++) {
 	                    if (i == word.Syllables.length - 1) {
-	                        kong += "<input type=\"text\" id=\"onefinshed\"><span class=\"none\" id=\"errorshow\"><img src=\"/egword/build/img/cry.png\" alt=\"\" class=\"ml30\" ><span class=\"error\">正确拼写:<span>" + word.Word + "</span></span></span><span class=\"none\" id=\"rightshow\"><img src=\"/egword/build/img/smail.png\" alt=\"\" class=\"ml30\"><span class=\"success\">正确</span></span>";
+	                        kong += "<input type=\"text\" id=\"onefinshed\"><img src=\"/egword/build/img/error.png\" class=\"word0-clear pointer\" alt=\"清空\"><span class=\"none\" id=\"errorshow\"><img src=\"/egword/build/img/cry.png\" alt=\"\" class=\"ml30\" ><span class=\"error\">正确拼写:<span>" + word.Word + "</span></span></span><span class=\"none\" id=\"rightshow\"><img src=\"/egword/build/img/smail.png\" alt=\"\" class=\"ml30\"><span class=\"success\">正确</span></span>";
 	                    } else {
 	                        kong += "<input type=\"text\">";
 	                    }
 	                }
 	               
 	                $("#listendo").children(".content").children(".write").html(kong);
-
+	                var num = Math.floor(Math.random() * 2);
 	                var spanchoose = "";
 	                for (var i = 0; i < word.Syllables.length; i++) {
-	                    spanchoose += ("<span>" + word.Syllables[i] + "</span>");
+	                   
 	                    switch (i) {
 	                        case 0:
-	                            for (var j = 0; j < word.OneSd.length; j++) {
-	                                spanchoose += ("<span>" + word.OneSd[j] + "</span>");
+	                            if (num==0) {
+	                                spanchoose += ("<span>" + word.Syllables[i] + "</span>");
+	                                for (var j = 0; j < word.OneSd.length; j++) {
+	                                    spanchoose += ("<span>" + word.OneSd[j] + "</span>");
+	                                }
+
+	                            } else {
+	                                for (var j = 0; j < word.OneSd.length; j++) {
+	                                    spanchoose += ("<span>" + word.OneSd[j] + "</span>");
+	                                }
+	                                spanchoose += ("<span>" + word.Syllables[i] + "</span>");
 	                            }
+	                           
 	                            break;
 	                        case 1:
-	                            for (var k = 0; k < word.TwoSd.length; k++) {
-	                                spanchoose += ("<span>" + word.TwoSd[k] + "</span>");
+
+	                            if (num == 0) {
+	                                spanchoose += ("<span>" + word.Syllables[i] + "</span>");
+	                                for (var j = 0; j < word.TwoSd.length; j++) {
+	                                    spanchoose += ("<span>" + word.TwoSd[j] + "</span>");
+	                                }
+
+	                            } else {
+	                                for (var j = 0; j < word.TwoSd.length; j++) {
+	                                    spanchoose += ("<span>" + word.TwoSd[j] + "</span>");
+	                                }
+	                                spanchoose += ("<span>" + word.Syllables[i] + "</span>");
 	                            }
+
+	                            //for (var k = 0; k < word.TwoSd.length; k++) {
+	                            //    spanchoose += ("<span>" + word.TwoSd[k] + "</span>");
+	                            //}
 	                            break;
 	                        case 2:
-	                            for (var h = 0; h < word.ThreeSd.length; h++) {
-	                                spanchoose += ("<span>" + word.ThreeSd[h] + "</span>");
+
+	                            if (num == 0) {
+	                                spanchoose += ("<span>" + word.Syllables[i] + "</span>");
+	                                for (var j = 0; j < word.ThreeSd.length; j++) {
+	                                    spanchoose += ("<span>" + word.ThreeSd[j] + "</span>");
+	                                }
+
+	                            } else {
+	                                for (var j = 0; j < word.ThreeSd.length; j++) {
+	                                    spanchoose += ("<span>" + word.ThreeSd[j] + "</span>");
+	                                }
+	                                spanchoose += ("<span>" + word.Syllables[i] + "</span>");
 	                            }
+	                            //for (var h = 0; h < word.ThreeSd.length; h++) {
+	                            //    spanchoose += ("<span>" + word.ThreeSd[h] + "</span>");
+	                            //}
 	                            break;
 	                        case 3:
-	                            for (var p = 0; p < word.FourSd.length; p++) {
-	                                spanchoose += ("<span>" + word.FourSd[p] + "</span>");
+
+	                            if (num == 0) {
+	                                spanchoose += ("<span>" + word.Syllables[i] + "</span>");
+	                                for (var j = 0; j < word.FourSd.length; j++) {
+	                                    spanchoose += ("<span>" + word.FourSd[j] + "</span>");
+	                                }
+
+	                            } else {
+	                                for (var j = 0; j < word.FourSd.length; j++) {
+	                                    spanchoose += ("<span>" + word.FourSd[j] + "</span>");
+	                                }
+	                                spanchoose += ("<span>" + word.Syllables[i] + "</span>");
 	                            }
+	                            //for (var p = 0; p < word.FourSd.length; p++) {
+	                            //    spanchoose += ("<span>" + word.FourSd[p] + "</span>");
+	                            //}
 	                            break;
 	                    }
 	                }
 	                $("#listendo").children(".content").children(".sing-word").html(spanchoose);
 	                $(".oneciyi").hide();
 	                $("#listendo").removeClass("none");
+	                try{
 	                var readId = "myaudio" + +word.WordId;
+
 	                var start = 0;
 	                document.getElementById(readId).play();
 	                document.getElementById(readId).onended = function () {
 	                    start++;
 	                    start == 1 && document.getElementById(readId).pause();
 	                };
-	               
+	                } catch (err) {
+	                    console.log(err);
+	                }
 	                
 
 	            } else {
+
+	                var wordStr = word.Word;
+	                if (word.Word.indexOf("-") == -1) {
+	                    wordStr = word.Syllables.join("-");
+	                }
+
+
+	                var array = ['sion', 'tion', 'sual', 'sure', 'ture', 'dge', 'ar', 'or', 'er', 'ir', 'ur', 'air', 'eir', 'ear', 'eer', 'oar', 'are', 'ere', 'ere', 'ire', 'ore', 'ure', '-y', 'le', 'al', 'el', 'ol', 'il', 'ul', 'ow', 'ew', 'aw', 'gh', 'nk', 'ng', 'ge', 'a', 'e', 'i', 'o', 'u', 'an', 'en', 'in'];
+	                for (var l = 0; l < array.length; l++) {
+	                    if (wordStr.indexOf(array[l]) != -1) {
+	                        wordStr = wordStr.replace(new RegExp(array[l], "gi"), (l + 10000).toString());
+	                    }
+	                }
+	                for (var l = 0; l < array.length; l++) {
+	                    if (wordStr.indexOf((l + 10000).toString()) != -1) {
+	                        wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
+	                    }
+
+	                }
+	                var arr = wordStr.split("<span class=\"red\">");
+	                for (var m = 0; m < arr.length; m++) {
+	                    if (arr[m].indexOf("<") == -1) {
+	                        wordStr = wordStr.replace(arr[m], ("<span>" + arr[m] + "</span>"));
+	                    } else {
+	                        if (arr[m].split("</span>")[1] != "") {
+	                            wordStr = wordStr.replace(arr[m], (arr[m].split("</span>")[0] + "</span><span>" + arr[m].split("</span>")[1] + "</span>"));
+	                        }
+	                    }
+	                }
+
+
 	                $("#choosedo").children(".content").children(".voice").children(".word").children(".fl").html(word.Word);
 	                //   $("#know").children(".content").children(".pronunce").html(wordStr + "<img src=\"/egword/build/img/horn.png\" data-id=\"" + word.WordId + "\" alt=\"\" class=\"horn\"><audio id=\"myaudio" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
 	                $("#choosedo").children(".content").children(".voice").children(".word").children(".pronunce").html(wordStr + "<img src=\"/egword/build/img/horn.png\" data-id=\"" + word.WordId + "\" alt=\"\" class=\"horn\"><audio id=\"myaudio" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
@@ -322,17 +425,19 @@
 	                $("#choosedo").removeClass("none");
 	            }
 	            timer = setInterval(function () {
-	                var value = parseInt($("#time").attr("datanum")) - 1;
-	                currentUseTime = parseInt(currentUseTime) + 1;
-	                $("#time").html(value + "s");
-	                $("#time").attr("datanum", value);
-	                if (value == 0) {
-	                    //单词未学
-	                    clearInterval(timer);
-	                    if (currentType == -1 || currentType == 3) {
-	                        currentType = 4;
+	                if (timerStop == false) {
+	                    var value = parseInt($("#time").attr("datanum")) - 1;
+	                    currentUseTime = parseInt(currentUseTime) + 1;
+	                    $("#time").html(value + "s");
+	                    $("#time").attr("datanum", value);
+	                    if (value == 0) {
+	                        //单词未学
+	                        clearInterval(timer);
+	                        if (currentType == -1 || currentType == 3) {
+	                            currentType = 4;
+	                        }
+	                        InitLearnPage(3, 0);
 	                    }
-	                    InitLearnPage(3, 0);
 	                }
 	            }, 1000);
 	            break;
@@ -385,49 +490,88 @@
 	                    }
 	                }
 	            }
-	            $("#learn").children(".voice").children(".pronunce").html("<span>" + wordStr + "</span>" + "<img src=\"/egword/build/img/horn.png\" data-id=\"" + word.WordId + "\" alt=\"\" class=\"horn\"><audio id=\"myaudio" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
+	            $("#learn").children(".voice").children(".pronunce").html("<span id=\"biaohong\">" + wordStr + "</span>" + "<img src=\"/egword/build/img/horn.png\" data-id=\"" + word.WordId + "\" alt=\"\" class=\"horn\"><audio id=\"myaudio" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
 	            $("#learn").removeClass("none");
 
 	            var count = 0;
 	            //发出读音后展示词性  词义
 	            if (currentType == 1) {
 	                count = 2;
-	                $("#learn").children(".voice").children(".word-types").html("<div class=\"konow-gapone\"><span class=\"konow-gap\">生</span><span>夹生词，请快速跟读两遍</span></div><audio id=\"autuo" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
+	                 $("#learn").children(".voice").children(".word-types").html("<div class=\"konow-gapone\"><span id=\"zhangwochengdu\"><span class=\"konow-gap\">生</span><span>夹生词，分音节，快速跟读两遍</span></span></div><audio id=\"autuo" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
+	               // $("#learn").children(".voice").children(".word-types").html("<audio id=\"autuo" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
 
 	            } else if (currentType == 2 || currentType == 4) {
 	                count = 3;
-	                $("#learn").children(".voice").children(".word-types").html(" <div class=\"konow-gapone\"><span class=\"konow-gap\">陌</span><span>陌生词，请慢速跟读三遍</span></div><audio id=\"autuo" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
+	                 $("#learn").children(".voice").children(".word-types").html(" <div class=\"konow-gapone\"><span id=\"zhangwochengdu\"><span class=\"konow-gap\">陌</span><span>陌生词，分音节，慢速跟读三遍</span></span></div><audio id=\"autuo" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
+	               // $("#learn").children(".voice").children(".word-types").html("<audio id=\"autuo" + word.WordId + "\" src=\"" + word.Audio + "\" controls=\"controls\" hidden=\"true\" >");
 	            }
+	            $("#learn").children(".voice").children(".word-types").show();
+	            try {
+	                var dataId = "autuo" + word.WordId;
+	                var start = 0;
+	                document.getElementById(dataId).play();
+	                document.getElementById(dataId).onended = function () {
+	                    start++;
+	                    if (start == count) {
 
-	            var dataId = "autuo" + word.WordId;
-	            var start = 0;
-	            document.getElementById(dataId).play();
-	            document.getElementById(dataId).onended = function () {
-	                start++;
-	                if (start == count) {
+	                        document.getElementById(dataId).pause();
+	                        setTimeout(function () {
+	                            
+	                            $("#nextword").show();
+	                            $("#learn").children(".voice").children(".word-types").hide();
+	                            if (word.Rember != "" && word.Rember.length > 0) {
+	                                $("#learn").children(".voice").children(".remumber").show();
+	                                $("#learn").children(".voice").children(".remumber").html("<div class=\"wordWrap\"><span class=\"mr10\">【记忆法】</span>" + word.Rember + "</div>");
+	                            }
+	                           
+	                            var mean = "";
+	                            for (var i = 0; i < word.Mean.length; i++) {
+	                                mean += (word.Mean[i] + "<br/>");
+	                            }
+	                            $("#learn").children(".voice").children(".anysis").html(" <span>" + mean + "</span>");
+	                            canClick = true;
+	                            //if (parseInt(userCount) == 0) {
+	                            //    clearInterval(timer);
+	                            //    // guide.popup($(".konow-gapone")[0], 'konow-gap-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'up', '掌握程度不同，学习方法不同，因“词”施教！', '/egword/build/img/get-it-img3.png');
+	                            //    guide.popup($("#zhangwochengdu"), 'konow-gap-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'up', '掌握程度不同，学习方法不同，因“词”施教！', '/egword/build/img/get-it-img3.png');
 
-	                    document.getElementById(dataId).pause();
+	                            //}
+	                        }, 1000);
+	                    } else {
+	                        setTimeout(function () {
+	                            try{
+	                                document.getElementById(dataId).play();
+	                            } catch (err) {
+	                                console.log(err);
+	                            }
+	                        }, 1000);
+	                        // document.getElementById(dataId).play();
+	                    }
+	                };
+
+	            } catch (err) {
+	                console.log(err);
+	                $("#learn").children(".voice").children(".word-types").hide();
+	                $("#nextword").show();
+	                if (word.Rember!=""&&word.Rember.length>0) {
 	                    $("#learn").children(".voice").children(".remumber").show();
-	                    $("#nextword").show();
 	                    $("#learn").children(".voice").children(".remumber").html("<div class=\"wordWrap\"><span class=\"mr10\">【记忆法】</span>" + word.Rember + "</div>");
-	                    var mean = "";
-	                    for (var i = 0; i < word.Mean.length; i++) {
-	                        mean += (word.Mean[i] + "<br/>");
-	                    }
-	                    $("#learn").children(".voice").children(".anysis").html(" <span>" + mean + "</span>");
-	                    canClick = true;
-	                    if (parseInt(userCount) == 0) {
-	                        clearInterval(timer);
-	                        guide.popup($(".konow-gapone")[0], 'konow-gap-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'up', '掌握程度不同，学习方法不同，因“词”施教！', '/egword/build/img/get-it-img3.png');
-	                    }
-	                } else {
-	                    setTimeout(function() {
-	                        document.getElementById(dataId).play();
-	                    }, 1000);
-	                   // document.getElementById(dataId).play();
 	                }
-	            };
+	               
+	                var mean = "";
+	                for (var i = 0; i < word.Mean.length; i++) {
+	                    mean += (word.Mean[i] + "<br/>");
+	                }
+	                $("#learn").children(".voice").children(".anysis").html(" <span>" + mean + "</span>");
+	                canClick = true;
+	                //if (parseInt(userCount) == 0) {
+	                //    clearInterval(timer);
+	                //    // guide.popup($(".konow-gapone")[0], 'konow-gap-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'up', '掌握程度不同，学习方法不同，因“词”施教！', '/egword/build/img/get-it-img3.png');
+	                //    guide.popup($("#zhangwochengdu"), 'konow-gap-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'up', '掌握程度不同，学习方法不同，因“词”施教！', '/egword/build/img/get-it-img3.png');
 
+	                //}
+	            }
+	            
 	            $("#learn").removeClass("none");
 
 	            break;
@@ -453,7 +597,7 @@
 	        //记忆法
 	        guide.popup($(".remumber")[0], 'remumberone', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'up', '别人家的孩子经常用的记忆小贴士，让你记得更快、更牢、更有趣！', '/egword/build/img/get-it-img3.png');
 	    });
-
+	    
 	    $("body").delegate(".remumberone", "click", function (event) {
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
@@ -476,7 +620,10 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
-	        guide.popup($(".pronunce-guide")[0], 'pronunce-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'down', '注意标红字母的发音，掌握自然拼读法，“拼音式”记忆！', '/egword/build/img/pingzi.png', 25);
+	        // guide.popup($(".pronunce-guide")[0], 'pronunce-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'down', '注意标红字母的发音，掌握自然拼读法，“拼音式”记忆！', '/egword/build/img/pingzi.png', 25);
+	        // guide.popup($("#biaohong"), 'pronunce-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'down', '注意标红字母的发音，掌握自然拼读法，“拼音式”记忆！', '/egword/build/img/pingzi.png', 25);
+	        guide.popup($(".pronunce-guide"), 'pronunce-guides', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'down', '注意标红字母的发音，掌握自然拼读法，“拼音式”记忆！', '/egword/build/img/pingzi.png', 25);
+	        showTask = 2;
 	    });
 
 	    $("body").delegate(".pronunce-guides", "click", function (event) {
@@ -500,10 +647,22 @@
 	    });
 
 	    $("body").delegate("#exit", "click", function (event) {
-	        window.location.href = "/Student/LearnCenter/Index";
+	       $('.pop-mask').show();
+	       $('.returnPop').show();
+	        timerStop = true;
 	    });
+	    $("body").delegate(".return", "click", function (event) {
+	        $('.pop-mask').show();
+	        $('.returnPop').show();
+	        timerStop = true;
+	    });
+	    $('.returnsure').click(function () {
+	        window.location.href = "/Student/LearnCenter/CourseBase?courseId=" + oneCourseId;
+	       // window.location.href = "/Student/LearnCenter/ExperienceLesson?unitId=" + unitId + "&unitOrder=" + orderUnit + "&bookGroupId=" + bookGroupId + "&birefName=noname&courseId=" + oneCourseId;
+	    })
 	    //读音
 	    $("body").delegate(".horn", "mouseover", function (event) {
+	        try{
 	        var readId = "myaudio" + event.target.getAttribute("data-id");
 	        var start = 0;
 	        document.getElementById(readId).play();
@@ -511,6 +670,9 @@
 	            start++;
 	            start == 1 && document.getElementById(readId).pause();
 	        };
+	        } catch (err) {
+	            console.log(err);
+	        }
 
 	    });
 
@@ -529,7 +691,7 @@
 
 	    //拼写题
 	    $("body").delegate("#onetype", "click", function (event) {
-	        if ($(event.target).attr("class") != undefined) {
+	        if ($(event.target).attr("class")=="active") {
 	            return;
 	        }
 	        var value = event.target.innerHTML;
@@ -543,6 +705,7 @@
 	                $(this).val(value);
 	                write = false;
 	                if ($(this).attr("id") == "onefinshed") {
+	                    clearInterval(timer);
 	                    var word = JSON.parse(localStorage.Words)[localStorage.Index];
 	                    var answer = "";
 	                    $("input").each(function () {
@@ -601,15 +764,31 @@
 	        });
 	    });
 
+	    //拼写题清空
+	    $("body").delegate(".word0-clear", "click", function () {
+	        $("input").each(function () {
+	            $(this).val("");
+	        });
+	        $("#onetype span").each(function () {
+	            $(this).removeClass("active");
+	        });
+
+	    });
+
+
+	    
 	    //选义题
 	    $("body").delegate(".items", "click", function (event) {
+	       
 	        $(this).children("img").each(function () {
 	            if ($(this).attr("data-id") == $(event.target).attr("data-id")) {
 	                $(this).removeClass("none");
 	            }
 	        });
+	        clearInterval(timer);
 	        if ($(event.target).attr("data-id") == "ok") {
 	            $("img[data-id=\"ok\"]").show();
+	            $(event.target).addClass("success");
 	            LogTime(currentUseTime, 2);
 	            if (currentType == -1) {
 	                currentType = 0;
@@ -625,10 +804,12 @@
 	            currentType = -1;
 	            if (parseInt(userCount) == 0) {
 	                guide.popup($(event.target), 'userchooseok', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'up', 'Congratulations！熟词＋1', '/egword/build/img/get-it-img3.png');
+	                userCount = 1;
 	                clearInterval(timer);
 
 	            } else {
 	                setTimeout(function () {
+	                    
 	                    InitProccess();
 	                    if (parseInt(localStorage.Index) == JSON.parse(localStorage.Words).length) {
 	                        window.location.href = "/Student/LearnCenter/SelfTestIndex?unitId=" + unitId + "&count=" + localStorage.Index;
@@ -640,6 +821,7 @@
 
 	        } else {
 	            $("img[data-id=\"" + $(event.target).attr("data-id") + "\"]").show();
+	            $(event.target).addClass("error");
 	            setTimeout(function () {
 	                LogStudy(0, 3);
 	                LogTime(currentUseTime, 2);
@@ -654,6 +836,7 @@
 	                }
 	                if (parseInt(userCount) == 0) {
 	                    guide.popup($(event.target), 'userchooseerror', true, { width: 130, height: 125 }, { width: 340, height: 175 }, 'up', 'Come on！夹生词＋1', '/egword/build/img/get-it-img3.png');
+	                    userCount = 1;
 	                    clearInterval(timer);
 	                } else {
 	                    InitLearnPage(3, 0);
@@ -683,9 +866,10 @@
 	        clearInterval(timer);
 	        clearInterval(timerRead);
 	        if (currentType == 4) {
-	            SetStudyUp(0);
-	            localStorage.Index = parseInt(localStorage.Index) + 1;
-	            currentType = -1;
+	            InitLearnPage(1, 0);
+	           // SetStudyUp(0);
+	           // localStorage.Index = parseInt(localStorage.Index) + 1;
+	            //currentType = -1;
 	        } else {
 	            LogTime(currentUseTime, 1);
 	            InitLearnPage(2, 3);
@@ -710,6 +894,13 @@
 	        $(".guide-msg-pop").remove();
 	        InitLearnPage(3, 0);
 	    });
+	    $('.header .close,.eg-pop .cancel').click(function() {
+	        $('.pop-mask').hide();
+	        $('.eg-pop').hide();
+	        timerStop = false;
+	    });
+
+
 	});
 
 
@@ -1104,11 +1295,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -1126,12 +1323,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -1140,18 +1338,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -1180,7 +1384,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -1201,16 +1405,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -1240,6 +1450,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);

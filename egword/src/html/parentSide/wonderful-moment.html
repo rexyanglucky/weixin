@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -46,10 +46,22 @@
     </div>
 
 </div>
-
+<div class="pop-mask"><img src="../../../build/img/slides-1.png" alt=""></div>
 <!--<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>-->
 <script type="text/javascript" src="/egword/build/dep/SUI-Mobile/js/zepto.min.js"></script>
 <script type="text/javascript" src="/egword/build/dep/SUI-Mobile/js/sm.js"></script>
 <script type="text/javascript" src="/egword/build/js/parentSide/wonderful-moment.js"></script>
+    <script>
+        $(document).on('click', '.img', function () {
+            $('.pop-mask').show();
+            var htnlval = $(this).html();
+            $('.pop-mask').html(htnlval)
+
+        })
+      $(document).on('click', '.pop-mask img', function () {
+           $('.pop-mask').html('');
+            $('.pop-mask').hide();
+        })
+    </script>
 </body>
 </html>

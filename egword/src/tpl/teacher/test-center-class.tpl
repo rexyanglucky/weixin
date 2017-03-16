@@ -4,10 +4,10 @@
         <a href="#" class="item-link item-content">
             <div class="item-inner">
                 <div class="item-title-row">
-                    <div class="item-title">{{v.UserName}}</div>
-                    <div class="item-after"><span>({{v.ClassName}})  词汇等级：</span><span class="ml10">{{v.ResultLevel}}</span></div>
+                    <div class="item-title">{{v.UserName}} ({{v.ClassName}})</div>
+                    <div class="item-after"><span>词汇等级：</span><span class="ml10">{{v.ResultLevel}}</span></div>
                 </div>
-                <div class="item-subtitle"><span>测评时间：</span><span class="ml10">{{v.CreateTime2 | dateFormat: 'yyyy/MM/dd hh:mm'}}</span></div>
+                <div class="item-subtitle"><span>测评时间：</span><span class="ml10">{{v.CreateTime}}</span></div>
             </div>
         </a>
     </li>

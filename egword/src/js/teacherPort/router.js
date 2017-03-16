@@ -20,11 +20,12 @@ html_js_cssRoute["login"]={css:"login",js:"login"};//登录
 
 //页面dom加载之后加载js
 $(document).on("pageInit", function(e, pageId, $page) {
-    console.log($page);
-    console.log(pageId);
+    $('.picker-modal').hide(0);
+   
     $.ajax({
         type: "get",
         url: "/teacher/myclass/GetMyTeachClassList",
+        async:false,
         cache: false,
         data: {},
         dataType: "JSON",
@@ -43,15 +44,27 @@ $(document).on("pageInit", function(e, pageId, $page) {
         var jsUrl = src.jsurl + html_js_cssRoute[pageId].js + ".js?v=" + src.version;
         reloadJS("cp-script", jsUrl, pageId);
     }
+ 
+  
+   // 
+     
+    
 });
 //动画切换之前换加载下一个页面的css
-$(document).on("pageAnimationStart",function(e,pageId,$page){
-    if(pageId&&html_js_cssRoute[pageId]){
+$(document).on("pageAnimationStart", function (e, pageId, $page) {
+
+   if(pageId&&html_js_cssRoute[pageId]){
         var cssUrl=src.cssurl+html_js_cssRoute[pageId].css+".css?v="+src.version;
         reloadCss("cp-css",cssUrl);
     }
     document.title=document.getElementById("doc-title").value;
 });
+//请求新的页面之前
+//$(document).on("pageLoadComplete", function () {
+//   console.log(66)
+//    console.log($('.picker-modal'))
+//    $('.picker-modal').hide();
+//})
 //动画切换之后加载下一个页面的css
 //    $(document).on("pageAnimationEnd",function(e,pageId,$page){
 //        if(pageId&&html_js_cssRoute[pageId]){
@@ -75,6 +88,7 @@ function reloadJS(id,path,pageid)
     scriptObj.type = "text/javascript";
     scriptObj.id   = id;
     document.getElementsByTagName("head")[0].appendChild(scriptObj);
+    
 }
 function reloadCss(id,path)
 {

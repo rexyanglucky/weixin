@@ -116,10 +116,14 @@
         font-size:15px;
       }
       .word{height:100px;line-height:100px;display:inline-block;font-size:40px;border:none;width:60%;}
-      .pronunce{float:right;height:110px;line-height:110px;}
+      .pronunce{float:left;height:110px;line-height:110px; margin-left:25px;}
       .voice{
         min-width:580px;
         max-width:780px;
+        .btn:hover{
+            background: #fff4ea!important;
+            border: 2px solid #ffb269!important;
+        }
         .btn{
           text-align:left;
           color:#646464;
@@ -131,30 +135,44 @@
           width:460px;
           border:2px solid #cfcfcf;
           margin-top:10px;
+          overflow:hidden;
+          white-space:nowrap;
+          text-overflow:ellipsis;
+          vertical-align:middle;
           .order{margin-right:30px;}
         }
         .vm{margin-left:20px;}
-        .error{
-          background:#ffe2e0;
-          border:2px solid #ff887b;
-        }
-        .success{
-          border:2px solid #5ee28a;
-        }
+        
+        .error.btn{
+            background:#ffe2e0!important;
+            border:2px solid #ff887b!important;
       }
-      .tell{
+        .success.btn{
+            border:2px solid #5ee28a!important;
+            background:#f9f9f9!important;
+      }
+        .tell{
         height:105px;
         img{
           vertical-align: middle;
         }
         .see{
-          color:#ffb269;
+          color:#ffffff;
           margin-left:20px;
           font-size:16px;
           cursor: pointer;
+          height: 30px;
+          line-height: 30px;
+          display: inline-block;
+          padding: 0 20px;
+          background: #ff8b1e;
+          border: 1px solid #ff3c00;
+          font-size: 16px;
+          border-radius: 4px;
+          cursor: pointer;
         }
       }
-      .write{
+        .write{
         input{
           height:40px;
           border:none;
@@ -162,12 +180,15 @@
           margin-right:25px;
           border-bottom:3px solid #b5b5b5;
           outline: none;
+          text-align:center;
         }
         img{vertical-align: middle;}
         .error,.success{
           margin-left:15px;
           color:#ff9a3a;
           font-size:18px;
+          border:0;
+          background:none;
           span{
             color:#fe8c1f;
             font-size:24px;
@@ -177,8 +198,7 @@
         }
         .success{color:#3ad96f;span{color:#3ad96f;}}
       }
-
-      .sing-word{
+        .sing-word{
         margin-bottom:30px;
         span{
           margin-top:35px;
@@ -202,6 +222,8 @@
           border:2px solid #ffb269;
         }
       }
+      }
+  
     }
   }
   .return{
@@ -224,6 +246,11 @@
   .body{
     text-align:center;
     .text{
+        p{
+        display: inline-block;
+        width: 145px;
+        text-align: left;
+        }
       width:50%;
       margin:0 auto;
       padding:30px 0 20px 0;
@@ -265,14 +292,24 @@
     line-height:30px;
     padding:0 30px;
   }
+ .unclick{
+    cursor: default;
+    background:#ffc997;
+    color:#ff9439;
+    border:1px solid #f37817;
+  }
   .img{
     margin:0 auto;
     margin-top:105px;
+    display:block;
+    clear:left;
   }
   .small-letter{
     height:70px;
+    width:200px;
+    margin:0 auto;
     padding:20px 0 30px 0;
-    text-align:center;
+    text-align:left;
     line-height:40px;
     color:#fe932e;
     font-size:20px;

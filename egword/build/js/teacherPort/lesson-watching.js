@@ -45,26 +45,83 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
+	Array.prototype.removeByValue = function (val) {
+	    for (var i = 0; i < this.length; i++) {
+	        if (this[i] == val) {
+	            this.splice(i, 1);
+	            break;
+	        }
+	    }
+	}
+	Array.prototype.isHaveValue = function (val) {
+	    for (var i = 0; i < this.length; i++) {
+	        if (this[i] == val) {
+
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+
+	var _groupArr = [];
+
 	var lesson = {
 	    init: function () {
+	        var tthis = this;
+	        $(document).off("click");
+	        $(document).on("click", ".card-header", function () {
+	            tthis.toggleShow(this);
 
-	        $(".card-header").off("click");
-	        $(".card-header").on("click",
-	            function () {
-	                var p = $(this).parent();
-	                if (p.hasClass("slide-down")) {
-	                    var next = $(this).next();
-	                    $(next).hide(100);
-	                    p.removeClass("slide-down").addClass("slide-up");
-	                    $(this).find(".icon-down-drop").removeClass("icon-down-drop").addClass("icon-right-drop");
-	                } else {
-	                    var next = $(this).next();
-	                    $(next).show(100);
-	                    p.removeClass("slide-up").addClass("slide-down");
-	                    $(this).find(".icon-right-drop").removeClass("icon-right-drop").addClass("icon-down-drop");
-	                }
+	            //var p = $(this).parent();
+	            //var groupindex = $(this).attr("data-groupindex");
 
-	            });
+	            //if (p.hasClass("slide-down")) {
+	            //    var next = $(this).next();
+	            //    $(next).hide(100);
+	            //    p.removeClass("slide-down").addClass("slide-up");
+	            //    $(this).find(".icon-down-drop").removeClass("icon-down-drop").addClass("icon-right-drop");
+
+
+	            //    _groupArr.removeByValue(groupindex);
+
+	            //} else {
+	            //    var next = $(this).next();
+	            //    $(next).show(100);
+	            //    p.removeClass("slide-up").addClass("slide-down");
+	            //    $(this).find(".icon-right-drop").removeClass("icon-right-drop").addClass("icon-down-drop");
+
+	            //    if (!_groupArr.isHaveValue(groupindex)) {
+
+	            //        _groupArr.push(groupindex);
+	            //    }
+	            //}
+
+	        });
+	    },
+	    toggleShow: function (item) {
+	        var p = $(item).parent();
+	        var groupindex = $(item).attr("data-groupindex");
+
+	        if (p.hasClass("slide-down")) {
+	            var next = $(item).next();
+	            $(next).hide(100);
+	            p.removeClass("slide-down").addClass("slide-up");
+	            $(item).find(".icon-down-drop").removeClass("icon-down-drop").addClass("icon-right-drop");
+
+
+	            _groupArr.removeByValue(groupindex);
+
+	        } else {
+	            var next = $(item).next();
+	            $(next).show(100);
+	            p.removeClass("slide-up").addClass("slide-down");
+	            $(item).find(".icon-right-drop").removeClass("icon-right-drop").addClass("icon-down-drop");
+
+	            if (!_groupArr.isHaveValue(groupindex)) {
+
+	                _groupArr.push(groupindex);
+	            }
+	        }
 	    }
 
 
@@ -76,17 +133,19 @@
 	var timer = {};
 
 	$(function () {
-	    
+
 	    classindex = $("#hidden-classindex").text();
 	    classid = $("#hidden-classid").text();
 
-	    GetClassroomMonitor();
+	    GetClassroomMonitor(1);
 
 	    $("#btn-submit").click(SaveClassEnd);
 
+
+
 	});
 
-	function GetClassroomMonitor() {
+	function GetClassroomMonitor(a) {
 
 	    $.ajax({
 	        type: "get",
@@ -95,16 +154,49 @@
 	        data: { classindex: classindex },
 	        dataType: "JSON",
 	        success: function (data) {
-
+	            document.getElementById("b-monitorlist").innerHTML = "";
 	            data = JSON.parse(data);
+
+
+	            if (data.Code == "404" && data.OK.toString() == "false") {
+	                window.location.reload();
+	                return;
+
+	            }
+
 	            var li = data.result;
 
 	            var tpl = __webpack_require__(46);
-	            $("#b-monitorlist").html(tpl(li));
+	            
+	            document.getElementById("b-monitorlist").innerHTML = tpl(li);
+	            //$("#b-monitorlist").html("");
+	            //$("#b-monitorlist").html(tpl(li));
 
 	            lesson.init();
 
-	           window.timer= setTimeout(GetClassroomMonitor, 10000);
+
+	            //保留上次展开的组的状态
+	            for (var i = 0; i < _groupArr.length; i++) {
+
+	                lesson.toggleShow($(".card-header[data-groupindex='" + _groupArr[i] + "']")[0]);
+	                //$(".card-header[data-groupindex='" + _groupArr[i] + "']").click();
+
+	            }
+
+	            //第一次第一个组展开
+	            if (a == 1) {
+
+	                //if ($(".card-header").eq(0).length > 0) {
+	                //    $(".card-header").eq(0).click();
+	                //}
+	                lesson.toggleShow($(".card-header").eq(0));
+	                //$(".card-header").eq(0).click();
+	                //setTimeout(function () { $(".card-header").eq(0).click(); }, 1000);
+
+	            }
+
+
+	            window.timer = setTimeout(GetClassroomMonitor, 10000);
 
 	        }
 	    });
@@ -112,7 +204,7 @@
 	}
 
 	function SaveClassEnd() {
-
+	    _groupArr = [];
 	    $.ajax({
 	        type: "POST",
 	        url: "/teacher/myclass/SaveClassEnd",
@@ -123,7 +215,7 @@
 
 	            $("#btn-submit").off("click");
 
-	            $.router.load('/teacher/myclass/CourseReport?classindex=' + classindex+"&classid="+classid, true);
+	            $.router.load('/teacher/myclass/CourseReport?classindex=' + classindex + "&classid=" + classid, true);
 
 	        }
 	    });
@@ -230,15 +322,19 @@
 	/**/) {
 	'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,v=$data.v,i=$data.i,$escape=$utils.$escape,d=$data.d,j=$data.j,$out='';$out+=' ';
 	$each($data,function(v,i){
-	$out+=' <div class="card slide-down"> ';
+	$out+=' <div class="card slide-up"> ';
 	if(v.GroupIndex>0){
-	$out+=' <div class="card-header"> <div class="head-title"> <span class="icon-down-drop"></span> ';
+	$out+=' <div class="card-header" data-groupindex="';
+	$out+=$escape(v.GroupIndex);
+	$out+='"> <div class="head-title"> <span class="icon-right-drop"></span> ';
 	$out+=$escape(v.GroupIndex);
 	$out+='组 </div> <div class="head-after"><span>平均：</span><span>';
 	$out+=$escape(v.AvgCredits);
 	$out+='</span><span>学分</span><span>（第';
 	$out+=$escape(v.Ranking);
 	$out+='名）</span></div> </div> ';
+	}else{
+	$out+=' <div class="card-header" data-groupindex="0" style="min-height:0;height:0;margin:0;padding:0;"></div> ';
 	}
 	$out+=' <div class="card-content"> <div class="list-block"> <ul> ';
 	$each(v.StudentMonitorInfoList,function(d,j){

@@ -14,10 +14,13 @@ $(function () {
     $("#passone").hide();
     $("#passtwo").hide();
     $("#passthree").hide();
+    // $(".info").hide();
+    $(".info").css('visibility', 'hidden')
     if (result.Score == 100) {
         shoumengban = $("#fullfen");
         $("#full").removeClass("none");
-        $("#starsone").hide();
+        //  $("#starsone").hide();
+        $("#starsone").css('visibility', 'hidden')
         $(".in").hide();
         var score = 0;
         var timer = setInterval(function () {
@@ -32,10 +35,11 @@ $(function () {
             } else if (score - result.Score > 5) {
               
                 $("#starsone").show();
+                $("#starsone").css('visibility', 'visible')
             }
            
             score++;
-        }, 100);
+        }, 20);
         $("#creditone").html("+" + result.Credit);
         $("#currenyone").html("+" + result.Curreny);
         
@@ -52,20 +56,23 @@ $(function () {
             } else if (score - result.Score > 5) {
                 $("#passthree").show();
                 $(".in").show();
+                // $(".info").show();
+                $(".info").css('visibility', 'visible')
                clearInterval(timer);
             }
             score++;
-        }, 100);
+        }, 20);
 
         $("#creditthree").html("+" + result.Credit);
         $("#nopasstwo").html(result.NoPass);
     } else {
         shoumengban = $("#nofullfen");
         $("#nofull").removeClass("none");
-        $("#starstwo").hide();
+        //$("#starstwo").hide();
+        $("#starstwo").css('visibility','hidden');
         $(".in").hide();
         var score = 0;
-        var timer = setInterval(function () {
+       var timer = setInterval(function () {
             
             if (score <= result.Score) {
                 $(".pass-score").html(score + "分");
@@ -75,15 +82,18 @@ $(function () {
                 $(".in").show();
                 clearInterval(timer);
             } else if (score - result.Score > 5) {
+                $(".info").css('visibility','visible');
                 if (result.Score < 90) {
-                    $("#starstwo").html("<i class=\"star star7 ml15\"></i>");
+                    $("#starstwo").html("<i class=\"star star7 ml15\"></i><i class=\"star star8 ml15\"></i><i class=\"star star8 ml15\"></i>");
                 } else {
-                    $("#starstwo").html("<i class=\"star star7 ml15\"></i><i class=\"star star7 ml15\"></i>");
+                    $("#starstwo").html("<i class=\"star star7 ml15\"></i><i class=\"star star7 ml15\"></i><i class=\"star star8 ml15\"></i>");
                 }
-                $("#starstwo").show();
+
+                //$("#starstwo").show();
+                $("#starstwo").css('visibility', 'visible');
             } 
             score++; 
-        }, 100);
+        }, 20);
      
         $("#credittwo").html("+" + result.Credit);
         $("#currenytwo").html("+" + result.Curreny);

@@ -8,10 +8,10 @@
       font-size:16px;
      }
     .word{
-      height:110px;line-height:110px;display:inline-block;font-size:40px;
+      min-height:110px;line-height:110px;display:inline-block;font-size:40px;
      }
     .pronunce{
-      height:110px;line-height:110px;
+      min-height:110px;line-height:110px;
      }
     .tell{
       height:55px;
@@ -33,6 +33,10 @@
         margin-right:25px;
         border-bottom:2px solid #b5b5b5;
         outline: none;
+        font-size:16px;
+        font-weight:500;
+        text-align:center;
+
       }
 
     }
@@ -49,6 +53,8 @@
         border-radius:6px;
         background:#f9f9f9;
         margin-right:10px;
+        font-weight:500;
+        font-size:16px;
       }
       span.active{
         background:#fff4ea;
@@ -62,12 +68,13 @@
     .voice{
       width:580px;
       .vm{margin-left:20px;}
-      .error{
-        background:#ffe2e0;
-        border:2px solid #ff887b;
+       .btn.error{
+        background:#ffe2e0!important;
+        border:2px solid #ff887b!important;
       }
-      .success{
-        border:2px solid #5ee28a;
+      .btn.success{
+        border:2px solid #5ee28a!important;
+         background:#f9f9f9!important;
       }
     }
     .unit-1  .word{
@@ -80,6 +87,7 @@
       }
       .btn.success{
         border:2px solid #5ee28a!important;
+         background:#f9f9f9!important;
       }
     }
     .unit-1 .btn,.unit-5 .btn{
@@ -95,6 +103,10 @@
       margin-top:10px;
       .order{margin-right:30px;}
     }
+    .unit-1 .btn:hover,.unit-5 .btn:hover{
+         background: #fff4ea!important;
+        border: 2px solid #ffb269!important;
+    }
   }
 }
 .return{
@@ -103,3 +115,4 @@
   line-height:30px;
   margin-right:20px;
 }
+.selectionthree{margin-top:10px;}

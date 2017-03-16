@@ -57,10 +57,22 @@
 	function VerUserClass() {
 	    $.post("/Student/LearnCenter/GetUserClassInfo", {}, function (result) {
 	        if (result.State == 0) {
-	            needCourseId = result.CouserId;
+	            needCourseId = parseInt(result.CouserId);
 	            groupId = result.GroupId;
-	            if (result.GroupId>0&&needCourseId>0) {
-	                $("#zhuangtai").html("<img src=\"../../../build/img/pc.png\" alt=\"\" class=\"vm\"/>&nbsp;<span class=\"learn-coins\">正在上课:</span><span style=\"margin-left: 20px;\">(" + groupId + "组)</span>");
+	            if (needCourseId > 0) {
+	                if (groupId > 0) {
+	                    $("#zhuangtai").html("<img src=\"../../../egword/build/img/pc.png\" alt=\"\" class=\"vm\"/>&nbsp;<span class=\"learn-coins\">正在上课:</span><span style=\"margin-left: 20px;\">(" + groupId + "组)</span>");
+	                } else {
+	                    $("#zhuangtai").html("<img src=\"../../../egword/build/img/pc.png\" alt=\"\" class=\"vm\"/>&nbsp;<span class=\"learn-coins\">正在上课</span>");
+	                }
+	               
+	                $(".synchronization").each(function() {
+	                    if (parseInt($(this).attr("data-id")) == needCourseId) {
+	                        var message = $(this).children(".onediv").children(".twodiv").children(".threediv").children(".kexiao").html();
+	                        var newmessage = (parseInt(message.split('/')[0]) + 1 )+ "/" + message.split('/')[1];
+	                        $(this).children(".onediv").children(".twodiv").children(".threediv").children(".kexiao").html(newmessage);
+	                    }
+	                });
 	            }
 	        }
 	    });
@@ -70,11 +82,12 @@
 	    $.post("/Student/LearnCenter/ReviewCount", { "courseId": courseId }, function (result) {
 	        if (result.State == 0) {
 	            if (result.Data == 0) {
-	                if (type == 0) {
-	                    window.location.href = "/Student/LearnCenter/ExperienceIndex?courseId=" + courseId;
-	                } else {
-	                    window.location.href = "/Student/LearnCenter/CourseBase?courseId=" + courseId;
-	                }
+	                window.location.href = "/Student/LearnCenter/CourseBase?courseId=" + courseId;
+	                //if (type == 0) {
+	                //    window.location.href = "/Student/LearnCenter/ExperienceIndex?courseId=" + courseId;
+	                //} else {
+	                //    window.location.href = "/Student/LearnCenter/CourseBase?courseId=" + courseId;
+	                //}
 	                
 	            } else {
 	                window.location.href = "/Student/LearnCenter/ReviewCourse?courseId=" + courseId + "&count=" + result.Data + "&canClose=" + result.CanClose;
@@ -95,6 +108,7 @@
 
 	    $("body").delegate(".close", "click", function () {
 	        $("#go-lesson").hide();
+	        $('.pop-mask').hide();
 	    });
 
 	    
@@ -102,17 +116,19 @@
 	    $("body").delegate(".courseinsert", "click", function () {
 	        var courseId = $(this).attr("data-setid");
 
-	        if (needCourseId == courseId||needCourseId==0) {
+	        if (parseInt(needCourseId) == parseInt(courseId)||parseInt(needCourseId)==0) {
 	            InsertCourse(courseId,1);
 	        } else {
 	            $("#go-lesson").show();
+	            $('.pop-mask').show();
 	        }
 	    });
 
 	    $("body").delegate(".analysispage", "click", function () {
 	        var courseId = $(this).attr("data-setid");
+	        var courseName = $(this).attr("data-name");
 
-	        window.location.href = "/Student/LearnCenter/StudentAnalysis?courseId=" + courseId;
+	        window.location.href = "/Student/LearnCenter/StudentAnalysis?courseId=" + courseId + "&courseName=" + courseName;
 	    });
 
 	    $("body").delegate(".wordbenpage", "click", function () {
@@ -147,6 +163,7 @@
 	            InsertCourse(courseId,0);
 	        } else {
 	            $("#go-lesson").show();
+	            $('.pop-mask').show();
 	        }
 	    });
 	});
@@ -545,11 +562,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -567,12 +590,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -581,18 +605,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -621,7 +651,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -642,16 +672,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -681,6 +717,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);

@@ -54,7 +54,11 @@ function GetGroupOrderList() {
             if (m.PassRate>0) {
                 $("#b-passrate").html(m.PassRate + "%");
             } else {
-                $("#b-passrate").html("-");
+                if (m.AllStudentCount>0) {
+                    $("#b-passrate").html("0%");
+                } else {
+                     $("#b-passrate").html("-");
+                }
 
             }
 
@@ -80,8 +84,16 @@ function GetTeacherKpi(timenum) {
 
             var m = data.result;
 
-            $("#b-kpivalue").html(m.KpiValue + "分");
-            $("#b-ordernum").html("第" + m.OrderNum + "名");
+            var kpi = m.KpiValue > 0 ? m.KpiValue : 0;
+
+            $("#b-kpivalue").html(kpi + "分");
+
+            if (m.OrderNum>0) {
+                 $("#b-ordernum").html("第" + m.OrderNum + "名");
+            } else {
+                 $("#b-ordernum").html("暂无");
+            }
+           
 
 
         }
@@ -112,3 +124,5 @@ function ConvertName2Num(name) {
 
     return num;
 }
+
+

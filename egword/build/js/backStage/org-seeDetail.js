@@ -44,8 +44,12 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
 	var Lui = __webpack_require__(1);
 	var tool = __webpack_require__(6);
+	var ut = __webpack_require__(8);//校验
+	var pop = __webpack_require__(11);//提示消息
+
 	var lui = new Lui();
 	//编辑的弹出层事件
 	tool.pophide($('.eg-pop .close,.eg-pop .cancel'), $('.eg-pop'));
@@ -137,18 +141,21 @@
 	            jsonAdd.Remark = escape($("#txtmark").val());//备注
 	           
 	            if (jsonAdd.LinkMan.length < 1) {
-	                alert("机构联系人不能为空");
+	                $("#addTipU").css({ "visibility": "visible" }).html("机构联系人不能为空！");
+	                //alert("机构联系人不能为空");
 	                return;
 	            }
 	            if (jsonAdd.LinkManTel.length < 1) {
-	                alert("机构电话不能为空");
+	                $("#addTipU").css({ "visibility": "visible" }).html("电话格式不对！");
+	                //alert("机构电话不能为空");
 	                return;
 	            }
-
+	           
 	            //校验电话
-	            if (!IsMobile(jsonAdd.LinkManTel)) {
+	            if (!ut.IsMobile(jsonAdd.LinkManTel)) {
+	                $("#addTipU").css({ "visibility": "visible" }).html("电话格式不对！");
 
-	                alert("电话格式不对");
+	                //alert("电话格式不对");
 	                return;
 
 	            }
@@ -181,12 +188,15 @@
 	                            success: function (data) {
 
 
-	                                alert("添加成功");
+	                                //alert("添加成功");
+	                                pop.PopTipShow("操作成功");
 
 	                            }
 	                        });
 	                    } else {
-	                        alert("电话重复");
+	                        //alert("电话重复");
+	                        $("#addTipU").css({ "visibility": "visible" }).html("电话重复！");
+	                       
 	                    }
 
 	                }
@@ -207,7 +217,7 @@
 
 	        //checkbox点击的时候
 	        $("body").delegate("#checkBoxSpan", "click", function () {
-	            debugger;
+	            
 	            CalMoney();
 	        });
 	      
@@ -227,7 +237,8 @@
 	                jsonAddCz.OrgValue = 0;
 	            }
 	            if (jsonAddCz.OrgMoney.length < 1) {
-	                alert("机构付款金额不能为空");
+	                $("#addTipM").css({ "visibility": "visible" }).html("机构付款金额不能为空！");
+	                //alert("机构付款金额不能为空");
 	                return;
 	            }
 	            //提交表单
@@ -240,10 +251,12 @@
 	                    data: JSON.stringify(jsonAddCz)
 	                },
 	                success: function (data) {
-	                    debugger;
+	                    
 	                    $(".eg-pop .close").click();//关闭弹窗
+	                    GetSingleOrg();//重新请求
 
-	                    alert("添加成功");
+	                   // alert("添加成功");
+	                    //pop.PopTipShow("添加成功");
 
 	                }
 	            });
@@ -253,23 +266,47 @@
 	        });
 
 
+	      
 	        //机构账号冻结
 	        $("body").delegate("#froBtn", "click", function () {
+	            var str = $("#froBtn").html();
+	            pop.OpenConfrimPop("确认" + str + "?", "Confrim", str + "提示");
+
+
+
+	        });
+	        //确定禁用
+	        $("body").delegate("#Confrim", "click", function () {
+	            var subVal = $("#froBtn").attr("data-id");
 	            //提交表单
-	                $.ajax({
-	                    type: "post",
-	                    url: "/Management/OrgManage/FrozenAccount",
-	                    dataType: "json",
-	                    data: {
-	                        data: orgId
-	            },
+	            $.ajax({
+	                type: "post",
+	                url: "/Management/OrgManage/FrozenAccount",
+	                dataType: "json",
+	                data: {
+	                    data: orgId, type: subVal
+	                },
 	                success: function (data) {
-	                    debugger;
-	                   
-	                    alert("冻结成功");
+
+	                    $(".eg-pop").hide();
+	                    $(".pop-mask").hide();//隐藏
+
+	                    //alert("冻结成功");
+	                    //pop.PopTipShow("操作成功");
+	                    if (subVal == "1") {//启用
+	                        $("#froBtn").html("启用账号");
+	                        $("#froBtn").attr("data-id","0");
+
+
+	                    } else {
+	                        $("#froBtn").html("冻结账号");
+	                        $("#froBtn").attr("data-id", "1");
+	                        
+	                    }
 
 	                }
 	            });
+
 	        });
 
 
@@ -322,7 +359,7 @@
 	                    $("#spandrop_jy").html("B级");
 
 	                }
-	                debugger;
+	                
 	                $("#drop_htyq").attr("title", GetNumTran(data.Data.CoYear) + "年");//合同延期
 	                $("#spandrop_htyq").html(GetNumTran(data.Data.CoYear) + "年");//合同延期显示赋值
 	                $("#drop_htyq").attr("data-id", data.Data.CoYear);
@@ -335,6 +372,17 @@
 	                //oldCoYear = data.Data.CoYear;//后台需要进行减法处理（暂时不需要）
 	                //储值信息赋值
 	                $("#orgName").html(orgName);
+	                if (data.Data.IsFrozen) {//禁用1启用0
+	                    $("#froBtn").attr("data-id", "0");
+	                    $("#froBtn").html("启用账号");
+
+
+	                } else {
+	                    $("#froBtn").attr("data-id", "1");//
+	                    $("#froBtn").html("冻结账号");
+
+	                    
+	                }
 
 
 	            }
@@ -364,7 +412,7 @@
 	//计算总额
 	function CalMoney() {
 
-	    debugger;
+	    
 	    var total = 0;
 	    var zk = $("#drop_zk").attr("data-id");
 	    if ($("#txtOrgMoney").val() != "") {
@@ -819,11 +867,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -841,12 +895,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -855,18 +910,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -895,7 +956,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -916,16 +977,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -955,6 +1022,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
@@ -1172,7 +1240,97 @@
 
 /***/ },
 /* 7 */,
-/* 8 */,
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	    checkNum: function (event) {
+
+	        var keynum = event.keyCode;
+	        if ((keynum >= 48 && keynum <= 57)) {
+	            document.execCommand("Cut", false, true);
+	            var nT = $(event.currentTarget).val();
+	            //第一个不能输入0
+	            if ((nT == "") && keynum == 48)
+	                return false;
+
+	            else if (nT.length > 2) {
+	                return false;
+	            } else
+	                return true;
+	        } else
+	            return false;
+	    },
+	    matchNum: function (t) {
+	        t.value = t.value.trimtext('.');
+	    },
+	    checkFloat: function (event) {
+	        //var score = this.totalSore;
+	        var keynum = event.keyCode;
+	        //console.log(keynum);
+	        if ((keynum >= 48 && keynum <= 57) || (keynum == 46)) {
+	            document.execCommand("Cut", false, true);
+	            var nT = $(event.currentTarget).val();
+	            //第一个字符不能为小数点，不能重复输入小数点
+	            if ((nT == "" || nT.indexOf(".") > -1) && keynum == 46)
+	                return false;
+	                //小数点后保留一位
+	            else if (nT.length > 2 && nT.indexOf(".") == nT.length - 2) {
+	                return false;
+	            }
+	                //0后面只能输入小数点
+	            else if (nT == "0" && keynum != 46)
+	                return false;
+	                //三位数后只能输入小数点
+	            else if (nT.length == 3 && nT.indexOf(".") < 0 && keynum != 46)
+	                return false;
+	            else if (nT.length > 4) {
+	                return false;
+	            } else
+	                return true;
+	        } else
+	            return false;
+	    },
+	    numGradeTran: function (t) { //数字年级转换
+	       
+	        switch (t) {
+	            case 1:
+	                return "一年级";
+	            case 2:
+	                return "二年级";
+	            case 3:
+	                return "三年级";
+	            case 4:
+	                return "四年级";
+	            case 5:
+	                return "五年级";
+	            case 6:
+	                return "六年级";
+	            case 7:
+	                return "七年级";
+	            case 8:
+	                return "八年级";
+	            case 9:
+	                return "九年级";
+	            case 10:
+	                return "高一";
+	            case 11:
+	                return "高二";
+	            case 12:
+	                return "高三";
+	            default:
+	                return t;
+
+
+	        }
+
+	        return t;
+	    }, IsMobile: function(t) {
+	        return (/^1[3|4|5|7|8]\d{9}$/.test(t));//校验手机的格式
+	    }
+	}
+
+/***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1415,7 +1573,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }
@@ -1521,7 +1679,87 @@
 	}();
 
 /***/ },
-/* 11 */,
+/* 11 */
+/***/ function(module, exports) {
+
+	//遮罩
+	function MaskShow() {
+	    $(".pop-mask").show();
+	}
+
+	function MaskHide() {
+	    $(".pop-mask").hide();
+	    $(".add").hide();
+	}
+	//传递显示的消息
+	function PopTipShow(obj,title) {
+	    $(".small-pop").each(function () {
+
+	        $(this).remove();
+	    });
+
+	    if (title == undefined) {
+	        title = "提示消息";
+	    }
+	    var tiphtml = '<div class="eg-pop small-pop" > <div class="header"> ' + title + '<span class="close"></span> </div> <div class="body">' + obj + ' </div> </div>';
+
+	   
+	    $("body").append(tiphtml);
+	    $(".pop-mask").show();
+	    $(".small-pop").show();
+	}
+
+
+
+	//弹出确认框
+	var OpenConfrimPop = function (obj,btnId,title) {
+	    $('[class="pop-up font14"]').each(function () {
+
+	        $(this).remove();
+	    });
+
+	    if (title==undefined) {
+	        title ="提示消息";
+	    }
+	   
+	    var html = '<div class="eg-pop small-popbtn" > <div class="header"> ' + title + '<span class="close"></span> </div> <div class="body"> ' + obj + ' </div> <div class="footer"> <span class="operatBtn left" id="' + btnId + '" style="margin-left:50px;">确定</span> <span class="operatBtn right" id="Cancel" style="margin-right:50px;">取消</span> </div> </div>';
+	    debugger;
+	    $("body").append(html);
+	    $(".pop-mask").show();
+	    $(".small-popbtn").show();
+	};
+
+	function PopTipHide() {
+	    $(".pop-up").hide();
+	    $(".pop-mask").hide();
+	    $(".add").hide();
+	    document.location.reload();
+	}
+
+	exports.MaskShow = MaskShow;
+	exports.MaskHide = MaskHide;
+	exports.PopTipShow = PopTipShow;
+	exports.PopTipHide = PopTipHide;
+	exports.OpenConfrimPop = OpenConfrimPop;
+
+	//处理弹出框的隐藏
+	$(function () {
+	    $("body").delegate(".close,#Cancel", "click", function () {
+	        $(".small-popbtn").hide();
+	        $(".small-pop").hide();
+	        $(".pop-mask").hide();
+	        //document.location.reload();
+	    });
+
+	   
+
+
+
+	});
+
+
+
+/***/ },
 /* 12 */,
 /* 13 */,
 /* 14 */,

@@ -61,7 +61,10 @@
 	var commJs = __webpack_require__(8);//公共方法
 	var gradeArr = [{ name: '一年级', id: '1', pid: '' }, { name: '二年级', id: '2', pid: '00' }, { name: '三年级', id: '3', pid: '00' }, { name: '四年级', id: '4', pid: '00_01' }, { name: '五年级', id: '5', pid: '00_01' }, { name: '六年级', id: '6', pid: '00_02' }, { name: '七年级', id: '7', pid: '00_02' }, { name: '八年级', id: '8', pid: '' }, { name: '九年级', id: '9', pid: '00' }, { name: '高一', id: '10', pid: '00' }, { name: '高二', id: '11', pid: '00_01' }, { name: '高三', id: '12', pid: '00_01' }];//年级初始化
 
-	var isSel = 0;//0表示没加载下拉1表示加载
+	var isSel = 0;//0表示没加载下拉1表示加载（学校）
+	//var isSelBj = 0;//0表示没加载下拉班级1表示加载
+	var arrTjr = [];//推荐人，老师
+	var isLoadTeach = 0;//是否加载推荐人0没加，1加
 	var module = {
 	    init: function () {
 	        //todo 逻辑函数
@@ -123,13 +126,22 @@
 	            var dataArr = $(this).attr("data-id");//数组id、姓名、年级、学校id、教材id
 	            var stuName = $(this).attr("data-name");//学生姓名
 	           
+
 	            stuId = parseInt(dataArr.split('-')[0]);
 	            stuGrade = parseInt(dataArr.split('-')[1]);
 	            stuEditionId = parseInt(dataArr.split('-')[3]);
 	            var strGrade = commJs.numGradeTran(parseInt(dataArr.split('-')[1]));
 	            $("#stuName").html(stuName + "(" + strGrade + ")");//张三（七年级）
-
-
+	            debugger;
+	            var strShow = $(this).html();//续课
+	            if (strShow == "续课") {
+	                $("#showAddCo").html("课程续报");
+	                $("#tjr").show();
+	            } else {
+	                $("#showAddCo").html("课程开通");
+	                $("#tjr").hide();
+	                
+	            }
 	            //调取数据初始化弹窗(下拉框的数据)
 	            var arrTemp = [];//临时数据
 	            //加载班级列表
@@ -152,12 +164,12 @@
 	                            });//课程
 	                        }
 
-	                        lui.initDropDownList({ warpid: "drop_class", width: 185, subtextlength: 20, nameField: 'name', idField: 'id', data: arrTemp, selectedCallBack: null });//报课的班级
+	                        lui.initDropDownList({ warpid: "drop_class", width: 185, subtextlength: 15, nameField: 'name', idField: 'id', data: arrTemp, selectedCallBack: null });//报课的班级
 	                        loadCourse(1);
 	                    }
 	                    else {
 
-	                        lui.initDropDownList({ warpid: "drop_class", width: 185, subtextlength: 20, nameField: 'name', idField: 'id', data: [{ name: '无', id: '0' }], selectedCallBack: null });//报课的班级
+	                        lui.initDropDownList({ warpid: "drop_class", width: 185, subtextlength: 15, nameField: 'name', idField: 'id', data: [{ name: '无', id: '0' }], selectedCallBack: null });//报课的班级
 	                        loadCourse(1);
 	                       
 
@@ -190,8 +202,14 @@
 	            }
 	            jsonAdd.SchoolId = $("#drop_class").attr("data-id").split('-')[0];
 	            jsonAdd.ClassId = $("#drop_class").attr("data-id").split('-')[1];
+	            debugger;
+	            jsonAdd.RefereeId = $("#drop_tjr").attr("data-id");//推荐人
+	            if (parseInt(jsonAdd.RefereeId)>0) {
+	                
+	            } else {
+	                jsonAdd.RefereeId = 0;//给默认值
 
-	           
+	            }
 
 	            if ($("#engType").hasClass("active")) {
 	                jsonAdd.IsEng = 1;//是默认的英语
@@ -233,7 +251,21 @@
 	        });
 	        //教材选择框
 	        $("body").delegate('.teacher-grade', "click", function () {
-	            GetEdutionData("X");
+	           
+	            var grade = $("#drop_nj").attr("data-id");
+	            if (grade > 9) { 
+
+	                $("span[data-id='G']").click();
+
+	            } else if (grade > 6) {
+	                $("span[data-id='C']").click();
+
+	            } else {
+
+	                $("span[data-id='X']").click();
+	            }
+
+	            //GetEdutionData("X");
 	            $("#add-grade").show();
 
 
@@ -447,7 +479,15 @@
 
 	//只是加载列表数据
 	function GetStuDataNotLoadSelect() {
+	   
 	    loadClass(-1);//如果是-的话不进行加载课程
+	    return GetStuData(1);
+
+	}
+
+	//只是加载列表数据（不联动）
+	function GetStuDataNotLoadSelectBj() {
+	   
 	    return GetStuData(1);
 
 	}
@@ -503,7 +543,7 @@
 	        success: function (data) {
 	            if (data.Data && data.Data.length > 0) {
 
-
+	                arrBj.length = 0;//清空数组
 	                arrBj.push({
 	                    name: "全部班级", id: 0, pid: 0
 	                });//班级
@@ -515,7 +555,7 @@
 	                }
 
 
-	                lui.initDropDownList({ warpid: "drop_bj", width: 185, nameField: 'name', idField: 'id', data: arrBj, selectedCallBack: GetStuDataNotLoadSelect, subtextlength: 10 });//班级
+	                lui.initDropDownList({ warpid: "drop_bj", width: 185, nameField: 'name', idField: 'id', data: arrBj, selectedCallBack: GetStuDataNotLoadSelectBj, subtextlength: 10 });//班级
 
 	                if (obj != -1) {
 	                    loadCourse();
@@ -549,8 +589,11 @@
 	        success: function (data) {
 	            
 	            if (data.Data && data.Data.length > 0) {
-
-
+	                if (isLoadTeach != 1) {
+	                    loadTeachers();//加载推荐人
+	                    
+	                }
+	              
 	                arrTbk.push({
 	                    name: "同步课", id: 0, pid: 0
 	                });//班级
@@ -576,7 +619,7 @@
 	                    $("#lessonPrice").html(arrTemp[0].id.split('-')[3] + "元");
 
 	                } else {
-	                    lui.initDropDownList({ warpid: "drop_tbk", width: 185, nameField: 'name', idField: 'id', data: arrTbk, selectedCallBack: GetStuDataNotLoadSelect, subtextlength: 10 });//课程
+	                    lui.initDropDownList({ warpid: "drop_tbk", width: 185, nameField: 'name', idField: 'id', data: arrTbk, selectedCallBack: GetStuDataNotLoadSelectBj, subtextlength: 10 });//课程
 	                }
 
 
@@ -678,6 +721,52 @@
 	    });
 
 	}
+
+
+
+	//加载推荐人
+	function loadTeachers() {
+
+	    //加载班级列表
+	    $.ajax({
+	        type: "post",
+	        url: "/Org/StudentManage/GetOrgTeachers",
+	        dataType: "json",
+	        data: {
+	            data: ""
+	        },
+	        success: function (data) {
+	            if (data.Data && data.Data.length > 0) {
+
+
+
+	                for (var i = 0; i < data.Data.length; i++) {
+
+	                    arrTjr.push({
+	                        name: data.Data[i].TeachName, id: data.Data[i].TeachId, pid: 1
+	                    });//推荐人
+	                }
+
+
+	                lui.initDropDownList({
+	                    warpid: "drop_tjr", width: 185, nameField: 'name', idField: 'id', subtextlength: 10, data: arrTjr
+	                });//推荐人
+	                isLoadTeach = 1;
+
+	            }
+	            else {
+
+	                lui.initDropDownList({
+	                    warpid: "drop_tjr", width: 185, nameField: 'name', idField: 'id', data: [{ name: '无', id: '0', pid: '' }]
+	                });//推荐人
+
+	            }
+	        }
+	    });
+
+	}
+
+
 
 
 
@@ -1146,11 +1235,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -1168,12 +1263,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -1182,18 +1278,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -1222,7 +1324,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -1243,16 +1345,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -1282,6 +1390,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
@@ -1832,7 +1941,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }
@@ -2030,6 +2139,12 @@
 	    obj.html('<tr  style="border:none;text-align:center;height:280px;"><td style="font-size: 16px;" colspan="'+num+'"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;">'+jQuery("#divLoading").html() +'</div></div></td></tr>');
 	}
 
+	function ShowLoadingForTableNoClass(obj, num) {
+	    if (num == undefined || obj == undefined) {
+	        return;
+	    }
+	    obj.html('<tr><td colspan="' + num + '"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;">' + jQuery("#divLoading").html() + '</div></div></td></tr>');
+	}
 
 
 	//弹出加载图片
@@ -2042,6 +2157,8 @@
 
 
 	exports.ShowLoadingForTable = ShowLoadingForTable;//针对table布局的
+	exports.ShowLoadingForTableNoClass = ShowLoadingForTableNoClass;//清除样式
+
 	exports.ShowLoading = ShowLoading;
 
 
@@ -2257,7 +2374,7 @@
 	$out+=' <tr> <td>';
 	$out+=$escape($value.StuName);
 	$out+='</td> <td>';
-	$out+=$escape($value.LoginId);
+	$out+=$escape($value.Tel);
 	$out+='</td> ';
 	include('./StuClassList',$value.StuClassList);
 	$out+=' <td> <span class="inline operatBtn seeDetail" data-id="';

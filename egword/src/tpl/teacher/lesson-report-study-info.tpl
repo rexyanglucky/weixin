@@ -83,7 +83,8 @@
                                     <div class="item-inner">
                                         <div class="item-title">
                                             累计学分：
-                                            {{if studentAll.Credits<studentAll.CurrentNumber*studentAll.DestNumber}}
+                                            <!--(总课次-剩余课次) * 单课目标量-->
+                                            {{if studentAll.Credits<(studentOne.BookNumber-studentAll.LeftNumber)*studentOne.DestNumber}}
                                             <span class="word-num">
                                                 {{studentAll.Credits}}
                                             {{else}}
@@ -91,7 +92,7 @@
                                              {{studentAll.Credits}}
                                             {{/if}}
                                             </span>
-                                            <span class="item-remark">（参考值：<span>{{studentAll.CurrentNumber*studentAll.DestNumber}}/{{studentAll.WordAmount}}</span>）</span>
+                                            <span class="item-remark">（参考值：<span>{{(studentOne.BookNumber-studentAll.LeftNumber)*studentOne.DestNumber}}/{{studentAll.DestNumber}}</span>）</span>
                                         </div>
                                         <div class="item-after"></div>
                                     </div>

@@ -69,7 +69,8 @@
                         font-size: 94px;
                         color: #ffb973;
                         position: absolute;
-                        top: 300px;
+                        top: 50%;
+                        transform: translateY(-50%);
                         left: -88px;
                         cursor: pointer;
                     }
@@ -83,7 +84,8 @@
                         color: #ffb973;
                         position: absolute;
                         cursor: pointer;
-                        top: 300px;
+                         top: 50%;
+                        transform: translateY(-50%);
                         right: -88px;
                     }
                 }
@@ -102,7 +104,7 @@
                             border-bottom: 1px solid #ffe6b1;
                             //height:80px;
                             margin-left: 30px;
-
+                           
                             .word-name {
                                 font-size: 30px;
                                 font-weight: bold;
@@ -177,7 +179,7 @@
                         color: #ffb973;
                         position: absolute;
                         top: 300px;
-                        left: -88px;
+                        left: -60px;
                         cursor: pointer;
                     }
                 }
@@ -192,7 +194,7 @@
                         position: absolute;
                         cursor: pointer;
                         top: 300px;
-                        right: -88px;
+                        right: -60px;
                     }
                 }
 
@@ -206,11 +208,14 @@
                         height: 80px;
                         line-height: 80px;
                         background: #f2f2f2;
-
+                         cursor:pointer;
                         .col {
                             display: inline-block;
                             float: left;
                             text-indent: 3.04%;
+                            overflow:hidden;
+                            white-space:nowrap;
+                            text-overflow:ellipsis;
                         }
 
                         .col1 {

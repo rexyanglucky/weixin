@@ -143,7 +143,11 @@
 	              
 	            }
 	            else {
-	                $("#showNoData").show();
+	                if (page == 1) {
+	                    
+	                    $("#showNoData").show();
+	                }
+	              
 
 
 	            }
@@ -425,7 +429,7 @@
 	    }
 	    for (var l = 0; l < array.length; l++) {
 	        if (wordStr.indexOf((l + 10000).toString()) != -1) {
-	            wordStr = wordStr.replace(new RegExp((l + 10000).toString()), ("<span class=\"red\">" + array[l] + "</span>"));
+	            wordStr = wordStr.replace(new RegExp((l + 10000).toString(), "gi"), ("<span class=\"red\">" + array[l] + "</span>"));
 	        }
 
 	    }

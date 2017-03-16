@@ -8,11 +8,6 @@ $(function () {
 
     GetCourseReportList();
 
-    $("#btn-submit").click(function () {
-
-        $.router.load("/teacher/myclass/RewardCoin?classindex=" + classindex+"&classid="+classid, true);
-
-    });
 
     $(".s-tab").on("click", function () {
 
@@ -35,6 +30,21 @@ function GetCourseReportList() {
             var tpl = require("teacher/lesson-report");
 
             $("#g-s-content").html(tpl(data));
+
+            var ishavegroup = 0;
+
+            if (data.grouplist.length > 0) {
+
+                ishavegroup = 1;
+            }
+
+    
+            $("#btn-submit").click(function () {
+
+                $.router.load("/teacher/myclass/RewardCoin?classindex=" + classindex + "&classid=" + classid+"&ishavegroup="+ishavegroup, true);
+
+            });
+
 
             $(".b-studentlist-item").on("click", function () {
                 var classindex = $(this).attr("data-classindex");

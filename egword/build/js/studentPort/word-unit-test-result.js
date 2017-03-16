@@ -60,10 +60,13 @@
 	    $("#passone").hide();
 	    $("#passtwo").hide();
 	    $("#passthree").hide();
+	    // $(".info").hide();
+	    $(".info").css('visibility', 'hidden')
 	    if (result.Score == 100) {
 	        shoumengban = $("#fullfen");
 	        $("#full").removeClass("none");
-	        $("#starsone").hide();
+	        //  $("#starsone").hide();
+	        $("#starsone").css('visibility', 'hidden')
 	        $(".in").hide();
 	        var score = 0;
 	        var timer = setInterval(function () {
@@ -78,10 +81,11 @@
 	            } else if (score - result.Score > 5) {
 	              
 	                $("#starsone").show();
+	                $("#starsone").css('visibility', 'visible')
 	            }
 	           
 	            score++;
-	        }, 100);
+	        }, 20);
 	        $("#creditone").html("+" + result.Credit);
 	        $("#currenyone").html("+" + result.Curreny);
 	        
@@ -98,20 +102,23 @@
 	            } else if (score - result.Score > 5) {
 	                $("#passthree").show();
 	                $(".in").show();
+	                // $(".info").show();
+	                $(".info").css('visibility', 'visible')
 	               clearInterval(timer);
 	            }
 	            score++;
-	        }, 100);
+	        }, 20);
 
 	        $("#creditthree").html("+" + result.Credit);
 	        $("#nopasstwo").html(result.NoPass);
 	    } else {
 	        shoumengban = $("#nofullfen");
 	        $("#nofull").removeClass("none");
-	        $("#starstwo").hide();
+	        //$("#starstwo").hide();
+	        $("#starstwo").css('visibility','hidden');
 	        $(".in").hide();
 	        var score = 0;
-	        var timer = setInterval(function () {
+	       var timer = setInterval(function () {
 	            
 	            if (score <= result.Score) {
 	                $(".pass-score").html(score + "分");
@@ -121,15 +128,18 @@
 	                $(".in").show();
 	                clearInterval(timer);
 	            } else if (score - result.Score > 5) {
+	                $(".info").css('visibility','visible');
 	                if (result.Score < 90) {
-	                    $("#starstwo").html("<i class=\"star star7 ml15\"></i>");
+	                    $("#starstwo").html("<i class=\"star star7 ml15\"></i><i class=\"star star8 ml15\"></i><i class=\"star star8 ml15\"></i>");
 	                } else {
-	                    $("#starstwo").html("<i class=\"star star7 ml15\"></i><i class=\"star star7 ml15\"></i>");
+	                    $("#starstwo").html("<i class=\"star star7 ml15\"></i><i class=\"star star7 ml15\"></i><i class=\"star star8 ml15\"></i>");
 	                }
-	                $("#starstwo").show();
+
+	                //$("#starstwo").show();
+	                $("#starstwo").css('visibility', 'visible');
 	            } 
 	            score++; 
-	        }, 100);
+	        }, 20);
 	     
 	        $("#credittwo").html("+" + result.Credit);
 	        $("#currenytwo").html("+" + result.Curreny);
@@ -582,11 +592,17 @@
 	        $("body").append(luidivspeak);
 	        $(".lui_wordspeak").each(function (index, item) {
 	            // $(item).unbind("mouseover");
-	            $(item).unbind("click");
-	            $(item).bind("click", function () {
+	            //$(item).unbind("click");
+	            //$(item).bind("click", function () {
+	            //    // var soundurl = $(item).attr("data-src");
+	            //    sthis.play(item);
+	            //});
+	            $(item).unbind("mouseover");
+	            $(item).bind("mouseover", function () {
 	                // var soundurl = $(item).attr("data-src");
 	                sthis.play(item);
 	            });
+
 	        });
 	        if (param.auto) {
 	            param.loop = param.loop || 1;
@@ -604,12 +620,13 @@
 	        var sthis = this;
 	        loop = loop || 1;
 	        interval = interval || 1000;
+	        var url = $(item).attr("data-src");
+	        var div = document.getElementById('lui_div_speak');
+	        div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
+	        var audio = $("#lui_audio_speak")[0];
+	        audio.onended = null;
 	        if (loop > 0) {
-	            var url = $(item).attr("data-src");
-	            var div = document.getElementById('lui_div_speak');
-	            div.innerHTML = '<audio id="lui_audio_speak"><source src="' + url + '"></audio>';
-	            var audio = $("#lui_audio_speak")[0];
-	            audio.play();
+	             audio.play();
 	            if (callback) {
 	                if (loop === 1) {
 	                    // audio.onended=callback;
@@ -618,18 +635,24 @@
 	                            callback();
 	                            window.clearInterval(is_playFinish);
 	                        }
-	                        setTimeout(function() {
-	                            window.clearInterval(is_playFinish);
-	                        }, 10000);
 	                    }, 5);
+	                    setTimeout(function () {
+	                        window.clearInterval(is_playFinish);
+	                    }, 10000);
 	                }
 	            }
 	            loop--;
 	        }
 	        if (loop > 0) {
-	            setTimeout(function () {
-	                sthis.play(item, loop,interval,callback);
-	            }, interval);
+	          
+	            audio.onended = function () {
+	                setTimeout(function () {
+	                    sthis.play(item, loop, interval, callback);
+	                }, interval);
+	            }
+	           
+	            
+	            
 	        }
 	        else { return; }
 	    }
@@ -658,7 +681,7 @@
 	    }else{
 	        url='/egword/build/img/guide-line.png'
 	    }
-
+	   
 	    if(pd){
 	        pd=pd
 	    }else{pd=10}
@@ -679,16 +702,22 @@
 	        $(".guide-over-layer").remove();
 	        $(".guide-line").remove();
 	        $(".guide-msg-pop").remove();
+	        $(".guide-pop").remove();
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
 	    }else{
 	        $('<div class="guide-line" style="width:'+line.width+'px;height:'+line.height+'px;background:url('+url+') no-repeat"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);
+	        $('<div class="guide-pop"></div>').insertBefore(document.body.firstChild);
 	        $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="button-center"><span class="get-it '+getItbutton+'">GET IT!</span></div></div>').insertBefore(document.body.firstChild);
 	        if(hasimg){
 	            $(".guide-msg-pop").remove();
 	            $('<div class="guide-msg-pop" style="width:'+box.width+'px;height:'+box.height+'px;"><span class="anchor"></span><div class="padding"><p>'+content+'</p></div><div class="bottombutton"><span class="get-it '+getItbutton+'">GET IT!</span><img src="'+hasimg+'" alt=""></div></dvi></div>').insertBefore(document.body.firstChild);
 	        }
 	    }
+	    console.log($(getItbutton))
+	    $('.' + getItbutton).on('click', function () {
+	       $('.guide-pop').hide();
+	    })
 	    if(dist){
 	        var d=$(dist);
 	        var pos=d.offset();
@@ -718,6 +747,7 @@
 	LuiGuide.prototype.init=function(){
 	    $(".guide-over-layer").remove();
 	    $(".guide-line").remove();
+	    $(".guide-pop").remove();
 	    $(".guide-msg-pop").remove();
 	    /*$('<div class="guide-line"></div>').insertBefore(document.body.firstChild);
 	    $('<div class="guide-over-layer"></div>').insertBefore(document.body.firstChild);

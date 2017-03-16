@@ -7,7 +7,7 @@ var guide = lui.initGuide();
 
 
 $(function () {
-    if (userCount <= 0) {
+    if (showTask>0) {
         guide.popup($(".child-unit")[0], 'child-unit0', true, { width: 130, height: 125 }, { width: 350, height: 270 }, 'up', '学完每个单元都会有测试，根据结果点亮荣耀之星！', '/egword/build/img/get-it-img2.png', 15);
     }
 
@@ -24,7 +24,7 @@ $(function () {
         count++;
     });
     count = 0;
-
+   
     $(".mt15").each(function () {
         if (count != 0) {
             var doc = $(this).children(".megs").children(".fr").children(".ml30");
@@ -35,20 +35,32 @@ $(function () {
         count++;
     });
 
-    $("body").delegate(".downleft", "click", function (event) {
-        $(this).parent(".fr").parent(".megs").parent(".mt15").children(".main-content").toggle();
-        var doc = $(this).parent(".fr").children(".ml30");
+   
+    $("body").delegate(".megs", "click", function (event) {
+       // $(this).parent(".fr").parent(".megs").parent(".mt15").children(".main-content").toggle();
+       // $(this).parent(".fr").parent(".megs").toggleClass('addColor');
+        //var doc = $(this).parent(".fr").children(".ml30");
+        
+        $(this).parent(".mt15").children(".main-content").toggle();
+       
+        var doc = $(this).children(".fr").children(".ml30");
         var srcStr = doc.attr("src");
         if (srcStr.toString().indexOf("down-arrow.png") == -1) {
             doc.attr("src", "/egword/build/img/down-arrow.png");
-            $(this).removeClass("megscolor");
+           $(this).css('background', '#ff8b1e');
         } else {
             doc.attr("src", "/egword/build/img/left-arrow.png");
-            $(this).addClass("megscolor");
+            $(this).css('background', '#ffc46e');
+            
+          
         }
+
     });
 
     $("body").delegate(".tabs-header", "click", function (event) {
+        if ($(event.target).attr("data-id")==undefined) {
+            return;
+        }
         $(this).children("span").each(function () {
             $(this).removeClass("active");
             $(this).addClass("normal");
@@ -64,15 +76,19 @@ $(function () {
             }
 
         });
+
     });
     $("body").delegate(".showremark", "click", function (event) {
+        $('.pop-mask').show();
         var remark = $(this).attr("data-message");
         $(".text").html(remark);
         $(".eg-pop").show();
+        //阻止事件继续
+        event.stopPropagation();
     });
 
     $("body").delegate(".close", "click", function (event) {
-     
+        $('.pop-mask').hide();
         $(".eg-pop").hide();
     });
     

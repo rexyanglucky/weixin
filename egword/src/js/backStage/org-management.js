@@ -2,10 +2,12 @@
 var Lui = require('../../LUI/js/lui');
 var tool = require('../../LUI/tool');
 var lui = new Lui();
+var commJs = require("../lib/util.js");//公共方法
 //发送请求调取省市县数据
 var arrS = [];//省
 var arrSs = [];//市
 var arrX = [];//县
+var orgId = 0;//当前的orgId
 
 //arrS.push({ name: '北京市', id: '110000', pid: '110000' });
 //arrSs.push({ name: '北京市', id: '110000', pid: '110000' });
@@ -39,14 +41,38 @@ lui.initDropDownList({ warpid: "drop_jy", width: 60, nameField: 'name', idField:
 lui.initDropDownList({ warpid: "drop_xs", width: 100, nameField: 'name', idField: 'id', data: [{ name: '01', id: '00', pid: '' }, { name: '02', id: '00_01', pid: '00' }, { name: '03', id: '00_02', pid: '00' }, { name: '04', id: '00_01_01', pid: '00_01' }, { name: '05', id: '00_01_02', pid: '00_01' }, { name: '06', id: '00_02_01', pid: '00_02' }, { name: '07', id: '00_02_02', pid: '00_02' }] });
 //教师数量的下拉
 lui.initDropDownList({ warpid: "drop_js", width: 90, nameField: 'name', idField: 'id', data: [{ name: '01', id: '00', pid: '' }, { name: '02', id: '00_01', pid: '00' }, { name: '03', id: '00_02', pid: '00' }, { name: '04', id: '00_01_01', pid: '00_01' }, { name: '05', id: '00_01_02', pid: '00_01' }, { name: '06', id: '00_02_01', pid: '00_02' }, { name: '07', id: '00_02_02', pid: '00_02' }] });
+
+//折扣的下拉
+lui.initDropDownList({
+    warpid: "drop_zk", width: 90, nameField: 'name', idField: 'id', data: [{
+        name: '一折', id: '0.1', pid: '00_02'
+    }, {
+        name: '二折', id: '0.2', pid: '00_02'
+    }, {
+        name: '三折', id: '0.3', pid: '00_02'
+    }, {
+        name: '四折', id: '0.4', pid: '00_02'
+    }, { name: '五折', id: '0.5', pid: '00_01' }, { name: '六折', id: '0.6', pid: '00_01' }, {
+        name: '七折', id: '0.7', pid: '00'
+    }, {
+        name: '八折', id: '0.8', pid: '00'
+    }, { name: '九折', id: '0.9', pid: '' }]
+});
 //添加机构的弹出层事件
 tool.pophide($('.eg-pop .close'), $('.eg-pop'));
-tool.popshow($('.addbtn '), $('#addorg-pop'));
+//tool.popshow($('.addbtn '), $('#addorg-pop'));
 //机构详情的弹出层事件
 tool.popshow($('.see-detail '), $('#addorg-name'));
+
+//多选框的点击
+tool.checkBoox();
 //后台交互
 var tplTableOrg = require("OrgManage/OrgManageList.tpl");
 require("../../tpl/template-helpers.js");
+//分页
+var pop = require("../lib/popup/popuptip.js");
+var loadimg = require("../lib/popup/showloadimg.js");
+var Paginator = require('../lib/page/Paginator.js');
 var module = {
     init: function () {
         //todo 逻辑函数
@@ -64,7 +90,17 @@ var module = {
         //todo 绑定事件
         //搜索
         $("body").delegate("#searchImg", "click", function () {
-            GetOrgData();
+            GetOrgData(1);
+
+        });
+        //添加机构
+        $("body").delegate("#addOrgBtn", "click", function () {
+          
+            GetSData();//初始化省市数据  添加机构的时候触发
+            $("#addorg-pop").show();
+            $('.pop-mask').show();
+
+            
 
         });
 
@@ -117,22 +153,27 @@ var module = {
             jsonAdd.Addr = escape($("#txtconaddr").val());
             jsonAdd.Remark = escape($("#txtmark").val());//备注
             if (jsonAdd.OrgName.length < 1) {
-                alert("机构名称不能为空");
+                $("#addTip").css({ "visibility": "visible" }).html("机构名称不能为空！");
+             
                 return;
             }
             if (jsonAdd.LinkMan.length < 1) {
-                alert("机构联系人不能为空");
+                $("#addTip").css({ "visibility": "visible" }).html("机构联系人不能为空！");
                 return;
             }
             if (jsonAdd.LinkManTel.length < 1) {
-                alert("机构电话不能为空");
+                $("#addTip").css({ "visibility": "visible" }).html("电话格式不对！");
+
+              
                 return;
             }
 
             //校验电话
             if (!IsMobile(jsonAdd.LinkManTel)) {
+                $("#addTip").css({ "visibility": "visible" }).html("电话格式不对！");
 
-                alert("电话格式不对");
+
+             
                 return;
 
             }
@@ -170,13 +211,15 @@ var module = {
                                 $("#loginTel").html(jsonAdd.LinkManTel);//电话
                                 $("#addorg-name").show();
                                 $('.pop-mask').show();
-                                alert(data + "添加成功");
+                                //alert(data + "添加成功");
                                 GetOrgData();//重新加载列表
 
                             }
                         });
                     } else {
-                        alert("电话重复");
+                        //alert("电话重复");
+                        $("#addTip").css({ "visibility": "visible" }).html("电话重复！");
+
                     }
 
                 }
@@ -188,6 +231,72 @@ var module = {
 
 
 
+        });
+
+        //机构付款金额和奖励储值失去焦点的时候
+        $("body").delegate("#txtOrgMoney,#txtOrgValue", "blur", function () {
+            CalMoney();
+        });
+        //checkbox点击的时候
+        $("body").delegate("#checkBoxSpan", "click", function () {
+           
+            CalMoney();
+        });
+
+
+        //储值
+        $("body").delegate(".cz", "click", function () {
+            orgId = $(this).attr("data-id");//当前的机构id
+            $("#orgNameShow").html($(this).attr("data-name"));//机构的名称
+            $('#save-pop').show();
+            $('.pop-mask').show();
+
+        });
+
+        //储值信息的提交表单
+        $("body").delegate("#btnCzOk", "click", function () {
+            var jsonAddCz = {};
+            jsonAddCz.OrgId = orgId;
+            jsonAddCz.OrgMoney = $("#txtOrgMoney").val();//付款金额
+            jsonAddCz.DisCount = $("#drop_zk").attr("data-id");//折扣  
+            jsonAddCz.OrgValue = $("#txtOrgValue").val();//奖励储值  checkImg
+            jsonAddCz.Remarks = escape($("#txtRemarks").val());//备注
+            jsonAddCz.AfterValue = escape($("#addCz").html());//最后的总的计算钱数
+
+
+            if (jsonAddCz.OrgValue == "") {
+                jsonAddCz.OrgValue = 0;
+            }
+            if (jsonAddCz.OrgMoney.length < 1) {
+                $("#addTipM").css({ "visibility": "visible" }).html("机构付款金额不能为空！");
+                //alert("机构付款金额不能为空");
+                return;
+            }
+            //提交表单
+            $.ajax({
+                type: "post",
+                url: "/Management/OrgManage/AddOrgMoney",
+                dataType: "json",
+                data: {
+
+                    data: JSON.stringify(jsonAddCz)
+                },
+                success: function (data) {
+                   
+                    $(".eg-pop .close").click();//关闭弹窗
+
+                    GetOrgData(1);//重新加载
+
+                }
+            });
+
+
+
+        });
+        //储值的取消
+        $("body").delegate("#addMCancel","click", function() {
+            $("#save-pop").hide();
+            $('.pop-mask').hide();
         });
 
     }
@@ -226,8 +335,15 @@ function OptTypeSel() {
 
 
 //发送请求调取数据
-function GetOrgData() {
+function GetOrgData(page) {
+    //$("#divLoading").show();
+    
+    loadimg.ShowLoadingForTableNoClass($("#tb"), 12);//不要tr样式的清除
+    if (page == undefined) {
+        page = 1;
+    }
 
+    var pageSize = 10;
     var json = {};
     json.OrgType = dataType;//0:全部，1金牌，2银牌
     json.KeyWord = escape($("#txtserch").val());
@@ -239,7 +355,7 @@ function GetOrgData() {
         data: {
             //OrgType: dataType,
             //KeyWord: escape($("#txtserch").val()) //$("#tagId").val()
-            data: JSON.stringify(json)
+            data: JSON.stringify(json), PageIndex: page, PageSize: pageSize
         },
         success: function (data) {
 
@@ -248,17 +364,19 @@ function GetOrgData() {
                 $("#tb").html(tplTableOrg(data.Data));
                 //$("#Totalcount").html(data.PageSum);
                 //Paginator.Paginator(10, page, data.PageSum, loadExamStu);
-                //加载咨询师列表
-                GetSData();//初始化省市数据
+                //加载列表
+                Paginator.Paginator(pageSize, page, data.PageSum, GetOrgData);
+            
 
             }
             else {
 
                 $("#tb").html("");
-
-                //$("#tb").html('<tr  style="border:none;text-align:center;height:280px;"><td style="font-size: 16px;" colspan="8"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;"><img src="../../../bundle/img/noclass.png" style="text-align:center;"><br/><span>暂无数据！</span></div></div></td></tr>');//清空数据
-                //$("#pagination").html("");//分页控件不显示
-                //$("#Totalcount").html(0);//数据设置为0
+                //<img src="../../../bundle/img/noclass.png" style="text-align:center;">
+                $("#tb").html('<tr  style="border:none;text-align:center;height:280px;"><td style="font-size: 16px;" colspan="8"><div class="data_img"><div class="big_area" style="margin-top:10px;line-height:30px;"><br/><span>暂无数据！</span></div></div></td></tr>');//清空数据
+                $("#pagination").html("");//分页控件不显示
+                $("#Totalcount").html(0);//数据设置为0
+                $("#bandTotalcount").html(0);//禁用
 
 
 
@@ -312,6 +430,30 @@ function GetSData() {
 
 }
 
+
+
+//计算总额
+function CalMoney() {
+
+   
+    var total = 0;
+    var zk = $("#drop_zk").attr("data-id");
+    if ($("#txtOrgMoney").val() != "") {
+
+        total = parseFloat($("#txtOrgMoney").val()) / parseFloat(zk);
+    }
+    var cssVal = $("#checkImg").css("visibility");
+    if (cssVal != "hidden") {
+        if ($("#txtOrgValue").val() != "") {
+            total = parseFloat($("#txtOrgValue").val()) + total;
+
+        }
+
+    }
+    total = total.toFixed(2);//保留两位小数
+    $("#addCz").html(total);
+
+}
 
 
 
@@ -398,6 +540,48 @@ function OptShiBind() {
     Bindx(Sscode);
 
 }
+
+
+//添加实时校验
+$(function () {
+    OptCheck();
+
+});
+//校验
+function OptCheck() {
+    
+    $("#txtorgname,#txtorgcon").keyup(function () {
+        
+        if (this.value.length > 1) {
+            $("#addTip").css({ "visibility": "hidden" });
+        }
+
+    });
+
+    $("#txtcontel").keyup(function () {
+        if (commJs.IsMobile(this.value)) {
+            $("#addTip").css({ "visibility": "hidden" });
+        } else {
+            $("#addTip").css({ "visibility": "visible" }).html("手机格式不对！");
+        }
+
+    });
+
+
+}
+
+
+
+
+//回车事件
+$(function () {
+    $('#txtserch').bind('keypress', function (event) {
+        if (event.keyCode == "13") {
+            GetOrgData(1);
+
+        }
+    });
+});
 
 
 

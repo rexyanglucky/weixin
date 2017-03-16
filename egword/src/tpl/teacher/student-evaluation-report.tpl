@@ -44,62 +44,63 @@
                 <table class="table-result wp100 mt10">
                     <tr>
                         <td class="wp20 tl pl25">听说能力</td>
-                        <td class="wp60 tl pl35">能力说明</td>
+                        <td class="wp60 tl pl35">体现学生在英语考试中，关于“听力和口语”方面的应试能力。</td>
 
                         {{if AbilityResult[0]=="优秀"}}
                         <td class="wp20 col-best tc">优秀</td>
                         {{else if AbilityResult[0]=="良好"}}
                         <td class="wp20 col-good tc">良好</td>
                         {{else if AbilityResult[0]=="及格"}}
-                        <td class="wp20 col-pass tc">及格</td>
+                        <td class="wp20 col-pass tc">合格</td>
                         {{else if AbilityResult[0]=="不及格"}}
-                        <td class="wp20 col-bad tc">不及格</td>
+                        <td class="wp20 col-bad tc">不合格</td>
                         {{/if}}
 
                     </tr>
                     <tr>
-                        <td class="wp20 tl pl25">写作能力</td>
-                        <td class="wp60 tl pl35">能力说明</td>
+                        <td class="wp20 tl pl25">阅读能力</td>
+                        <td class="wp60 tl pl35">体现学生在英语考试中，关于“英译汉、阅读理解”方面的应试能力。</td>
+
 
                         {{if AbilityResult[2]=="优秀"}}
                         <td class="wp20 col-best tc">优秀</td>
                         {{else if AbilityResult[2]=="良好"}}
                         <td class="wp20 col-good tc">良好</td>
                         {{else if AbilityResult[2]=="及格"}}
-                        <td class="wp20 col-pass tc">及格</td>
+                        <td class="wp20 col-pass tc">合格</td>
                         {{else if AbilityResult[2]=="不及格"}}
-                        <td class="wp20 col-bad tc">不及格</td>
+                        <td class="wp20 col-bad tc">不合格</td>
                         {{/if}}
 
 
                     </tr>
                     <tr>
-                        <td class="wp20 tl pl25">阅读能力</td>
-                        <td class="wp60 tl pl35">能力说明</td>
+                        <td class="wp20 tl pl25">写作能力</td>
+                        <td class="wp60 tl pl35">体现学生在英语考试中，关于“书面表达、写作”方面的应试能力。</td>
 
                         {{if AbilityResult[1]=="优秀"}}
                         <td class="wp20 col-best tc">优秀</td>
                         {{else if AbilityResult[1]=="良好"}}
                         <td class="wp20 col-good tc">良好</td>
                         {{else if AbilityResult[1]=="及格"}}
-                        <td class="wp20 col-pass tc">及格</td>
+                        <td class="wp20 col-pass tc">合格</td>
                         {{else if AbilityResult[1]=="不及格"}}
-                        <td class="wp20 col-bad tc">不及格</td>
+                        <td class="wp20 col-bad tc">不合格</td>
                         {{/if}}
 
 
                     </tr>
                     <tr>
                         <td class="wp20 tl pl25">翻译能力</td>
-                        <td class="wp60 tl pl35">能力说明</td>
+                        <td class="wp60 tl pl35">体现学生在英语考试中，关于“汉译英、完型填空”方面的应试能力。</td>
                         {{if AbilityResult[3]=="优秀"}}
                         <td class="wp20 col-best tc">优秀</td>
                         {{else if AbilityResult[3]=="良好"}}
                         <td class="wp20 col-good tc">良好</td>
                         {{else if AbilityResult[3]=="及格"}}
-                        <td class="wp20 col-pass tc">及格</td>
+                        <td class="wp20 col-pass tc">合格</td>
                         {{else if AbilityResult[3]=="不及格"}}
-                        <td class="wp20 col-bad tc">不及格</td>
+                        <td class="wp20 col-bad tc">不合格</td>
                         {{/if}}
                     </tr>
                 </table>
@@ -109,57 +110,57 @@
                 <table class="table-result wp100 mt10">
                     <tr>
                         <td class="wp40 tl pl25">拼读能力</td>
-                        <td class="wp40 tl pl35">能力说明</td>
+                        <td class="wp40 tl pl35">看到单词都能正确读出来，体现学生“见词能读”的识词能力。</td>
 
                         {{if AbilityResult[4]=="优秀"}}
                         <td class="wp20 col-best tc">优秀</td>
                         {{else if AbilityResult[4]=="良好"}}
                         <td class="wp20 col-good tc">良好</td>
                         {{else if AbilityResult[4]=="及格"}}
-                        <td class="wp20 col-pass tc">及格</td>
+                        <td class="wp20 col-pass tc">合格</td>
                         {{else if AbilityResult[4]=="不及格"}}
-                        <td class="wp20 col-bad tc">不及格</td>
+                        <td class="wp20 col-bad tc">不合格</td>
                         {{/if}}
 
 
                     </tr>
                     <tr>
                         <td class="tl pl25">词形识记能力</td>
-                        <td class="tl pl35">能力说明</td>
+                        <td class="tl pl35">听到单词都能正确写出来，体现学生“听词能写”的识词能力。</td>
                         {{if AbilityResult[5]=="优秀"}}
                         <td class="wp20 col-best tc">优秀</td>
                         {{else if AbilityResult[5]=="良好"}}
                         <td class="wp20 col-good tc">良好</td>
                         {{else if AbilityResult[5]=="及格"}}
-                        <td class="wp20 col-pass tc">及格</td>
+                        <td class="wp20 col-pass tc">合格</td>
                         {{else if AbilityResult[5]=="不及格"}}
-                        <td class="wp20 col-bad tc">不及格</td>
+                        <td class="wp20 col-bad tc">不合格</td>
                         {{/if}}
                     </tr>
                     <tr>
                         <td class="tl pl25">词义识记能力</td>
-                        <td class="tl pl35">能力说明</td>
+                        <td class="tl pl35">见到单词都能准确表达中文词义，体现学生“见词识义”的识词能力。</td>
                         {{if AbilityResult[6]=="优秀"}}
                         <td class="wp20 col-best tc">优秀</td>
                         {{else if AbilityResult[6]=="良好"}}
                         <td class="wp20 col-good tc">良好</td>
                         {{else if AbilityResult[6]=="及格"}}
-                        <td class="wp20 col-pass tc">及格</td>
+                        <td class="wp20 col-pass tc">合格</td>
                         {{else if AbilityResult[6]=="不及格"}}
-                        <td class="wp20 col-bad tc">不及格</td>
+                        <td class="wp20 col-bad tc">不合格</td>
                         {{/if}}
                     </tr>
                     <tr>
                         <td class="tl pl25">词义词形的辨析能力</td>
-                        <td class="tl pl35">能力说明</td>
+                        <td class="tl pl35">掌握单词词义与拼写规则之间的要领，体现学生“辨别词义和词形”的能力。</td>
                         {{if AbilityResult[7]=="优秀"}}
                         <td class="wp20 col-best tc">优秀</td>
                         {{else if AbilityResult[7]=="良好"}}
                         <td class="wp20 col-good tc">良好</td>
                         {{else if AbilityResult[7]=="及格"}}
-                        <td class="wp20 col-pass tc">及格</td>
+                        <td class="wp20 col-pass tc">合格</td>
                         {{else if AbilityResult[7]=="不及格"}}
-                        <td class="wp20 col-bad tc">不及格</td>
+                        <td class="wp20 col-bad tc">不合格</td>
                         {{/if}}
                     </tr>
                 </table>
@@ -205,9 +206,9 @@
         <div class="footer mt100 mb40">
             <p class="line"></p>
             <div class="kouhao">
-             
-              {{BGrade == "x" ? "20小时拿下小学6年单词" : BGrade == "c" ? "30小时拿下初中3年单词" : "50小时拿下高中3年单词"}}
-             
+
+                {{BGrade == "x" ? "20小时拿下小学6年单词" : BGrade == "c" ? "30小时拿下初中3年单词" : "50小时拿下高中3年单词"}}
+
             </div>
         </div>
 

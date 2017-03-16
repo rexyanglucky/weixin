@@ -3,6 +3,7 @@
 var arrTbk = [];//同步课
 var arrBj = [];//班级
 var arrTjr = [];//推荐人，老师
+var isLoadTeach = 0;//0未加载，1加载
 var tplTableStuDetail = require("StudentManage/StuDetail.tpl");//学生详情
 var stuId = $("#stuId").val();//学生id  stuEditionId
 var stuEditionId = $("#stuEditionId").val();//教材id
@@ -131,11 +132,11 @@ var module = {
             var type = $(this).attr("data-type");//类型0为调班1为加课次
             var id = this.id;
             if (type == "0") {
-                $("#currentClass").html(id.split('-')[2]);
+                $("#currentClass").html($(this).attr("data-name"));//当前班级
                 if ($("#change-prounce").css("display")!="none") {
                     //进行联动读音
                     $('.spans').removeClass('active');
-                    if (id.split('-')[3] == "true") {//英式选中，美式移除
+                    if (id.split('-')[2] == "true") {//英式选中，美式移除
                         $("#updateRead").addClass('active');
 
                     } else {
@@ -146,6 +147,7 @@ var module = {
 
             } else {
                 $("#currentCourseNumber").html(id.split('-')[1] + "/" + id.split('-')[2] + "课次");//目前班级
+                $("#currentCourseNumber").attr("data-id", id.split('-')[1] + "-" + id.split('-')[0]);
 
             }
 
@@ -173,15 +175,17 @@ var module = {
 
                     }
                 } else {
-                    $("#currentClass").html(id.split('-')[2]);
+                    $("#currentClass").html($(this).attr("data-name"));
                     
                 }
+                $("#currentClass").attr("data-id", id.split('-')[1]);
 
             } else {
                 $("#currentCourseNumber").html(id.split('-')[1] + "/" + id.split('-')[2] + "课次");//目前班级
 
             }
-            $("#currentClass").html(id.split('-')[2]);
+            $("#currentClass").html($(this).attr("data-name"));
+           
             $('.radio').removeClass('active');
             $($(this).find(".radio")[0]).addClass('active');
 
@@ -214,7 +218,7 @@ var module = {
             var orgCourse = $("#stuCourse .active")[0].id;
             jsonAdd.CourseId = orgCourse.split('-')[0];//课程id、课次 、课程有效期 课价
             var currC = $("#currentClass").attr("data-id");//当前选择课程所在的班级old
-            if (currC == jsonAdd.ClassId) {
+            if (currC == jsonAdd.ClassId || jsonAdd.ClassId=="0") {
                 return;//无效请求每更换班级
             }
 
@@ -254,6 +258,8 @@ var module = {
             $("#addCStuName").html(stuName);//张三（七年级）
             $('.pop-mask').show();
             $("#add-classOrder").show();
+          
+            
 
         });
         //加课次提交数据
@@ -274,6 +280,7 @@ var module = {
             //     return;//无效请求不能超过当前的总课次
             // }
             jsonAdd.LeftNumber = addNum;//加课的次数
+            jsonAdd.ReaLeftNumber = parseInt(orgCourse.split('-')[3]);//加课的次数
             //提交表单
             $.ajax({
                 type: "post",
@@ -284,14 +291,15 @@ var module = {
                     data: JSON.stringify(jsonAdd)
                 },
                 success: function (data) {
-
+                   
                     if (data && data.Data > 0) {
                         GetStuDetailData();//重新加载列表
                         $("#add-classOrder").hide();
                         $('.pop-mask').hide();
 
                     } else {
-                        alert("提交失败");
+                        $("#addCourseTip").css({ "visibility": "visible" }).html(data.TagValue);
+                        //alert(data.TagValue);
                     }
 
 
@@ -334,6 +342,7 @@ var module = {
                 return;
             }
             jsonAdd.CourseId = orgCourse.split('-')[0];//课程id、已经上课次 、总课次
+            jsonAdd.ClassId = orgCourse.split('-')[4];//班级id
             jsonAdd.Remark = $("#backReason").val().trim();//退课的原因
             //提交表单
             $.ajax({
@@ -418,6 +427,13 @@ var module = {
 
         //续课的确定
         $("body").delegate("#courseAddBtn", "click", function () {
+
+            
+            if ($("#drop_class").attr("data-id") == "0") {
+                return;//无效请求每更换班级
+            }
+
+
             var jsonAdd = {};
             var orgCourse = $("#drop_course").attr("data-id");//课程数组
             jsonAdd.StuId = stuId;
@@ -621,7 +637,11 @@ function loadCourse() {
                 $("#lessonTime").html(arrTemp[0].id.split('-')[2] + "次");
                 $("#lessonPrice").html(arrTemp[0].id.split('-')[3] + "元");
                 //$("#actuPrice").html(arrTemp[0].id.split('-')[4] + "元");
-                loadTeachers();//加载推荐人
+                if (isLoadTeach != 1) {
+                    loadTeachers();//加载推荐人
+                    
+                }
+             
 
             }
             else {
@@ -632,7 +652,10 @@ function loadCourse() {
                 $("#lessonTime").html(0 + "次");
                 $("#lessonPrice").html(0 + "元");
                 //$("#actuPrice").html(0+ "元");
-                loadTeachers();//加载推荐人
+                if (isLoadTeach != 1) {
+                    loadTeachers();//加载推荐人
+
+                }
 
             }
         }
@@ -659,13 +682,13 @@ function loadCourseRad(obj) {//当为2的时候为修改读音的渲染
                 for (var i = 0; i < data.Data.length; i++) {
 
                     if (i == 0) {
-                        strHtml += '<label style="" class="lbCourse" data-type="0" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].ClassName + "-" + data.Data[i].IsEng + '><span data-type="0" class="radio active" style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].ClassName + "-" + data.Data[i].IsEng + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
+                        strHtml += '<label style="" class="lbCourse" data-type="0" data-name=' + data.Data[i].ClassName + '  data-id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].IsEng + '><span data-type="0" class="radio active" style="margin-right:15px;" data-name=' + data.Data[i].ClassName + '  id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId  + "-" + data.Data[i].IsEng + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
                         $("#currentClass").html(data.Data[i].ClassName);//目前班级
                         $("#currentClass").attr("data-id", data.Data[i].ClassId);
                        
 
                     } else {
-                        strHtml += '<label style="" class="lbCourse" data-type="0" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].ClassName + "-" + data.Data[i].IsEng + '><span data-type="0"  class="radio " style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].ClassName + "-" + data.Data[i].IsEng + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
+                        strHtml += '<label style="" class="lbCourse" data-type="0"  data-name=' + data.Data[i].ClassName + ' data-id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId + "-" + data.Data[i].IsEng + '><span data-type="0"  class="radio " style="margin-right:15px;" data-name=' + data.Data[i].ClassName + '  id=' + data.Data[i].CourseId + "-" + data.Data[i].ClassId  + "-" + data.Data[i].IsEng + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
 
                     }
                 }
@@ -719,12 +742,12 @@ function loadCourseRad2() {
                 for (var i = 0; i < data.Data.length; i++) {
 
                     if (i == 0) {
-                        strHtml += '<label style="width:50%;display:inline-block;font-size:14px;" class="lbCourse" data-type="1" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + '><span data-type="1"  class="radio active" style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
+                        strHtml += '<label style="width:50%;display:inline-block;font-size:14px;" class="lbCourse" data-type="1" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].LeftNumber + '><span data-type="1"  class="radio active" style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].LeftNumber + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
                         $("#currentCourseNumber").html(data.Data[i].HaveNumber + "/" + data.Data[i].BookNumber + "课次");//目前班级
                         $("#currentCourseNumber").attr("data-id", data.Data[i].HaveNumber + "-" + data.Data[i].CourseId);
 
                     } else {
-                        strHtml += '<label style="width:50%;display:inline-block;font-size:14px;" class="lbCourse" data-type="1" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + '><span data-type="1"  class="radio " style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
+                        strHtml += '<label style="width:50%;display:inline-block;font-size:14px;" class="lbCourse" data-type="1" data-id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].LeftNumber + '><span data-type="1"  class="radio " style="margin-right:15px;" id=' + data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].LeftNumber + '></span><span class="left15">' + data.Data[i].CourseName + '</span></label>';
 
                     }
                 }
@@ -764,7 +787,7 @@ function loadCourseBack() {
                 for (var i = 0; i < data.Data.length; i++) {
 
                     arrTemp.push({
-                        name: data.Data[i].CourseName, id: data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].ExpiryMonth, pid: data.Data[i].CourseId
+                        name: data.Data[i].CourseName, id: data.Data[i].CourseId + "-" + data.Data[i].HaveNumber + "-" + data.Data[i].BookNumber + "-" + data.Data[i].ExpiryMonth + "-" + data.Data[i].ClassId, pid: data.Data[i].CourseId
                     });//报班的课程
 
                 }
@@ -819,9 +842,9 @@ function loadTeachers() {
 
 
                 lui.initDropDownList({
-                    warpid: "drop_tjr", width: 200, nameField: 'name', idField: 'id', data: arrTjr
+                    warpid: "drop_tjr", width: 200, nameField: 'name', idField: 'id', data: arrTjr, subtextlength: 10
                 });//推荐人
-
+                isLoadTeach = 1;
 
             }
             else {

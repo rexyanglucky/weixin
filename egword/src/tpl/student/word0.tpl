@@ -5,10 +5,10 @@
     <div class="tell">
         <i class="lui_wordspeak" data-src="{{Audio}}" data-auto="true" data-loop="2"></i>
 
-        <span class="see">看词义</span>
+        <span class="see">显示词义</span>
 
         {{each WordNatures as v i}}
-        <span class="word-mean none">{{WordNatures[0]}}</span>
+        <span class="word-mean none">{{v}}</span>
         {{/each}}
 
     </div>

@@ -55,11 +55,6 @@
 
 	    GetCourseReportList();
 
-	    $("#btn-submit").click(function () {
-
-	        $.router.load("/teacher/myclass/RewardCoin?classindex=" + classindex+"&classid="+classid, true);
-
-	    });
 
 	    $(".s-tab").on("click", function () {
 
@@ -82,6 +77,21 @@
 	            var tpl = __webpack_require__(41);
 
 	            $("#g-s-content").html(tpl(data));
+
+	            var ishavegroup = 0;
+
+	            if (data.grouplist.length > 0) {
+
+	                ishavegroup = 1;
+	            }
+
+	    
+	            $("#btn-submit").click(function () {
+
+	                $.router.load("/teacher/myclass/RewardCoin?classindex=" + classindex + "&classid=" + classid+"&ishavegroup="+ishavegroup, true);
+
+	            });
+
 
 	            $(".b-studentlist-item").on("click", function () {
 	                var classindex = $(this).attr("data-classindex");
@@ -233,9 +243,9 @@
 	$out+='组)</span> ';
 	}
 	$out+=' </div> <div class="item-after"> ';
-	if(v.BookNumber - v.CurrentNumber == 0){
+	if(v.LeftNumber == 0){
 	$out+=' <div class="lesson-circle over">已结课</div> ';
-	}else if(v.BookNumber - v.CurrentNumber == 1){
+	}else if(v.LeftNumber == 1){
 	$out+=' <div class="lesson-circle normal">剩1次</div> ';
 	}else{
 	$out+=' ';

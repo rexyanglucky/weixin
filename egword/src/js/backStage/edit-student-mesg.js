@@ -32,8 +32,10 @@ var module = {
         //todo 绑定事件
         //教材选择框
         $("body").delegate('.teacher-grade', "click", function () {
+            
             //对应的学段点击
-           // GetEdutionData("X");
+            // GetEdutionData("X");
+            grade=parseInt($("#drop_grade").attr("data-id"));//年级
             if (grade > 9) {
 
                 $("span[data-id='G']").click();
@@ -42,8 +44,8 @@ var module = {
                 $("span[data-id='C']").click();
 
             } else {
-                
-                GetEdutionData("X");
+                $("span[data-id='X']").click();
+                //GetEdutionData("X");
             }
 
             $("#add-grade").show();
@@ -97,7 +99,8 @@ var module = {
             }
             jsonAdd.Grade = $("#drop_grade").attr("data-id");//年级
             jsonAdd.EditionId = $("#editionName").attr("data-id");//选的教材id
-            if (jsonAdd.BookVersion == "0" || jsonAdd.BookVersion == "") {
+          
+            if (jsonAdd.EditionId == "0" || jsonAdd.EditionId == "") {
                
                 pop.PopTipShow("教材不能为空!");
                 return;
@@ -194,7 +197,7 @@ function GetStuEditData() {
                 grade = data.Data.GradeId;
                 //教材   data.Data.TeachVersion
                 $("#editionName").html(data.Data.EditionName);
-                $("#editionName").attr("data-id", data.Data.EditionID);//教材版本
+                $("#editionName").attr("data-id", data.Data.EditionId);//教材版本
                 //$("#editionId").val(data.Data.EditionId);
 
 

@@ -660,3 +660,24 @@ html {
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
 }
+.bar.bar-tab .icon-home:before {
+  content: url("../../../build/img/mystudent.png");
+}
+.bar.bar-tab .icon-me:before {
+  content: url("../../../build/img/test-center.png");
+}
+.bar.bar-tab .icon-star:before {
+  content: url("../../../build/img/perser-center.png");
+}
+.bar.bar-tab .active {
+  color: #45c6fc;
+}
+.bar.bar-tab .active .icon-home:before {
+  content: url("../../../build/img/mystudent-active.png");
+}
+.bar.bar-tab .active .icon-me:before {
+  content: url("../../../build/img/test-center-active.png");
+}
+.bar.bar-tab .active .icon-star:before {
+  content: url("../../../build/img/perser-center-active.png");
+}
